@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% block head %}
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='CSS/style.css')}}"
+    />
+    <title>{% block title %}BlockWay{% endblock%}</title>
+    {% endblock %}
+  </head>
+  <body>
+    <div class="content">{% block content %}{% endblock %}</div>
+    <div class="footer">
+      {% block footer %}&copy; Copyright 2026 by Nykyta McDonald{% endblock %}
+    </div>
+  </body>
+</html>

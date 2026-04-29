@@ -1,0 +1,23 @@
+services:
+  web:
+    container_name: "block_app"
+    build: .
+    ports:
+      - 8000:8000
+  pihole:
+    container_name: pihole
+    hostname: pihole
+    image: pihole/pihole:latest
+    environment:
+      TZ: "Europe/Dublin"
+      FTLCONF_webserver_api_password: "@connection5"
+      FTLCONF_dns_listeningMode: "all"
+    ports:
+      - "8080:80"
+      - "53:53/udp"
+      - "53:53/tcp"
+    volumes:
+      - "/home/nykyta/pihole/etc-pihole:/etc/pihole"
+    cap_add:
+      - NET_ADMIN
+    restart: unless-stopped

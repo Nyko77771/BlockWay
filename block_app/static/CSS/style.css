@@ -1,0 +1,16 @@
+html,
+body {
+  background-color: #f1faee;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  border: 4px solid black;
+}
+.footer {
+  display: flex;
+  justify-content: center;
+}
