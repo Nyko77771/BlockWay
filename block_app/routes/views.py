@@ -1,22 +1,26 @@
 from flask import Blueprint, render_template, request, redirect, session
 import sqlite3
 
-# Database connection setup
-def db_connect():
-    if sqlite3.connect('users.db'):
-        print("Database connection successful.")
-    else:
-        print("Database connection failed.")
-    return sqlite3.connect('users.db')
+# Tracking Variables
+current_user = {
+    "authenticated": None
+}
+session = ""
 
 views = Blueprint(
     'views',
     __name__,
 )
 
+def authenticate_user():
+    if session is None:
+        current_user["authenticated"] = False
+    current_user["authenticated"] = True
+
 @views.route('/', methods=['GET'])
 def home():
-    return render_template('home.html')
+    authenticate_user()
+    return render_template('home.html', current_user=current_user)
 
 @views.route('/signup', methods=['GET'])
 def signup():
@@ -27,5 +31,8 @@ def signin():
     if request.method == 'POST':
         request_data = request.form
         username = request_data.get('username')
+        password = request_data.get('password')
+        confirm_password = request_data.get('confirm_password')
         return redirect('/')
-    return render_template('signin.html')
+    authenticate_user()
+    return render_template('signin.html', current_user=current_user)

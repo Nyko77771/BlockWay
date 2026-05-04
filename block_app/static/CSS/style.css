@@ -1,7 +1,43 @@
+/* Backgroun Colour */
 html,
 body {
   background-color: #f1faee;
 }
+
+/* Styling for Nav */
+.navbar {
+  display: flex;
+}
+
+.navbar a {
+  margin-right: 7px;
+  margin-bottom: 15px;
+  border: 3px solid #457b9d;
+  border-radius: 10%;
+  padding: 3px;
+  text-decoration: none;
+  color: #1d3557;
+}
+
+.navbar a:hover {
+  color: #e63946;
+  border-color: #1d3557;
+}
+
+.navbar_links {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 15px;
+  width: 100%;
+  position: relative;
+}
+
+.nav_start {
+  gap: 26px;
+}
+
+/* Styling for Main Content Div */
 .content {
   display: flex;
   flex-direction: column;
@@ -10,6 +46,63 @@ body {
   height: 90vh;
   border: 4px solid black;
 }
+
+/* Styling Home page */
+
+.choice_title {
+  text-align: center;
+}
+
+.home_choice {
+  display: flex;
+  float: left;
+  width: 100%;
+}
+
+.home_column {
+  width: 50%;
+  text-align: center;
+  text-decoration: none;
+  border: 2px solid #457b9d;
+  margin: 5px;
+}
+
+.home_column a {
+  text-decoration: none;
+}
+
+.home_column:hover {
+  color: #e63946;
+  border-color: #1d3557;
+}
+
+/* Signin Page Styling */
+.signin_box {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Signup Page Styling */
+
+.signup_form {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid blue;
+  width: auto;
+  padding: 15px;
+  align-items: center;
+}
+
+.signup_form input {
+}
+
+.submit_btn {
+  border: 2px solid black;
+  width: 100px;
+  margin-top: 15px;
+}
+
+/* Footer Styling */
 .footer {
   display: flex;
   justify-content: center;

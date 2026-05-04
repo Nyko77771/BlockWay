@@ -1,0 +1,35 @@
+<div class="navbar">
+  {% if current_user.is_authenticated %}
+  <div class="navbar_logo nav_start">
+    <img
+      alt="!!!BlockWay Logo to be Designed!!!"
+      src="{{url_for('static', filename='static/logo.png')}}"
+    />
+  </div>
+  {% endif %}
+  <div class="navbar_links">
+    {% if current_user.is_authenticated and not current_user.is_admin %}
+    <a href="{{ url_for('views.dashboard') }}">Dashboard</a>
+    <a href="{{ url_for('views.settings') }}">Settings</a>
+    <a href="{{ url_for('views.logoff') }}">Logoff</a>
+    {% elif current_user.is_authenticated and current_user.is_admin %}
+    <a href="{{ url_for('views.admin_dashboard') }}">Admin Dashboard</a>
+    <a href="{{ url_for('views.settings') }}">Settings</a>
+    <a href="{{ url_for('views.logoff') }}">Logoff</a>
+    {% else %} {% if request.endpoint != 'views.home' %}
+    <div class="back_button nav_start">
+      <a href="{{ url_for('views.home') }}">
+        <img
+          alt="!!!Back Button Icon to be Designed!!!"
+          src="{{url_for('static', filename='static/back_icon.png')}}"
+        />
+      </a>
+    </div>
+    {% endif %}
+    <div class="nav_end">
+      <a href="{{ url_for('views.signin') }}">Login</a>
+      <a href="{{ url_for('views.signup') }}">Signup</a>
+    </div>
+    {% endif %}
+  </div>
+</div>

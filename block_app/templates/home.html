@@ -1,11 +1,39 @@
-{% extends "partials/head.html"%} {% block title %} Welcome to BlockWay {%
-endblock %} {% block content %}
+{% extends "partials/head.html"%} {% block navbar %} {% include
+"partials/navbar.html" %} {% endblock %} {% block title %} Welcome to BlockWay
+{% endblock %} {% block content %}
 <div class="home_box">
+  <img
+    alt="!!!BlockWay Logo to be Designed!!!"
+    src="{{url_for('static', filename='static/logo.png')}}"
+  />
   <h2>Welcome to BlockWay</h2>
   <h3>The Future of Dynamic Malicious Traffic Filtering</h3>
   <p>
     Blockway is a new open-source solution for cutting malicious and benign
     traffic detection and management.
   </p>
+  <div class="choice_title">
+    <h2>Please Choose Below:</h2>
+  </div>
+
+  <div class="home_choice">
+    <div class="home_column">
+      <a href="{{ url_for('views.signin') }}">
+        <div class="home_login_choice">
+          <h3>Login</h3>
+        </div>
+      </a>
+      <p>Choose this if you need to login</p>
+    </div>
+
+    <div class="home_column">
+      <a href="{{ url_for('views.signup') }}">
+        <div class="home_login_choice">
+          <h3>Create Account</h3>
+        </div>
+      </a>
+      <p>Choose this if you need to signup</p>
+    </div>
+  </div>
 </div>
 {% endblock %}
