@@ -6,6 +6,10 @@ from block_app.database.database import check_start_db
 def make_blockway():
     # Creating Flask Instance
     block_app = Flask(__name__)
+
+    # !!! TO ADD ENCRYPTION HERE!!!
+    block_app.secret_key = 'ADD ENCRYPTED KEY HERE'
+
     # Defining the routes functions inside the app via flask blueprint
     block_app.register_blueprint(views)
     # Starting Database

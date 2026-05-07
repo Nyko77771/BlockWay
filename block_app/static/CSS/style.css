@@ -1,27 +1,47 @@
 /* Backgroun Colour */
 html,
 body {
-  background-color: #f1faee;
+  overflow: hidden;
+  padding: 0;
+  margin: 2px;
 }
+
+/* Colour for content box */
 
 /* Styling for Nav */
 .navbar {
   display: flex;
+  background-color: #ffbe0b;
+  margin-bottom: 8px;
+  width: 100%;
+  padding-top: 10px;
+  box-shadow:
+    rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
+    rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
+    rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+  background: #020024;
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(139, 139, 217, 1) 0%,
+    rgba(0, 125, 150, 1) 100%
+  );
 }
 
 .navbar a {
-  margin-right: 7px;
+  margin-left: 3px;
+  margin-right: 4px;
   margin-bottom: 15px;
-  border: 3px solid #457b9d;
+  border: 1px solid #90e0ef;
   border-radius: 10%;
   padding: 3px;
   text-decoration: none;
-  color: #1d3557;
+  color: #caf0f8;
 }
 
 .navbar a:hover {
-  color: #e63946;
-  border-color: #1d3557;
+  color: #ffd166;
+  border-color: #ffd166;
 }
 
 .navbar_links {
@@ -34,7 +54,15 @@ body {
 }
 
 .nav_start {
+  margin-left: 3px;
   gap: 26px;
+}
+
+/* Wrapper class for main body */
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Styling for Main Content Div */
@@ -43,8 +71,8 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 90vh;
-  border: 4px solid black;
+  height: 85vh;
+box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
 }
 
 /* Styling Home page */
@@ -57,6 +85,16 @@ body {
   display: flex;
   float: left;
   width: 100%;
+}
+
+.home_box {
+  display: inline-block;
+  padding-top: 0;
+  background-color: #90e0ef;
+  height: 80%;
+  width: 100%;
+  align-content: center;
+  text-align: center;
 }
 
 .home_column {
@@ -87,13 +125,17 @@ body {
 .signup_form {
   display: flex;
   flex-direction: column;
-  border: 2px solid blue;
   width: auto;
   padding: 15px;
   align-items: center;
 }
 
-.signup_form input {
+.signup_form .submit_btn {
+  margin-top: 20px;
+  width: 110%;
+  border-radius: 5%;
+  color: #1d3557;
+  border: 3px solid #457b9d;
 }
 
 .submit_btn {
@@ -105,5 +147,11 @@ body {
 /* Footer Styling */
 .footer {
   display: flex;
+  margin: 0;
+  margin-bottom: 5px;
+  position: fixed;
+  width: 100%;
   justify-content: center;
+  align-items: center;
+  bottom: 0;
 }

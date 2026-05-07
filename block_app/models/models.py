@@ -32,6 +32,7 @@ class User(Base):
     username = Column(String, unique=True)
     password = Column(String(255), nullable=False)
     role_type = Column(String)
+    pihole_location = Column(String)
     date_created = Column(DateTime(timezone=True) , server_default=func.now())
     sessions = relationship("UserSession", back_populates="user")
     events = relationship("Event", back_populates="user")

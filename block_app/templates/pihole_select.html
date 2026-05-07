@@ -1,0 +1,41 @@
+{% extends "partials/head.html"%} {% block navbar %} {% include
+"partials/navbar.html" %} {% endblock %} {% block title %} Pihole Selection {%
+endblock %} {% block content %}
+<h1>Pihole Selection</h1>
+<p>We have detected that it is your initial set-up</p>
+<p>Please Add Pihole</p>
+<h2>Choose Option:</h2>
+<form>
+  <input type="radio" id="option1" name="option" value="option1" />
+  <label for="option1">Option 1: Add Pihole Manually</label><br />
+  <input type="radio" id="option2" name="option" value="option2" />
+  <label for="option2">Option 2: Auto-Detect Pihole</label><br />
+</form>
+<div class="pihole_auto_selection" hidden>
+  <label for="pihole_ip">Click to scan network automatically:</label>
+  <input type="button" id="scan_button" value="Scan Network" />
+</div>
+<div class="pihole_manual_select" hidden>
+  <label>Enter Pihole IP below:</label>
+  <input type="text" placeholder="Add address here:" />
+</div>
+<script>
+  const option1 = document.getElementById("option1");
+  const option2 = document.getElementById("option2");
+  const autoSelection = document.querySelector(".pihole_auto_selection");
+  const manualSelection = document.querySelector(".pihole_manual_select");
+
+  option1.addEventListener("change", function () {
+    if (this.checked) {
+      autoSelection.hidden = true;
+      manualSelection.hidden = false;
+    }
+  });
+  option2.addEventListener("change", function () {
+    if (this.checked) {
+      autoSelection.hidden = false;
+      manualSelection.hidden = true;
+    }
+  });
+</script>
+{% endblock %}
