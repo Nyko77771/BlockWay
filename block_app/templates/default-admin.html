@@ -1,0 +1,14 @@
+{% extends "partials/head.html"%} {% block title %} Admin Registration {%
+endblock %} {% block content %} {% if message %}
+<div class="message">{{ message }}</div>
+{% endif %}
+<div class="signup_box">
+  <h2>Admin Registration</h2>
+</div>
+<h3>Please Change your Default Admin Details</h3>
+<form
+  method="POST"
+  action="{{ url_for('setup.admin_setup') }}"
+  class="signup_form"
+></form>
+{% endblock %}

@@ -17,6 +17,10 @@ class StatusEnum(enum.Enum):
     OPEN = "open"
     CLOSED = "closed"
 
+class UserRoleEnum(enum.Enum):
+    NORMAL = "normal"
+    ADMIN = "admin"
+
 # Association Table
 issue_events = Table(
     "issue_events",
@@ -36,6 +40,12 @@ class User(Base):
     date_created = Column(DateTime(timezone=True) , server_default=func.now())
     sessions = relationship("UserSession", back_populates="user")
     events = relationship("Event", back_populates="user")
+
+    __table_args__ = (
+        CheckConstraint(
+           "role_type IN ('admin', 'normal')"
+        ),
+    )
 
 # Event Table
 class Event(Base):

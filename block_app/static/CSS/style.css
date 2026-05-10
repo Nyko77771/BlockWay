@@ -53,6 +53,14 @@ body {
   position: relative;
 }
 
+.navbar_links_authenticated {
+  display: flex;
+  margin-bottom: 15px;
+  padding-right: 5px;
+  width: 100%;
+  justify-content: end;
+}
+
 .nav_start {
   margin-left: 3px;
   gap: 26px;
@@ -72,7 +80,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 85vh;
-box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
 }
 
 /* Styling Home page */
