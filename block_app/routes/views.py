@@ -66,27 +66,30 @@ def signup():
                 role_type = db_models.UserRoleEnum['NORMAL'].value,
             )
 
-            if check_admin():
-                session['user_id'] = new_user.user_id
-                return redirect('/setup/admin-setup')
 
             db.add(new_user)
             db.commit()
+
+            # Get User ID from db
+            new_db_user = db.query(db_models.User).filter(db_models.User.username == given_username).first()
+
+            # Establishing a session
+            session['user_id'] = new_db_user.user_id
+
+            if check_admin():
+                return redirect('/setup/admin-setup')
+
+
+
             print('Closing the Database')
             db.close()
 
             print('Redirecting to dashboard')
-            return render_template('dashboard.html')
+            return redirect('/dashboard')
 
         except:
-            authenticate_user()
             return render_template('signup.html', message='Something went wrong.Try again', current_user=current_user)
 
-
-
-
-
-    authenticate_user()
     return render_template('signup.html', current_user=current_user)
 
 @views.route('/signin', methods=['GET', 'POST'])
@@ -105,7 +108,6 @@ def signin():
 
         # Check if db has found user
         if db_username is None:
-            authenticate_user()
             return render_template('signup.html', message='Not found', current_user=current_user)
 
         #Check the passwords
@@ -116,7 +118,6 @@ def signin():
         # PASSWORD DECRYPTION
 
         if db_password != given_password:
-            authenticate_user()
             render_template('signup.html', message='Passwords do not match', current_user=current_user)
 
         session['user_id'] = db_username.user_id
@@ -124,15 +125,12 @@ def signin():
         return redirect('/dashboard')
 
 
-
-    authenticate_user()
     return render_template('signin.html', current_user=current_user)
 
 # Route for Dashboard
 @views.route('/dashboard')
 def dashboard():
-    print('Current session user: ' + str(session['user_id']))
-    authenticate_user()
+    print('Current session user: ' + str(session.get('user_id')))
     return render_template('dashboard.html', current_user=current_user)
 
 # Route for Logout
