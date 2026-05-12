@@ -13,14 +13,11 @@
     <a href="{{ url_for('views.settings') }}">Settings</a>
     <a href="{{ url_for('views.logout') }}">Logoff</a>
 
-
     {% elif current_user.user_id and current_user.admin %}
     <a href="{{ url_for('views.admin_dashboard') }}">Admin Dashboard</a>
-    <a href="{{ url_for('views.settings') }}">Settings</a>
+    <a href="{{ url_for('views.admin_settings') }}">Settings</a>
     <a href="{{ url_for('views.logout') }}">Logoff</a>
-    {% else %}
-
-    {% if request.endpoint != 'views.home' %}
+    {% else %} {% if request.endpoint != 'views.home' %}
     <div class="back_button nav_start">
       <a href="{{ url_for('views.home') }}">
         <img

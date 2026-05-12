@@ -1,5 +1,5 @@
-from flask import Blueprint, render_template, request, redirect, session
-from block_app.database.database import engine, SessionLocal
+from flask import Blueprint, render_template, request, redirect, session, abort
+from block_app.database.database import SessionLocal
 import  block_app.models.db_models as db_models
 from block_app.database.database import check_admin
 
@@ -41,7 +41,7 @@ def signup():
 
         # Checking if provided passwords match
         if given_password != given_confirm_password:
-            return render_template('/signup', message='Passwords do not match!')
+            return render_template('signup.html', message='Passwords do not match!', current_user=current_user)
 
         # TO ADD:
         # 1. PASSWORD COMPLEXITY CHECK
@@ -79,8 +79,6 @@ def signup():
             if check_admin():
                 return redirect('/setup/admin-setup')
 
-
-
             print('Closing the Database')
             db.close()
 
@@ -117,8 +115,9 @@ def signin():
         # SECURE PASSWORD
         # PASSWORD DECRYPTION
 
+        # If Passwords don't match ask user to sign-in again
         if db_password != given_password:
-            render_template('signup.html', message='Passwords do not match', current_user=current_user)
+            render_template('signin.html', message='Passwords do not match', current_user=current_user)
 
         session['user_id'] = db_username.user_id
         db.close()
@@ -131,6 +130,8 @@ def signin():
 @views.route('/dashboard')
 def dashboard():
     print('Current session user: ' + str(session.get('user_id')))
+    if current_user['user_id'] is None:
+        abort(404)
     return render_template('dashboard.html', current_user=current_user)
 
 # Route for Logout
@@ -143,3 +144,9 @@ def logout():
 @views.route('/settings')
 def settings():
     return render_template('/settings', current_user=current_user)
+
+# 404 Page
+# Handling Not Found Errors
+@views.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html')

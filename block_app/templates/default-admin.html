@@ -2,6 +2,11 @@
 endblock %} {% block content %} {% if message %}
 <div class="message">{{ message }}</div>
 {% endif %}
+<div class="default_admin_details">
+  <h2>Default Admin Details</h2>
+  <p>Username: {{ user.username }}</p>
+  <p>Password: {{ user.password }}</p>
+</div>
 <div class="signup_box">
   <h2>Admin Registration</h2>
 </div>
@@ -10,5 +15,12 @@ endblock %} {% block content %} {% if message %}
   method="POST"
   action="{{ url_for('setup.admin_setup') }}"
   class="signup_form"
-></form>
+>
+  <label for="username">Username:</label>
+  <input type="text" id="username" name="username" required />
+  <label for="password">Password:</label>
+  <input type="password" id="password" name="password" required />
+  <button type="submit">Register</button>
+  <a href="{{ url_for('views.dashboard') }}" class="btn_cancel">Cancel</a>
+</form>
 {% endblock %}
