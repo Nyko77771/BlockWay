@@ -156,6 +156,17 @@ def logout():
 def settings():
     return render_template('normal_templates/settings.html', current_user=current_user)
 
+@views.get('/change-theme')
+def change_theme():
+    current_theme = session.get('theme')
+    if current_theme == 'dark':
+        session['theme'] = 'light'
+    else:
+        session['theme'] = 'dark'
+
+    return redirect(request.args.get('current_page'))
+
+
 # 404 Page
 # Handling Not Found Errors
 @views.errorhandler(404)

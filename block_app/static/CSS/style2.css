@@ -1,4 +1,18 @@
-
+:root {
+    /* Light Theme */
+  --background_light: ;
+  /* Dark Theme */
+  --main_colour: ;
+  --nav_colour: #3f37c9;
+  --background: #3f37c9;
+  --border_color: #274c77;
+  --cards: ;
+  --text_colour: #ffffff;
+  --highlighted_text: ;
+  --text_font: ;
+  --background_dark: ;
+  --background_light: ;
+}
 /*
 /* Backgroun Colour */
 html,
