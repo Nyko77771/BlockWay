@@ -1,0 +1,42 @@
+{% extends "partials/head.html"%} {% block title %} Signin {% endblock %} {%
+block content %} {% if message %}
+<div class="message">{{ message }}</div>
+{% endif %}
+<div class="main_signin">
+  <!---->
+  <div class="signin_form_box">
+    <div>
+      <img
+        src="{{ url_for('static', filename='images/signin.png') }}"
+        alt="signin logo"
+        class="signin_image"
+      />
+      <h2>Get Started with an Account!</h2>
+    </div>
+
+    <div class="choice_title">
+      <h2>Login</h2>
+    </div>
+
+    <form method="POST" action="{{ url_for('views.signin') }}">
+      <h3>Username</h3>
+      <input type="text" name="username" required />
+      <h3>Password</h3>
+      <input type="password" name="password" required />
+      <div class="signin_btn_group">
+        <input type="submit" value="Login" class="submit_button" />
+        <a href="{{ url_for('views.home') }}" class="btn_cancel">Cancel</a>
+      </div>
+
+      <a href="{{ url_for('views.signup') }}" class="signup_link"
+        >Don't have an account? Sign up here.</a
+      >
+    </form>
+  </div>
+
+  <!---->
+  <div class="signin_welcomebox">
+    <h1>Welcome!</h1>
+  </div>
+</div>
+{% endblock %}

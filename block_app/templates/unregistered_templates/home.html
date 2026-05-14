@@ -1,0 +1,59 @@
+{% extends "partials/head.html"%} {% block navbar %} {% include
+"partials/navs/navbar_unregistered.html" %} {% endblock %} {% block title %}
+Welcome {% endblock %} {% block content %}
+<div class="home_background">
+  <div class="home_box">
+    <div class="home_welcome">
+      <img
+        alt="!BlockWay Logo Goes Here!"
+        src="{{url_for('static', filename='static/logo.png')}}"
+      />
+      <h2>Welcome to BlockWay</h2>
+      <h3>The Future of Dynamic Malicious Traffic Filtering</h3>
+      <p>
+        Blockway is a new open-source solution for cutting malicious and benign
+        traffic detection and management.
+      </p>
+    </div>
+
+    <div class="home_choice">
+      <div class="home_column">
+        <a href="{{ url_for('views.signin') }}">
+          <div class="home_login_choice">
+            <h3>Login</h3>
+          </div>
+        </a>
+      </div>
+
+      <div class="home_column">
+        <a href="{{ url_for('views.signup') }}">
+          <div class="home_login_choice">
+            <h3>Create Account</h3>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="home_features_statement">
+    <div class="home_features">
+      <h2>Features</h2>
+      <ul>
+        <li>Lightweight ML model</li>
+        <li>Automatic Website Analysis</li>
+        <li>Real-time Traffic Filtering</li>
+        <li>Customizable Rules and Alerts</li>
+      </ul>
+    </div>
+    <div class="home_statement">
+      <h2>Features</h2>
+      <ul>
+        <li>Lightweight ML model</li>
+        <li>Automatic Website Analysis</li>
+        <li>Real-time Traffic Filtering</li>
+        <li>Customizable Rules and Alerts</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

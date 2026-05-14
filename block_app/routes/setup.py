@@ -63,9 +63,9 @@ def admin_setup():
         return redirect('/pihole')
 
 
-    return render_template('default-admin.html', user=user)
+    return render_template('normal_templates/default-admin.html', user=user)
 
 
 @setup.route('/pihole')
 def setup_pihole():
-    return render_template('pihole_select.html')
+    return render_template('normal_templates/pihole_select.html')

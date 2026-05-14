@@ -1,0 +1,12 @@
+<div class="navbar navbar_authenticated_admin">
+  <img
+    alt="!!!BlockWay Logo to be Designed!!!"
+    src="{{url_for('static', filename='static/logo.png')}}"
+  />
+
+  <div class="nav_end">
+    <a href="{{ url_for('views.admin_dashboard') }}">Admin Dashboard</a>
+    <a href="{{ url_for('views.admin_settings') }}">Settings</a>
+    <a href="{{ url_for('views.logout') }}">Logoff</a>
+  </div>
+</div>

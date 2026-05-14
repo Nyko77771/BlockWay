@@ -16,14 +16,14 @@ views = Blueprint(
 )
 
 # Method for checjking whether user was authenticated
-
 @views.before_request
 def get_id():
     current_user['user_id'] = session.get('user_id')
 
+# Home Route - Initial Page
 @views.route('/', methods=['GET'])
 def home():
-    return render_template('home.html', current_user=current_user)
+    return render_template('unregistered_templates/home.html', current_user=current_user)
 
 # Route for Signup page
 @views.route('/signup', methods=['GET', 'POST'])
@@ -41,7 +41,7 @@ def signup():
 
         # Checking if provided passwords match
         if given_password != given_confirm_password:
-            return render_template('signup.html', message='Passwords do not match!', current_user=current_user)
+            return render_template('unregistered_templates/signup.html', message='Passwords do not match!', current_user=current_user)
 
         # TO ADD:
         # 1. PASSWORD COMPLEXITY CHECK
@@ -57,7 +57,7 @@ def signup():
         # PASSWORD DECTRYPTION
 
         if db_username == given_username:
-            return render_template('signup.html', message='Use different username', current_user=current_user)
+            return render_template('unregistered_templates/signup.html', message='Use different username', current_user=current_user)
 
         try:
             new_user = db_models.User(
@@ -86,9 +86,9 @@ def signup():
             return redirect('/dashboard')
 
         except:
-            return render_template('signup.html', message='Something went wrong.Try again', current_user=current_user)
+            return render_template('unregistered_templates/signup.html', message='Something went wrong.Try again', current_user=current_user)
 
-    return render_template('signup.html', current_user=current_user)
+    return render_template('unregistered_templates/signup.html', current_user=current_user)
 
 @views.route('/signin', methods=['GET', 'POST'])
 def signin():
@@ -117,22 +117,33 @@ def signin():
 
         # If Passwords don't match ask user to sign-in again
         if db_password != given_password:
-            render_template('signin.html', message='Passwords do not match', current_user=current_user)
+            render_template('unregistered_templates/signin.html', message='Passwords do not match', current_user=current_user)
 
         session['user_id'] = db_username.user_id
         db.close()
         return redirect('/dashboard')
 
 
-    return render_template('signin.html', current_user=current_user)
+    return render_template('unregistered_templates/signin.html', current_user=current_user)
 
+# Route for Features
+@views.route('/features')
+def features():
+    return render_template('unregistered_templates/features.html', current_user=current_user)
+
+# Route for About
+@views.route('/about')
+def about():
+    return render_template('unregistered_templates/about.html', current_user=current_user)
+
+# NORMAL REGISTERED USER PAGES
 # Route for Dashboard
 @views.route('/dashboard')
 def dashboard():
     print('Current session user: ' + str(session.get('user_id')))
     if current_user['user_id'] is None:
         abort(404)
-    return render_template('dashboard.html', current_user=current_user)
+    return render_template('normal_templates/dashboard.html', current_user=current_user)
 
 # Route for Logout
 @views.route('/logout')
@@ -143,7 +154,7 @@ def logout():
 # Route for Settings
 @views.route('/settings')
 def settings():
-    return render_template('/settings', current_user=current_user)
+    return render_template('normal_templates/settings.html', current_user=current_user)
 
 # 404 Page
 # Handling Not Found Errors

@@ -1,4 +1,5 @@
-<div class="navbar">
+<div class="navbar {% if current_user.user_id %} navbar_sidebar {% endif %}">
+
   {% if current_user.user_id %}
   <div class="navbar_logo nav_start">
     <img
@@ -7,7 +8,10 @@
     />
   </div>
   {% endif %}
+
+
   <div class="navbar_links_authenticated">
+
     {% if current_user.user_id and not current_user.admin %}
     <a href="{{ url_for('views.dashboard') }}">Dashboard</a>
     <a href="{{ url_for('views.settings') }}">Settings</a>
@@ -17,7 +21,10 @@
     <a href="{{ url_for('views.admin_dashboard') }}">Admin Dashboard</a>
     <a href="{{ url_for('views.admin_settings') }}">Settings</a>
     <a href="{{ url_for('views.logout') }}">Logoff</a>
-    {% else %} {% if request.endpoint != 'views.home' %}
+
+    {% else %}
+
+    {% if request.endpoint != 'views.home' %}
     <div class="back_button nav_start">
       <a href="{{ url_for('views.home') }}">
         <img
@@ -27,6 +34,8 @@
       </a>
     </div>
     {% endif %}
+
+
     <div class="nav_end">
       <a href="{{ url_for('views.signin') }}">Login</a>
       <a href="{{ url_for('views.signup') }}">Signup</a>
