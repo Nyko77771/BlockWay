@@ -1,5 +1,5 @@
 :root {
-    /* Light Theme */
+  /* Light Theme */
   --background_light: ;
   /* Dark Theme */
   --main_colour: ;
@@ -207,4 +207,25 @@ body {
   justify-content: center;
   align-items: center;
   bottom: 0;
+}
+
+.home_statement {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.home_features {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: start;
+  border: 2px solid black;
+}
+
+.home_features li {
+  font-size: 150%;
 }
