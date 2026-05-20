@@ -1,6 +1,8 @@
 from flask import Flask, jsonify;
 from block_app.routes.views import views
 from block_app.routes.setup import setup
+from block_app.routes.dashboard import dashboard
+from block_app.routes.settings import settings
 from block_app.database.database import check_start_db
 
 # Making a function for block app creation
@@ -14,6 +16,8 @@ def make_blockway():
     # Defining the routes functions inside the app via flask blueprint
     block_app.register_blueprint(views)
     block_app.register_blueprint(setup)
+    block_app.register_blueprint(dashboard)
+    block_app.register_blueprint(settings)
     # Starting Database
     check_start_db()
     return block_app

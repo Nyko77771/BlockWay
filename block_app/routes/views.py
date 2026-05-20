@@ -7,13 +7,28 @@ from block_app.database.database import check_admin
 # Tracking Variables
 current_user = {
     "user_id": None,
-    "new_user": None
+    "new_user": None,
+    "is_admin": False
 }
 
 views = Blueprint(
     'views',
     __name__,
 )
+
+def get_user_type(user_id):
+    # Opening db connection
+    db = SessionLocal()
+    print('Checking user type')
+
+    db_user = db.query(db_models.User).filter(db_models.User.user_id == user_id).first()
+
+    if db_user.role_type == "admin":
+        print('Current user is admin')
+        current_user['is_admin'] = True
+    print('User is not admin')
+    # Closing db connection
+    db.close()
 
 # Method for checjking whether user was authenticated
 @views.before_request
@@ -90,6 +105,7 @@ def signup():
 
     return render_template('unregistered_templates/signup.html', current_user=current_user)
 
+
 @views.route('/signin', methods=['GET', 'POST'])
 def signin():
     if request.method == 'POST':
@@ -137,24 +153,12 @@ def about():
     return render_template('unregistered_templates/about.html', current_user=current_user)
 
 # NORMAL REGISTERED USER PAGES
-# Route for Dashboard
-@views.route('/dashboard')
-def dashboard():
-    print('Current session user: ' + str(session.get('user_id')))
-    if current_user['user_id'] is None:
-        abort(404)
-    return render_template('normal_templates/dashboard.html', current_user=current_user)
 
 # Route for Logout
 @views.route('/logout')
 def logout():
     session.clear()
     return redirect('/')
-
-# Route for Settings
-@views.route('/settings')
-def settings():
-    return render_template('normal_templates/settings.html', current_user=current_user)
 
 @views.get('/change-theme')
 def change_theme():

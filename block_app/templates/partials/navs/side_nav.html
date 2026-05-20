@@ -1,0 +1,11 @@
+<div class="side_navbar">
+  {% if current_user.user_id and current_user.is_admin %}
+  <a href="{{ url_for('dashboard.dashboard_home') }}">Admin Overview</a>
+  {% elif current_user.user_id %}
+  <a href="{{ url_for('dashboard.dashboard_home') }}">Overview</a>
+  {% endif %}
+
+  <a href="{{ url_for('dashboard.threats') }}">Threats</a>
+  <a href="{{ url_for('dashboard.rules') }}">Rules</a>
+  <a href="{{ url_for('dashboard.system') }}">System</a>
+</div>

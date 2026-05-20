@@ -1,0 +1,16 @@
+<div class="navbar navbar_registered">
+  <img
+    alt="!!!BlockWay Logo to be Designed!!!"
+    src="{{url_for('static', filename='static/logo.png')}}"
+  />
+
+  <div class="nav_end">
+    {% if current_user.user_id and current_user.is_admin %}
+    <a href="{{ url_for('dashboard.dashboard_home') }}">Admin Dashboard</a>
+    {% elif current_user.user_id %}
+    <a href="{{ url_for('dashboard.dashboard_home') }}">Dashboard</a>
+    {% endif %}
+    <a href="{{ url_for('settings.settings_home') }}">Settings</a>
+    <a href="{{ url_for('views.logout') }}">Logoff</a>
+  </div>
+</div>
