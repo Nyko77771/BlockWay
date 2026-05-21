@@ -5,12 +5,46 @@
   />
 
   <div class="nav_end">
-    {% if current_user.user_id and current_user.is_admin %}
-    <a href="{{ url_for('dashboard.dashboard_home') }}">Admin Dashboard</a>
+    {% if request.endpoint == 'dashboard.dashboard_home' %} {% if
+    current_user.user_id and current_user.is_admin %}
+    <a
+      href="{{ url_for('dashboard.dashboard_home') }}"
+      class="{% if request.endpoint == 'dashboard.dashboard_home' %} active_link disabled selected {% endif %}"
+      >Admin Dashboard</a
+    >
     {% elif current_user.user_id %}
-    <a href="{{ url_for('dashboard.dashboard_home') }}">Dashboard</a>
+    <a
+      href="{{ url_for('dashboard.dashboard_home') }}"
+      class="{% if request.endpoint == 'dashboard.dashboard_home' %} active_link disabled {% endif %}"
+    >
+      Dashboard
+    </a>
     {% endif %}
+    <!--Divider Line (for decoration)-->
+    <div class="nav_decorator_line"></div>
     <a href="{{ url_for('settings.settings_home') }}">Settings</a>
     <a href="{{ url_for('views.logout') }}">Logoff</a>
+
+    {% elif request.endpoint == 'settings.settings_home' %}
+    <a href="{{ url_for('settings.settings_home') }}">Settings</a>
+    <!--Divider Line (for decoration)-->
+    <div class="nav_decorator_line"></div>
+    {% if current_user.user_id and current_user.is_admin %}
+    <a
+      href="{{ url_for('dashboard.dashboard_home') }}"
+      class="{% if request.endpoint == 'dashboard.dashboard_home' %} active_link disabled selected {% endif %}"
+      >Admin Dashboard</a
+    >
+    {% elif current_user.user_id %}
+    <a
+      href="{{ url_for('dashboard.dashboard_home') }}"
+      class="{% if request.endpoint == 'dashboard.dashboard_home' %} active_link disabled {% endif %}"
+    >
+      Dashboard
+    </a>
+    {% endif %}
+
+    <a href="{{ url_for('views.logout') }}">Logoff</a>
+    {% endif %}
   </div>
 </div>

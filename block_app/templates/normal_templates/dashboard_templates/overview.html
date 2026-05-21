@@ -1,20 +1,20 @@
-{% extends "partials/head.html"%}
-{% block navbar %}
-{% include
-"partials/navs/navbar_registered.html" %}
-{% endblock %}
-
-{% block title %}
-Dashboard {% endblock %}
-{% block content %}
+{% extends "partials/head.html"%} {% block navbar %} {% include
+"partials/navs/navbar_registered.html" %} {% endblock %} {% block title %}
+Dashboard {% endblock %} {% block content %}
 <div class="container">
   <div class="dash_nav">{% include "partials/navs/side_nav.html" %}</div>
   <div class="dash_main">
-    <h1>Dashboard</h1>
-    <p>
-      Welcome to your dashboard! Here you can manage your account and view your
-      activity.
-    </p>
+    <div class="dash_title">
+      <h1>Dashboard</h1>
+      <p>
+        Welcome to your dashboard! Here you can manage your account and view
+        your activity.
+      </p>
+    </div>
+    <div class="dash_content">
+      <div class="dash_box"></div>
+    </div>
+
     <!-- Add more dashboard content here -->
   </div>
 </div>

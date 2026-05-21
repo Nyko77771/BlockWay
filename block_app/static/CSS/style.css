@@ -338,7 +338,11 @@ body {
   justify-content: center;
   text-align: center;
   height: 50vh;
+  max-height: 800px;
+  min-height: 400px;
   width: 40vw;
+  min-width: 400px;
+  max-width: 700px;
   box-shadow: var(--border) 1px 1px 3px;
   transition: 2s ease-in-out;
 }
@@ -388,6 +392,20 @@ body {
 .signup_message:hover h1 {
   transform: scale(1.5);
   transition: transform 1.5s ease;
+}
+
+@media (max-width: 1490px) {
+  .signup_message h1 {
+    font-size: 0.7rem;
+  }
+  .signup_inputs .submit_btn,
+  .signup_inputs .cancel_btn {
+    font-size: 0.6rem;
+  }
+
+  .signup_btns .login_link {
+    font-size: 0.65rem;
+  }
 }
 
 /* Signin Page */
@@ -492,13 +510,71 @@ body {
   justify-content: center;
 }
 
-/* Dashboard */
-.dash_nav {
-  border: 2px solid black;
-  width: 50vw;
+/* Regitered Navbar */
+.navbar_registered:hover .nav_decorator_line {
+  height: 22px;
+  transform: scaleY(1.1);
+}
+
+/* Dashboard Pages */
+.container {
+  display: flex;
+  flex-direction: row;
 }
 
 .dash_main {
   border: 5px solid red;
-  width: 50vw;
+  width: 70vw;
+}
+
+/* Dashboard Side Nav Styling */
+.dash_nav {
+  border: 2px solid var(--border);
+  width: 15vw;
+  height: 80vh;
+  max-height: 650px;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+.side_navbar {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  text-align: center;
+  justify-content: center;
+}
+
+.side_nav_btns {
+  text-decoration: none;
+  color: var(--text);
+  height: 40px;
+  max-height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+}
+
+.side_nav_btns:hover {
+  border: 2px solid var(--border);
+  border-radius: 20px;
+}
+
+/* Overview Styling */
+
+.nav_decorator_line {
+  height: 10px;
+  border: 1px solid var(--border);
+  transition: all 0.9s ease-in-out;
+  transform: scaleY(1);
+}
+
+.active_link {
+  background-color: var(--button_transform);
+  color: var(--box);
+}
+.disabled {
+  pointer-events: none;
 }
