@@ -14,6 +14,7 @@
   );
 
   --text: #003049;
+  --text2: #ffffff;
   --highlight: ;
 
   /* Non-Changing */
@@ -523,8 +524,12 @@ body {
 }
 
 .dash_main {
-  border: 5px solid red;
+  border: 1px solid var(--border);
+  border-left: 5px solid var(--border);
   width: 70vw;
+  display: flex;
+  flex-direction: column;
+  padding: 8px 8px 8px 10px;
 }
 
 /* Dashboard Side Nav Styling */
@@ -537,6 +542,7 @@ body {
   border-bottom-left-radius: 8px;
 }
 
+/* Dashboard Side Container */
 .side_navbar {
   height: 100%;
   display: flex;
@@ -547,6 +553,7 @@ body {
 }
 
 .side_nav_btns {
+  position: relative;
   text-decoration: none;
   color: var(--text);
   height: 40px;
@@ -554,12 +561,50 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
+  border-radius: 20px 0 0 20px;
+  overflow: visible;
+  isolation: isolate;
+  z-index: 0;
+  margin-top: 2px;
+}
+
+.side_nav_btns::before,
+.side_nav_btns::after {
+  content: "";
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.side_nav_btns::before {
+  top: -30px;
+  right: -1px;
+  background: var(--sidebar-bg);
+  border-bottom-right-radius: 20px;
+  box-shadow: 6px 6px 0 0 var(--border);
+}
+
+/* BOTTOM inset corner */
+.side_nav_btns::after {
+  bottom: -30px;
+  right: -1px;
+  background: var(--sidebar-bg);
+  border-top-right-radius: 20px;
+  box-shadow: 6px -6px 0 0 var(--border);
+}
+
+.side_nav_btns:hover::before,
+.side_nav_btns:hover::after {
+  opacity: 1;
 }
 
 .side_nav_btns:hover {
-  border: 2px solid var(--border);
-  border-radius: 20px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  color: var(--text2);
 }
 
 /* Overview Styling */

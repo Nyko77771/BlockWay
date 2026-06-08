@@ -16,6 +16,14 @@ views = Blueprint(
     __name__,
 )
 
+# Function for Password Strength Check
+def password_check(password):
+    return
+
+# Function for Hashing Password
+def get_secure_password(password):
+    return
+
 def get_user_type(user_id):
     # Opening db connection
     db = SessionLocal()
