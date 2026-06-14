@@ -16,13 +16,17 @@ views = Blueprint(
     __name__,
 )
 
+#######################################
+# Will be done in Services
 # Function for Password Strength Check
 def password_check(password):
     return
 
+# Will be done in Services
 # Function for Hashing Password
 def get_secure_password(password):
     return
+########################################
 
 def get_user_type(user_id):
     # Opening db connection
