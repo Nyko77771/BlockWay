@@ -16,18 +16,6 @@ views = Blueprint(
     __name__,
 )
 
-#######################################
-# Will be done in Services
-# Function for Password Strength Check
-def password_check(password):
-    return
-
-# Will be done in Services
-# Function for Hashing Password
-def get_secure_password(password):
-    return
-########################################
-
 def get_user_type(user_id):
     # Opening db connection
     db = SessionLocal()
@@ -81,7 +69,7 @@ def signup():
         db_username = db_user.username if db_user and db_user.username is not None else ''
 
         # TO ADD
-        # PASSWORD DECTRYPTION
+        # PASSWORD CHECKING
 
         if db_username == given_username:
             return render_template('unregistered_templates/signup.html', message='Use different username', current_user=current_user)

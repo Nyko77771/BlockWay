@@ -21,7 +21,7 @@ def check_start_db():
         print("Database not found.")
         print("Creating Database...")
 
-    Base.metadata.create_all(engine)
+    Base.metadata.create_all(bind=engine)
 
 def check_admin():
     db =  SessionLocal()
