@@ -15,7 +15,7 @@ Dashboard {% endblock %} {% block content %}
     <div class="settings_content">
       div class="settings_box">
         <h2>Change Password</h2>
-        <form method="POST" action="{{ url_for('settings.settings_home') }}">
+        <form method="POST" action="{{ url_for('settings.home') }}">
             <div class="form_group">
                 <label for="current_password">Current Password</label>
                 <input

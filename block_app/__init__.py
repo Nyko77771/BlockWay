@@ -1,4 +1,4 @@
-from flask import Flask, jsonify;
+from flask import Flask, jsonify, render_template
 from block_app.routes.views import views
 from block_app.routes.setup import setup
 from block_app.routes.dashboard import dashboard
@@ -18,6 +18,13 @@ def make_blockway():
     block_app.register_blueprint(setup)
     block_app.register_blueprint(dashboard)
     block_app.register_blueprint(settings)
+
+    # 404 Page
+    # Handling Not Found Errors Globally
+    @block_app.errorhandler(404)
+    def page_not_found(e):
+        return render_template('404.html')
+
     # Starting Database
     check_start_db()
     return block_app

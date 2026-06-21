@@ -5,40 +5,43 @@
   />
 
   <div class="nav_end">
-    {% if request.endpoint == 'dashboard.dashboard_home' %} {% if
-    current_user.user_id and current_user.is_admin %}
+    {% if request.endpoint == 'dashboard.home' %} {% if current_user.user_id and
+    current_user.is_admin %}
     <a
-      href="{{ url_for('dashboard.dashboard_home') }}"
-      class="{% if request.endpoint == 'dashboard.dashboard_home' %} active_link disabled selected {% endif %}"
+      href="{{ url_for('dashboard.home') }}"
+      class="{% if request.endpoint == 'dashboard.home' %} active_link disabled selected {% endif %}"
       >Admin Dashboard</a
     >
     {% elif current_user.user_id %}
     <a
-      href="{{ url_for('dashboard.dashboard_home') }}"
-      class="{% if request.endpoint == 'dashboard.dashboard_home' %} active_link disabled {% endif %}"
+      href="{{ url_for('dashboard.home') }}"
+      class="{% if request.endpoint == 'dashboard.home' %} active_link disabled {% endif %}"
     >
       Dashboard
     </a>
     {% endif %}
+
     <!--Divider Line (for decoration)-->
     <div class="nav_decorator_line"></div>
     <a href="{{ url_for('settings.home') }}">Settings</a>
     <a href="{{ url_for('views.logout') }}">Logoff</a>
 
-    {% elif request.endpoint == 'settings.settings_home' %}
-    <a href="{{ url_for('settings.settings_home') }}" class="{% if request.endpoint == 'settings.settings_home' %} active_link disabled selected {% endif %}">Settings</a>
+    {% elif request.endpoint == 'settings.home' %}
+    <a
+      href="{{ url_for('settings.home') }}"
+      class="{% if request.endpoint == 'settings.home' %} active_link disabled selected {% endif %}"
+      >Settings</a
+    >
     <!--Divider Line (for decoration)-->
     <div class="nav_decorator_line"></div>
-    {% if current_user.user_id and current_user.is_admin %}
-    <a
-      href="{{ url_for('dashboard.dashboard_home') }}"
 
-      >Admin Dashboard</a
-    >
+    {% if current_user.user_id and current_user.is_admin %}
+
+    <a href="{{ url_for('dashboard.home') }}">Admin Dashboard</a>
     {% elif current_user.user_id %}
     <a
-      href="{{ url_for('dashboard.dashboard_home') }}"
-      class="{% if request.endpoint == 'dashboard.dashboard_home' %} active_link disabled {% endif %}"
+      href="{{ url_for('dashboard.home') }}"
+      class="{% if request.endpoint == 'dashboard.home' %} active_link disabled {% endif %}"
     >
       Dashboard
     </a>

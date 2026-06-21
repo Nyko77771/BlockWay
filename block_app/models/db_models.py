@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, Table, DateTime, func, Enum, CheckConstraint
+from sqlalchemy import Column, Integer, String, ForeignKey, Table, DateTime, func, Enum, CheckConstraint, Boolean, Float
 from sqlalchemy.orm import relationship, backref, Mapped, mapped_column
 from sqlalchemy.ext.declarative import declarative_base
 import enum
@@ -21,6 +21,10 @@ class UserRoleEnum(enum.Enum):
     NORMAL = "normal"
     ADMIN = "admin"
 
+class DomainPredictionType(enum.Enum):
+    BENIGN = "benign"
+    MALICIOUS = "malicious"
+
 # Association Table
 issue_events = Table(
     "issue_events",
@@ -34,7 +38,8 @@ class User(Base):
     __tablename__ = "users"
     user_id = Column(Integer, primary_key=True, autoincrement=True)
     username = Column(String, unique=True)
-    password = Column(String(255), nullable=False)
+    password_hash = Column(String, nullable=False)
+    salt = Column(String, nullable=False)
     role_type = Column(String)
     pihole_location = Column(String)
     date_created = Column(DateTime(timezone=True) , server_default=func.now())
@@ -97,3 +102,19 @@ class UserSession(Base):
     token  = Column(String)
     date_created = Column(DateTime(timezone=True))
     user = relationship("User", back_populates="sessions")
+
+# Analysed Domains Table
+class AnalysedDomains(Base):
+     __tablename__ = "analysed_domains"
+     domain_id = Column(Integer, primary_key=True, autoincrement=True)
+     domain_name = Column(String, unique=True, nullable=False)
+     prediction_type = Column(String, nullable=False)
+     prediction_score = Column(Float, nullable=True)
+     blocked_domain =  Column(Boolean, default=False, nullable=False)
+     date_created = Column(DateTime(timezone=True) , server_default=func.now())
+     last_update = Column(DateTime(timezone=True) , server_default=func.now(), onupdate=func.now())
+     __table_args__ = (
+        CheckConstraint(
+           "prediction_type IN ('benign', 'malicious')"
+        ),
+    )

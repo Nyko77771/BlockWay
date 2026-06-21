@@ -58,9 +58,14 @@ def password_strength(password):
     return score
 
 # Method for Hashing Passwords
-def password_hashing(password):
+def password_hashing(password, salt=None):
     bytes_password = password.encode()
     generated_values  = {}
-    generated_values['salt'] = bcrypt.gensalt()
+    
+    if salt == None:
+        generated_values['salt'] = bcrypt.gensalt()
+    else:
+        generated_values['salt'] = salt
+
     generated_values['hash'] = bcrypt.hashpw(bytes_password, generated_values['salt']) # Hashing Password with Salt
     return generated_values

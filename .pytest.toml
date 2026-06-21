@@ -1,6 +1,6 @@
 [pytest]
 minversion = "9.0"
-addopts = ["-v", "-ra"]
+addopts = ["-v", "-ra", "-s"]
 testpaths = ["tests"]
 python_files = ["pihole_service_test.py"]
 pythonpath = ["src"]

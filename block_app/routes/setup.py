@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, redirect
 from block_app.database.database import engine, SessionLocal
 import  block_app.models.db_models as db_models
-# import hashlib
+from block_app.services.password_service import password_hashing, password_strength
 
 setup = Blueprint(
     'setup',
@@ -40,10 +40,21 @@ def admin_setup():
         print('New password is:')
         # TO BE DELETED
 
+
+
+
+
+        #  ADD SALT
+        # ADD HASHED PASSWORD
+
+
         # Update database with new values
+
 
         db_admin.username = new_admin_username
         db_admin.password = new_admin_password
+        db_admin.salt = new_admin_password
+
 
         db.commit()
 
