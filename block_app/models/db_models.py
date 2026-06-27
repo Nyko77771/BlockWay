@@ -38,7 +38,7 @@ class User(Base):
     __tablename__ = "users"
     user_id = Column(Integer, primary_key=True, autoincrement=True)
     username = Column(String, unique=True)
-    password_hash = Column(String, nullable=False)
+    password = Column(String, nullable=False)
     salt = Column(String, nullable=False)
     role_type = Column(String)
     pihole_location = Column(String)

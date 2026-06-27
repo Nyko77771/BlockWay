@@ -18,23 +18,34 @@ def home():
 
     # Opening db connection
     db = SessionLocal()
+    try:
 
-    # Getting id from session
-    print('Current session user: ' + str(session.get('user_id')))
-    current_user_id = session.get('user_id')
-    user['user_id'] = current_user_id
+        # Getting id from session
+        print('Current session user: ' + str(session.get('user_id')))
+        current_user_id = session.get('user_id')
+        user['user_id'] = current_user_id
 
-    db_user = db.query(db_models.User).filter(db_models.User.user_id == current_user_id).first()
+        db_user = db.query(db_models.User).filter(db_models.User.user_id == current_user_id).first()
 
-    if db_user.user_id is None:
-        abort(404)
+        if db_user.user_id is None:
+            abort(404)
 
-    if check_user_type(current_user_id):
-        user['is_admin'] = True
-        print('Getting advanced dash')
-        return render_template('admin_templates/dashboard_templates/admin_overview.html', current_user=user)
+        if check_user_type(current_user_id):
+            user['is_admin'] = True
+            print('Getting advanced dash')
+            return render_template('admin_templates/dashboard_templates/admin_overview.html', current_user=user)
 
-    return render_template('normal_templates/dashboard_templates/overview.html', current_user=user)
+        return render_template('normal_templates/dashboard_templates/overview.html', current_user=user)
+    except Exception as e:
+        print('Exception occurred')
+        print(f'Exception: {e}')
+        message='Something Went Wrong. Please Log In Again'
+        session.clear()
+        return render_template('unregistered_templates/home.html', current_user=user, message = message)
+    finally:
+        print('Closing db connection')
+        db.close()
+
 
 ##################################################################
 # TO DO:

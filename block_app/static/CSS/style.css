@@ -54,6 +54,12 @@ body {
   height: 100vh;
 }
 
+/* Message */
+
+.message {
+  font-size: 0.7rem;
+}
+
 /* Navbar Common */
 
 /* Styling for Nav */
@@ -510,6 +516,117 @@ body {
   display: flex;
   justify-content: center;
 }
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  color: var(--border);
+}
+
+.tooltip_text {
+  visibility: hidden;
+  width: 220px;
+  background-color: var(--box);
+  box-shadow: var(--border) 1px 1px 1px;
+  border-radius: 3%;
+  padding: 5%;
+  margin-left: 2px;
+  text-align: center;
+  font-size: 0.65rem;
+  position: absolute;
+  z-index: 1;
+  max-width: 250px;
+  max-height: 180px;
+  bottom: 75%;
+  left: -30%;
+}
+
+.tooltip_text_bottom {
+  min-width: 180px;
+  left: -110%;
+}
+
+.tooltip:hover .tooltip_text {
+  visibility: visible;
+}
+
+/* Default-Admin Page */
+.default_admin {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+}
+
+.default_admin_details {
+  padding-left: 20px;
+}
+
+.admin_setup_container {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  text-align: start;
+  height: 550px;
+  max-height: 550px;
+  padding: 2%;
+}
+
+.admin_setup_container .default_admin_heading {
+  text-align: center;
+  align-self: center;
+}
+
+.admin_setup_container .default_admin_box {
+  align-items: center;
+  text-align: center;
+}
+
+.default_admin_box {
+  display: flex;
+  flex-direction: column;
+  height: 20vh;
+  max-height: 300px;
+}
+
+.default_admin_form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px;
+  box-shadow:
+    rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  margin-bottom: 10px;
+}
+
+#btn_default_register {
+  margin-top: 5px;
+  max-width: 50%;
+  border: 2px solid var(--border);
+  padding: 2px;
+  border-radius: 8%;
+  background-color: var(--button_main);
+  color: var(--text);
+  cursor: pointer;
+  transition: all 1s ease-in-out;
+}
+
+#btn_default_register:hover {
+  background-color: var(--button_transform);
+  transform: translateY(-2px);
+  color: var(--box);
+}
+
+.default_admin_cancel_btn {
+  margin: 3px 0 0 0;
+  max-width: 50%;
+}
+
+/* /////////////////////////////////////// */
+
+/* Registered Templates */
 
 /* Regitered Navbar */
 .navbar_registered:hover .nav_decorator_line {

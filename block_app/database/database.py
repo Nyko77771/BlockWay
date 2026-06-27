@@ -1,6 +1,7 @@
 from sqlalchemy import create_engine
 # Importing my schema
 from block_app.models.db_models import Base, User
+from block_app.services.password_service import password_hashing
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.exc import OperationalError
 from sqlalchemy.ext.declarative import declarative_base
@@ -23,35 +24,50 @@ def check_start_db():
 
     Base.metadata.create_all(bind=engine)
 
+# Function for checking default admin
+# Also creates default admin if none are found
 def check_admin():
     db =  SessionLocal()
 
-    # Check if admin exists
-    db_admin = db.query(User).filter(User.role_type == 'admin').first()
+    try:
 
-    if not db_admin:
+        # Check if admin exists
+        print('Checking if admin')
+        db_admin = db.query(User).filter(User.role_type == 'admin').first()
 
-        # Generate random password
-        letters_digits = string.ascii_letters + string.digits
-        for i in range(0, 15):
-            random_password = ''.join(secrets.choice(letters_digits))
+        if not db_admin:
 
-        # Create default admin
-        default_admin = User(
-            username = 'admin',
-            password = random_password,
-            role_type = 'admin'
-        )
+            # Generate random password
+            letters_digits = string.ascii_letters + string.digits + "!@~£%$"
+            random_password = ''.join(secrets.choice(letters_digits) for i in range (10))
 
-        db.add(default_admin)
-        db.commit()
+            # Password Hashing
+            hashed_values = password_hashing(random_password)
+            salt  = hashed_values['salt']
 
-        print("Created default admin account")
-        print('Default passwords needs to be changed')
-        return True
+            # Create default admin
+            default_admin = User(
+                username = 'admin',
+                password = random_password,
+                salt = salt,
+                role_type = 'admin'
+            )
 
-    print('Contains admin account')
-    return False
-    # Closing db connection
-    db.close()
+            db.add(default_admin)
+            db.commit()
+
+            print("Created default admin account")
+            print('Default passwords needs to be changed')
+            return True
+
+        print('Already contains admin account')
+        return False
+    except Exception as e:
+        print('Exception occured')
+        print(f'Exception: {e}')
+        return False
+    finally:
+        # Closing db connection
+        print('Closing Connection')
+        db.close()
 

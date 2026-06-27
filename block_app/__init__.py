@@ -4,6 +4,9 @@ from block_app.routes.setup import setup
 from block_app.routes.dashboard import dashboard
 from block_app.routes.settings import settings
 from block_app.database.database import check_start_db
+from block_app.cli.administrator import admin_reset
+from dotenv import load_dotenv
+import os
 
 # Making a function for block app creation
 def make_blockway():
@@ -19,11 +22,14 @@ def make_blockway():
     block_app.register_blueprint(dashboard)
     block_app.register_blueprint(settings)
 
+    # CLI Commands
+    block_app.cli.add_command(admin_reset)
+
     # 404 Page
     # Handling Not Found Errors Globally
     @block_app.errorhandler(404)
     def page_not_found(e):
-        return render_template('404.html')
+        return render_template('404.html'), 404
 
     # Starting Database
     check_start_db()

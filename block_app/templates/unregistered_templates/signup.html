@@ -15,9 +15,27 @@ block content %}
     >
       <h3>Username</h3>
       <input type="text" name="username" required />
-      <h3>Password</h3>
+      <h3>
+        Password
+        <span class="tooltip">
+          &#9432;
+          <span class="tooltip_text">
+            Your password should be at least 10 characters long and contain a
+            mix of uppercase letters, lowercase letters, and numbers.
+          </span>
+        </span>
+      </h3>
       <input type="password" name="password" required />
-      <h3>Confirm Password</h3>
+      <h3>
+        Confirm Password
+        <span class="tooltip">
+          &#9432;
+          <span class="tooltip_text tooltip_text_bottom">
+            Please make sure to enter the same password as above for
+            verification.
+          </span>
+        </span>
+      </h3>
       <input type="password" name="confirm_password" required />
       <div class="signup_btns">
         <a href="{{ url_for('views.signin') }}" class="login_link"
