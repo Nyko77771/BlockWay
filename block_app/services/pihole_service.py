@@ -58,6 +58,16 @@ class Pihole:
 
         data_json = pihole_response.json()
         queries = data_json['queries']
+        return queries
+
+    def get_domains(self):
+        queries = self.__get_queries()
+
+        # Using set method to create object with no duplicates
+        domains = set()
+
+        for query in queries:
+            domains.add(query['domain'])
 
 
 
