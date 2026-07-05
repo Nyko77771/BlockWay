@@ -17,21 +17,21 @@ queries = {
             "status": "CACHE",
             "dnssec": "SECURE",
             "domain": "vpn-api.proton.me",
-            "upstream": null,
+            "upstream": None,
             "reply": {
                 "type": "IP",
                 "time": 1.9550323486328125e-05
             },
             "client": {
                 "ip": "192.168.9.105",
-                "name": null
+                "name": None
             },
-            "list_id": null,
+            "list_id": None,
             "ede": {
                 "code": -1,
-                "text": null
+                "text": None
             },
-            "cname": null
+            "cname": None
         },
         {
             "id": 5993,
@@ -40,7 +40,7 @@ queries = {
             "status": "CACHE",
             "dnssec": "INSECURE",
             "domain": "105.9.168.192.in-addr.arpa",
-            "upstream": null,
+            "upstream": None,
             "reply": {
                 "type": "NXDOMAIN",
                 "time": 0.00011539459228515625
@@ -49,40 +49,36 @@ queries = {
                 "ip": "127.0.0.1",
                 "name": "localhost"
             },
-            "list_id": null,
+            "list_id": None,
             "ede": {
                 "code": -1,
-                "text": null
+                "text": None
             },
-            "cname": null
+            "cname": None
         },
     ]                                     
 }
 
 
-pi_ip = '192.168.9.109'
+pi_ip = '192.168.9.108'
 
 PIHOLE_AUTH_URL = f'http://{pi_ip}:8080/api/auth/'
 PIHOLE_QUERY_URL = f'http://{pi_ip}:8080/api/queries'
 PIHOLE_STATS_URL = f'http://{pi_ip}:8080/api/stats/recent_blocked'
 
-password = os.getenv("TEST_API")
+password = os.getenv("PASSWORD")
 
-
-def test_can_get_endpoint():
+# Testing API Connections
+def __get_endpoint():
 
     print('#################################################')
     print('Sending Request')
-    print(f'To AUTH URL: {PIHOLE_AUTH_URL}')
-    print(f'Password: {password}')
 
     response = requests.post(
     PIHOLE_AUTH_URL,
-    json={"password": password},
+    json={"password": str(password)},
     timeout = 5
 )
-
-    assert response.status_code == 200
 
     response_data  = response.json()
 
@@ -97,6 +93,38 @@ def test_can_get_endpoint():
     return sid, csrf
 
 """
+
+def test_checking_returned_queries():
+    print('#################################################')
+
+    sid, csrf = __get_endpoint()
+
+    print(f'SID in receiving queries test {sid}')
+    response = requests.get(
+        PIHOLE_QUERY_URL,
+        headers={
+            "X-FTL-SID": sid,
+            "X-FTL-CSRF": csrf
+            },
+        timeout = 5
+        )
+    
+    data_json = response.json()
+
+    queries = data_json['queries']
+
+    unique_statuses = set()
+
+    for query in queries:
+        unique_statuses.add(query['status'])
+    
+    for status in unique_statuses:
+        print(f'Status Type: {status}')
+
+    assert response.status_code == 200
+
+
+
 
 def test_receiving_queries():
 
@@ -149,6 +177,8 @@ def test_getting_blocked_queries():
 
 """
 
+# Testing Timestamp Methods
+"""
 def test_recent_time():
 
     recent_time = datetime.now().timestamp()
@@ -166,16 +196,32 @@ def test_timestamp():
 
     assert date_time.year == 2026
 
-
-
-
 """
-# Testing Pihole Class
 
-pi_ip = '192.168.9.108'
-password = os.getenv("TEST_API")
 
-pihole = Pihole(pi_ip, password)
+def test_querying():
+    assert len(queries['queries']) == 2
 
-pihole
-"""
+def test_split():
+    
+    domains = queries['queries']
+
+    blocked_status = ['GRAVITY']
+    allowed_status = ['FORWARDED', 'CACHE', 'CACHE_STALE']
+    in_progress_status = ['IN_PROGRESS']
+
+    blocked_domains = set()
+    permited_domains = set()
+
+    for domain in domains:
+
+        if domain['status'] in in_progress_status:
+                continue
+
+        if  domain['status'] in blocked_status:
+                blocked_domains.add(domain['domain'])
+        else:
+                permited_domains.add(domain['domain'])
+
+    assert len(blocked_domains) == 0
+    assert len(permited_domains) == 2

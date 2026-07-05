@@ -5,7 +5,7 @@ services:
     image: pihole/pihole:latest
     environment:
       TZ: "Europe/Dublin"
-      FTLCONF_webserver_api_password: "@connection5"
+      FTLCONF_webserver_api_password: ${PASSWORD}
       FTLCONF_dns_listeningMode: "all"
     expose:
       - "80"

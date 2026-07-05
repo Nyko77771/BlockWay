@@ -78,8 +78,45 @@ class Pihole:
         return domains
 
     # Method for Making Blocked and Non=Blocked List
-    def domains_conversion(self):
-        pass
+    def __domains_split(self):
+        domains = self.__get__recent_domains()
+
+        blocked_domains = set()
+        permited_domains = set()
+
+        for domain in domains:
+
+            status = str(domain['status'])
+
+            status_type = self.__classify_status(status)
+
+            if status_type == 'ignore':
+                continue
+
+            if  status_type == 'block':
+                blocked_domains.add(domain['domain'])
+            else:
+                permited_domains.add(domain['domain'])
+
+        return permited_domains, blocked_domains
+    
+    
+    def __classify_status(self, status):
+        
+        blocked_status = ['GRAVITY']
+        allowed_status = ['FORWARDED', 'CACHE', 'CACHE_STALE']
+        in_progress_status = ['IN_PROGRESS']
+
+        if status in in_progress_status:
+            return 'ignore'
+        
+        if status in blocked_status:
+            return 'block'
+        
+        if status in allowed_status:
+            return 'allow'
+
+
 
 # NEED TO:
 # Extract RECENT queries (no repetition) - DONE

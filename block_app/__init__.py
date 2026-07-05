@@ -8,6 +8,10 @@ from block_app.database.database import check_start_db
 from block_app.cli.administrator import admin_reset
 from dotenv import load_dotenv
 import os
+import dotenv
+
+# Loading the enviromental variables
+dotenv.load_dotenv()
 
 # Making a function for block app creation
 def make_blockway():
@@ -37,7 +41,7 @@ def make_blockway():
 
 
     # !!! TO ADD ENCRYPTION HERE!!!
-    block_app.secret_key = 'ADD ENCRYPTED KEY HERE'
+    block_app.secret_key = os.getenv("SECRET")
 
     # Defining the routes functions inside the app via flask blueprint
     block_app.register_blueprint(views)
