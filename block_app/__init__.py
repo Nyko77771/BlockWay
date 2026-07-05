@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, render_template
+from flask_talisman import Talisman
 from block_app.routes.views import views
 from block_app.routes.setup import setup
 from block_app.routes.dashboard import dashboard
@@ -12,6 +13,28 @@ import os
 def make_blockway():
     # Creating Flask Instance
     block_app = Flask(__name__)
+
+    # Adding HTTPS and Secure Headers
+    talisman = Talisman(block_app)
+
+    # HTTP Strict Transport Security Header
+    hsts = {
+    'max-age': 31536000,
+    'includeSubDomains': True
+    }
+
+    csp = {
+        "default-src": "'self'",
+        "style-src": "'self'",
+        "script-src": "'self'",
+        "img-src": ["'self'", "data:"],
+    }
+
+
+    talisman.x_xss_protection = True
+    talisman.strict_transport_security = hsts
+    talisman.content_security_policy = csp
+
 
     # !!! TO ADD ENCRYPTION HERE!!!
     block_app.secret_key = 'ADD ENCRYPTED KEY HERE'

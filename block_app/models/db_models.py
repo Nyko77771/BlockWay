@@ -25,6 +25,10 @@ class DomainPredictionType(enum.Enum):
     BENIGN = "benign"
     MALICIOUS = "malicious"
 
+class PiholeAdded(enum.Enum):
+    YES = "yes"
+    NO = "no"
+
 # Association Table
 issue_events = Table(
     "issue_events",
@@ -67,7 +71,7 @@ class Event(Base):
 
     __table_args__ = (
         CheckConstraint(
-           "severity IN ('critical', 'high', 'low', 'info')"
+           "severity IN ('critical', 'high', 'low', 'info')",
         ),
     )
 
@@ -113,8 +117,10 @@ class AnalysedDomains(Base):
      blocked_domain =  Column(Boolean, default=False, nullable=False)
      date_created = Column(DateTime(timezone=True) , server_default=func.now())
      last_update = Column(DateTime(timezone=True) , server_default=func.now(), onupdate=func.now())
+     added_to_pihole = Column(String)
      __table_args__ = (
         CheckConstraint(
-           "prediction_type IN ('benign', 'malicious')"
+           "prediction_type IN ('benign', 'malicious')",
+           "added_to_pihole IN ('yes', 'no)"
         ),
     )

@@ -1,7 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, session, abort
 from block_app.routes.dashboard import check_user_type
-from block_app.database.database import SessionLocal
-import  block_app.models.db_models as db_models
+from block_app.services.database_service import DomainDatabase
 
 settings = Blueprint(
     'settings',
@@ -15,24 +14,26 @@ user = {
 
 @settings.route('/settings', methods=['GET', 'POST'])
 def home():
-    with SessionLocal() as db:
-        print('Current session user: ' + str(session.get('user_id')))
-        current_user_id = session.get('user_id')
-        user['user_id'] = current_user_id
-        print('User id:')
-        print(str(user['user_id']))
 
-        db_user = db.query(db_models.User).filter(db_models.User.user_id == current_user_id).first()
+    print('Current session user: ' + str(session.get('user_id')))
+    current_user_id = session.get('user_id')
+    user['user_id'] = current_user_id
+    print('User id:')
+    print(str(user['user_id']))
 
-        if db_user.user_id is None:
-            abort(404)
+    db_user = DomainDatabase.get_db_user_by_id(current_user_id)
 
-        if check_user_type(current_user_id):
-            user['is_admin'] = True
-            print('Getting advanced settings')
-            return render_template('admin_templates/settings_templates/admin_settings.html', current_user=user)
+    if db_user.user_id is None:
+        abort(404)
 
-        return render_template('normal_templates/settings_templates/account_settings.html', current_user=user)
+    if check_user_type(current_user_id):
+        user['is_admin'] = True
+        print('Getting advanced settings')
+        return render_template('admin_templates/settings_templates/admin_settings.html', current_user=user)
+
+    return render_template('normal_templates/settings_templates/account_settings.html', current_user=user)
+
+# TO DO:
 
 @settings.route('/email', methods=['GET'])
 def email():

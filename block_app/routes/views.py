@@ -1,8 +1,11 @@
 from flask import Blueprint, render_template, request, redirect, session, abort
-from block_app.database.database import SessionLocal
-import  block_app.models.db_models as db_models
+
+from block_app.services.database_service import DomainDatabase
+
 from block_app.database.database import check_admin
+
 from block_app.routes.user_check import check_user_type
+
 from block_app.services.password_service import password_hashing, password_strength
 
 # Tracking Variables
@@ -20,17 +23,14 @@ views = Blueprint(
 # To Remove
 def get_user_type(user_id):
     # Opening db connection
-    db = SessionLocal()
-    print('Checking user type')
 
-    db_user = db.query(db_models.User).filter(db_models.User.user_id == user_id).first()
+    db_user = DomainDatabase.get_db_user(user_id)
 
     if db_user.role_type == "admin":
         print('Current user is admin')
         current_user['is_admin'] = True
     print('User is not admin')
-    # Closing db connection
-    db.close()
+
 #########################################
 
 # Method for checjking whether user was authenticated
@@ -47,9 +47,6 @@ def home():
 @views.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
-        # Get database connection (db)
-        db = SessionLocal()
-
         try:
 
             # Get the data from the request
@@ -72,7 +69,7 @@ def signup():
 
             # Check username
             # Get username from db
-            db_user = db.query(db_models.User).filter(db_models.User.username == given_username).first()
+            db_user = DomainDatabase.get_db_user_by_username(given_username)
 
             db_username = db_user.username if db_user and db_user.username is not None else ''
 
@@ -88,19 +85,10 @@ def signup():
             password_salt = hashed_values['salt']
 
 
-            new_user = db_models.User(
-                username = given_username,
-                password = hashed_password,
-                salt = password_salt,
-                role_type = db_models.UserRoleEnum['NORMAL'].value,
-            )
-
-            print('Adding User')
-            db.add(new_user)
-            db.commit()
+            new_user = DomainDatabase.add_db_user(given_username, hashed_password, password_salt)
 
             # Get User ID from db
-            new_db_user = db.query(db_models.User).filter(db_models.User.username == given_username).first()
+            new_db_user = DomainDatabase.get_db_user_by_username(given_username)
 
             # Establishing a session
             session['user_id'] = new_db_user.user_id
@@ -115,9 +103,6 @@ def signup():
             print('Exception occured')
             print(f'Exception: {e}')
             return render_template('unregistered_templates/signup.html', message='Something went wrong.Try again', current_user=current_user)
-        finally:
-            print('Closing the Database')
-            db.close()
 
     return render_template('unregistered_templates/signup.html', current_user=current_user)
 
@@ -125,8 +110,6 @@ def signup():
 @views.route('/signin', methods=['GET', 'POST'])
 def signin():
     if request.method == 'POST':
-        # Establishing db connection
-        db = SessionLocal()
 
         try:
 
@@ -136,7 +119,7 @@ def signin():
             given_password = request_data.get('password')
 
             # Get Database details
-            db_username = db.query(db_models.User).filter(db_models.User.username == given_username).first()
+            db_username = DomainDatabase.get_db_user_by_username(given_username)
 
             # Check if db has found user
             if db_username is None:
@@ -147,7 +130,7 @@ def signin():
             db_salt = db_username.salt
 
             # Hash given password
-            given_hashed= password_hashing(given_password, db_salt)
+            given_hashed = password_hashing(given_password, db_salt)
             given_hashed_password = given_hashed['hash']
 
             # If Passwords don't match ask user to sign-in again
@@ -161,9 +144,6 @@ def signin():
             print('Exception occured')
             print(f'Exception: {e}')
             return render_template('unregistered_templates/signin.html', message='Something went wrong.Try again', current_user=current_user)
-        finally:
-            print('Closing the Database')
-            db.close()
 
 
     return render_template('unregistered_templates/signin.html', current_user=current_user)

@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, session, abort
-from block_app.database.database import SessionLocal
-import  block_app.models.db_models as db_models
+from block_app.services.database_service import DomainDatabase
+
 from block_app.routes.user_check import check_user_type
 
 dashboard = Blueprint(
@@ -16,8 +16,6 @@ user = {
 @dashboard.route('/dashboard', methods=['GET'])
 def home():
 
-    # Opening db connection
-    db = SessionLocal()
     try:
 
         # Getting id from session
@@ -25,7 +23,7 @@ def home():
         current_user_id = session.get('user_id')
         user['user_id'] = current_user_id
 
-        db_user = db.query(db_models.User).filter(db_models.User.user_id == current_user_id).first()
+        db_user = DomainDatabase.get_db_user_by_id(current_user_id)
 
         if db_user.user_id is None:
             abort(404)
@@ -36,6 +34,7 @@ def home():
             return render_template('admin_templates/dashboard_templates/admin_overview.html', current_user=user)
 
         return render_template('normal_templates/dashboard_templates/overview.html', current_user=user)
+    
     except Exception as e:
         print('Exception occurred')
         print(f'Exception: {e}')
