@@ -1,7 +1,10 @@
-import requests
+# Importing Local Services
 from block_app.services.log_service import logger
 from block_app.services.database_service import DomainDatabase
-from block_app.services.ml_model_service import DomainAnalyses
+
+# Importing request library for establishing API communication
+import requests
+# Importing dataetime for time calculation / conversion
 from datetime import datetime, timedelta
 
 
@@ -17,7 +20,8 @@ class Pihole:
         self.csrf = None
         self.db_domains = DomainDatabase.get_db_domains()
 
-
+    # Method for Authenticating with Pihole Connections
+    # Used to get SID and
     def authenticate(self):
         try:
             logger.info('Getting SID from Pihole')
@@ -135,6 +139,8 @@ class Pihole:
 
         unfamiliar_blocked_domains = self.__get_new_domains(blocked_domains, db_domains)
 
+        return unfamiliar_permitted_domains, unfamiliar_blocked_domains
+
         self.perform_ml_analyses(unfamiliar_permitted_domains, 'allowed')
         self.perform_ml_analyses(unfamiliar_blocked_domains, 'blocked')
 
@@ -151,11 +157,9 @@ class Pihole:
 
         return to_analyse
 
-    # ML Analysis
-    def perform_ml_analyses():
 
+    #################################################
 
-        return
 
     # General Pihole Information:
     # Get Pihole's Statistical Data for Later Display

@@ -14,26 +14,26 @@ class DomainAnalyses:
     def __init__(self):
         try:
             self.logistic_model = self.__open_zip()
-            self.random_forrest = load('../models/r_forrest.pkl')
-            print('Models Loaded')
+            self.random_forrest = load('block_app/models/r_forrest.pkl')
+            logger.info('Models Loaded')
         except Exception as e:
             logger.exception('Exception Occurred while Loading Models')
 
     # Extracting Model from Zip File
     def __open_zip(self):
-        path = "../models/r_forrest.zip"
+        path = "block_app/models/r_forrest.zip"
 
         with zipfile.ZipFile(path, 'r') as zObject:
 
             with zObject.open('r_forrest.pkl') as file:
                 model = load(file)
-
         return model
 
 
-    # TO DO
+    # Method for creating analysis features
     def create_x_features(self, url):
 
+        # First checking if domain is in correct format
         if self._check_domain:
             return [
                 self._make_length(url),
@@ -78,27 +78,7 @@ class DomainAnalyses:
         prediction_score = self.__prediction(self.random_forrest, url)
         return prediction_score
 
-    # ADD PRIVATE METHODS
-    # WILL BE USED FOR CREATING FEATURES
-
     ####################################
-    # Need Features:
-    # 0. Domain - (To DROP before conversion)
-
-    # 1. Length -
-    # 2. Has_IP -
-    # 3. Digit_Count -
-    # 4. Dot_Count -
-    # 5. Has_Subdomain -
-    # 6. Subdomain_Count -
-    # 7. Hyphen_Count -
-    # 8. Special_Count -
-    # 9. Host_in_Subdomain -
-    # 10. Host_in_Domain -
-    # 11. Similarity -
-    # 12. Has .com -
-    # 13. Has .org -
-    # 14. Has country code
 
     # Private Class Methods
 

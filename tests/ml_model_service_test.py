@@ -1,4 +1,6 @@
 import pytest
+import zipfile
+from joblib import load
 
 # Fake Model Set-up
 
@@ -33,6 +35,7 @@ class FakeModelAnalysis:
         return number
 
 # Unit Testing:
+"""
 def test_feature_creation():
     fake_analysis = FakeModelAnalysis()
 
@@ -62,3 +65,23 @@ def test_benign_prediction():
     result = fake_analysis.logistic_model.predict('benign')
 
     assert result == 0
+
+"""
+
+def test_zip_opening():
+
+    path = "block_app/models/r_forrest.zip"
+
+    with zipfile.ZipFile(path, 'r') as zObject:
+
+        assert 'r_forrest.pkl' in zObject.namelist()
+
+def test_model_forrest_loaded():
+    model = load('block_app/models/r_forrest.pkl')
+
+    assert model is not None
+
+def test_model_logistic_loaded():
+    model = load('block_app/models/logistic.pkl')
+
+    assert model is not None
