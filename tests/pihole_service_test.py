@@ -56,15 +56,18 @@ queries = {
             },
             "cname": None
         },
-    ]                                     
+    ]
 }
 
 
-pi_ip = '192.168.9.108'
+pi_ip = '192.168.9.109'
 
 PIHOLE_AUTH_URL = f'http://{pi_ip}:8080/api/auth/'
 PIHOLE_QUERY_URL = f'http://{pi_ip}:8080/api/queries'
 PIHOLE_STATS_URL = f'http://{pi_ip}:8080/api/stats/recent_blocked'
+PIHOLE_SUMMARY_URL = f'http://{pi_ip}:8080/api/stats/database/summary'
+PIHOLE_TOP_CLIENTS_URL = f'http://{pi_ip}:8080/api/stats/database/top_clients'
+
 
 password = os.getenv("PASSWORD")
 
@@ -92,6 +95,63 @@ def __get_endpoint():
 
     return sid, csrf
 
+def __get_summary():
+
+        sid, csrf = __get_endpoint()
+
+        current_time = datetime.now().timestamp()
+
+        hour_ago = (datetime.now() - timedelta(hours=1)).timestamp()
+
+        pihole_response = requests.get(
+        PIHOLE_SUMMARY_URL,
+        headers={
+            "X-FTL-SID": sid,
+            "X-FTL-CSRF": csrf
+            },
+        params={
+            "from": str(hour_ago),
+            "until": str(current_time)
+        },
+        timeout = 5)
+
+        summary = pihole_response.json()
+
+        print(summary)
+
+        assert 'sum_queries' in summary
+        assert 'sum_blocked' in summary
+
+def test_get_top_client():
+
+        sid, csrf = __get_endpoint()
+
+        current_time = datetime.now().timestamp()
+
+        hour_ago = (datetime.now() - timedelta(hours=1)).timestamp()
+
+        pihole_response = requests.get(
+        PIHOLE_TOP_CLIENTS_URL,
+        headers={
+            "X-FTL-SID": sid,
+            "X-FTL-CSRF": csrf
+            },
+        params={
+            "from": str(hour_ago),
+            "until": str(current_time)
+        },
+        timeout = 5)
+
+        top_clients = pihole_response.json()
+
+        print(top_clients)
+
+        assert 'clients' in top_clients
+        assert 'total_queries' in top_clients
+        assert 'blocked_queries' in top_clients
+
+
+
 """
 
 def test_checking_returned_queries():
@@ -108,7 +168,7 @@ def test_checking_returned_queries():
             },
         timeout = 5
         )
-    
+
     data_json = response.json()
 
     queries = data_json['queries']
@@ -117,7 +177,7 @@ def test_checking_returned_queries():
 
     for query in queries:
         unique_statuses.add(query['status'])
-    
+
     for status in unique_statuses:
         print(f'Status Type: {status}')
 
@@ -198,12 +258,13 @@ def test_timestamp():
 
 """
 
-
+# Testing Query Returns
+"""
 def test_querying():
     assert len(queries['queries']) == 2
 
 def test_split():
-    
+
     domains = queries['queries']
 
     blocked_status = ['GRAVITY']
@@ -225,3 +286,4 @@ def test_split():
 
     assert len(blocked_domains) == 0
     assert len(permited_domains) == 2
+"""

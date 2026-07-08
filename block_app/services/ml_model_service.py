@@ -1,41 +1,74 @@
 from joblib import load
+from block_app.services.log_service import logger
+
 import pandas as pd
 import re
 import tldextract as tld
 import Levenshtein
+import zipfile
 
 class DomainAnalyses:
 
     popular_domain_data_frame = None
 
     def __init__(self):
-        self.logistic_model = load('models/logistic.pkl')
-        self.random_forrest = load('models/r_forrest.pkl')
-        print('Models Loaded')
+        try:
+            self.logistic_model = self.__open_zip()
+            self.random_forrest = load('../models/r_forrest.pkl')
+            print('Models Loaded')
+        except Exception as e:
+            logger.exception('Exception Occurred while Loading Models')
+
+    # Extracting Model from Zip File
+    def __open_zip(self):
+        path = "../models/r_forrest.zip"
+
+        with zipfile.ZipFile(path, 'r') as zObject:
+
+            with zObject.open('r_forrest.pkl') as file:
+                model = load(file)
+
+        return model
+
 
     # TO DO
     def create_x_features(self, url):
-        return [
-            self._make_length(url),
-            self._make_has_ip(url),
-            self._make_digit_count(url),
-            self.__make_dot_count(url),
-            self.__make_has_subdomain(url),
-            self.__make_subdomain_count(url),
-            self.__make_hyphen_count(url),
-            self.__make_special_count(url),
-            self.__make_host_in_subdomain(url),
-            self.__make_host_in_domain(url),
-            self.__make_similarity(url),
-            self.__make_has_com(url),
-            self.__make_has_org(url),
-            self.__make_has_country_code(url)
-        ]
+
+        if self._check_domain:
+            return [
+                self._make_length(url),
+                self._make_has_ip(url),
+                self._make_digit_count(url),
+                self.__make_dot_count(url),
+                self.__make_has_subdomain(url),
+                self.__make_subdomain_count(url),
+                self.__make_hyphen_count(url),
+                self.__make_special_count(url),
+                self.__make_host_in_subdomain(url),
+                self.__make_host_in_domain(url),
+                self.__make_similarity(url),
+                self.__make_has_com(url),
+                self.__make_has_org(url),
+                self.__make_has_country_code(url)
+            ]
+        else:
+            logger.exception(f'Domain {url} is not a Domain')
+            return False
+
 
     def __prediction(self, model, url):
         x_test = self.create_x_features(url)
         prediction = model.predict(x_test)
         return prediction[0]
+
+    def __probability(self, model, url):
+        x_test = self.create_x_features(url)
+        probability = model.predict_proba()
+        return probability[0]
+
+    def logistic_probability(self, url):
+        probability_score = self.__probability(self.logistic_model, url)
+        return probability_score
 
     def logistic_prediction(self, url):
         prediction_score = self.__prediction(self.logistic_model, url)
