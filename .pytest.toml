@@ -2,5 +2,5 @@
 minversion = "9.0"
 addopts = ["-v", "-ra", "-s"]
 testpaths = ["tests"]
-python_files = ["ml_model_service_test.py"]
+python_files = ["start_service_test.py"]
 pythonpath = ["src"]
