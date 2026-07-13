@@ -1,7 +1,5 @@
 {% extends "partials/head.html"%} {% block title %} Signin {% endblock %} {%
-block content %} {% if message %}
-<div class="message">{{ message }}</div>
-{% endif %}
+block content %}
 <div class="main_signin">
   <!---->
   <div class="signin_form_box">
@@ -12,6 +10,10 @@ block content %} {% if message %}
         class="signin_image"
       />
     </div>
+
+    {% if message %}
+    <div class="message">{{ message }}</div>
+    {% endif %}
 
     <div class="choice_title">
       <h1>Welcome Back!</h1>

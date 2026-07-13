@@ -1,5 +1,6 @@
 # Importing Local Services
 from block_app.services.log_service import logger
+from block_app.services.ml_model_service import DomainAnalyses
 from block_app.services.database_service import DomainDatabase
 
 # Importing request library for establishing API communication
@@ -18,7 +19,11 @@ class Pihole:
         self.pihole_password = pihole_password
         self.sid = None
         self.csrf = None
-        self.db_domains = DomainDatabase.get_db_domains()
+
+        # Initialising ML Analysis class
+        self.ml_analyses = DomainAnalyses()
+        # Initialish Database
+        self.database = DomainDatabase()
 
     # Method for Authenticating with Pihole Connections
     # Used to get SID and
@@ -67,7 +72,7 @@ class Pihole:
         return queries
 
     # Obtaining Recent Domains
-    def __get__recent_domains(self):
+    def __get__recent_domains(self, last_scan):
         queries = self.__get_queries()
 
         logger.info('Getting Recent Queries')
@@ -84,8 +89,8 @@ class Pihole:
         return domains
 
     # Method for Making Blocked and Non=Blocked List
-    def __domains_split(self):
-        domains = self.__get__recent_domains()
+    def __domains_split(self, last_scan):
+        domains = self.__get__recent_domains(last_scan)
 
         logger.info('Splitting Queries')
         logger.info('Creating Allowed and Blocked Domains')
@@ -127,13 +132,13 @@ class Pihole:
 
 
     # Method for Finding Newly Encountered Domains
-    def pihole_domain_analyses(self):
+    def pihole_domain_analyses(self, last_scan):
 
         logger.info('Obtaining Unfamiliar Domains')
 
-        db_domains = DomainDatabase.get_db_domains()
+        db_domains = self.database.get_db_domains()
 
-        permitted_domains, blocked_domains = self.__domains_split()
+        permitted_domains, blocked_domains = self.__domains_split(last_scan)
 
         unfamiliar_permitted_domains = self.__get_new_domains(permitted_domains, db_domains)
 
@@ -157,6 +162,42 @@ class Pihole:
 
         return to_analyse
 
+    # Method for Performing Scan
+    def domains_scan(self, domains):
+        try:
+            logger.info(f'Starting domain scan for {domains} ; size: {len(domains)}')
+            for domain in domains:
+                logger.info(f'Scanning {domain}')
+
+                logistic_probability = self.ml_analyses.logistic_probability(domain)
+
+                if logistic_probability < 60:
+                    logger.info('Logiistic Model Determined Domain to be Benign')
+                    logistic_prediction = self.ml_analyses.logistic_prediction(domain)
+                    self.database.add_db_domain(domain, 'benign', logistic_prediction)
+                else:
+                    # Analysing with better model
+                    logger.info('Random Forrest Scan is Required')
+                    random_forrest_prediction = self.ml_analyses.random_forrest_prediction(domain)
+
+                    # If score is high than likely Malicious
+                    if random_forrest_prediction >= 80:
+
+                        result = self.add_to_pihole_blocklist(domain, 'malicious')
+                        self.database.add_db_domain(domain, 'malicious', random_forrest_prediction, result)
+                    else:
+                        logistic_prediction = self.ml_analyses.logistic_prediction(domain)
+                        self.database.add_db_domain(domain, 'benign', logistic_prediction)
+
+                logger.info("Scan Completed")
+            logger.info(f"Domains {domains} have been scanned")
+            return True
+        except Exception as e:
+            logger.exception('Exxception Occurred while Performing a Scan')
+
+
+    def add_to_pihole_blocklist(self, domain):
+        pass
 
     #################################################
 

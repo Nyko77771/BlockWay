@@ -29,6 +29,11 @@ class PiholeAdded(enum.Enum):
     YES = "yes"
     NO = "no"
 
+class ScanStatus(enum.Enum):
+    SUCCESS = "success"
+    FAILURE = "failure"
+    NONE = "none"
+
 # Association Table
 issue_events = Table(
     "issue_events",
@@ -117,10 +122,21 @@ class AnalysedDomains(Base):
      blocked_domain =  Column(Boolean, default=False, nullable=False)
      date_created = Column(DateTime(timezone=True) , server_default=func.now())
      last_update = Column(DateTime(timezone=True) , server_default=func.now(), onupdate=func.now())
-     added_to_pihole = Column(String)
+     added_to_pihole = Column(Boolean, default=False, nullable=False)
      __table_args__ = (
         CheckConstraint(
-           "prediction_type IN ('benign', 'malicious')",
-           "added_to_pihole IN ('yes', 'no)"
+           "prediction_type IN ('benign', 'malicious')"
+        ),
+    )
+
+class ScheduleConfiguration(Base):
+    __tablename__ = "configuration"
+    schedule_id = Column(Integer, primary_key=True, autoincrement=True)
+    last_scan = Column(DateTime(timezone=True), nullable=True)
+    next_scan = Column(DateTime(timezone=True), nullable=True)
+    last_scan_status = Column(String, nullable=False, default="success")
+    __table_args__ = (
+        CheckConstraint(
+           "last_scan_status IN ('success', 'failure', 'none')"
         ),
     )

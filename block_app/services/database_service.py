@@ -1,14 +1,18 @@
+# Importing Local Services
+from block_app.services.log_service import logger
 from block_app.database.database import SessionLocal
 import  block_app.models.db_models as db_models
 
 class DomainDatabase:
 
+    ###########################################
     # User Methods
     # Method for Getting User by Username
     def get_db_user_by_username(self, username):
         db = SessionLocal()
         try:
             print('Checking user type')
+            print(f'User: {username}')
 
             db_user = db.query(db_models.User).filter(db_models.User.username == username).first()
 
@@ -49,7 +53,7 @@ class DomainDatabase:
                     username = username,
                     password = password,
                     salt = salt,
-                    role_type = db_models.UserRoleEnum['NORMAL'].value,
+                    role_type = db_models.UserRoleEnum.NORMAL.value,
             )
 
             db.add(new_user)
@@ -57,9 +61,9 @@ class DomainDatabase:
 
         except Exception as e:
             print('Exception occurred')
-            print(f'Exception: {e}')
+            logger.exception(f'Exception: {e}')
         finally:
-            print('Closing Database')
+            logger.info('Closing Database')
             db.close()
 
     def get_default_admin():
@@ -83,8 +87,9 @@ class DomainDatabase:
             db.commit()
 
         except Exception as e:
-            print('Exception occurred')
-            print(f'Exception: {e}')
+            logger.exception('Exception occurred')
+            logger.exception(f'Exception: {e}')
+            db.rollback()
         finally:
             db.close()
 
@@ -115,8 +120,33 @@ class DomainDatabase:
             print('Closing the database')
             db.close()
 
-    def add_db_domain():
-        pass
+    def add_db_domain(self, domain, prediction_type, score, added_to_pihole=False):
+        db = SessionLocal()
+        try:
+            logger.info('Adding User')
+
+            new_domain = db_models.AnalysedDomains(
+                    domain_name = domain,
+                    prediction_type = db_models.DomainPredictionType.MALICIOUS.value if prediction_type == 'malicious' else db_models.DomainPredictionType.BENIGN.value,
+                    prediction_score = score,
+                    blocked_domain = prediction_type == 'malicious',
+                    added_to_pihole = added_to_pihole,
+            )
+
+            db.add(new_domain)
+            db.commit()
+            db.refresh(new_domain)
+
+            return new_domain
+
+        except Exception as e:
+            logger.exception('Failed to Add Domain')
+            logger.info('Rolling Back Domain Addition')
+            db.rollback()
+        finally:
+            logger.info('Closing Database')
+            db.close()
+
 
     def update_db_domain():
         pass

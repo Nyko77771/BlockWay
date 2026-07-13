@@ -724,6 +724,24 @@ body {
   color: var(--text2);
 }
 
+.active_side_link {
+  background: var(--border);
+}
+
+.active_side_link::before {
+  top: -30px;
+  right: -1px;
+  background: var(--sidebar-bg);
+  border-bottom-right-radius: 20px;
+  box-shadow: 6px 6px 0 0 var(--border);
+  top: -30px;
+  right: -1px;
+  background: var(--sidebar-bg);
+  border-bottom-right-radius: 20px;
+  box-shadow: 6px 6px 0 0 var(--border);
+  opacity: 1;
+}
+
 /* Overview Styling */
 
 .nav_decorator_line {
@@ -737,6 +755,7 @@ body {
   background-color: var(--button_transform);
   color: var(--box);
 }
+
 .disabled {
   pointer-events: none;
 }

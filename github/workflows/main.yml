@@ -6,6 +6,7 @@ on:
       - main
       - dashboard_access
       - pihole_api
+      - pi_scheduler
 
   pull_request:
     branches:
@@ -14,6 +15,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     steps:
       - name: Checkout repo
@@ -30,8 +32,11 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
           pip install pytest flake8
 
+      - name: Linting with flake8
+        run: flake8
+
       - name: Test with pytest
         run: pytest
 
-      - name: Linting with flake8
-        run: flake8
+      - name: Security Scanning with bandit
+        run: bandit -r

@@ -3,7 +3,6 @@ from flask_talisman import Talisman
 from block_app.routes.views import views
 from block_app.routes.setup import setup
 from block_app.routes.dashboard import dashboard
-from block_app.routes.settings import settings
 from block_app.database.database import check_start_db
 from block_app.cli.administrator import admin_reset
 from dotenv import load_dotenv
@@ -47,8 +46,6 @@ def make_blockway():
     block_app.register_blueprint(views)
     block_app.register_blueprint(setup)
     block_app.register_blueprint(dashboard)
-    block_app.register_blueprint(settings)
-
     # CLI Commands
     block_app.cli.add_command(admin_reset)
 

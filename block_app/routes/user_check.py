@@ -4,7 +4,9 @@ def check_user_type(user_id):
     try:
         print('Checking user type')
 
-        db_user = DomainDatabase.get_db_user_by_id(user_id)
+        db = DomainDatabase()
+
+        db_user = db.get_db_user_by_id(user_id)
 
         if db_user.role_type == "admin":
             print('Current user is admin')

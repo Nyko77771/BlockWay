@@ -1,4 +1,6 @@
 <div class="navbar navbar_unregistered">
+  {% if not current_user.user_id and not current_user.is_admin %}
+
   <img
     alt="!!!BlockWay Logo to be Designed!!!"
     src="{{url_for('static', filename='static/logo.png')}}"
@@ -20,4 +22,6 @@
     <a href="{{ url_for('views.about') }}">About</a>
     <a href="{{ url_for('views.signin') }}">Login</a>
   </div>
+
+  {% endif %}
 </div>

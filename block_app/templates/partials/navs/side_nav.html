@@ -1,18 +1,33 @@
 <div class="side_navbar">
-  {% if request.endpoint == 'dashboard.home' %} {% if current_user.user_id and
-  current_user.is_admin %}
+  {% if current_user.user_id and current_user.is_admin %}
   <a
-    href="{{ url_for('dashboard.home') }}"
-    class="side_nav_btns {% if request.endpoint == 'dashboard.home' %} active_side_link {% endif %}"
-    >Admin Overview</a
+    href="{{ url_for('dashboard.configurations') }}"
+    class="side_nav_btns {% if request.endpoint == 'dashboard.configurations' %} active_side_link {% endif %}"
+    >Configurations</a
   >
+  <a
+    href="{{ url_for('dashboard.logs') }}"
+    class="side_nav_btns {% if request.endpoint == 'dashboard.logs' %} active_side_link {% endif %}"
+    >Logs</a
+  >
+  <a
+    href="{{ url_for('dashboard.users') }}"
+    class="side_nav_btns {% if request.endpoint == 'dashboard.users' %} active_side_link {% endif %}"
+    >Users</a
+  >
+  <a
+    href="{{ url_for('dashboard.ml') }}"
+    class="side_nav_btns {% if request.endpoint == 'dashboard.ml' %} active_side_link {% endif %}"
+    >ML Management</a
+  >
+
+
   {% elif current_user.user_id %}
   <a
     href="{{ url_for('dashboard.home') }}"
     class="side_nav_btns {% if request.endpoint == 'dashboard.home' %} active_side_link {% endif %}"
     >Overview</a
   >
-  {% endif %}
 
   <a
     href="{{ url_for('dashboard.threats') }}"
@@ -20,35 +35,15 @@
     >Threats</a
   >
   <a
-    href="{{ url_for('dashboard.rules') }}"
-    class="side_nav_btns {% if request.endpoint == 'dashboard.rules' %} active_side_link {% endif %}"
-    >Rules</a
-  >
-  <a
     href="{{ url_for('dashboard.system') }}"
     class="side_nav_btns {% if request.endpoint == 'dashboard.system' %} active_side_link {% endif %}"
     >System</a
   >
-  {% elif request.endpoint == 'settings.home' %}
   <a
-    href="{{ url_for('settings.home') }}"
-    class="side_nav_btns {% if request.endpoint == 'settings.home' %} active_side_link {% endif %}"
-    >Account & Security</a
+    href="{{ url_for('dashboard.settings') }}"
+    class="side_nav_btns {% if request.endpoint == 'dashboard.settings' %} active_side_link {% endif %}"
+    >Settings</a
   >
-  <a
-    href="{{ url_for('settings.email') }}"
-    class="side_nav_btns {% if request.endpoint == 'settings.email' %} active_side_link {% endif %}"
-    >Email</a
-  >
-  <a
-    href="{{ url_for('settings.home') }}"
-    class="side_nav_btns {% if request.endpoint == 'settings.home' %} active_side_link {% endif %}"
-    >Account & Security</a
-  >
-  <a
-    href="{{ url_for('settings.theme') }}"
-    class="side_nav_btns {% if request.endpoint == 'settings.theme' %} active_side_link {% endif %}"
-    >Theme</a
-  >
+
   {% endif %}
 </div>

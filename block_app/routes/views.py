@@ -33,7 +33,7 @@ def get_user_type(user_id):
 
 #########################################
 
-# Method for checjking whether user was authenticated
+# Method for checking whether user was authenticated
 @views.before_request
 def get_id():
     current_user['user_id'] = session.get('user_id')
@@ -66,10 +66,12 @@ def signup():
             if score < 5:
                 return render_template('unregistered_templates/signup.html', message='Password does not meet the minimum complexity', current_user=current_user)
 
+            # Initialing DomainDatabase class
+            db = DomainDatabase()
 
             # Check username
             # Get username from db
-            db_user = DomainDatabase.get_db_user_by_username(given_username)
+            db_user = db.get_db_user_by_username(given_username)
 
             db_username = db_user.username if db_user and db_user.username is not None else ''
 
@@ -85,10 +87,10 @@ def signup():
             password_salt = hashed_values['salt']
 
 
-            new_user = DomainDatabase.add_db_user(given_username, hashed_password, password_salt)
+            new_user = db.add_db_user(given_username, hashed_password, password_salt)
 
             # Get User ID from db
-            new_db_user = DomainDatabase.get_db_user_by_username(given_username)
+            new_db_user = db.get_db_user_by_username(given_username)
 
             # Establishing a session
             session['user_id'] = new_db_user.user_id
@@ -118,8 +120,11 @@ def signin():
             given_username = request_data.get('username')
             given_password = request_data.get('password')
 
+            # Initialing Domain Database
+            db = DomainDatabase()
+
             # Get Database details
-            db_username = DomainDatabase.get_db_user_by_username(given_username)
+            db_username = db.get_db_user_by_username(given_username)
 
             # Check if db has found user
             if db_username is None:
