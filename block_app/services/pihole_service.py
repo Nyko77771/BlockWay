@@ -76,14 +76,14 @@ class Pihole:
         queries = self.__get_queries()
 
         logger.info('Getting Recent Queries')
-        time_difference = (datetime.now - timedelta(hours=1)).timestamp()
+        difference = last_scan.timestamp()
 
 
         # Using set method to create object with no duplicates
         domains = set()
 
         for query in queries:
-            if query['time'] >= time_difference:
+            if query['time'] >= difference:
                 domains.add(query['domain'])
 
         return domains

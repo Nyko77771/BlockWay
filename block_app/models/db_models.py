@@ -140,3 +140,8 @@ class ScheduleConfiguration(Base):
            "last_scan_status IN ('success', 'failure', 'none')"
         ),
     )
+
+class Pihole(Base):
+    __tablename__ = "pihole"
+    pihole_id = Column(Integer, primary_key=True, autoincrement=True)
+    pihole_address = Column(String, nullable=True)

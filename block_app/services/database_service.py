@@ -3,6 +3,10 @@ from block_app.services.log_service import logger
 from block_app.database.database import SessionLocal
 import  block_app.models.db_models as db_models
 
+# Importing External Libraries
+from datetime import datetime
+from time import timezone
+
 class DomainDatabase:
 
     ###########################################
@@ -19,35 +23,33 @@ class DomainDatabase:
             return db_user
 
         except Exception as e:
-            print('Exception occurred')
-            print(f'Exception: {e}')
+            logger.exception('Failed to Get User by Username')
         finally:
-            print('Closing Database')
+            logger.info('Closing Database')
             db.close()
 
     # Method for Getting User by ID
     def get_db_user_by_id(self, user_id):
         db = SessionLocal()
         try:
-            print('Checking user type')
+            logger.info('Checking User by ID')
 
             db_user = db.query(db_models.User).filter(db_models.User.user_id == user_id).first()
 
             return db_user
 
         except Exception as e:
-            print('Exception occurred')
-            print(f'Exception: {e}')
+            logger.exception('Failed to Get User by ID')
         finally:
-            print('Closing Database')
+            logger.info('Closing Database')
             db.close()
 
     # Method for Adding User
-    def add_db_user(username, password, salt):
+    def add_db_user(self, username, password, salt):
 
         db = SessionLocal()
         try:
-            print('Adding User')
+            logger.info('Adding User')
 
             new_user = db_models.User(
                     username = username,
@@ -59,9 +61,8 @@ class DomainDatabase:
             db.add(new_user)
             db.commit()
 
-        except Exception as e:
-            print('Exception occurred')
-            logger.exception(f'Exception: {e}')
+        except Exception:
+            logger.exception('Failed to Add User')
         finally:
             logger.info('Closing Database')
             db.close()
@@ -69,15 +70,16 @@ class DomainDatabase:
     def get_default_admin():
         db = SessionLocal()
         try:
+            logger.info('Getting User Database Details')
             db_admin = db.query(db_models.User).filter(db_models.User.username == 'admin').first()
             return db_admin
         except Exception as e:
-            print('Exception occurred')
-            print(f'Exception: {e}')
+            logger.exception('Failed to Get Admin')
         finally:
+            logger.info('Closing Database')
             db.close()
 
-    def update_default_admin(username, password, salt):
+    def update_default_admin(self, username, password, salt):
         db = SessionLocal()
         try:
             db_admin = db.query(db_models.User).filter(db_models.User.username == 'admin').first()
@@ -86,27 +88,27 @@ class DomainDatabase:
             db_admin.salt = salt
             db.commit()
 
-        except Exception as e:
-            logger.exception('Exception occurred')
-            logger.exception(f'Exception: {e}')
+        except Exception:
+            logger.exception('Admin Update Failed')
             db.rollback()
         finally:
+            logger.info('Closing Database')
             db.close()
 
-    def check_db_admin():
+    def check_db_admin(self):
         pass
 
-    def update_db_user():
+    def update_db_user(self):
         pass
 
-    def make_db_admin():
+    def make_db_admin(self):
         pass
 
     ##############################
     # Domain Methods
     def get_db_domains(self):
         try:
-
+            logger.info('Getting Database Domains')
             db = SessionLocal()
 
             db_domains = db.query(db_models.AnalysedDomains).all()
@@ -114,10 +116,9 @@ class DomainDatabase:
             return db_domains
 
         except Exception as e:
-            print('Exception has occured')
-            print(f'Exception: {e}')
+            logger.exception('Failed to get Domains')
         finally:
-            print('Closing the database')
+            logger.info('Closing Database')
             db.close()
 
     def add_db_domain(self, domain, prediction_type, score, added_to_pihole=False):
@@ -148,14 +149,89 @@ class DomainDatabase:
             db.close()
 
 
-    def update_db_domain():
+    def update_db_domain(self):
         pass
 
-    def get_db_recent_domains():
+    def get_db_recent_domains(self):
         pass
 
-    def get_malicious_domains():
+    def get_malicious_domains(self):
         pass
 
-    def get_unblocked_domains():
+    def get_unblocked_domains(self):
         pass
+
+    ######################################
+    # Scheduler Methods
+    def get_last_scan():
+        db = SessionLocal()
+        try:
+            logger.info('Getting Scan Details')
+
+            db_schedule = db.query(db_models.ScheduleConfiguration).first()
+            db_last_scan = db_schedule.last_scan
+
+            return db_last_scan
+
+        except Exception as e:
+            logger.exception('Failed to Get Last Scan Details')
+        finally:
+            logger.info('Closing Database')
+            db.close()
+
+
+    def update_last_scan():
+        db = SessionLocal()
+        try:
+            schedule = db.query(db_models.ScheduleConfiguration).first()
+
+            if schedule is None:
+                logger.info('Scheduler  not Set')
+                return False
+            
+            schedule.last_scan = datetime.now(timezone.utc)
+            schedule.next_scan = ''
+            schedule.last_scan_status = ''
+
+        except Exception as e:
+            logger.exception('Failed to Update the Last Scan Details')   
+        finally:
+            logger.info('Closing Database')
+            db.close()
+
+    ######################################
+    # Pihole Methods
+    def get_pihole_address(user_id):
+        db = SessionLocal()
+        try:
+            logger.info('Getting address')
+
+            db_pihole = db.query(db_models.Pihole).first()
+            db_pi_address = db_pihole.pihole_address
+
+            return db_pi_address
+
+        except Exception as e:
+            logger.exception('Failed to Get Pihole Address')
+        finally:
+            logger.info('Closing Database')
+            db.close()
+    
+    def add_pihole_address(address):
+        db = SessionLocal()
+        try:
+            
+            new_pi_address = db_models.Pihole(
+                    pihole_address = address,
+            )
+
+            db.add(new_pi_address)
+            db.commit()
+
+        except Exception as e:
+            logger.exception('Failed to Add Pihole Address')
+            logger.info('Rolling Back Address Addition')
+            db.rollback()
+        finally:
+            logger.info('Closing Database')
+            db.close()
