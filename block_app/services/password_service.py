@@ -16,7 +16,6 @@ def password_strength(password):
     special = False
     digits = False
 
-
     for c in password:
         # Checking for Upper Letters
         if c.isupper():
@@ -34,38 +33,40 @@ def password_strength(password):
         if c.isdigit():
             digits = True
 
-
     if length >= 10:
         score += 1
-        print('Adding length')
+        print("Adding length")
 
     if upper:
         score += 1
-        print('Adding upper')
+        print("Adding upper")
 
     if lower:
         score += 1
-        print('Adding lower')
+        print("Adding lower")
 
     if special:
         score += 1
-        print('Adding special')
+        print("Adding special")
 
     if digits:
         score += 1
-        print('Adding digits')
+        print("Adding digits")
 
     return score
+
 
 # Method for Hashing Passwords
 def password_hashing(password, salt=None):
     bytes_password = password.encode()
-    generated_values  = {}
-    
-    if salt == None:
-        generated_values['salt'] = bcrypt.gensalt()
-    else:
-        generated_values['salt'] = salt
+    generated_values = {}
 
-    generated_values['hash'] = bcrypt.hashpw(bytes_password, generated_values['salt']) # Hashing Password with Salt
+    if salt == None:
+        generated_values["salt"] = bcrypt.gensalt()
+    else:
+        generated_values["salt"] = salt
+
+    generated_values["hash"] = bcrypt.hashpw(
+        bytes_password, generated_values["salt"]
+    )  # Hashing Password with Salt
     return generated_values

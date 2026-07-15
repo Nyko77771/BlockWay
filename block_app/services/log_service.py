@@ -1,7 +1,7 @@
 import logging
 
 # Creating a Logger Variable
-logger = logging.getLogger('block_app')
+logger = logging.getLogger("block_app")
 logger.setLevel(logging.DEBUG)
 
 # Creating Specific Logging handlers
@@ -14,8 +14,7 @@ file_handler.setLevel(logging.WARNING)
 # Adding Formatter to Handlers
 # Create Custom Logging Form
 formatter = logging.Formatter(
-    "%(asctime) - %(levelname) - %(name) - %(message)",
-    datefmt="%d-%m-%Y %H:%M"
+    "%(asctime) - %(levelname) - %(name) - %(message)", datefmt="%d-%m-%Y %H:%M"
 )
 console_handler.setFormatter(formatter)
 file_handler.setFormatter(formatter)

@@ -7,6 +7,7 @@ import tldextract as tld
 import Levenshtein
 import zipfile
 
+
 class DomainAnalyses:
 
     popular_domain_data_frame = None
@@ -14,21 +15,20 @@ class DomainAnalyses:
     def __init__(self):
         try:
             self.logistic_model = self.__open_zip()
-            self.random_forrest = load('block_app/models/r_forrest.pkl')
-            logger.info('Models Loaded')
+            self.random_forrest = load("block_app/models/r_forrest.pkl")
+            logger.info("Models Loaded")
         except Exception as e:
-            logger.exception('Exception Occurred while Loading Models')
+            logger.exception("Exception Occurred while Loading Models")
 
     # Extracting Model from Zip File
     def __open_zip(self):
         path = "block_app/models/r_forrest.zip"
 
-        with zipfile.ZipFile(path, 'r') as zObject:
+        with zipfile.ZipFile(path, "r") as zObject:
 
-            with zObject.open('r_forrest.pkl') as file:
+            with zObject.open("r_forrest.pkl") as file:
                 model = load(file)
         return model
-
 
     # Method for creating analysis features
     def create_x_features(self, url):
@@ -49,12 +49,11 @@ class DomainAnalyses:
                 self.__make_similarity(url),
                 self.__make_has_com(url),
                 self.__make_has_org(url),
-                self.__make_has_country_code(url)
+                self.__make_has_country_code(url),
             ]
         else:
-            logger.exception(f'Domain {url} is not a Domain')
+            logger.exception(f"Domain {url} is not a Domain")
             return False
-
 
     def __prediction(self, model, url):
         x_test = self.create_x_features(url)
@@ -84,7 +83,7 @@ class DomainAnalyses:
 
     # Method for uploading popular domains csv
     def __get_popular_domains(self):
-        self.popular_domain_data_frame = pd.read_csv('models/popular_domains.csv')
+        self.popular_domain_data_frame = pd.read_csv("models/popular_domains.csv")
         return
 
     # Method For Checking if Domain was given
@@ -94,9 +93,14 @@ class DomainAnalyses:
         subdomain = sections.subdomain
         suffix = sections.suffix
 
-        regex = '^(?:[a-zA-Z0-9]+\.)+[a-zA-Z]{2,}$'
+        regex = "^(?:[a-zA-Z0-9]+\.)+[a-zA-Z]{2,}$"
         domain_pattern = re.compile(regex)
-        if domain != None and subdomain != None and suffix != None and domain_pattern.fullmatch(url):
+        if (
+            domain != None
+            and subdomain != None
+            and suffix != None
+            and domain_pattern.fullmatch(url)
+        ):
             return True
         return False
 
@@ -105,7 +109,7 @@ class DomainAnalyses:
         return length
 
     def _make_has_ip(self, url):
-        pattern = r'(\d{1,3}\.){3}\d{1,3}'
+        pattern = r"(\d{1,3}\.){3}\d{1,3}"
         ip_patter_object = re.compile(pattern)
         matched_object = ip_patter_object.search(url)
         ip_num = matched_object.group()
@@ -119,7 +123,7 @@ class DomainAnalyses:
         return count
 
     def __make_dot_count(self, url):
-        return url.count('.')
+        return url.count(".")
 
     def __make_has_subdomain(self, url):
         sections = tld.extract(url)
@@ -129,12 +133,12 @@ class DomainAnalyses:
         sections = tld.extract(url)
         subdomain = sections.subdomain
         if subdomain:
-            return len(subdomain.split('.'))
+            return len(subdomain.split("."))
         else:
             return 0
 
     def __make_hyphen_count(self, url):
-        return url.count('-')
+        return url.count("-")
 
     def __make_special_count(self, url):
         count = 0
@@ -150,7 +154,7 @@ class DomainAnalyses:
         hostname = sections.domain.lower()
         subdomain = sections.subdomain.lower()
         for domain in self.popular_domain_data_frame:
-            domain_name = domain.split('.')[0]
+            domain_name = domain.split(".")[0]
             if domain_name in subdomain and hostname != domain_name:
                 return 1
         return 0
@@ -160,7 +164,7 @@ class DomainAnalyses:
             self.__get_popular_domains()
         sections = tld.extract(url)
         hostname = sections.domain.lower()
-        if hostname in self.popular_domain_data_frame['Domain']:
+        if hostname in self.popular_domain_data_frame["Domain"]:
             return 1
         return 0
 
@@ -171,35 +175,27 @@ class DomainAnalyses:
             sections = tld.extract(url)
             hostname = sections.domain.lower()
             best_score = 0
-            for domain in self.popular_domain_data_frame['Domain']:
+            for domain in self.popular_domain_data_frame["Domain"]:
                 similiraty_score = Levenshtein.ratio(domain, hostname)
                 if similiraty_score > best_score:
                     return similiraty_score
                 else:
                     return best_score
         except Exception as e:
-            print('')
-
+            print("")
 
     def __make_has_com(self, url):
         sections = tld.extract(url)
         suffix = sections.suffix
-        return int(suffix.lower() == 'com')
+        return int(suffix.lower() == "com")
 
     def __make_has_org(self, url):
         sections = tld.extract(url)
         suffix = sections.suffix
-        return int(suffix.lower() == 'org')
+        return int(suffix.lower() == "org")
 
     def __make_has_country_code(self, url):
         sections = tld.extract(url)
         suffix = sections.suffix
-        last_section = suffix.split('.')[-1]
+        last_section = suffix.split(".")[-1]
         return int(len(last_section) == 2)
-
-
-
-
-
-
-

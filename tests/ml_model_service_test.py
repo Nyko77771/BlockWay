@@ -4,13 +4,15 @@ from joblib import load
 
 # Fake Model Set-up
 
+
 class FakeModel:
 
     def predict(self, type):
-        if type == 'malicious':
+        if type == "malicious":
             return 1
-        if type == 'benign':
+        if type == "benign":
             return 0
+
 
 class FakeModelAnalysis:
 
@@ -33,6 +35,7 @@ class FakeModelAnalysis:
 
     def _make_fake_digit_count(self, number):
         return number
+
 
 # Unit Testing:
 """
@@ -68,20 +71,23 @@ def test_benign_prediction():
 
 """
 
+
 def test_zip_opening():
 
     path = "block_app/models/r_forrest.zip"
 
-    with zipfile.ZipFile(path, 'r') as zObject:
+    with zipfile.ZipFile(path, "r") as zObject:
 
-        assert 'r_forrest.pkl' in zObject.namelist()
+        assert "r_forrest.pkl" in zObject.namelist()
+
 
 def test_model_forrest_loaded():
-    model = load('block_app/models/r_forrest.pkl')
+    model = load("block_app/models/r_forrest.pkl")
 
     assert model is not None
 
+
 def test_model_logistic_loaded():
-    model = load('block_app/models/logistic.pkl')
+    model = load("block_app/models/logistic.pkl")
 
     assert model is not None

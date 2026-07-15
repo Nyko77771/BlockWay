@@ -11,6 +11,7 @@ import dotenv
 # Loading the enviromental variables
 dotenv.load_dotenv()
 
+
 # Making a function for block app creation
 def make_blockway():
     # Creating Flask Instance
@@ -21,10 +22,7 @@ def make_blockway():
     talisman = Talisman(block_app)
 
     # HTTP Strict Transport Security Header
-    hsts = {
-        'max-age': 31536000,
-        'includeSubDomains': True
-    }
+    hsts = {"max-age": 31536000, "includeSubDomains": True}
 
     csp = {
         "default-src": "'self'",
@@ -51,7 +49,7 @@ def make_blockway():
     # Handling Not Found Errors Globally
     @block_app.errorhandler(404)
     def page_not_found(e):
-        return render_template('404.html'), 404
+        return render_template("404.html"), 404
 
     # Starting Database
     check_start_db()

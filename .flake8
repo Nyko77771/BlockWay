@@ -4,7 +4,8 @@ max-line-length = 100
 exclude =
     .git,
     .env,
-    blck_app/__init__.py,
+    block_app/__init__.py,
+    tests,
     app.py,
     .github,
     .dockerignore,
