@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, session, abort
+from flask import Blueprint, render_template, session, abort
 from block_app.services.database_service import DomainDatabase
 
 from block_app.routes.user_check import check_user_type
@@ -29,6 +29,9 @@ def home():
         db = DomainDatabase()
 
         db_user = db.get_db_user_by_id(user_id)
+
+        if db_user is None:
+            raise Exception
 
         if db_user.user_id is None:
             abort(404)

@@ -1,10 +1,9 @@
-from flask import Blueprint, render_template, request, redirect, session, abort
+from flask import Blueprint, render_template, request, redirect, session
 
 from block_app.services.database_service import DomainDatabase
 
 from block_app.database.database import check_admin
 
-from block_app.routes.user_check import check_user_type
 
 from block_app.services.password_service import password_hashing, password_strength
 
@@ -15,22 +14,6 @@ views = Blueprint(
     "views",
     __name__,
 )
-
-
-#######################################
-# To Remove
-def get_user_type(user_id):
-    # Opening db connection
-
-    db_user = DomainDatabase.get_db_user(user_id)
-
-    if db_user.role_type == "admin":
-        print("Current user is admin")
-        current_user["is_admin"] = True
-    print("User is not admin")
-
-
-#########################################
 
 
 # Method for checking whether user was authenticated
@@ -88,7 +71,7 @@ def signup():
                 db_user.username if db_user and db_user.username is not None else ""
             )
 
-            if db_username == given_username:
+            if str(db_username) == str(given_username):
                 print("Found User")
                 return render_template(
                     "unregistered_templates/signup.html",
@@ -102,10 +85,13 @@ def signup():
             hashed_password = hashed_values["hash"]
             password_salt = hashed_values["salt"]
 
-            new_user = db.add_db_user(given_username, hashed_password, password_salt)
+            db.add_db_user(given_username, hashed_password, password_salt)
 
             # Get User ID from db
             new_db_user = db.get_db_user_by_username(given_username)
+
+            if new_db_user is None:
+                raise Exception
 
             # Establishing a session
             session["user_id"] = new_db_user.user_id
@@ -223,4 +209,4 @@ def change_theme():
     else:
         session["theme"] = "dark"
 
-    return redirect(request.args.get("current_page"))
+    return redirect(request.args.get("current_page")) # type: ignore

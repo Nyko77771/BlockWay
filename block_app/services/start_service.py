@@ -13,19 +13,22 @@ from datetime import datetime, timedelta
 # Importing Scheduler Module to Schedule Hourly Scans:
 from scheduler import Scheduler
 
-
 class StartService:
 
     # Initialing Method for Class
-    def __init__(self, address):
+    def __init__(self):
+        # Initialing the Database
+        self.database = DomainDatabase()
+        address = self.database.get_pihole_address()
+
         # Loading environmental variables
         load_dotenv()
 
         # Obtaining Password from .env
-        self.password = os.getenv("PASSWORD")
+        self.password = os.getenv('PASSWORD')
         # Initialising Pihole class
         self.pihole = Pihole(address, self.password)
-        self.database = DomainDatabase()
+        
 
         # Setting Scheduler variable
         self.schedule = Scheduler()
@@ -35,7 +38,7 @@ class StartService:
     # Method for Starting Scheduled Scans
     def start(self):
 
-        logger.info("Starting Scheduler")
+        logger.info('Starting Scheduler')
 
         while True:
             # Executing any given jobs
@@ -46,32 +49,35 @@ class StartService:
     # Method for Performing Scan
     def run_scan(self):
 
-        logger.info("Starting scheduled ML Analyses")
+        logger.info('Starting scheduled ML Analyses')
 
         try:
 
-            logger.info("Establishing Pihole Connection")
+            logger.info('Establishing Pihole Connection')
             # Getting SID and CSRF
             self.pihole.authenticate()
 
             last_scan = self.database.get_last_scan()
 
-            self.permitted_domains, self.blocked_domains = (
-                self.pihole.pihole_domain_analyses(last_scan)
-            )
+            self.permitted_domains, self.blocked_domains = self.pihole.pihole_domain_analyses(last_scan)
 
             outcome_permmitted = self.pihole.domains_scan(self.permitted_domains)
 
             outcome_blocked = self.pihole.domains_scan(self.blocked_domains)
 
-            now = datetime.now()
             message = ""
+
             if outcome_permmitted and outcome_blocked:
                 message = "success"
             else:
                 message = "failure"
 
-            self.database.update_last_scan(now, message)
+            self.database.update_last_scan(message)
         except Exception as e:
-            logger.exception("Exception Occurred While Perfoming a Scan")
-            logger.exception("Scheduled Scan Failed")
+            logger.exception('Exception Occurred While Perfoming a Scan')
+            logger.exception('Scheduled Scan Failed')
+
+
+
+
+

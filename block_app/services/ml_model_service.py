@@ -17,7 +17,7 @@ class DomainAnalyses:
             self.logistic_model = self.__open_zip()
             self.random_forrest = load("block_app/models/r_forrest.pkl")
             logger.info("Models Loaded")
-        except Exception as e:
+        except Exception:
             logger.exception("Exception Occurred while Loading Models")
 
     # Extracting Model from Zip File
@@ -61,7 +61,7 @@ class DomainAnalyses:
         return prediction[0]
 
     def __probability(self, model, url):
-        x_test = self.create_x_features(url)
+        self.create_x_features(url)
         probability = model.predict_proba()
         return probability[0]
 
@@ -93,12 +93,12 @@ class DomainAnalyses:
         subdomain = sections.subdomain
         suffix = sections.suffix
 
-        regex = "^(?:[a-zA-Z0-9]+\.)+[a-zA-Z]{2,}$"
+        regex = r"^(?:[a-zA-Z0-9]+\.)+[a-zA-Z]{2,}$"
         domain_pattern = re.compile(regex)
         if (
-            domain != None
-            and subdomain != None
-            and suffix != None
+            domain is not None
+            and subdomain is not None
+            and suffix is not None
             and domain_pattern.fullmatch(url)
         ):
             return True
@@ -112,6 +112,8 @@ class DomainAnalyses:
         pattern = r"(\d{1,3}\.){3}\d{1,3}"
         ip_patter_object = re.compile(pattern)
         matched_object = ip_patter_object.search(url)
+        if matched_object is None:
+            return 0
         ip_num = matched_object.group()
         return 1 if ip_num else 0
 
@@ -150,39 +152,46 @@ class DomainAnalyses:
     def __make_host_in_subdomain(self, url):
         if self.popular_domain_data_frame is None:
             self.__get_popular_domains()
+        popular_domains = self.popular_domain_data_frame
+        if popular_domains is None:
+            return 0
         sections = tld.extract(url)
         hostname = sections.domain.lower()
         subdomain = sections.subdomain.lower()
-        for domain in self.popular_domain_data_frame:
-            domain_name = domain.split(".")[0]
+        for domain in popular_domains:
+            domain_name = str(domain).split(".")[0]
             if domain_name in subdomain and hostname != domain_name:
                 return 1
         return 0
 
+
     def __make_host_in_domain(self, url):
         if self.popular_domain_data_frame is None:
             self.__get_popular_domains()
+        popular_domains = self.popular_domain_data_frame
+        if popular_domains is None:
+            return 0
         sections = tld.extract(url)
         hostname = sections.domain.lower()
-        if hostname in self.popular_domain_data_frame["Domain"]:
+        if hostname in popular_domains["Domain"]:
             return 1
         return 0
 
     def __make_similarity(self, url):
-        try:
-            if self.popular_domain_data_frame is None:
-                self.__get_popular_domains()
-            sections = tld.extract(url)
-            hostname = sections.domain.lower()
-            best_score = 0
-            for domain in self.popular_domain_data_frame["Domain"]:
-                similiraty_score = Levenshtein.ratio(domain, hostname)
-                if similiraty_score > best_score:
-                    return similiraty_score
-                else:
-                    return best_score
-        except Exception as e:
-            print("")
+        if self.popular_domain_data_frame is None:
+            self.__get_popular_domains()
+        popular_domains = self.popular_domain_data_frame
+        if popular_domains is None:
+            return 0
+        sections = tld.extract(url)
+        hostname = sections.domain.lower()
+        best_score = 0
+        for domain in popular_domains["Domain"]:
+            similiraty_score = Levenshtein.ratio(domain, hostname)
+            if similiraty_score > best_score:
+                return similiraty_score
+            else:
+                return best_score
 
     def __make_has_com(self, url):
         sections = tld.extract(url)

@@ -27,7 +27,7 @@ class DomainDatabase:
 
             return db_user
 
-        except Exception as e:
+        except Exception:
             logger.exception("Failed to Get User by Username")
         finally:
             logger.info("Closing Database")
@@ -47,7 +47,7 @@ class DomainDatabase:
 
             return db_user
 
-        except Exception as e:
+        except Exception:
             logger.exception("Failed to Get User by ID")
         finally:
             logger.info("Closing Database")
@@ -86,7 +86,7 @@ class DomainDatabase:
                 .first()
             )
             return db_admin
-        except Exception as e:
+        except Exception:
             logger.exception("Failed to Get Admin")
         finally:
             logger.info("Closing Database")
@@ -138,7 +138,7 @@ class DomainDatabase:
 
             return db_domains
 
-        except Exception as e:
+        except Exception:
             logger.exception("Failed to get Domains")
         finally:
             logger.info("Closing Database")
@@ -167,7 +167,7 @@ class DomainDatabase:
 
             return new_domain
 
-        except Exception as e:
+        except Exception:
             logger.exception("Failed to Add Domain")
             logger.info("Rolling Back Domain Addition")
             db.rollback()
@@ -202,7 +202,7 @@ class DomainDatabase:
 
             return db_last_scan
 
-        except Exception as e:
+        except Exception:
             logger.exception("Failed to Get Last Scan Details")
         finally:
             logger.info("Closing Database")
@@ -221,7 +221,7 @@ class DomainDatabase:
             schedule.next_scan = datetime.now(timezone.utc)
             schedule.last_scan_status = type
 
-        except Exception as e:
+        except Exception:
             logger.exception("Failed to Update the Last Scan Details")
         finally:
             logger.info("Closing Database")
@@ -229,7 +229,7 @@ class DomainDatabase:
 
     ######################################
     # Pihole Methods
-    def get_pihole_address(self, user_id):
+    def get_pihole_address(self):
         db = SessionLocal()
         try:
             logger.info("Getting address")
@@ -244,7 +244,7 @@ class DomainDatabase:
 
             return db_pi_address
 
-        except Exception as e:
+        except Exception:
             logger.exception("Failed to Get Pihole Address")
         finally:
             logger.info("Closing Database")
@@ -261,7 +261,7 @@ class DomainDatabase:
             db.add(new_pi_address)
             db.commit()
 
-        except Exception as e:
+        except Exception:
             logger.exception("Failed to Add Pihole Address")
             logger.info("Rolling Back Address Addition")
             db.rollback()
