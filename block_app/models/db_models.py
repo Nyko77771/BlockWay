@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, String, ForeignKey, Table, DateTime, func, Enum, CheckConstraint, Boolean, Float
 from sqlalchemy.orm import relationship, backref, Mapped, mapped_column
 from sqlalchemy.ext.declarative import declarative_base
+from datetime import datetime
 import enum
 
 Base = declarative_base()
@@ -50,7 +51,6 @@ class User(Base):
     password = Column(String, nullable=False)
     salt = Column(String, nullable=False)
     role_type = Column(String)
-    pihole_location = Column(String)
     date_created = Column(DateTime(timezone=True) , server_default=func.now())
     sessions = relationship("UserSession", back_populates="user")
     events = relationship("Event", back_populates="user")
@@ -131,15 +131,18 @@ class AnalysedDomains(Base):
 
 class ScheduleConfiguration(Base):
     __tablename__ = "configuration"
-    schedule_id = Column(Integer, primary_key=True, autoincrement=True)
-    last_scan = Column(DateTime(timezone=True), nullable=True)
-    next_scan = Column(DateTime(timezone=True), nullable=True)
-    last_scan_status = Column(String, nullable=False, default="success")
-    __table_args__ = (
-        CheckConstraint(
-           "last_scan_status IN ('success', 'failure', 'none')"
-        ),
+
+    schedule_id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    last_scan: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    next_scan: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    last_scan_status: Mapped[str] = mapped_column(
+        String,
+        default="success",
+        nullable=False
     )
+    __table_args__ = (
+        CheckConstraint(                "last_scan_status IN ('success', 'failure', 'none')" ),
+)
 
 class Pihole(Base):
     __tablename__ = "pihole"

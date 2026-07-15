@@ -1,11 +1,10 @@
-from flask import Flask, jsonify, render_template
+from flask import Flask, render_template
 from flask_talisman import Talisman
 from block_app.routes.views import views
 from block_app.routes.setup import setup
 from block_app.routes.dashboard import dashboard
 from block_app.database.database import check_start_db
 from block_app.cli.administrator import admin_reset
-from dotenv import load_dotenv
 import os
 import dotenv
 
@@ -15,6 +14,7 @@ dotenv.load_dotenv()
 # Making a function for block app creation
 def make_blockway():
     # Creating Flask Instance
+
     block_app = Flask(__name__)
 
     # Adding HTTPS and Secure Headers
@@ -22,8 +22,8 @@ def make_blockway():
 
     # HTTP Strict Transport Security Header
     hsts = {
-    'max-age': 31536000,
-    'includeSubDomains': True
+        'max-age': 31536000,
+        'includeSubDomains': True
     }
 
     csp = {
@@ -33,11 +33,9 @@ def make_blockway():
         "img-src": ["'self'", "data:"],
     }
 
-
     talisman.x_xss_protection = True
     talisman.strict_transport_security = hsts
     talisman.content_security_policy = csp
-
 
     # !!! TO ADD ENCRYPTION HERE!!!
     block_app.secret_key = os.getenv("SECRET")

@@ -5,7 +5,7 @@ import  block_app.models.db_models as db_models
 
 # Importing External Libraries
 from datetime import datetime
-from time import timezone
+from datetime import timezone
 
 class DomainDatabase:
 
@@ -67,7 +67,7 @@ class DomainDatabase:
             logger.info('Closing Database')
             db.close()
 
-    def get_default_admin():
+    def get_default_admin(self):
         db = SessionLocal()
         try:
             logger.info('Getting User Database Details')
@@ -83,6 +83,9 @@ class DomainDatabase:
         db = SessionLocal()
         try:
             db_admin = db.query(db_models.User).filter(db_models.User.username == 'admin').first()
+            if db_admin is None:
+                raise Exception
+
             db_admin.username = username
             db_admin.password = password
             db_admin.salt = salt
@@ -94,6 +97,9 @@ class DomainDatabase:
         finally:
             logger.info('Closing Database')
             db.close()
+
+    def update_db_user_password(self, user, password):
+        pass
 
     def check_db_admin(self):
         pass
@@ -107,9 +113,10 @@ class DomainDatabase:
     ##############################
     # Domain Methods
     def get_db_domains(self):
+        db = SessionLocal()
         try:
             logger.info('Getting Database Domains')
-            db = SessionLocal()
+
 
             db_domains = db.query(db_models.AnalysedDomains).all()
 
@@ -163,12 +170,15 @@ class DomainDatabase:
 
     ######################################
     # Scheduler Methods
-    def get_last_scan():
+    def get_last_scan(self):
         db = SessionLocal()
         try:
             logger.info('Getting Scan Details')
 
             db_schedule = db.query(db_models.ScheduleConfiguration).first()
+            if db_schedule is None:
+                raise Exception
+
             db_last_scan = db_schedule.last_scan
 
             return db_last_scan
@@ -180,33 +190,39 @@ class DomainDatabase:
             db.close()
 
 
-    def update_last_scan():
+    def update_last_scan(self, type):
         db = SessionLocal()
         try:
             schedule = db.query(db_models.ScheduleConfiguration).first()
 
             if schedule is None:
                 logger.info('Scheduler  not Set')
-                return False
-            
+                raise Exception
+
+
             schedule.last_scan = datetime.now(timezone.utc)
-            schedule.next_scan = ''
-            schedule.last_scan_status = ''
+            schedule.next_scan = datetime.now(timezone.utc)
+            schedule.last_scan_status = type
 
         except Exception as e:
-            logger.exception('Failed to Update the Last Scan Details')   
+            logger.exception('Failed to Update the Last Scan Details')
         finally:
             logger.info('Closing Database')
             db.close()
 
     ######################################
     # Pihole Methods
-    def get_pihole_address(user_id):
+    def get_pihole_address(self, user_id):
         db = SessionLocal()
         try:
             logger.info('Getting address')
 
             db_pihole = db.query(db_models.Pihole).first()
+
+            if db_pihole is None:
+                logger.info('Scheduler  not Set')
+                raise Exception
+
             db_pi_address = db_pihole.pihole_address
 
             return db_pi_address
@@ -216,11 +232,11 @@ class DomainDatabase:
         finally:
             logger.info('Closing Database')
             db.close()
-    
-    def add_pihole_address(address):
+
+    def add_pihole_address(self, address):
         db = SessionLocal()
         try:
-            
+
             new_pi_address = db_models.Pihole(
                     pihole_address = address,
             )

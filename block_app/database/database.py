@@ -3,9 +3,8 @@ from sqlalchemy import create_engine
 from block_app.models.db_models import Base, User
 from block_app.services.password_service import password_hashing
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy.exc import OperationalError
-from sqlalchemy.ext.declarative import declarative_base
-import secrets, string
+import secrets
+import string
 import os
 
 DATABASE_URL = "sqlite:///./block_app/database/block_way.db"
@@ -27,7 +26,7 @@ def check_start_db():
 # Function for checking default admin
 # Also creates default admin if none are found
 def check_admin():
-    db =  SessionLocal()
+    db = SessionLocal()
 
     try:
 
@@ -43,7 +42,7 @@ def check_admin():
 
             # Password Hashing
             hashed_values = password_hashing(random_password)
-            salt  = hashed_values['salt']
+            salt = hashed_values['salt']
 
             # Create default admin
             default_admin = User(
