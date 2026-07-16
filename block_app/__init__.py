@@ -1,3 +1,6 @@
+"""This module creates the block_way app"""
+import os
+import dotenv
 from flask import Flask, render_template
 from flask_talisman import Talisman
 from block_app.routes.views import views
@@ -5,24 +8,20 @@ from block_app.routes.setup import setup
 from block_app.routes.dashboard import dashboard
 from block_app.database.database import check_start_db
 from block_app.cli.administrator import admin_reset
-import os
-import dotenv
+from block_app.services.log_service import logger
+
 
 # Loading the enviromental variables
 dotenv.load_dotenv()
 
-
 # Making a function for block app creation
 def make_blockway():
+    """Defines Flask App"""
+    logger.info('Creating Block_App')
     # Creating Flask Instance
-
     block_app = Flask(__name__)
 
     # Adding HTTPS and Secure Headers
-    talisman = Talisman(block_app)
-
-    # HTTP Strict Transport Security Header
-    hsts = {"max-age": 31536000, "includeSubDomains": True}
 
     csp = {
         "default-src": "'self'",
@@ -31,9 +30,14 @@ def make_blockway():
         "img-src": ["'self'", "data:"],
     }
 
-    talisman.x_xss_protection = True
-    talisman.strict_transport_security = hsts
-    talisman.content_security_policy = csp
+    Talisman(
+        block_app,
+        content_security_policy = csp,
+        strict_transport_security = True,
+        strict_transport_security_max_age = 31536000,
+        strict_transport_security_include_subdomains = True,
+    )
+
 
     # !!! TO ADD ENCRYPTION HERE!!!
     block_app.secret_key = os.getenv("SECRET")
@@ -48,7 +52,8 @@ def make_blockway():
     # 404 Page
     # Handling Not Found Errors Globally
     @block_app.errorhandler(404)
-    def page_not_found(e):
+    def page_not_found(error):
+        logger.error('Error: %s', error)
         return render_template("404.html"), 404
 
     # Starting Database

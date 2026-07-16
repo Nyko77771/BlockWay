@@ -8,7 +8,6 @@ from block_app.services.log_service import logger
 from dotenv import load_dotenv
 import os
 import time
-from datetime import datetime, timedelta
 
 # Importing Scheduler Module to Schedule Hourly Scans:
 from scheduler import Scheduler
@@ -28,7 +27,6 @@ class StartService:
         self.password = os.getenv('PASSWORD')
         # Initialising Pihole class
         self.pihole = Pihole(address, self.password)
-        
 
         # Setting Scheduler variable
         self.schedule = Scheduler()
@@ -73,11 +71,6 @@ class StartService:
                 message = "failure"
 
             self.database.update_last_scan(message)
-        except Exception as e:
+        except Exception:
             logger.exception('Exception Occurred While Perfoming a Scan')
             logger.exception('Scheduled Scan Failed')
-
-
-
-
-

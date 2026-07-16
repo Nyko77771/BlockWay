@@ -209,4 +209,4 @@ def change_theme():
     else:
         session["theme"] = "dark"
 
-    return redirect(request.args.get("current_page")) # type: ignore
+    return redirect(request.args.get("current_page"))  # type: ignore

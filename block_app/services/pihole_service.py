@@ -7,7 +7,7 @@ from block_app.services.database_service import DomainDatabase
 import requests
 
 # Importing dataetime for time calculation / conversion
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 
 # Establishing an overall class for Pihole connections
@@ -51,8 +51,12 @@ class Pihole:
             logger.exception(f"Exception: {e}")
 
     def __get_queries(self):
-        if self.pihole_sid is None:
+        if self.sid is None:
             self.authenticate()
+
+        if self.sid is None or self.csrf is None:
+            logger.error('Not Authenticated with Pihole')
+            raise RuntimeError('Pihole Authentication is Not Established')
 
         logger.info("Getting Pihole Queries")
         pihole_response = requests.get(
@@ -155,7 +159,7 @@ class Pihole:
 
         for domain in pi_domains:
             if domain not in db_domains:
-                to_analyse.append(domain)
+                to_analyse.add(domain)
 
         return to_analyse
 
@@ -182,9 +186,9 @@ class Pihole:
                     # If score is high than likely Malicious
                     if random_forrest_prediction >= 80:
 
-                        result = self.add_to_pihole_blocklist(domain, "malicious")
+                        result = self.add_to_pihole_blocklist(domain)
                         self.database.add_db_domain(
-                            domain, "malicious", random_forrest_prediction, result
+                            domain, "malicious", random_forrest_prediction, True
                         )
                     else:
                         logistic_prediction = self.ml_analyses.logistic_prediction(
@@ -197,7 +201,7 @@ class Pihole:
                 logger.info("Scan Completed")
             logger.info(f"Domains {domains} have been scanned")
             return True
-        except Exception as e:
+        except Exception:
             logger.exception("Exxception Occurred while Performing a Scan")
 
     def add_to_pihole_blocklist(self, domain):
@@ -209,19 +213,27 @@ class Pihole:
     # Get Pihole's Statistical Data for Later Display
     def get_pihole_summary(self):
 
-        if self.pihole_sid is None:
+        if self.sid is None or self.csrf is None:
             self.authenticate()
+
+        if self.sid is None or self.csrf is None:
+            logger.error('Not Authenticated with Pihole')
+            raise RuntimeError('Pihole Authentication is Not Established')
 
         logger.info("Getting Pihole Database Summary")
 
-        current_time = datetime.now().timestamp()
+        current_time = datetime.now(timezone.utc).timestamp()
 
-        hour_ago = (datetime.now - timedelta(hours=1)).timestamp()
+        hour_ago = (datetime.now(timezone.utc) - timedelta(hours=1)).timestamp()
 
         pihole_response = requests.get(
             f"http://{self.pihole_address}/api/stats/database/summary",
-            headers={"X-FTL-SID": self.sid, "X-FTL-CSRF": self.csrf},
-            params={"from": str(hour_ago), "until": str(current_time)},
+            headers={
+                "X-FTL-SID": self.sid, "X-FTL-CSRF": self.csrf
+                },
+            params={
+                "from": str(hour_ago),
+                "until": str(current_time)},
             timeout=5,
         )
 

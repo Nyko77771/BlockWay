@@ -4,9 +4,9 @@ on:
   push:
     branches:
       - main
-      - dashboard_access
       - pihole_api
       - pi_scheduler
+      - normal_dash
 
   pull_request:
     branches:
@@ -34,12 +34,11 @@ jobs:
 
       - name: Linting with flake8
         run: |
-          cat .flake8
           flake8 --version
           flake8
 
       - name: Linting with pylint
-        run: pylint $(git ls-files '*.py')
+        run: pylint block_app
 
       - name: Test with pytest
         run: pytest

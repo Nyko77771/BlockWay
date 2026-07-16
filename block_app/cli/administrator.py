@@ -23,11 +23,11 @@ def admin_reset():
     db_user = database.get_db_user_by_username(username)
 
     if db_user is None:
-        click.echo(f"Username not Found")
+        click.echo("Username not Found")
 
     if db_user is not None:
 
-        click.echo(f"Checking Passwords")
+        click.echo("Checking Passwords")
         db_salt = db_user.salt
         hashed_given_password = password_hashing(current_password, db_salt)
         db_password = db_user.password

@@ -61,7 +61,7 @@ def password_hashing(password, salt=None):
     bytes_password = password.encode()
     generated_values = {}
 
-    if salt == None:
+    if salt is None:
         generated_values["salt"] = bcrypt.gensalt()
     else:
         generated_values["salt"] = salt

@@ -164,7 +164,6 @@ class DomainAnalyses:
                 return 1
         return 0
 
-
     def __make_host_in_domain(self, url):
         if self.popular_domain_data_frame is None:
             self.__get_popular_domains()
