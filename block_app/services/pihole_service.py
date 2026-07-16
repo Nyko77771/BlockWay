@@ -186,7 +186,7 @@ class Pihole:
                     # If score is high than likely Malicious
                     if random_forrest_prediction >= 80:
 
-                        result = self.add_to_pihole_blocklist(domain)
+                        self.add_to_pihole_blocklist(domain)
                         self.database.add_db_domain(
                             domain, "malicious", random_forrest_prediction, True
                         )
