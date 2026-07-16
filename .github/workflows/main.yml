@@ -38,7 +38,7 @@ jobs:
           flake8
 
       - name: Linting with pylint
-        run: pylint block_app
+        run: pylint block_app --rcfile=.pylintrc
 
       - name: Test with pytest
         run: pytest
