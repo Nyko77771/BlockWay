@@ -15,6 +15,7 @@ block content %}
     >
       <h3>Username</h3>
       <input type="text" name="username" required />
+      
       <h3>
         Password
         <span class="tooltip">
@@ -26,6 +27,7 @@ block content %}
         </span>
       </h3>
       <input type="password" name="password" required />
+
       <h3>
         Confirm Password
         <span class="tooltip">
@@ -37,6 +39,18 @@ block content %}
         </span>
       </h3>
       <input type="password" name="confirm_password" required />
+      
+      <h3>
+        Pihole Address
+        <span class="tooltip">
+          &#9432;
+          <span class="tooltip_text">
+            Please enter the address of your Pihole Service.
+          </span>
+        </span>
+      </h3>
+      <input type="text" name="address" required/>
+
       <div class="signup_btns">
         <a href="{{ url_for('views.signin') }}" class="login_link"
           >Already have an account? Log in</a

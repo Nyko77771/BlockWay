@@ -1,7 +1,8 @@
 from flask import Blueprint, render_template, request, redirect, session
 
+# Importing Custom Methods
 from block_app.services.database_service import DomainDatabase
-
+from block_app.services.pihole_formatter_service import PiholeFormatter
 from block_app.database.database import check_admin
 
 
@@ -42,6 +43,7 @@ def signup():
             given_username = request_data.get("username")
             given_password = request_data.get("password")
             given_confirm_password = request_data.get("confirm_password")
+            given_pi_address = request_data.get("address")
 
             # Checking if provided passwords match
             if given_password != given_confirm_password:
@@ -92,6 +94,15 @@ def signup():
 
             if new_db_user is None:
                 raise Exception
+
+            # Checking Pihole Address
+            pi_formatter = PiholeFormatter()
+            result = pi_formatter.check_address(str(given_pi_address))
+            if result:
+                # Adding Pihole address
+                db.add_pihole_address(given_pi_address)
+            else:
+                redirect("/setup/pihole")
 
             # Establishing a session
             session["user_id"] = new_db_user.user_id

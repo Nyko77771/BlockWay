@@ -1,0 +1,42 @@
+{% extends "partials/head.html"%} 
+{% block title %} New Admin Registration
+{%endblock %} 
+{% block content %} 
+{% if message %}
+<div class="message">{{ message }}</div>
+{% endif %}
+<div class="signup_box admin_setup_container">
+    <div class="default_admin_box">
+        <div class="signup_inputs">
+        <h3 id="default_admin_form_text">
+            Please Create Your Default Admin Details
+        </h3>
+        <form
+            method="POST"
+            action="{{ url_for('setup.admin_setup') }}"
+            class="default_admin_form"
+        >
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required />
+            <label for="password"
+            >Password:
+            <span class="tooltip">
+                &#9432;
+                <span class="tooltip_text">
+                Your password should be at least 10 characters long and contain a
+                mix of uppercase letters, lowercase letters, and numbers.
+                </span>
+            </span>
+            </label>
+            <input type="password" id="password" name="password" required />
+            <button type="submit" id="btn_default_register">Register</button>
+            <a
+            href="{{ url_for('dashboard.home') }}"
+            class="submit_btn cancel_btn default_admin_cancel_btn"
+            >
+            Cancel
+            </a>
+        </form>
+        </div>
+    </div>
+</div>

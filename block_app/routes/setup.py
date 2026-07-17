@@ -12,9 +12,20 @@ setup = Blueprint(
 @setup.route("/admin-setup", methods=["GET", "POST"])
 def admin_setup():
 
+    generic_user = {
+        "username": "Not Found",
+        "password": "Not Given"
+    }
+
     try:
+
+        db = DomainDatabase()
         # Get default admin details
-        db_admin = DomainDatabase.get_default_admin()
+        db_admin = db.get_default_admin()
+
+        if db_admin is None:
+            message = 'Please Create an Admin Account'
+            return render_template("/setup/new-admin-setup", message=message)
 
         user = {"username": db_admin.username, "password": db_admin.password}
 
@@ -41,20 +52,32 @@ def admin_setup():
             hashed_values = password_hashing(new_admin_password)
 
             # Update database with new values
-            DomainDatabase.update_default_admin(
+            db.update_default_admin(
                 new_admin_username, hashed_values["hash"], hashed_values["salt"]
             )
 
-            return redirect("/pihole")
+            db_pihole_address = db.get_pihole_address()
+
+            if db_pihole_address is None:
+                return redirect("/setup/pihole")
+            
+            return redirect('/dashboard')
+
     except Exception as e:
         print("Exception occurred")
         print(f"Exception: {e}")
         message = "Please try again"
         return render_template(
-            "normal_templates/default-admin.html", message=message, user=user
+            "normal_templates/default-admin.html", message=message, user=generic_user
         )
 
     return render_template("normal_templates/default-admin.html", user=user)
+
+
+@setup.route("/new-admin-setup", methods=["GET", "POST"])
+def new_admin_setup():
+
+    return render_template("normal_templates/default-admin-set.html")
 
 
 @setup.route("/pihole")

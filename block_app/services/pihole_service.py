@@ -1,3 +1,6 @@
+# Importing os module
+import os
+
 # Importing Local Services
 from block_app.services.log_service import logger
 from block_app.services.ml_model_service import DomainAnalyses
@@ -9,21 +12,32 @@ import requests
 # Importing dataetime for time calculation / conversion
 from datetime import datetime, timedelta, timezone
 
+# Importing dotenv library for obtaining values from.env
+from dotenv import load_dotenv
+
 
 # Establishing an overall class for Pihole connections
 class Pihole:
 
     # Creating an initialiser class
-    def __init__(self, pihole_address, pihole_password):
-        self.pihole_address = pihole_address
-        self.pihole_password = pihole_password
-        self.sid = None
-        self.csrf = None
+    def __init__(self):
+
+        # Loading .env variables into environment
+        load_dotenv()
+
 
         # Initialising ML Analysis class
         self.ml_analyses = DomainAnalyses()
         # Initialish Database
         self.database = DomainDatabase()
+
+        db_pihole_address = self.database.get_pihole_address()
+
+        self.pihole_address = db_pihole_address
+        self.pihole_password = os.getenv("PASSWORD")
+        self.sid = None
+        self.csrf = None
+
 
     # Method for Authenticating with Pihole Connections
     # Used to get SID and
