@@ -12,11 +12,12 @@ on:
     branches:
       - main
 
+permissions:
+  security-events: write
+
 jobs:
   test:
     runs-on: ubuntu-latest
-    permissions:
-      security-events: write
     timeout-minutes: 10
 
     steps:
