@@ -1,4 +1,4 @@
-block_way.localhost {
+block-way.localhost {
     reverse_proxy web:8000
 }
 

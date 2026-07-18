@@ -76,10 +76,10 @@ body {
   justify-content: flex-start;
   align-items: center;
   padding: 5px;
-  border-radius: 2%;
+  border-radius: 4%;
   box-shadow:
-    rgba(0, 0, 0, 0.25) 0px 14px 28px,
-    rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    rgba(0, 0, 0, 0.25) 0px 7px 18px,
+    rgba(0, 0, 0, 0.22) 0px 7px 10px;
 }
 
 .navbar .nav_end {
@@ -401,6 +401,10 @@ body {
   transition: transform 1.5s ease;
 }
 
+.address_input::placeholder {
+  font-size: 0.6rem;
+}
+
 @media (max-width: 1490px) {
   .signup_message h1 {
     font-size: 0.7rem;
@@ -412,6 +416,10 @@ body {
 
   .signup_btns .login_link {
     font-size: 0.65rem;
+  }
+
+  .signin_link {
+    font-size: 0.7rem;
   }
 }
 
@@ -632,6 +640,26 @@ body {
 /* Registered Templates */
 
 /* Regitered Navbar */
+
+.nav_logo {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  border-bottom: 2px solid var(--border_color);
+  color: var(--text);
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 5px;
+}
+
+.navbar_registered {
+  top: 65px;
+  max-width: 250px;
+}
+
 .navbar_registered:hover .nav_decorator_line {
   height: 22px;
   transform: scaleY(1.1);
@@ -761,4 +789,12 @@ body {
 
 .disabled {
   pointer-events: none;
+}
+
+/* OVERVIEW Main Content Styling */
+
+
+
+.dash_content {
+  overflow: scroll;
 }

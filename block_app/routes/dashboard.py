@@ -74,12 +74,12 @@ def threats():
 
 @dashboard.route("/system", methods=["GET"])
 def system():
-    return render_template("normal_templates/dashboard_templates/system.html")
+    return render_template("normal_templates/dashboard_templates/system.html", current_user=user)
 
 
 @dashboard.route("/settings", methods=["GET"])
 def settings():
-    return render_template("normal_templates/dashboard_templates/settings.html")
+    return render_template("normal_templates/dashboard_templates/settings.html", current_user=user)
 
 
 # Advanced Users

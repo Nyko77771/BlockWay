@@ -15,7 +15,6 @@ from datetime import datetime, timedelta, timezone
 # Importing dotenv library for obtaining values from.env
 from dotenv import load_dotenv
 
-
 # Establishing an overall class for Pihole connections
 class Pihole:
 
@@ -37,7 +36,6 @@ class Pihole:
         self.pihole_password = os.getenv("PASSWORD")
         self.sid = None
         self.csrf = None
-
 
     # Method for Authenticating with Pihole Connections
     # Used to get SID and
@@ -254,19 +252,3 @@ class Pihole:
         summary = pihole_response.json()
 
         return summary
-
-
-# NEED TO:
-# Extract RECENT queries (no repetition) - DONE
-# Split Blocked and Not-Blocked - DONE
-# Check with the entries on database  (AnalysedDomains) - DONE
-# If not on Database check:
-# Check Non-blocked entries
-# Checked Blocked entries
-# Do Predictions
-# Store Predictions
-# Retrive Malicious Domains
-# If Pihole has List:
-# Update Pihole Block list
-# If Pihole has no List:
-# Create a List

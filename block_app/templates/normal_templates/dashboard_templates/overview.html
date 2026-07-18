@@ -1,22 +1,45 @@
-{% extends "partials/head.html"%}
-{% block navbar %}
-{% include
-"partials/navs/navbar_registered.html" %}
-{% endblock %}
-{% block title %}
-Dashboard {% endblock %}
-{% block content %}
+{% extends "partials/head.html"%} {% block navbar %} {% include
+"partials/navs/nav_logo.html" %} {% include
+"partials/navs/navbar_registered.html" %} {% endblock %} {% block title %}
+Dashboard {% endblock %} {% block content %}
 <div class="container">
   <div class="dash_nav">{% include "partials/navs/side_nav.html" %}</div>
   <div class="dash_main">
     <div class="dash_title">
       <h1>Overview</h1>
-      <p>
-        Welcome to Dashboard overview!
-      </p>
+      <p>Welcome to Dashboard overview!</p>
     </div>
     <div class="dash_content">
-      <div class="dash_box"></div>
+      <div class="dash_box">
+        <!-- Add your dashboard content here -->
+        <!-- Displaying some general information -->
+        <div class="dash_general_info">
+          <div class="dash_general_queries"></div>
+          <div class="dash_general_threats"></div>
+          <div class="dash_general_ml_blocks"></div>
+          <div class="dash_general_status"></div>
+        </div>
+        <div class="dash_general_graphs">
+          <div class="dash_general_graph_activity"></div>
+          <div class="dash_general_graph_allowed_blocked"></div>
+          <div class="dash_general_graph_threat"></div>
+        </div>
+      </div>
+      <div class="dash_general_blocked_domains">
+        <table class="dash_general_blocked_domains_table">
+          <thead>
+            <tr>
+              <th>Blocked Domains</th>
+              <th>Name</th>
+              <th>Time</th>
+              <th>Source</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Add your blocked domains data here -->
+          </tbody>
+        </table>
+      </div>
     </div>
 
     <!-- Add more dashboard content here -->
