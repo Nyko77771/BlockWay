@@ -24,7 +24,6 @@ class Pihole:
         # Loading .env variables into environment
         load_dotenv()
 
-
         # Initialising ML Analysis class
         self.ml_analyses = DomainAnalyses()
         # Initialish Database

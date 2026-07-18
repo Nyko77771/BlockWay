@@ -24,10 +24,10 @@ class PiholeFormatter:
                 return False
             else:
                 return self.__check_connection(address)
-        
+
         except Exception:
             return False
-                
+
     def __check_connection(self, address):
         try:
             logger.info('Checking Connection to Pihole')
@@ -41,4 +41,5 @@ class PiholeFormatter:
         except requests.exceptions.ConnectionError:
             logger.exception('Unable to Establish Connection to Pihole')
             return False
+
         
