@@ -16,8 +16,8 @@ class DomainDatabase:
     def get_db_user_by_username(self, username):
         db = SessionLocal()
         try:
-            print("Checking user type")
-            print(f"User: {username}")
+            logger.info("Checking user type")
+            logger.info(f"User: {username}")
 
             db_user = (
                 db.query(db_models.User)
@@ -41,7 +41,7 @@ class DomainDatabase:
 
             db_user = (
                 db.query(db_models.User)
-                .filter(db_models.User.user_id == user_id)
+                .filter(db_models.User.id == user_id)
                 .first()
             )
 
@@ -191,7 +191,6 @@ class DomainDatabase:
 
             for db_domain in db_domains:
 
-                db_domain.domain_name
                 if db_domain.date_created >= difference:
                     recent_domains.append(db_domain)
 
@@ -201,7 +200,6 @@ class DomainDatabase:
         finally:
             logger.info("Closing Database")
             db.close()
-
 
     def get_malicious_domains(self):
         pass
