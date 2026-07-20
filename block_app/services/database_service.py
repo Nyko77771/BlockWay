@@ -38,6 +38,7 @@ class DomainDatabase:
         db = SessionLocal()
         try:
             logger.info("Checking User by ID")
+            logger.info(f'User ID: {user_id}')
 
             db_user = (
                 db.query(db_models.User)

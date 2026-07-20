@@ -8,7 +8,7 @@
 "partials/navs/nav_logo.html" %} {% include
 "partials/navs/navbar_registered.html" %} {% endblock %} {% block title %}
 Dashboard {% endblock %} {% block content %}
-<div class="container">
+<div class="dash_container">
   <div class="dash_nav">{% include "partials/navs/side_nav.html" %}</div>
   <div class="dash_main">
     <div class="dash_title">
@@ -42,6 +42,10 @@ Dashboard {% endblock %} {% block content %}
           <div class="dash_general_graph_activity">
             <h3>Activity</h3>
             <canvas id="generalActivityChart"></canvas>
+            <div 
+              id="graph-data"
+              data-chart="{{ general_graph | tojson | forceescape }}">
+            </div>
           </div>
           <div class="dash_general_graph_allowed_blocked"></div>
           <div class="dash_general_graph_threat"></div>
@@ -51,7 +55,9 @@ Dashboard {% endblock %} {% block content %}
         <table class="dash_general_blocked_domains_table">
           <thead>
             <tr>
-              <th>Blocked Domains</th>
+              <th colspan="4">Blocked Domains</th>
+            </tr>
+            <tr>
               <th>Name</th>
               <th>Time</th>
               <th>Source</th>
@@ -60,8 +66,8 @@ Dashboard {% endblock %} {% block content %}
           <tbody>
             {% if table_data %} {% for event in table_data %}
             <tr>
-              <td>{{ event.time }}</td>
               <td>{{ event.domain }}</td>
+              <td>{{ event.time }}</td>
               <td>{{ event.source }}</td>
             </tr>
             {% endfor %} {% else %}
@@ -76,31 +82,12 @@ Dashboard {% endblock %} {% block content %}
 
     <!-- Add more dashboard content here -->
   </div>
-  <script>
-    const labels = JSON.parse("{{ general_graph | tojson | safe }}");
-    const chartData = JSON.parse("{{ general_graph_data | tojson | safe }}");
-
-    const data = {
-      labels: labels,
-      datasets: [
-        {
-          label: "Activity",
-          data: chartData,
-          backgroundColor: "rgba(75, 192, 192, 0.2)",
-          borderColor: "rgb(75, 192, 192)",
-        },
-      ],
-    };
-
-    const config = {
-      type: "line",
-      data: data,
-    };
-
-    const generalActivityChart = new Chart(
-      document.getElementById("generalActivityChart"),
-      config,
-    );
-  </script>
 </div>
+{% block script2 %}
+  <script
+  src="{{ url_for('static', filename='js/overview.js') }}"
+  defer
+>
+</script>
+{% endblock %}
 {% endblock %}
