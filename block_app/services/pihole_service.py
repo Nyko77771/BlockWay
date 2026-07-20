@@ -19,7 +19,7 @@ from dotenv import load_dotenv
 class Pihole:
 
     # Creating an initialiser class
-    def __init__(self):
+    def __init__(self, address=None):
 
         # Loading .env variables into environment
         load_dotenv()
@@ -29,12 +29,21 @@ class Pihole:
         # Initialish Database
         self.database = DomainDatabase()
 
-        db_pihole_address = self.database.get_pihole_address()
+        if address is None:
+            db_pihole_address = self.database.get_pihole_address()
 
-        self.pihole_address = db_pihole_address
+            self.pihole_address = db_pihole_address
+        else:
+            self.pihole_address = address
+
         self.pihole_password = os.getenv("PASSWORD")
         self.sid = None
         self.csrf = None
+
+    def contains_address(self):
+        if self.pihole_address is None:
+            return False
+        return True
 
     # Method for Authenticating with Pihole Connections
     # Used to get SID and
@@ -251,3 +260,65 @@ class Pihole:
         summary = pihole_response.json()
 
         return summary
+
+    def get_recent_blocked_clients(self):
+
+        if self.sid is None or self.csrf is None:
+            self.authenticate()
+
+        if self.sid is None or self.csrf is None:
+            logger.error('Not Authenticated with Pihole')
+            raise RuntimeError('Pihole Authentication is Not Established')
+
+        logger.info("Getting Pihole Top Clients")
+
+        # Getting Pihole Queries
+        queries = self.__get_queries()
+
+        pihole_events = []
+
+        for query in queries:
+
+            status = self.__classify_status(query["status"])
+
+            if status is not "block":
+                continue
+
+            pihole_events.append(
+                {
+                    "time": query['time'],
+                    "domain": query['domain'],
+                    "source": 'Pihole'
+                }
+            )
+
+        # Getting Domains from Database
+        from_time = (datetime.now(timezone.utc) - timedelta(hours=1)).timestamp()
+        until_time = datetime.now(timezone.utc).timestamp()
+        recent_db_domains = self.database.get_db_recent_domains(from_time, until_time)
+
+        if recent_db_domains is None:
+            pihole_events.sort(
+                reverse = True,
+                key = lambda event : event["time"]
+            )
+            return pihole_events[:5]
+
+        ml_events = []
+
+        for domain in recent_db_domains:
+            ml_events.append(
+                {
+                    "time": domain.date_created.timestamp(),
+                    "domain": domain.domain_name,
+                    "source": 'BlockWay ML'
+                }
+            )
+
+        events = pihole_events + ml_events
+        events.sort(
+            reverse = True,
+            key = lambda event : event["time"]
+        )
+
+        return events[:5]

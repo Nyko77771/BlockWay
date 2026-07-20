@@ -1,4 +1,10 @@
-{% extends "partials/head.html"%} {% block navbar %} {% include
+{% extends "partials/head.html"%} {% block scripts %} {% if current_user.user_id
+%}
+<script
+  src="{{ url_for('static', filename='js/chart.umd.min.js') }}"
+  defer
+></script>
+{% endif %} {% endblock %} {% block navbar %} {% include
 "partials/navs/nav_logo.html" %} {% include
 "partials/navs/navbar_registered.html" %} {% endblock %} {% block title %}
 Dashboard {% endblock %} {% block content %}
@@ -14,13 +20,29 @@ Dashboard {% endblock %} {% block content %}
         <!-- Add your dashboard content here -->
         <!-- Displaying some general information -->
         <div class="dash_general_info">
-          <div class="dash_general_queries"></div>
-          <div class="dash_general_threats"></div>
-          <div class="dash_general_ml_blocks"></div>
-          <div class="dash_general_status"></div>
+          <div class="dash_general_queries">
+            <h4>Queries</h4>
+            <p>Pihole Queries:</p>
+            <p>BlockWay ML Queries:</p>
+          </div>
+          <div class="dash_general_threats">
+            <h4>Threats Found:</h4>
+            <p>Total:</p>
+          </div>
+          <div class="dash_general_ml_blocks">
+            <h4>ML Blocks:</h4>
+            <p></p>
+          </div>
+          <div class="dash_general_status">
+            <h4>Status:</h4>
+            <p>!Active!</p>
+          </div>
         </div>
         <div class="dash_general_graphs">
-          <div class="dash_general_graph_activity"></div>
+          <div class="dash_general_graph_activity">
+            <h3>Activity</h3>
+            <canvas id="generalActivityChart"></canvas>
+          </div>
           <div class="dash_general_graph_allowed_blocked"></div>
           <div class="dash_general_graph_threat"></div>
         </div>
@@ -36,7 +58,17 @@ Dashboard {% endblock %} {% block content %}
             </tr>
           </thead>
           <tbody>
-            <!-- Add your blocked domains data here -->
+            {% if table_data %} {% for event in table_data %}
+            <tr>
+              <td>{{ event.time }}</td>
+              <td>{{ event.domain }}</td>
+              <td>{{ event.source }}</td>
+            </tr>
+            {% endfor %} {% else %}
+            <tr>
+              <td colspan="4">No blocked domains found.</td>
+            </tr>
+            {% endif %}
           </tbody>
         </table>
       </div>
@@ -44,5 +76,31 @@ Dashboard {% endblock %} {% block content %}
 
     <!-- Add more dashboard content here -->
   </div>
+  <script>
+    const labels = JSON.parse("{{ general_graph | tojson | safe }}");
+    const chartData = JSON.parse("{{ general_graph_data | tojson | safe }}");
+
+    const data = {
+      labels: labels,
+      datasets: [
+        {
+          label: "Activity",
+          data: chartData,
+          backgroundColor: "rgba(75, 192, 192, 0.2)",
+          borderColor: "rgb(75, 192, 192)",
+        },
+      ],
+    };
+
+    const config = {
+      type: "line",
+      data: data,
+    };
+
+    const generalActivityChart = new Chart(
+      document.getElementById("generalActivityChart"),
+      config,
+    );
+  </script>
 </div>
 {% endblock %}

@@ -1,6 +1,8 @@
 from flask import Blueprint, render_template, request, redirect
 from block_app.services.database_service import DomainDatabase
 from block_app.services.password_service import password_hashing, password_strength
+from block_app.services.log_service import logger
+from block_app.services.pihole_formatter_service import PiholeFormatter
 
 setup = Blueprint(
     "setup",
@@ -60,12 +62,11 @@ def admin_setup():
 
             if db_pihole_address is None:
                 return redirect("/setup/pihole")
-            
+
             return redirect('/dashboard')
 
-    except Exception as e:
+    except Exception:
         print("Exception occurred")
-        print(f"Exception: {e}")
         message = "Please try again"
         return render_template(
             "normal_templates/default-admin.html", message=message, user=generic_user
@@ -83,3 +84,30 @@ def new_admin_setup():
 @setup.route("/pihole")
 def setup_pihole():
     return render_template("normal_templates/pihole_select.html")
+
+@setup.route("/add-pihole", methods=["GET", "POST"])
+def add_pihole():
+    try:
+        if request.method == "POST":
+
+            response = request.form
+
+            given_address = response.get('pihole_address')
+
+            if given_address is None:
+                raise Exception
+
+            db = DomainDatabase()
+            pihole_formatter = PiholeFormatter()
+
+            if pihole_formatter.check_address(given_address):
+                logger.info("Pihole Address Added")
+                db.add_pihole_address(given_address)
+
+    except Exception:
+        logger.exception("Exception occurred")
+        message = "Please try adding address again"
+        return render_template(
+            "normal_templates/pihole_add.html", message=message
+        )
+    return render_template("normal_templates/pihole_add.html")

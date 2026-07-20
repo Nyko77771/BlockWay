@@ -14,6 +14,7 @@ from sqlalchemy.orm import relationship, Mapped, mapped_column
 from sqlalchemy.ext.declarative import declarative_base
 from datetime import datetime
 import enum
+from flask_login import UserMixin
 
 Base = declarative_base()
 
@@ -63,9 +64,9 @@ issue_events = Table(
 
 
 # User Table
-class User(Base):
+class User(Base, UserMixin):
     __tablename__ = "users"
-    user_id = Column(Integer, primary_key=True, autoincrement=True)
+    id = Column(Integer, primary_key=True, autoincrement=True)
     username = Column(String, unique=True)
     password = Column(String, nullable=False)
     salt = Column(String, nullable=False)
@@ -81,7 +82,7 @@ class User(Base):
 class Event(Base):
     __tablename__ = "events"
     event_id = Column(Integer, primary_key=True, autoincrement=True)
-    user_id = Column(Integer, ForeignKey("users.user_id"))
+    user_id = Column(Integer, ForeignKey("users.id"))
     event_type = Column(String, nullable=False)
     description = Column(String, nullable=False)
     severity = Column(String, nullable=False, default="info")
@@ -121,7 +122,7 @@ class Issue(Base):
 class UserSession(Base):
     __tablename__ = "user_sessions"
     session_id = Column(Integer, primary_key=True, autoincrement=True)
-    user_id = Column(Integer, ForeignKey("users.user_id"))
+    user_id = Column(Integer, ForeignKey("users.id"))
     token = Column(String)
     date_created = Column(DateTime(timezone=True))
     user = relationship("User", back_populates="sessions")

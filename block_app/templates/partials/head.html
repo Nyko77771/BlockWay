@@ -8,6 +8,8 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='CSS/style.css')}}"
     />
+    {% block scripts %}
+    {% endblock %}
     <title>{% block title %}BlockWay{% endblock%}</title>
     {% endblock %}
   </head>

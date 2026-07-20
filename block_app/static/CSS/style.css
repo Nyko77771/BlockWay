@@ -78,8 +78,15 @@ body {
   padding: 5px;
   border-radius: 4%;
   box-shadow:
-    rgba(0, 0, 0, 0.25) 0px 7px 18px,
-    rgba(0, 0, 0, 0.22) 0px 7px 10px;
+    rgba(0, 0, 0, 0.25) 0px 5px 15px,
+    rgba(0, 0, 0, 0.22) 0px 5px 10px;
+}
+
+.navbar:hover {
+  box-shadow:
+    rgba(0, 0, 0, 0.25) 0px 5px 16px,
+    rgba(0, 0, 0, 0.22) 0px 12px 10px;
+  opacity: 1;
 }
 
 .navbar .nav_end {
@@ -472,7 +479,8 @@ body {
 /* Sign-up and Signin Pages */
 /* Submit and Cancel Buttons (signin / signup) */
 .signup_box:hover,
-.signin_form_box:hover {
+.signin_form_box:hover,
+.pihole_add_container:hover {
   box-shadow: var(--border) 0px 4px 12px;
   transition: 0.8s;
 }
@@ -635,6 +643,22 @@ body {
   max-width: 50%;
 }
 
+/* Pihole Add Page */
+.pihole_add_container {
+  padding: 50px;
+  box-shadow:
+    rgba(136, 165, 191, 0.48) 6px 2px 16px 0px,
+    rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+  transition: 0.5s ease;
+  opacity: 1;
+}
+
+.return_box {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
 /* /////////////////////////////////////// */
 
 /* Registered Templates */
@@ -793,8 +817,52 @@ body {
 
 /* OVERVIEW Main Content Styling */
 
-
-
 .dash_content {
   overflow: scroll;
+}
+
+/* General Info Styling */
+.dash_general_info {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 20px;
+  width: 100%;
+}
+
+.dash_general_info > div {
+  flex: 1;
+}
+
+/* Table Styling */
+
+.dash_general_blocked_domains {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.dash_general_blocked_domains_table {
+  max-width: 1000px;
+  border-collapse: collapse;
+  text-align: center;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.dash_general_blocked_domains_table th,
+.dash_general_blocked_domains_table td {
+  border: 1px solid var(--box_2);
+  padding: 12px 20px;
+}
+
+.dash_general_blocked_domains_table th:hover {
+  background-color: var(--box_2);
+  color: var(--box);
+}
+
+.dash_general_blocked_domains_table td:hover {
+  background-color: var(--border);
+  color: var(--box);
 }

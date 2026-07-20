@@ -14,13 +14,10 @@ class PiholeFormatter:
 
             scheme = sections.scheme
             netloc = sections.netloc
-            port = sections.port
 
             if scheme not in ('http', 'https'):
                 return False
             if not netloc:
-                return False
-            if not port:
                 return False
             else:
                 return self.__check_connection(address)
@@ -31,7 +28,7 @@ class PiholeFormatter:
     def __check_connection(self, address):
         try:
             logger.info('Checking Connection to Pihole')
-            response = requests.head(address, timeout=5)
+            response = requests.get(address+str('/api/docs'), timeout=5)
 
             if response.ok:
                 return True
@@ -42,4 +39,3 @@ class PiholeFormatter:
             logger.exception('Unable to Establish Connection to Pihole')
             return False
 
-        

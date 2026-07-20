@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, session
+from flask_login import login_user, logout_user, current_user
 
 # Importing Custom Methods
 from block_app.services.database_service import DomainDatabase
@@ -9,7 +10,7 @@ from block_app.database.database import check_admin
 from block_app.services.password_service import password_hashing, password_strength
 
 # Tracking Variables
-current_user = {"user_id": None, "new_user": None, "is_admin": False}
+backend_current_user = {"user_id": None, "new_user": None, "is_admin": False}
 
 views = Blueprint(
     "views",
@@ -20,14 +21,17 @@ views = Blueprint(
 # Method for checking whether user was authenticated
 @views.before_request
 def get_id():
-    current_user["user_id"] = session.get("user_id")
+    if current_user.is_authenticated:
+        backend_current_user["user_id"] = current_user.id
+    else:
+        redirect('/signin')
 
 
 # Home Route - Initial Page
 @views.route("/", methods=["GET"])
 def home():
     return render_template(
-        "unregistered_templates/home.html", current_user=current_user
+        "unregistered_templates/home.html", current_user=backend_current_user
     )
 
 
@@ -50,7 +54,7 @@ def signup():
                 return render_template(
                     "unregistered_templates/signup.html",
                     message="Passwords do not match!",
-                    current_user=current_user,
+                    current_user=backend_current_user,
                 )
 
             # 1. PASSWORD COMPLEXITY CHECK
@@ -59,7 +63,7 @@ def signup():
                 return render_template(
                     "unregistered_templates/signup.html",
                     message="Password does not meet the minimum complexity",
-                    current_user=current_user,
+                    current_user=backend_current_user,
                 )
 
             # Initialing DomainDatabase class
@@ -78,7 +82,7 @@ def signup():
                 return render_template(
                     "unregistered_templates/signup.html",
                     message="Use different username",
-                    current_user=current_user,
+                    current_user=backend_current_user,
                 )
 
             # 2. PASSWORD HASHING + SALTING
@@ -105,7 +109,7 @@ def signup():
                 redirect("/setup/pihole")
 
             # Establishing a session
-            session["user_id"] = new_db_user.user_id
+            login_user(new_db_user)
 
             if check_admin():
                 return redirect("/setup/admin-setup")
@@ -119,11 +123,11 @@ def signup():
             return render_template(
                 "unregistered_templates/signup.html",
                 message="Something went wrong.Try again",
-                current_user=current_user,
+                current_user=backend_current_user,
             )
 
     return render_template(
-        "unregistered_templates/signup.html", current_user=current_user
+        "unregistered_templates/signup.html", current_user=backend_current_user
     )
 
 
@@ -149,7 +153,7 @@ def signin():
                 return render_template(
                     "unregistered_templates/signup.html",
                     message="Not found",
-                    current_user=current_user,
+                    current_user=backend_current_user,
                 )
 
             # Check the passwords
@@ -165,10 +169,10 @@ def signin():
                 render_template(
                     "unregistered_templates/signin.html",
                     message="Passwords do not match",
-                    current_user=current_user,
+                    current_user=backend_current_user,
                 )
 
-            session["user_id"] = db_username.user_id
+            login_user(db_username)
 
             return redirect("/dashboard")
         except Exception as e:
@@ -177,11 +181,11 @@ def signin():
             return render_template(
                 "unregistered_templates/signin.html",
                 message="Something went wrong.Try again",
-                current_user=current_user,
+                current_user=backend_current_user,
             )
 
     return render_template(
-        "unregistered_templates/signin.html", current_user=current_user
+        "unregistered_templates/signin.html", current_user=backend_current_user
     )
 
 
@@ -189,7 +193,7 @@ def signin():
 @views.route("/features")
 def features():
     return render_template(
-        "unregistered_templates/features.html", current_user=current_user
+        "unregistered_templates/features.html", current_user=backend_current_user
     )
 
 
@@ -197,7 +201,7 @@ def features():
 @views.route("/about")
 def about():
     return render_template(
-        "unregistered_templates/about.html", current_user=current_user
+        "unregistered_templates/about.html", current_user=backend_current_user
     )
 
 
@@ -207,7 +211,7 @@ def about():
 # Route for Logout
 @views.route("/logout")
 def logout():
-    session.clear()
+    logout_user()
     return redirect("/")
 
 

@@ -1,6 +1,7 @@
 """This module creates the block_way app"""
 import os
 import dotenv
+from flask_login import LoginManager
 from flask import Flask, render_template
 from flask_talisman import Talisman
 from block_app.routes.views import views
@@ -9,6 +10,7 @@ from block_app.routes.dashboard import dashboard
 from block_app.database.database import check_start_db
 from block_app.cli.administrator import admin_reset
 from block_app.services.log_service import logger
+from block_app.services.database_service import DomainDatabase
 
 
 # Loading the enviromental variables
@@ -41,6 +43,17 @@ def make_blockway():
 
     # !!! TO ADD ENCRYPTION HERE!!!
     block_app.secret_key = os.getenv("SECRET")
+
+    login_manager = LoginManager()
+    login_manager.init_app(block_app)
+    login_manager.login_view = 'views.signin' # type: ignore
+    login_manager.login_message = "Login to access page."
+
+    @login_manager.user_loader
+    def load_user(user_id):
+        db = DomainDatabase()
+        return db.get_db_user_by_id(user_id)
+
 
     # Defining the routes functions inside the app via flask blueprint
     block_app.register_blueprint(views)

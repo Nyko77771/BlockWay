@@ -147,7 +147,7 @@ class DomainDatabase:
     def add_db_domain(self, domain, prediction_type, score, added_to_pihole=False):
         db = SessionLocal()
         try:
-            logger.info("Adding User")
+            logger.info("Adding Domains")
 
             new_domain = db_models.AnalysedDomains(
                 domain_name=domain,
@@ -178,8 +178,30 @@ class DomainDatabase:
     def update_db_domain(self):
         pass
 
-    def get_db_recent_domains(self):
-        pass
+    def get_db_recent_domains(self, from_time, until_time):
+        db = SessionLocal()
+        try:
+            logger.info("Getting Specific Database Domains based on Time")
+
+            db_domains = db.query(db_models.AnalysedDomains).all()
+
+            difference = (from_time - until_time)
+
+            recent_domains = []
+
+            for db_domain in db_domains:
+
+                db_domain.domain_name
+                if db_domain.date_created >= difference:
+                    recent_domains.append(db_domain)
+
+            return recent_domains
+        except Exception:
+            logger.exception('An Exception Occurred')
+        finally:
+            logger.info("Closing Database")
+            db.close()
+
 
     def get_malicious_domains(self):
         pass
