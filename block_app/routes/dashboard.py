@@ -7,7 +7,7 @@ from block_app.services.database_service import DomainDatabase
 from block_app.services.dashboard_service import DashboardService
 from block_app.services.log_service import logger
 
-
+import traceback
 
 from block_app.routes.user_check import check_user_type
 
@@ -32,9 +32,9 @@ def dash_checks():
         return render_template('/normal_templates/pihole_add.html', message=message)
 
     # Getting id from session
-    logger.info("Current session user: " + str(session.get("user_id")))
-    current_user_id = session.get("user_id")
-    user["user_id"] = current_user_id
+    if current_user.is_authenticated:
+        logger.info("Current session user: " + str(current_user.id))
+        user["user_id"] = current_user.id
 
 
 
@@ -52,7 +52,7 @@ def home():
         if db_user is None:
             raise Exception
 
-        if db_user.user_id is None:
+        if db_user.id is None:
             abort(404)
 
         if check_user_type(user_id):
@@ -67,12 +67,11 @@ def home():
         dash_service = DashboardService()
 
         # Getting Data for Table
-        table_data = dash_service.get_table_data()
+        table_data = dash_service.get_table_data(True)
 
         # Getting Data for Graphs
         # Getting Gfeneral Graph Information
         general_graph = dash_service.get_last_24_hours()
-        general_graph_json = jsonify(general_graph)
 
         return render_template(
             "normal_templates/dashboard_templates/overview.html", current_user=user,
@@ -81,8 +80,8 @@ def home():
         )
 
     except Exception as e:
-        print("Exception occurred")
-        print(f"Exception: {e}")
+        print("EXCEPTION in DASH")
+        traceback.print_exc()
         message = "Something Went Wrong. Please Log In Again"
         user["user_id"] = None
         session.clear()

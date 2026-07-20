@@ -5,6 +5,7 @@ import os
 from block_app.services.log_service import logger
 from block_app.services.ml_model_service import DomainAnalyses
 from block_app.services.database_service import DomainDatabase
+from block_app.services.pihole_formatter_service import PiholeFormatter
 
 # Importing request library for establishing API communication
 import requests
@@ -49,91 +50,119 @@ class Pihole:
     # Used to get SID and
     def authenticate(self):
         try:
-            logger.info("Getting SID from Pihole")
+
+            formatter = PiholeFormatter()
+            if self.contains_address():
+
+                if formatter.check_address(self.pihole_address): # type: ignore
+
+                    logger.info("Getting SID from Pihole")
+                    logger.info(f"On address: {self.pihole_address}")
+                    pihole_response = requests.post(
+                        f"{str(self.pihole_address).rstrip('/')}/api/auth",
+                        json={"password": self.pihole_password},
+                        timeout=5,
+                    )
+
+                    data_json = pihole_response.json()
+
+                    status_code = pihole_response.status_code
+
+                    logger.info(f"Status: {status_code} - Data Obtained")
+
+                    self.sid = data_json["session"]["sid"]
+
+                    self.csrf = data_json["session"]["csrf"]
+
+        except Exception as e:
+            logger.exception(f"Exception: {e}")
+            return None
+
+    def __get_queries(self):
+        try:
+            if self.sid is None:
+                self.authenticate()
+
+            if self.sid is None or self.csrf is None:
+                logger.error('Not Authenticated with Pihole')
+                raise RuntimeError('Pihole Authentication is Not Established')
+
+            logger.info("Getting Pihole Queries")
             logger.info(f"On address: {self.pihole_address}")
-            pihole_response = requests.post(
-                f"http://{self.pihole_address}/api/auth",
-                json={"password": self.pihole_password},
+            pihole_response = requests.get(
+                f"{str(self.pihole_address).rstrip('/')}/api/queries",
+                headers={"X-FTL-SID": self.sid, "X-FTL-CSRF": self.csrf},
                 timeout=5,
             )
-
-            data_json = pihole_response.json()
 
             status_code = pihole_response.status_code
 
             logger.info(f"Status: {status_code} - Data Obtained")
 
-            self.sid = data_json["session"]["sid"]
-
-            self.csrf = data_json["session"]["csrf"]
-
-        except Exception as e:
-            logger.exception(f"Exception: {e}")
-
-    def __get_queries(self):
-        if self.sid is None:
-            self.authenticate()
-
-        if self.sid is None or self.csrf is None:
-            logger.error('Not Authenticated with Pihole')
-            raise RuntimeError('Pihole Authentication is Not Established')
-
-        logger.info("Getting Pihole Queries")
-        pihole_response = requests.get(
-            f"http://{self.pihole_address}/api/queries",
-            headers={"X-FTL-SID": self.sid, "X-FTL-CSRF": self.csrf},
-            timeout=5,
-        )
-
-        status_code = pihole_response.status_code
-
-        logger.info(f"Status: {status_code} - Data Obtained")
-
-        data_json = pihole_response.json()
-        queries = data_json["queries"]
-        return queries
+            data_json = pihole_response.json()
+            queries = data_json["queries"]
+            return queries
+        except RuntimeError:
+            logger.exception('No SID or CSRF tokens found')
+            return None
 
     # Obtaining Recent Domains
     def __get__recent_domains(self, last_scan):
-        queries = self.__get_queries()
+        try:
+            queries = self.__get_queries()
 
-        logger.info("Getting Recent Queries")
-        difference = last_scan.timestamp()
+            if queries is None:
+                raise RuntimeError
 
-        # Using set method to create object with no duplicates
-        domains = set()
+            logger.info("Getting Recent Queries")
+            difference = last_scan.timestamp()
 
-        for query in queries:
-            if query["time"] >= difference:
-                domains.add(query["domain"])
+            # Using set method to create object with no duplicates
+            domains = set()
 
-        return domains
+            for query in queries:
+                if query["time"] >= difference:
+                    domains.add(query["domain"])
+
+            return domains
+        except RuntimeError:
+            logger.exception('No queries obtained found')
+            return None
+        
 
     # Method for Making Blocked and Non=Blocked List
     def __domains_split(self, last_scan):
-        domains = self.__get__recent_domains(last_scan)
+        try:
 
-        logger.info("Splitting Queries")
-        logger.info("Creating Allowed and Blocked Domains")
+            domains = self.__get__recent_domains(last_scan)
 
-        blocked_domains = set()
-        permited_domains = set()
+            if domains is None:
+                raise RuntimeError
 
-        for domain in domains:
+            logger.info("Splitting Queries")
+            logger.info("Creating Allowed and Blocked Domains")
 
-            status = str(domain["status"])
+            blocked_domains = set()
+            permited_domains = set()
 
-            status_type = self.__classify_status(status)
+            for domain in domains:
 
-            if status_type == "ignore":
-                continue
+                status = str(domain["status"])
 
-            if status_type == "block":
-                blocked_domains.add(domain["domain"])
-            else:
-                permited_domains.add(domain["domain"])
+                status_type = self.__classify_status(status)
 
-        return permited_domains, blocked_domains
+                if status_type == "ignore":
+                    continue
+
+                if status_type == "block":
+                    blocked_domains.add(domain["domain"])
+                else:
+                    permited_domains.add(domain["domain"])
+
+            return permited_domains, blocked_domains
+        except RuntimeError:
+            logger.exception('No domains in queries')
+            return None            
 
     # Determine Status Type of Query
     def __classify_status(self, status):
@@ -158,7 +187,9 @@ class Pihole:
 
         db_domains = self.database.get_db_domains()
 
-        permitted_domains, blocked_domains = self.__domains_split(last_scan)
+
+        permitted_domains, blocked_domains = self.__domains_split(last_scan) # type: ignore
+
 
         unfamiliar_permitted_domains = self.__get_new_domains(
             permitted_domains, db_domains
@@ -238,6 +269,7 @@ class Pihole:
 
         if self.sid is None or self.csrf is None:
             logger.error('Not Authenticated with Pihole')
+            logger.info(f'Pihole address is: {self.pihole_address}')
             raise RuntimeError('Pihole Authentication is Not Established')
 
         logger.info("Getting Pihole Database Summary")
@@ -277,43 +309,51 @@ class Pihole:
 
         pihole_events = []
 
-        for query in queries:
+        if queries is not None:
 
-            status = self.__classify_status(query["status"])
+            for query in queries:
 
-            if status is not "block":
-                continue
+                status = self.__classify_status(query["status"])
 
-            pihole_events.append(
-                {
-                    "time": query['time'],
-                    "domain": query['domain'],
-                    "source": 'Pihole'
-                }
-            )
+                if status is not "block":
+                    continue
+
+
+                pihole_events.append(
+                    {
+                        "time": query["time"],
+                        "domain": query['domain'],
+                        "source": 'Pihole'
+                    }
+                )
 
         # Getting Domains from Database
         from_time = (datetime.now(timezone.utc) - timedelta(hours=1)).timestamp()
         until_time = datetime.now(timezone.utc).timestamp()
         recent_db_domains = self.database.get_db_recent_domains(from_time, until_time)
 
-        if recent_db_domains is None:
+        if recent_db_domains is None and queries is not None:
             pihole_events.sort(
                 reverse = True,
                 key = lambda event : event["time"]
             )
             return pihole_events[:5]
+        
+        if recent_db_domains is None and queries is None:
+            logger.warning('No domains obtained from Pihole and database.')
+            return None
 
         ml_events = []
 
-        for domain in recent_db_domains:
-            ml_events.append(
-                {
-                    "time": domain.date_created.timestamp(),
-                    "domain": domain.domain_name,
-                    "source": 'BlockWay ML'
-                }
-            )
+        if recent_db_domains is not None:
+            for domain in recent_db_domains:
+                ml_events.append(
+                    {
+                        "time": domain.date_created.timestamp(),
+                        "domain": domain.domain_name,
+                        "source": 'BlockWay ML'
+                    }
+                )
 
         events = pihole_events + ml_events
         events.sort(

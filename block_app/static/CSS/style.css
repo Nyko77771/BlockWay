@@ -690,18 +690,19 @@ body {
 }
 
 /* Dashboard Pages */
-.container {
-  display: flex;
-  flex-direction: row;
-}
+
 
 .dash_main {
+  flex: 1;
   border: 1px solid var(--border);
   border-left: 5px solid var(--border);
   width: 70vw;
   display: flex;
   flex-direction: column;
   padding: 8px 8px 8px 10px;
+  overflow: hidden;
+  height: 100%;
+  max-height: 650px;
 }
 
 /* Dashboard Side Nav Styling */
@@ -817,9 +818,25 @@ body {
 
 /* OVERVIEW Main Content Styling */
 
+/* Overview Page */
+.dash_container {
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+
+}
+
 .dash_content {
   overflow: scroll;
 }
+
+.dash_general_graph_activity {
+  display: flex;
+  flex-direction: row;
+  height: 150px;
+  border: 2px solid red;
+}
+
 
 /* General Info Styling */
 .dash_general_info {

@@ -15,7 +15,7 @@ if not logger.handlers:
     # Adding Formatter to Handlers
     # Create Custom Logging Form
     formatter = logging.Formatter(
-        "%(asctime)s - %(levelname)s - %(name)s - %(message)s", datefmt="%d-%m-%Y %H:%M:%S"
+        "%(asctime)s - %(levelname)s - %(filename)s - %(funcName)s - %(name)s - %(message)s", datefmt="%d-%m-%Y %H:%M:%S"
     )
     console_handler.setFormatter(formatter)
     file_handler.setFormatter(formatter)

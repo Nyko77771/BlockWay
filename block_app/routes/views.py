@@ -212,7 +212,9 @@ def about():
 @views.route("/logout")
 def logout():
     logout_user()
-    return redirect("/")
+    return render_template(
+        "unregistered_templates/home.html", current_user=backend_current_user
+    )
 
 
 # Method for Changing App Theme
