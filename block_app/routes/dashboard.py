@@ -1,10 +1,12 @@
 # Importing Flask Services
 from flask import Blueprint, render_template, session, abort, jsonify
 from flask_login import login_required, current_user
+
 # Importing Custom Services
 from block_app.services.pihole_service import Pihole
 from block_app.services.database_service import DomainDatabase
 from block_app.services.dashboard_service import DashboardService
+from block_app.services.pihole_connection_service import PiholeConnectionChecker
 from block_app.services.log_service import logger
 
 import traceback
@@ -29,12 +31,18 @@ def dash_checks():
     if not pihole.contains_address():
         logger.error('No Pihole Address Found')#
         message = 'Address Could not be reached. Try Again'
-        return render_template('/normal_templates/pihole_add.html', message=message)
+        return render_template('/normal_templates/pihole_add.html', message=message)    
 
     # Getting id from session
     if current_user.is_authenticated:
         logger.info("Current session user: " + str(current_user.id))
         user["user_id"] = current_user.id
+
+    # Checking Pihole Connection
+    if not pihole.connectionn_checker.is_connected():
+        logger.error('Cant Establish Pihole Connection')
+        message = 'Pihole address could not be reached'
+        return render_template('/normal_templates/pihole_add.html', message=message)
 
 
 

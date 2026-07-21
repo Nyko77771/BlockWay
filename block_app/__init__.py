@@ -1,16 +1,26 @@
 """This module creates the block_way app"""
 import os
 import dotenv
+
+# Importing Flask Methods and Objects
 from flask_login import LoginManager
 from flask import Flask, render_template
 from flask_talisman import Talisman
+
+# Importing Blueprints
 from block_app.routes.views import views
 from block_app.routes.setup import setup
 from block_app.routes.dashboard import dashboard
+
+# Importing Database Method
 from block_app.database.database import check_start_db
+
+# Importing Custom CLI Command
 from block_app.cli.administrator import admin_reset
-from block_app.services.log_service import logger
+
+# Importing Custom Services
 from block_app.services.database_service import DomainDatabase
+from block_app.services.log_service import logger
 
 
 # Loading the enviromental variables
@@ -18,8 +28,10 @@ dotenv.load_dotenv()
 
 # Making a function for block app creation
 def make_blockway():
+
     """Defines Flask App"""
     logger.info('Creating Block_App')
+
     # Creating Flask Instance
     block_app = Flask(__name__)
 

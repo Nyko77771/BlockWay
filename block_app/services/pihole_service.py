@@ -6,6 +6,7 @@ from block_app.services.log_service import logger
 from block_app.services.ml_model_service import DomainAnalyses
 from block_app.services.database_service import DomainDatabase
 from block_app.services.pihole_formatter_service import PiholeFormatter
+from block_app.services.pihole_connection_service import PiholeConnectionChecker
 
 # Importing request library for establishing API communication
 import requests
@@ -38,6 +39,7 @@ class Pihole:
             self.pihole_address = str(address).rstrip('/')
 
         self.pihole_password = os.getenv("PASSWORD")
+        self.connectionn_checker = PiholeConnectionChecker(self)
         self.sid = None
         self.csrf = None
 
@@ -45,6 +47,9 @@ class Pihole:
         if self.pihole_address is None:
             return False
         return True
+    
+    def get_address(self):
+        return self.database.get_pihole_address()
 
     # Method for Authenticating with Pihole Connections
     # Used to get SID and

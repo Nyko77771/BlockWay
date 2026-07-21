@@ -4,6 +4,8 @@ from block_app.services.password_service import password_hashing, password_stren
 from block_app.services.log_service import logger
 from block_app.services.pihole_formatter_service import PiholeFormatter
 
+import traceback
+
 setup = Blueprint(
     "setup",
     __name__,
@@ -66,7 +68,8 @@ def admin_setup():
             return redirect('/dashboard')
 
     except Exception:
-        print("Exception occurred")
+        logger.exception("Exception occurred")
+        traceback.print_exc
         message = "Please try again"
         return render_template(
             "normal_templates/default-admin.html", message=message, user=generic_user
@@ -104,6 +107,11 @@ def add_pihole():
                 logger.info("Pihole Address Added")
                 db.add_pihole_address(given_address)
                 return redirect("/dashboard")
+            else:
+                message = 'Incorrect Address Format'
+                return render_template(
+            "normal_templates/pihole_add.html", message=message
+        )
 
     except Exception:
         logger.exception("Exception occurred")

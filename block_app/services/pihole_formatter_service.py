@@ -42,19 +42,5 @@ class PiholeFormatter:
         except Exception:
             return False
 
-    def check_connection(self, address):
-        try:
-            logger.info('Checking Connection to Pihole')
-            response = requests.get(str(address).rstrip('/') +str('/api/docs'), timeout=5)
 
-            if response.ok:
-                return True
-            logger.warning(f'Pihole returned code: {response.status_code}')
-            return False
-        except requests.exceptions.Timeout:
-            logger.exception('Connection Timed Out')
-            return False
-        except requests.exceptions.ConnectionError:
-            logger.exception('Unable to Establish Connection to Pihole')
-            return False
 

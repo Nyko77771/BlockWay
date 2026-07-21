@@ -7,11 +7,11 @@ Pihole Selection
 
 {% block content %}
 
-{% if message %}
+<div class="signup_box pihole_setup">
+
+  {% if message %}
 <div class="message">{{ message }}</div>
 {% endif %}
-
-<div class="signup_box pihole_setup">
 
   <h1>Pihole Selection</h1>
   <p>We have detected that no Pihole is configured.</p>
@@ -19,10 +19,16 @@ Pihole Selection
   <h2>Choose Option:</h2>
 
   <form>
-    <input type="radio" id="option1" name="option" value="option1" />
-    <label for="option1">Option 1: Add Pihole Manually</label><br />
-    <input type="radio" id="option2" name="option" value="option2" />
-    <label for="option2">Option 2: Auto-Detect Pihole</label><br />
+    <div class="pihole_selection_form">
+      <div class="pihole_selection_option_1">
+        <input type="radio" id="option1" name="option" value="option1" />
+        <label for="option1">Option 1: Add Pihole Manually</label><br />
+      </div>
+      <div class="pihole_selection_option_2">
+        <input type="radio" id="option2" name="option" value="option2" />
+        <label for="option2">Option 2: Auto-Detect Pihole</label><br />
+      </div> 
+    </div>
   </form>
 
 
@@ -30,32 +36,13 @@ Pihole Selection
     <label for="pihole_ip">Click to scan network automatically:</label>
     <input type="button" id="scan_button" value="Scan Network" />
   </div>
+
   <div class="pihole_manual_select" hidden>
     <label>Enter Pihole IP below:</label>
     <input type="text" placeholder="Add address here:" />
   </div>
 </div>
-
-
-<script>
-  const option1 = document.getElementById("option1");
-  const option2 = document.getElementById("option2");
-  const autoSelection = document.querySelector(".pihole_auto_selection");
-  const manualSelection = document.querySelector(".pihole_manual_select");
-
-  option1.addEventListener("change", function () {
-    if (this.checked) {
-      autoSelection.hidden = true;
-      manualSelection.hidden = false;
-    }
-  });
-  option2.addEventListener("change", function () {
-    if (this.checked) {
-      autoSelection.hidden = false;
-      manualSelection.hidden = true;
-    }
-  });
-</script>
-
-
+{% endblock %}
+{% block script2 %}
+<script src="{{ url_for('static', filename='js/pihole_select.js') }}"></script>
 {% endblock %}

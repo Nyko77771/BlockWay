@@ -203,7 +203,25 @@ class DomainDatabase:
             db.close()
 
     def get_malicious_domains(self):
-        pass
+        db = SessionLocal()
+        try:
+            logger.info("Getting Malicious Domains")
+            db_malicious = db.query(db_models.AnalysedDomains).first()
+
+            malicious_list = []
+            if db_malicious is not None:
+                for domain in db_malicious:
+                    if domain.blocked_domain == True:
+                        malicious_list.append(domain)
+                return malicious_list
+            return None            
+        except Exception:
+            logger.exception("Failed to Get Malicious Domains")
+            return None
+        finally:
+            logger.info("Closing Database")
+            db.close()
+
 
     def get_unblocked_domains(self):
         pass
