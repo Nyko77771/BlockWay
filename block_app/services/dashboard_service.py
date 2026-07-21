@@ -21,6 +21,25 @@ class DashboardService:
         else:
             return None
 
+    def get_blocked_allowed_totals(self):
+        domains = self.__get_blocked_allowed()
+        if domains is not None:
+            blocked = 0
+            allowed = 0
+
+            for domain in domains:
+                status = self.pihole.get_status(domain["status"])
+
+                if status == "block":
+                    blocked += 1
+                elif status == "allowed":
+                    allowed += 1
+
+            return {
+                "allowed": allowed,
+                "blocked": blocked
+            }
+
     def get_last_24_hours(self):
 
         recent_blocked_queries = self.get_table_data()
@@ -62,25 +81,32 @@ class DashboardService:
                 "values": hourly_queries
 
             }
-        
+
         i=1
         for query in queries:
             logger.info(f'Query {i}: {query}')
             i += 1
 
         return queries
-    
+
+    # Method for Getting Recently Blocked Domains
+    def __get_blocked_allowed(self):
+         if self.pihole.contains_address():
+             return self.pihole.get_recent_pihole_domains()
+         return None
+
+    # Method for Converting UNIX Timestamp to Datetime (H:M:S)
     def __convert_time(self, queries_list):
 
         appended_queries = []
 
         for query in queries_list:
-            
+
             try:
                 query_time =  query['time']
 
                 if isinstance(query_time, float) or isinstance(query["time"], int):
-                    format_time = datetime.fromtimestamp(query["time"]).strftime("%H:%M:%S") 
+                    format_time = datetime.fromtimestamp(query["time"]).strftime("%H:%M:%S")
                 elif isinstance(query_time, str):
                     format_time = datetime.fromisoformat(query["time"]).strftime("%H:%M:%S")
                 else:
@@ -98,5 +124,3 @@ class DashboardService:
             )
 
             return appended_queries
-
-

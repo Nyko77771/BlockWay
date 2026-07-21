@@ -26,7 +26,7 @@ class StartService:
         # Obtaining Password from .env
         self.password = os.getenv('PASSWORD')
         # Initialising Pihole class
-        self.pihole = Pihole(address, self.password)
+        self.pihole = Pihole(address)
 
         # Setting Scheduler variable
         self.schedule = Scheduler()

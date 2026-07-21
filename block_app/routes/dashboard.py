@@ -70,12 +70,17 @@ def home():
         table_data = dash_service.get_table_data(True)
 
         # Getting Data for Graphs
-        # Getting Gfeneral Graph Information
-        general_graph = dash_service.get_last_24_hours()
+
+        # 1. Getting General Graph Information
+        activity_graph = dash_service.get_last_24_hours()
+
+        # 2. Getting Information for Chart Graph
+        chart_graph = dash_service.get_blocked_allowed_totals()
 
         return render_template(
             "normal_templates/dashboard_templates/overview.html", current_user=user,
-            general_graph=general_graph,
+            activity_graph=activity_graph,
+            chart_graph=chart_graph,
             table_data=table_data
         )
 

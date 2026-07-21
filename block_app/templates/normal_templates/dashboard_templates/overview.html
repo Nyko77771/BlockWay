@@ -22,33 +22,48 @@ Dashboard {% endblock %} {% block content %}
         <div class="dash_general_info">
           <div class="dash_general_queries">
             <h4>Queries</h4>
-            <p>Pihole Queries:</p>
-            <p>BlockWay ML Queries:</p>
+            <p class="small_dash_text">
+              Pihole Queries: {% if basic_stats.pi_query %} {{
+              basic_stats.pi_query }} {% else %} 0 {% endif %}
+            </p>
+            <p class="small_dash_text">BlockWay ML Queries:</p>
           </div>
           <div class="dash_general_threats">
             <h4>Threats Found:</h4>
-            <p>Total:</p>
+            <p class="small_dash_text">Total:</p>
           </div>
           <div class="dash_general_ml_blocks">
             <h4>ML Blocks:</h4>
-            <p></p>
+            <p class="small_dash_text"></p>
           </div>
           <div class="dash_general_status">
             <h4>Status:</h4>
-            <p>!Active!</p>
+            <p class="small_dash_text">!Active!</p>
           </div>
         </div>
-        <div class="dash_general_graphs">
-          <div class="dash_general_graph_activity">
+
+        <div class="dash_general_graph_activity">
+          <div class="dash_general_graph_title">
             <h3>Activity</h3>
-            <canvas id="generalActivityChart"></canvas>
-            <div 
-              id="graph-data"
-              data-chart="{{ general_graph | tojson | forceescape }}">
-            </div>
           </div>
-          <div class="dash_general_graph_allowed_blocked"></div>
-          <div class="dash_general_graph_threat"></div>
+
+          <div class="graph">
+            <canvas id="generalActivityChart"></canvas>
+            <div
+              id="activity_graph"
+              data-chart="{{ activity_graph | tojson | forceescape }}"
+            ></div>
+          </div>
+
+          <div class="graph">
+            <canvas id="generalBlockedAllowedChart"></canvas>
+            <div
+              id="blocked_allowed_graph"
+              data-chart="{{ chart_graph | tojson | forceescape }}"
+            ></div>
+          </div>
+
+          <div class="graph"></div>
         </div>
       </div>
       <div class="dash_general_blocked_domains">
@@ -84,10 +99,5 @@ Dashboard {% endblock %} {% block content %}
   </div>
 </div>
 {% block script2 %}
-  <script
-  src="{{ url_for('static', filename='js/overview.js') }}"
-  defer
->
-</script>
-{% endblock %}
-{% endblock %}
+<script src="{{ url_for('static', filename='js/overview.js') }}" defer></script>
+{% endblock %} {% endblock %}

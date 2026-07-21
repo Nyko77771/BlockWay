@@ -1,7 +1,14 @@
-{% extends "partials/head.html"%} {% block navbar %} {% include
+{% extends "partials/head.html"%} {% block scripts %} {% if current_user.user_id
+%}
+<script
+  src="{{ url_for('static', filename='js/chart.umd.min.js') }}"
+  defer
+></script>
+{% endif %} {% endblock %} {% block navbar %} {% include
+"partials/navs/nav_logo.html" %} {% include
 "partials/navs/navbar_registered.html" %} {% endblock %} {% block title %}
 Dashboard {% endblock %} {% block content %}
-<div class="container">
+<div class="dash_container">
   <div class="dash_nav">{% include "partials/navs/side_nav.html" %}</div>
   <div class="dash_main">
     <div class="dash_title">
@@ -12,11 +19,11 @@ Dashboard {% endblock %} {% block content %}
         threat.
       </p>
     </div>
-    <div class="dash_content">
-      <div class="dash_box"></div>
-    </div>
+    <div class="dash_content"></div>
 
     <!-- Add more dashboard content here -->
   </div>
 </div>
-{% endblock %}
+{% block script2 %}
+<script src="{{ url_for('static', filename='js/overview.js') }}" defer></script>
+{% endblock %} {% endblock %}

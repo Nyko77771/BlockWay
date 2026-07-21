@@ -128,7 +128,7 @@ class Pihole:
         except RuntimeError:
             logger.exception('No queries obtained found')
             return None
-        
+
 
     # Method for Making Blocked and Non=Blocked List
     def __domains_split(self, last_scan):
@@ -162,7 +162,7 @@ class Pihole:
             return permited_domains, blocked_domains
         except RuntimeError:
             logger.exception('No domains in queries')
-            return None            
+            return None
 
     # Determine Status Type of Query
     def __classify_status(self, status):
@@ -179,6 +179,9 @@ class Pihole:
 
         if status in allowed_status:
             return "allow"
+
+    def get_status(self, status):
+        return self.__classify_status(status)
 
     # Method for Finding Newly Encountered Domains
     def pihole_domain_analyses(self, last_scan):
@@ -213,6 +216,17 @@ class Pihole:
                 to_analyse.add(domain)
 
         return to_analyse
+
+    def get_recent_pihole_domains(self):
+        try:
+            logger.info("Obtaining Recent Pihole Domains")
+
+            last_scan = self.database.get_last_scan()
+
+            return self.__get__recent_domains(last_scan)
+        except Exception:
+            logger.exception('Unable to Obtain Recent Domains')
+            return None
 
     # Method for Performing Scan
     def domains_scan(self, domains):
@@ -293,6 +307,7 @@ class Pihole:
 
         return summary
 
+    # Method for Getting Blocked Clients from Pihoole / Database
     def get_recent_blocked_clients(self):
 
         if self.sid is None or self.csrf is None:
@@ -338,7 +353,7 @@ class Pihole:
                 key = lambda event : event["time"]
             )
             return pihole_events[:5]
-        
+
         if recent_db_domains is None and queries is None:
             logger.warning('No domains obtained from Pihole and database.')
             return None
@@ -362,3 +377,4 @@ class Pihole:
         )
 
         return events[:5]
+
