@@ -1,5 +1,5 @@
 #  Importing datetime
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 # Importing Custom Services
 from block_app.services.log_service import logger
 from block_app.services.pihole_service import Pihole
@@ -23,10 +23,9 @@ class DashboardService:
 
     def get_blocked_allowed_totals(self):
         domains = self.__get_blocked_allowed()
+        blocked = 0
+        allowed = 0
         if domains is not None:
-            blocked = 0
-            allowed = 0
-
             for domain in domains:
                 status = self.pihole.get_status(domain["status"])
 
@@ -35,10 +34,10 @@ class DashboardService:
                 elif status == "allowed":
                     allowed += 1
 
-            return {
-                "allowed": allowed,
-                "blocked": blocked
-            }
+        return {
+            "allowed": allowed,
+            "blocked": blocked
+        }
 
     def get_last_24_hours(self):
 
@@ -88,6 +87,47 @@ class DashboardService:
             i += 1
 
         return queries
+
+    def get_stats(self):
+
+        until_time = datetime.now(timezone.utc)
+        from_time = until_time - timedelta(hours=24)
+
+        pi_totals = 0
+        ml_totals = 0
+        ml_blocked = 0
+        threat_total = 0
+        activity = "Active"
+
+        db_queries = self.pihole.database.get_db_domains()
+
+        if db_queries is not None:
+            for query in db_queries:
+                if query['date_create'] >= from_time:
+                    ml_totals += 1
+                if query["blocked_domain"] == True:
+                    ml_blocked += 1
+
+        pihole_queries = self.pihole.get_pihole_summary(from_time, until_time)
+
+        if pihole_queries is not None:
+            pi_totals = pihole_queries["sum_queries"]
+            blocked_number = str(pihole_queries["sum_blocked"])
+            if blocked_number is not None and blocked_number.isdigit():
+                threat_total = int(blocked_number) + ml_blocked
+            else:
+                threat_total = ml_blocked
+
+        stats = {
+            "pi_query": pi_totals,
+            "ml_query": ml_totals,
+            "total_threats": threat_total,
+            "activity": activity,
+        }
+
+        return stats
+
+
 
     # Method for Getting Recently Blocked Domains
     def __get_blocked_allowed(self):

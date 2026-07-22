@@ -23,28 +23,41 @@ Dashboard {% endblock %} {% block content %}
           <div class="dash_general_queries">
             <h4>Queries</h4>
             <p class="small_dash_text">
-              Pihole Queries: {% if basic_stats.pi_query %} {{
+              Pihole Queries (24 hours): {% if basic_stats.pi_query %} {{
               basic_stats.pi_query }} {% else %} 0 {% endif %}
             </p>
-            <p class="small_dash_text">BlockWay ML Queries:</p>
+            <p class="small_dash_text">
+              BlockWay ML Queries (24 hours): {% if basic_stats.ml_query %} {{
+              basic_stats.ml_query }} {% else %} 0 {% endif %}
+            </p>
           </div>
           <div class="dash_general_threats">
             <h4>Threats Found:</h4>
-            <p class="small_dash_text">Total:</p>
+            <p class="small_dash_text">
+              Total: {% if basic_stats.total_threats %} {{
+              basic_stats.total_threats }} {% else %} 0 {% endif %}
+            </p>
           </div>
           <div class="dash_general_ml_blocks">
             <h4>ML Blocks:</h4>
+            <p>
+              {% if basic_stats.ml_blocks %} {{ basic_stats.ml_blocks }} {% else
+              %} 0 {% endif %}
+            </p>
             <p class="small_dash_text"></p>
           </div>
           <div class="dash_general_status">
             <h4>Status:</h4>
-            <p class="small_dash_text">!Active!</p>
+            <p class="small_dash_text">
+              {% if basic_stats.activity %} {{ basic_stats.activity }} {% else
+              %} Not Detected {% endif %}
+            </p>
           </div>
         </div>
 
         <div class="dash_general_graph_activity">
           <div class="dash_general_graph_title">
-            <h3>Activity</h3>
+            <h3>Activity Graph (24 hours)</h3>
           </div>
 
           <div class="graph">

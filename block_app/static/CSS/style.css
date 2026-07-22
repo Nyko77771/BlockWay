@@ -297,6 +297,10 @@ body {
   opacity: 0.75;
 }
 
+.back_button {
+  margin-left: 15px;
+}
+
 @media (max-width: 925px) {
   .home_statement h1,
   .home_features h1 {
@@ -828,6 +832,16 @@ body {
 
 .dash_content {
   overflow: scroll;
+}
+
+.dash_general_info {
+  display: flex;
+  gap: 2px;
+  flex-direction: row;
+}
+
+.dash_general_queries {
+  border: 1px solid var(--border);
 }
 
 /* Overview Graphs */

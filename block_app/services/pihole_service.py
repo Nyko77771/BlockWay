@@ -35,7 +35,7 @@ class Pihole:
 
             self.pihole_address = db_pihole_address
         else:
-            self.pihole_address = address
+            self.pihole_address = str(address).rstrip('/')
 
         self.pihole_password = os.getenv("PASSWORD")
         self.sid = None
@@ -222,7 +222,8 @@ class Pihole:
             logger.info("Obtaining Recent Pihole Domains")
 
             last_scan = self.database.get_last_scan()
-
+            if last_scan is None:
+                raise Exception
             return self.__get__recent_domains(last_scan)
         except Exception:
             logger.exception('Unable to Obtain Recent Domains')
@@ -276,7 +277,7 @@ class Pihole:
 
     # General Pihole Information:
     # Get Pihole's Statistical Data for Later Display
-    def get_pihole_summary(self):
+    def get_pihole_summary(self, from_time: datetime, until_time: datetime):
 
         if self.sid is None or self.csrf is None:
             self.authenticate()
@@ -288,12 +289,12 @@ class Pihole:
 
         logger.info("Getting Pihole Database Summary")
 
-        current_time = datetime.now(timezone.utc).timestamp()
+        current_time = from_time.timestamp()
 
-        hour_ago = (datetime.now(timezone.utc) - timedelta(hours=1)).timestamp()
+        hour_ago = until_time.timestamp()
 
         pihole_response = requests.get(
-            f"http://{self.pihole_address}/api/stats/database/summary",
+            f"{str(self.pihole_address).rstrip('/')}/api/stats/database/summary",
             headers={
                 "X-FTL-SID": self.sid, "X-FTL-CSRF": self.csrf
                 },

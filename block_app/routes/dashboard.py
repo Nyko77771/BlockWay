@@ -66,6 +66,9 @@ def home():
         # Initialising Dashboard Services
         dash_service = DashboardService()
 
+        # Getting general Statistical Information
+        basic_stats = dash_service.get_stats()
+
         # Getting Data for Table
         table_data = dash_service.get_table_data(True)
 
@@ -79,6 +82,7 @@ def home():
 
         return render_template(
             "normal_templates/dashboard_templates/overview.html", current_user=user,
+            basic_stats=basic_stats,
             activity_graph=activity_graph,
             chart_graph=chart_graph,
             table_data=table_data

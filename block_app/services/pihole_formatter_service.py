@@ -15,19 +15,26 @@ class PiholeFormatter:
             scheme = sections.scheme
             netloc = sections.netloc
             port = sections.port
+            path = sections.path
+            query = sections.query
+            fragment = sections.fragment
 
             logger.info('URL Provided:')
             logger.info(f'Scheme: {scheme}')
             logger.info(f'UNetloc: {netloc}')
             logger.info(f'UNetloc: {port}')
 
-
-
             if scheme not in ('http', 'https'):
                 return False
             if not netloc:
                 return False
             if not port:
+                return False
+            if path:
+                return False
+            if query:
+                return False
+            if fragment:
                 return False
             else:
                 return True
@@ -38,7 +45,7 @@ class PiholeFormatter:
     def check_connection(self, address):
         try:
             logger.info('Checking Connection to Pihole')
-            response = requests.get(address+str('/api/docs'), timeout=5)
+            response = requests.get(str(address).rstrip('/') +str('/api/docs'), timeout=5)
 
             if response.ok:
                 return True
