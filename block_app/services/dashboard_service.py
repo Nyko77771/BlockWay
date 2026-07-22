@@ -127,8 +127,6 @@ class DashboardService:
 
         return stats
 
-
-
     # Method for Getting Recently Blocked Domains
     def __get_blocked_allowed(self):
          if self.pihole.contains_address():

@@ -12,26 +12,31 @@ import time
 # Importing Scheduler Module to Schedule Hourly Scans:
 from scheduler import Scheduler
 
+# Importing datetime
+import datetime
+
 class StartService:
 
     # Initialing Method for Class
     def __init__(self):
-        # Initialing the Database
-        self.database = DomainDatabase()
-        address = self.database.get_pihole_address()
 
         # Loading environmental variables
         load_dotenv()
 
+
+        # Initialing the Database
+        self.database = DomainDatabase()
+        address = self.database.get_pihole_address()
         # Obtaining Password from .env
         self.password = os.getenv('PASSWORD')
         # Initialising Pihole class
         self.pihole = Pihole(address)
-
         # Setting Scheduler variable
         self.schedule = Scheduler()
+
+    def make_scheduler(self):
         # Creating a scheduled job
-        self.schedule.hourly(self.run_scan)
+        self.schedule.hourly(datetime.time(minute=59),self.run_scan)
 
     # Method for Starting Scheduled Scans
     def start(self):

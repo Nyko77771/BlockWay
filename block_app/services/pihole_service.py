@@ -228,10 +228,12 @@ class Pihole:
 
             last_scan = self.database.get_last_scan()
             if last_scan is None:
-                raise Exception
+                logger.error('No ML details found')
+                return []
             return self.__get__recent_domains(last_scan)
-        except Exception:
+        except Exception as e:
             logger.exception('Unable to Obtain Recent Domains')
+            logger.exception(f'{e}')
             return None
 
     # Method for Performing Scan

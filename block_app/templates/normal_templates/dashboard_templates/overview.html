@@ -15,22 +15,31 @@ Dashboard {% endblock %} {% block content %}
       <h1>Overview</h1>
       <p>Welcome to Dashboard overview!</p>
     </div>
+
     <div class="dash_content">
+
       <div class="dash_box">
         <!-- Add your dashboard content here -->
         <!-- Displaying some general information -->
-        <div class="dash_general_info">
+        <div class="dash_general_info">          
           <div class="dash_general_queries">
             <h4>Queries</h4>
-            <p class="small_dash_text">
-              Pihole Queries (24 hours): {% if basic_stats.pi_query %} {{
-              basic_stats.pi_query }} {% else %} 0 {% endif %}
-            </p>
-            <p class="small_dash_text">
-              BlockWay ML Queries (24 hours): {% if basic_stats.ml_query %} {{
-              basic_stats.ml_query }} {% else %} 0 {% endif %}
-            </p>
+            <div class="dash_general_queries_2"></div>
+              <p class="small_dash_text">
+                Blocked Queries (24 hours): {% if basic_stats.blocked_query %} {{
+                basic_stats.blocked_query }} {% else %} 0 {% endif %}
+              </p>
+              <p class="small_dash_text">
+                Pihole Queries (24 hours): {% if basic_stats.pi_query %} {{
+                basic_stats.pi_query }} {% else %} 0 {% endif %}
+              </p>
+              <p class="small_dash_text">
+                BlockWay ML Queries (24 hours): {% if basic_stats.ml_query %} {{
+                basic_stats.ml_query }} {% else %} 0 {% endif %}
+              </p>
+            </div>            
           </div>
+
           <div class="dash_general_threats">
             <h4>Threats Found:</h4>
             <p class="small_dash_text">
@@ -38,6 +47,7 @@ Dashboard {% endblock %} {% block content %}
               basic_stats.total_threats }} {% else %} 0 {% endif %}
             </p>
           </div>
+
           <div class="dash_general_ml_blocks">
             <h4>ML Blocks:</h4>
             <p>
@@ -46,6 +56,7 @@ Dashboard {% endblock %} {% block content %}
             </p>
             <p class="small_dash_text"></p>
           </div>
+
           <div class="dash_general_status">
             <h4>Status:</h4>
             <p class="small_dash_text">
@@ -78,8 +89,7 @@ Dashboard {% endblock %} {% block content %}
 
           <div class="graph"></div>
         </div>
-      </div>
-      <div class="dash_general_blocked_domains">
+<div class="dash_general_blocked_domains">
         <table class="dash_general_blocked_domains_table">
           <thead>
             <tr>
@@ -106,11 +116,13 @@ Dashboard {% endblock %} {% block content %}
           </tbody>
         </table>
       </div>
+      </div>
     </div>
 
     <!-- Add more dashboard content here -->
   </div>
 </div>
-{% block script2 %}
+ {% endblock %}
+ {% block script2 %}
 <script src="{{ url_for('static', filename='js/overview.js') }}" defer></script>
-{% endblock %} {% endblock %}
+{% endblock %}

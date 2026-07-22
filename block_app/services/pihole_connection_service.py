@@ -20,6 +20,7 @@ class PiholeConnectionChecker:
             result = self.__check_connection()
             self.previous_result = result
             self.previous_check = current_time
+            return self.previous_check
 
 
     def __check_connection(self):
@@ -28,6 +29,8 @@ class PiholeConnectionChecker:
             pihole_address = self.pihole.get_address()
             logger.info(f"Checking Pihole URL: {pihole_address}")
             response = requests.get(str(pihole_address)+"/admin/", timeout=5)
+            logger.info(response.status_code)
+            logger.info(response.headers)
             if response.ok:
                 return True
             logger.warning(f'Pihole Address returned code: {response.status_code}')
@@ -37,4 +40,7 @@ class PiholeConnectionChecker:
             return False
         except requests.exceptions.ConnectionError:
             logger.exception('Unable to Establish Connection to Pihole')
+            return False
+        except Exception:
+            logger.exception("Failed to Connect to Pihole")
             return False

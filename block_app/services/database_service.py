@@ -234,15 +234,20 @@ class DomainDatabase:
             logger.info("Getting Scan Details")
 
             db_schedule = db.query(db_models.ScheduleConfiguration).first()
+
             if db_schedule is None:
-                raise Exception
+                logger.info("No schedule found")
+                return None
 
             db_last_scan = db_schedule.last_scan
 
+            logger.info(f"Last scan: {db_last_scan}")
+
             return db_last_scan
 
-        except Exception:
+        except Exception as e:
             logger.exception("Failed to Get Last Scan Details")
+            logger.exception(f"{e}")
         finally:
             logger.info("Closing Database")
             db.close()

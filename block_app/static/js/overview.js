@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Graph 1
 
   const data_chart = document.getElementById("generalActivityChart");
-  const graphElement = document.getElementById("actvity_graph");
+  const graphElement = document.getElementById("activity_graph");
 
   console.log(data_chart.dataset.chart);
   console.log(graphElement.dataset.chart);
@@ -34,6 +34,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // Graph 2
   const data_chart2 = document.getElementById("generalBlockedAllowedChart");
   const graphElement2 = document.getElementById("blocked_allowed_graph");
+
+  console.log(data_chart2.dataset.chart);
+  console.log(graphElement2.dataset.chart);
 
   const graphData2 = JSON.parse(graphElement2.dataset.chart);
 

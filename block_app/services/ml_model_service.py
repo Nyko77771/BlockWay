@@ -14,11 +14,13 @@ class DomainAnalyses:
 
     def __init__(self):
         try:
-            self.logistic_model = self.__open_zip()
-            self.random_forrest = load("block_app/models/r_forrest.pkl")
+            self.random_forrest = self.__open_zip()
+            self.logistic_model = load("block_app/models/logistic.pkl")
+            self.scaler = load("block_app/models/scaler.pkl")
             logger.info("Models Loaded")
-        except Exception:
+        except Exception as e:
             logger.exception("Exception Occurred while Loading Models")
+            logger.exception(f"Exception: {e}")
 
     # Extracting Model from Zip File
     def __open_zip(self):
@@ -34,35 +36,36 @@ class DomainAnalyses:
     def create_x_features(self, url):
 
         # First checking if domain is in correct format
-        if self._check_domain:
-            return [
-                self._make_length(url),
-                self._make_has_ip(url),
-                self._make_digit_count(url),
-                self.__make_dot_count(url),
-                self.__make_has_subdomain(url),
-                self.__make_subdomain_count(url),
-                self.__make_hyphen_count(url),
-                self.__make_special_count(url),
-                self.__make_host_in_subdomain(url),
-                self.__make_host_in_domain(url),
-                self.__make_similarity(url),
-                self.__make_has_com(url),
-                self.__make_has_org(url),
-                self.__make_has_country_code(url),
-            ]
-        else:
-            logger.exception(f"Domain {url} is not a Domain")
-            return False
-
+        if not self._check_domain(url):
+            logger.exception(f'Domain {url} is invalid')
+            raise ValueError
+        return [[
+            self._make_length(url), # Random Yes
+            self._make_has_ip(url), # Random Yes
+            self._make_digit_count(url), # Random Yes
+            self.__make_dot_count(url), # 
+            self.__make_has_subdomain(url),
+            self.__make_subdomain_count(url),
+            self.__make_hyphen_count(url),
+            self.__make_special_count(url),
+            self.__make_host_in_subdomain(url),
+            self.__make_host_in_domain(url),
+            self.__make_similarity(url),
+            self.__make_has_com(url),
+            self.__make_has_org(url),
+            self.__make_has_country_code(url),
+        ]]
+    
     def __prediction(self, model, url):
         x_test = self.create_x_features(url)
-        prediction = model.predict(x_test)
+        x_scaled = self.scaler.transform(x_test)
+        prediction = model.predict(x_scaled)
         return prediction[0]
 
     def __probability(self, model, url):
-        self.create_x_features(url)
-        probability = model.predict_proba()
+        x_test = self.create_x_features(url)
+        x_scaled = self.scaler.transform(x_test)
+        probability = model.predict_proba(x_scaled)
         return probability[0]
 
     def logistic_probability(self, url):
@@ -70,11 +73,15 @@ class DomainAnalyses:
         return probability_score
 
     def logistic_prediction(self, url):
+        logger.info("Performing Logistic Prediction")
         prediction_score = self.__prediction(self.logistic_model, url)
+        logger.info(f"Logistic prediction Score: {prediction_score}")
         return prediction_score
 
     def random_forrest_prediction(self, url):
+        logger.info("Performing Random Forrest Prediction")
         prediction_score = self.__prediction(self.random_forrest, url)
+        logger.info(f"Random Forrest prediction Score: {prediction_score}")
         return prediction_score
 
     ####################################
@@ -83,7 +90,7 @@ class DomainAnalyses:
 
     # Method for uploading popular domains csv
     def __get_popular_domains(self):
-        self.popular_domain_data_frame = pd.read_csv("models/popular_domains.csv")
+        self.popular_domain_data_frame = pd.read_csv("block_app/models/popular_domains.csv")
         return
 
     # Method For Checking if Domain was given
@@ -129,7 +136,7 @@ class DomainAnalyses:
 
     def __make_has_subdomain(self, url):
         sections = tld.extract(url)
-        return bool(sections.subdomain)
+        return int(bool(sections.subdomain))
 
     def __make_subdomain_count(self, url):
         sections = tld.extract(url)
@@ -179,13 +186,11 @@ class DomainAnalyses:
     def __make_similarity(self, url):
         if self.popular_domain_data_frame is None:
             self.__get_popular_domains()
-        popular_domains = self.popular_domain_data_frame
-        if popular_domains is None:
-            return 0
+
         sections = tld.extract(url)
         hostname = sections.domain.lower()
         best_score = 0
-        for domain in popular_domains["Domain"]:
+        for domain in self.popular_domain_data_frame["Domain"]: # type: ignore
             similiraty_score = Levenshtein.ratio(domain, hostname)
             if similiraty_score > best_score:
                 return similiraty_score

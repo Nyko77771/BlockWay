@@ -2,6 +2,10 @@
 import os
 import dotenv
 
+# Importing Threading Module
+# Will be used to Create a parallel ML Processing Service
+import threading
+
 # Importing Flask Methods and Objects
 from flask_login import LoginManager
 from flask import Flask, render_template
@@ -22,6 +26,8 @@ from block_app.cli.administrator import admin_reset
 from block_app.services.database_service import DomainDatabase
 from block_app.services.log_service import logger
 
+# Importing ML Generating Method
+from block_app.services.run_ml_start_service import start_scheduler
 
 # Loading the enviromental variables
 dotenv.load_dotenv()
@@ -83,4 +89,10 @@ def make_blockway():
 
     # Starting Database
     check_start_db()
+
+    thread = threading.Thread(target=start_scheduler, daemon=True)
+    thread.start()
+    logger.info("Starting ML Thread")
+    logger.info(f'Active Threads: {threading.active_count()}')
+
     return block_app
