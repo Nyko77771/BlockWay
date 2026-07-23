@@ -2,3 +2,7 @@
 .dockerignore
 __pycache__
 *.pyc
+.db
+.vscode
+.pytest_cache
+block_app/models/r_forrest.pkl
