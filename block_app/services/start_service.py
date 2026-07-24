@@ -23,7 +23,6 @@ class StartService:
         # Loading environmental variables
         load_dotenv()
 
-
         # Initialing the Database
         self.database = DomainDatabase()
         address = self.database.get_pihole_address()

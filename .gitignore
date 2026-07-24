@@ -2,6 +2,7 @@
 .dockerignore
 __pycache__
 *.pyc
+block_way.db
 .db
 .vscode
 .pytest_cache

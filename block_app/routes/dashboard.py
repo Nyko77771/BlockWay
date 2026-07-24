@@ -1,3 +1,6 @@
+# Importing threading module
+import threading
+
 # Importing Flask Services
 from flask import Blueprint, render_template, session, abort, jsonify
 from flask_login import login_required, current_user
@@ -6,8 +9,9 @@ from flask_login import login_required, current_user
 from block_app.services.pihole_service import Pihole
 from block_app.services.database_service import DomainDatabase
 from block_app.services.dashboard_service import DashboardService
-from block_app.services.pihole_connection_service import PiholeConnectionChecker
 from block_app.services.log_service import logger
+# Importing ML Generating Method
+from block_app.services.run_ml_start_service import start_scheduler
 
 import traceback
 
@@ -31,7 +35,7 @@ def dash_checks():
     if not pihole.contains_address():
         logger.error('No Pihole Address Found')#
         message = 'Address Could not be reached. Try Again'
-        return render_template('/normal_templates/pihole_add.html', message=message)    
+        return render_template('/normal_templates/pihole_add.html', message=message)
 
     # Getting id from session
     if current_user.is_authenticated:
@@ -43,8 +47,6 @@ def dash_checks():
         logger.error('Cant Establish Pihole Connection')
         message = 'Pihole address could not be reached'
         return render_template('/normal_templates/pihole_add.html', message=message)
-
-
 
 @dashboard.route("/dashboard", methods=["GET"])
 def home():
@@ -70,6 +72,13 @@ def home():
                 "admin_templates/dashboard_templates/admin_system_details.html",
                 current_user=user,
             )
+
+        # Performing ML Analyses
+        # Using Threadding to run ML scan concurrently
+        thread = threading.Thread(target=start_scheduler, daemon=True)
+        thread.start()
+        logger.info("Starting ML Thread")
+        logger.info(f'Active Threads: {threading.active_count()}')
 
         # Initialising Dashboard Services
         dash_service = DashboardService()
