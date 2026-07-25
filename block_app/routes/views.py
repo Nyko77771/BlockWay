@@ -106,7 +106,9 @@ def signup():
                 # Adding Pihole address
                 db.add_pihole_address(given_pi_address)
             else:
-                redirect("/setup/pihole")
+                render_template(
+        "unregistered_templates/signup.html",current_user=backend_current_user, message="Please Enter URL address with a port number"
+    )
 
             # Establishing a session
             login_user(new_db_user)

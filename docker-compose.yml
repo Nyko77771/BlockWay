@@ -9,6 +9,7 @@ services:
       FTLCONF_dns_listeningMode: "all"
     expose:
       - "80"
+      - "53"
     volumes:
       - "/home/nykyta/pihole/etc-pihole:/etc/pihole"
     cap_add:

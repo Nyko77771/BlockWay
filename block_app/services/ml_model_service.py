@@ -39,42 +39,52 @@ class DomainAnalyses:
         if not self._check_domain(url):
             logger.exception(f'Domain {url} is invalid')
             raise ValueError
-        return [[
-            self._make_length(url), # Random Yes
-            self._make_has_ip(url), # Random Yes
-            self._make_digit_count(url), # Random Yes
-            self.__make_dot_count(url), # 
-            self.__make_has_subdomain(url),
-            self.__make_subdomain_count(url),
-            self.__make_hyphen_count(url),
-            self.__make_special_count(url),
-            self.__make_host_in_subdomain(url),
-            self.__make_host_in_domain(url),
-            self.__make_similarity(url),
-            self.__make_has_com(url),
-            self.__make_has_org(url),
-            self.__make_has_country_code(url),
-        ]]
-    
-    def __prediction(self, model, url):
+
+        features = pd.DataFrame([{
+            "domain_length": self._make_length(url),
+            "domain_has_ip": self._make_has_ip(url),
+            "domain_digit_count": self._make_digit_count(url),
+            "domain_dot_count":  self.__make_dot_count(url),
+            "domain_has_subdomain": self.__make_has_subdomain(url),
+            "domain_subdomain_count": self.__make_subdomain_count(url),
+            "domain_hyphen_count": self.__make_hyphen_count(url),
+            "domain_special_count": self.__make_special_count(url),
+            "domain_host_in_subdomain": self.__make_host_in_subdomain(url),
+            "domain_host_in_domain": self.__make_host_in_domain(url),
+            "domain_similarity": self.__make_similarity(url),
+            "domain_has_com": self.__make_has_com(url),
+            "domain_has_org": self.__make_has_org(url),
+            "domain_has_countrry_code": self.__make_has_country_code(url),
+            }])
+        return features
+
+    def __prediction(self, model, url, logistic=False):
         x_test = self.create_x_features(url)
-        x_scaled = self.scaler.transform(x_test)
-        prediction = model.predict(x_scaled)
+        prediction = []
+        if logistic:
+            x_scaled = self.scaler.transform(x_test)
+            prediction = model.predict(x_scaled)
+        else:
+            probability = model.predict(x_test)
         return prediction[0]
 
-    def __probability(self, model, url):
+    def __probability(self, model, url, logistic=False):
         x_test = self.create_x_features(url)
-        x_scaled = self.scaler.transform(x_test)
-        probability = model.predict_proba(x_scaled)
+        probability = []
+        if logistic:
+            x_scaled = self.scaler.transform(x_test)
+            probability = model.predict_proba(x_scaled)
+        else:
+            probability = model.predict_proba(x_test)
         return probability[0]
 
     def logistic_probability(self, url):
-        probability_score = self.__probability(self.logistic_model, url)
+        probability_score = self.__probability(self.logistic_model, url, True)
         return probability_score
 
     def logistic_prediction(self, url):
         logger.info("Performing Logistic Prediction")
-        prediction_score = self.__prediction(self.logistic_model, url)
+        prediction_score = self.__prediction(self.logistic_model, url, True)
         logger.info(f"Logistic prediction Score: {prediction_score}")
         return prediction_score
 
