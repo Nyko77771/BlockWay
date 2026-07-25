@@ -1,0 +1,1281 @@
+20-07-2026 11:31:25 - ERROR - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+20-07-2026 11:32:10 - ERROR - block_app - Failed to Get User by ID
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 44, in get_db_user_by_id
+    .filter(db_models.User.user_id == user_id)
+            ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'User' has no attribute 'user_id'
+20-07-2026 11:32:11 - ERROR - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+20-07-2026 11:32:11 - ERROR - block_app - Failed to Get User by ID
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/flask/app.py", line 891, in dispatch_request
+    self.raise_routing_exception(req)
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/flask/app.py", line 500, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/flask/ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/werkzeug/routing/map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 44, in get_db_user_by_id
+    .filter(db_models.User.user_id == user_id)
+            ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'User' has no attribute 'user_id'
+20-07-2026 11:32:32 - ERROR - block_app - Admin Update Failed
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.IntegrityError: UNIQUE constraint failed: users.username
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 109, in update_default_admin
+    db.commit()
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2030, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 1311, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 1286, in _prepare_impl
+    self.session.flush()
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4331, in flush
+    self._flush(objects)
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4466, in _flush
+    with util.safe_reraise():
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4427, in _flush
+    flush_context.execute()
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/persistence.py", line 85, in save_obj
+    _emit_update_statements(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/persistence.py", line 912, in _emit_update_statements
+    c = connection.execute(
+        ^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1419, in execute
+    return meth(
+           ^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.IntegrityError: (sqlite3.IntegrityError) UNIQUE constraint failed: users.username
+[SQL: UPDATE users SET username=?, password=?, salt=? WHERE users.id = ?]
+[parameters: ('Nyk', b'$2b$12$kZz7RjfA/D3bFJNsByCTOeodDmQ0rYb0YyMp5aF7QHEMOkkr4hFOi', b'$2b$12$kZz7RjfA/D3bFJNsByCTOe', 2)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+20-07-2026 11:32:32 - ERROR - block_app - Failed to Get Pihole Address
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 263, in get_pihole_address
+    raise Exception
+Exception
+20-07-2026 11:32:32 - ERROR - block_app - Failed to Get User by ID
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 44, in get_db_user_by_id
+    .filter(db_models.User.user_id == user_id)
+            ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'User' has no attribute 'user_id'
+20-07-2026 11:39:26 - ERROR - block_app - Failed to Get User by ID
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 44, in get_db_user_by_id
+    .filter(db_models.User.user_id == user_id)
+            ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'User' has no attribute 'user_id'
+20-07-2026 11:40:07 - ERROR - block_app - Failed to Get User by ID
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 44, in get_db_user_by_id
+    .filter(db_models.User.user_id == user_id)
+            ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'User' has no attribute 'user_id'
+20-07-2026 11:40:08 - ERROR - block_app - Failed to Get User by ID
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 44, in get_db_user_by_id
+    .filter(db_models.User.user_id == user_id)
+            ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'User' has no attribute 'user_id'
+20-07-2026 11:40:09 - ERROR - block_app - Failed to Get User by ID
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 44, in get_db_user_by_id
+    .filter(db_models.User.user_id == user_id)
+            ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'User' has no attribute 'user_id'
+20-07-2026 11:42:00 - ERROR - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+20-07-2026 11:42:11 - ERROR - block_app - Admin Update Failed
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.IntegrityError: UNIQUE constraint failed: users.username
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 109, in update_default_admin
+    db.commit()
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2030, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 1311, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 1286, in _prepare_impl
+    self.session.flush()
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4331, in flush
+    self._flush(objects)
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4466, in _flush
+    with util.safe_reraise():
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4427, in _flush
+    flush_context.execute()
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/persistence.py", line 85, in save_obj
+    _emit_update_statements(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/persistence.py", line 912, in _emit_update_statements
+    c = connection.execute(
+        ^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1419, in execute
+    return meth(
+           ^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.IntegrityError: (sqlite3.IntegrityError) UNIQUE constraint failed: users.username
+[SQL: UPDATE users SET username=?, password=?, salt=? WHERE users.id = ?]
+[parameters: ('Nyk', b'$2b$12$2uw6Mh8IxBOZMT3Zv9DOceUkVUAFBcxYgOWXFB.lEK//1wsJiehf6', b'$2b$12$2uw6Mh8IxBOZMT3Zv9DOce', 2)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+20-07-2026 11:42:14 - ERROR - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+20-07-2026 11:42:14 - ERROR - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+20-07-2026 11:45:37 - ERROR - __init__.py - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+20-07-2026 11:47:43 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+20-07-2026 11:58:05 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+20-07-2026 11:58:36 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+20-07-2026 11:58:36 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+20-07-2026 12:02:06 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+20-07-2026 12:19:40 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+20-07-2026 12:20:31 - ERROR - pihole_service.py - authenticate - block_app - Exception: HTTPConnectionPool(host='http', port=80): Max retries exceeded with url: //192.168.9.108:8080/api/auth (Caused by NameResolutionError("HTTPConnection(host='http', port=80): Failed to resolve 'http' ([Errno -2] Name or service not known)"))
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/urllib3/connection.py", line 204, in _new_conn
+    sock = connection.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/urllib3/util/connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/socket.py", line 963, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno -2] Name or service not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py", line 493, in _make_request
+    conn.request(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/urllib3/connection.py", line 500, in request
+    self.endheaders()
+  File "/usr/lib/python3.12/http/client.py", line 1360, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.12/http/client.py", line 1120, in _send_output
+    self.send(msg)
+  File "/usr/lib/python3.12/http/client.py", line 1064, in send
+    self.connect()
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/urllib3/connection.py", line 331, in connect
+    self.sock = self._new_conn()
+                ^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/urllib3/connection.py", line 211, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: HTTPConnection(host='http', port=80): Failed to resolve 'http' ([Errno -2] Name or service not known)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/requests/adapters.py", line 696, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/urllib3/util/retry.py", line 535, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='http', port=80): Max retries exceeded with url: //192.168.9.108:8080/api/auth (Caused by NameResolutionError("HTTPConnection(host='http', port=80): Failed to resolve 'http' ([Errno -2] Name or service not known)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 54, in authenticate
+    pihole_response = requests.post(
+                      ^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/requests/api.py", line 134, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/requests/api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/requests/sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/requests/sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/requests/adapters.py", line 729, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='http', port=80): Max retries exceeded with url: //192.168.9.108:8080/api/auth (Caused by NameResolutionError("HTTPConnection(host='http', port=80): Failed to resolve 'http' ([Errno -2] Name or service not known)"))
+20-07-2026 12:20:31 - ERROR - pihole_service.py - get_recent_blocked_clients - block_app - Not Authenticated with Pihole
+20-07-2026 12:20:31 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+20-07-2026 12:27:02 - ERROR - pihole_service.py - authenticate - block_app - Exception: HTTPConnectionPool(host='http', port=80): Max retries exceeded with url: //192.168.9.108:8080/api/auth (Caused by NameResolutionError("HTTPConnection(host='http', port=80): Failed to resolve 'http' ([Errno -2] Name or service not known)"))
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/urllib3/connection.py", line 204, in _new_conn
+    sock = connection.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/urllib3/util/connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/socket.py", line 963, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno -2] Name or service not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py", line 493, in _make_request
+    conn.request(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/urllib3/connection.py", line 500, in request
+    self.endheaders()
+  File "/usr/lib/python3.12/http/client.py", line 1360, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.12/http/client.py", line 1120, in _send_output
+    self.send(msg)
+  File "/usr/lib/python3.12/http/client.py", line 1064, in send
+    self.connect()
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/urllib3/connection.py", line 331, in connect
+    self.sock = self._new_conn()
+                ^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/urllib3/connection.py", line 211, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: HTTPConnection(host='http', port=80): Failed to resolve 'http' ([Errno -2] Name or service not known)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/requests/adapters.py", line 696, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/urllib3/util/retry.py", line 535, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='http', port=80): Max retries exceeded with url: //192.168.9.108:8080/api/auth (Caused by NameResolutionError("HTTPConnection(host='http', port=80): Failed to resolve 'http' ([Errno -2] Name or service not known)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 54, in authenticate
+    pihole_response = requests.post(
+                      ^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/requests/api.py", line 134, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/requests/api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/requests/sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/requests/sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/requests/adapters.py", line 729, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='http', port=80): Max retries exceeded with url: //192.168.9.108:8080/api/auth (Caused by NameResolutionError("HTTPConnection(host='http', port=80): Failed to resolve 'http' ([Errno -2] Name or service not known)"))
+20-07-2026 12:27:02 - ERROR - pihole_service.py - get_recent_blocked_clients - block_app - Not Authenticated with Pihole
+20-07-2026 12:27:02 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+20-07-2026 12:39:13 - ERROR - pihole_service.py - authenticate - block_app - Exception: HTTPConnectionPool(host='http', port=80): Max retries exceeded with url: //192.168.9.108:8080/api/auth (Caused by NameResolutionError("HTTPConnection(host='http', port=80): Failed to resolve 'http' ([Errno -2] Name or service not known)"))
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/urllib3/connection.py", line 204, in _new_conn
+    sock = connection.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/urllib3/util/connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/socket.py", line 963, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno -2] Name or service not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py", line 493, in _make_request
+    conn.request(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/urllib3/connection.py", line 500, in request
+    self.endheaders()
+  File "/usr/lib/python3.12/http/client.py", line 1360, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.12/http/client.py", line 1120, in _send_output
+    self.send(msg)
+  File "/usr/lib/python3.12/http/client.py", line 1064, in send
+    self.connect()
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/urllib3/connection.py", line 331, in connect
+    self.sock = self._new_conn()
+                ^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/urllib3/connection.py", line 211, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: HTTPConnection(host='http', port=80): Failed to resolve 'http' ([Errno -2] Name or service not known)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/requests/adapters.py", line 696, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/urllib3/util/retry.py", line 535, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='http', port=80): Max retries exceeded with url: //192.168.9.108:8080/api/auth (Caused by NameResolutionError("HTTPConnection(host='http', port=80): Failed to resolve 'http' ([Errno -2] Name or service not known)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 54, in authenticate
+    pihole_response = requests.post(
+                      ^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/requests/api.py", line 134, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/requests/api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/requests/sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/requests/sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/requests/adapters.py", line 729, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='http', port=80): Max retries exceeded with url: //192.168.9.108:8080/api/auth (Caused by NameResolutionError("HTTPConnection(host='http', port=80): Failed to resolve 'http' ([Errno -2] Name or service not known)"))
+20-07-2026 12:39:13 - ERROR - pihole_service.py - get_recent_blocked_clients - block_app - Not Authenticated with Pihole
+20-07-2026 12:39:13 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+20-07-2026 13:07:31 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+20-07-2026 13:15:23 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+20-07-2026 13:18:54 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+20-07-2026 13:24:28 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+20-07-2026 13:30:54 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+20-07-2026 13:31:05 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+20-07-2026 13:31:05 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+20-07-2026 13:56:05 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+20-07-2026 13:58:13 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+20-07-2026 14:07:44 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+20-07-2026 14:08:56 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+20-07-2026 14:09:09 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+20-07-2026 14:09:09 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+20-07-2026 14:18:30 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+20-07-2026 14:30:17 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+20-07-2026 14:55:14 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+20-07-2026 14:57:23 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+20-07-2026 15:18:22 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+20-07-2026 15:18:35 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+20-07-2026 15:25:58 - ERROR - pihole_service.py - authenticate - block_app - Exception: 'session'
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 73, in authenticate
+    self.sid = data_json["session"]["sid"]
+               ~~~~~~~~~^^^^^^^^^^^
+KeyError: 'session'
+20-07-2026 15:25:58 - ERROR - pihole_service.py - get_recent_blocked_clients - block_app - Not Authenticated with Pihole
+20-07-2026 15:25:59 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+20-07-2026 15:25:59 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+20-07-2026 15:26:14 - ERROR - pihole_service.py - authenticate - block_app - Exception: 'session'
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 73, in authenticate
+    self.sid = data_json["session"]["sid"]
+               ~~~~~~~~~^^^^^^^^^^^
+KeyError: 'session'
+20-07-2026 15:26:14 - ERROR - pihole_service.py - get_recent_blocked_clients - block_app - Not Authenticated with Pihole
+20-07-2026 15:26:14 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+20-07-2026 15:31:39 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+20-07-2026 15:55:05 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+20-07-2026 15:56:49 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+20-07-2026 16:04:08 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+20-07-2026 16:04:08 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+20-07-2026 16:04:19 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+20-07-2026 16:07:46 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+20-07-2026 16:10:20 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+20-07-2026 16:11:04 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+20-07-2026 16:27:53 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+20-07-2026 17:20:09 - ERROR - pihole_service.py - authenticate - block_app - Exception: 'session'
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 73, in authenticate
+    self.sid = data_json["session"]["sid"]
+               ~~~~~~~~~^^^^^^^^^^^
+KeyError: 'session'
+20-07-2026 17:20:09 - ERROR - pihole_service.py - get_recent_blocked_clients - block_app - Not Authenticated with Pihole
+20-07-2026 17:20:09 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+20-07-2026 17:20:09 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+20-07-2026 17:20:30 - ERROR - pihole_service.py - authenticate - block_app - Exception: 'session'
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 73, in authenticate
+    self.sid = data_json["session"]["sid"]
+               ~~~~~~~~~^^^^^^^^^^^
+KeyError: 'session'
+20-07-2026 17:20:30 - ERROR - pihole_service.py - get_recent_blocked_clients - block_app - Not Authenticated with Pihole
+20-07-2026 17:20:30 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+20-07-2026 17:21:12 - ERROR - pihole_service.py - authenticate - block_app - Exception: 'session'
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 73, in authenticate
+    self.sid = data_json["session"]["sid"]
+               ~~~~~~~~~^^^^^^^^^^^
+KeyError: 'session'
+20-07-2026 17:21:12 - ERROR - pihole_service.py - get_recent_blocked_clients - block_app - Not Authenticated with Pihole
+20-07-2026 17:21:12 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+21-07-2026 19:39:59 - ERROR - pihole_service.py - authenticate - block_app - Exception: HTTPConnectionPool(host='192.168.9.108', port=8080): Max retries exceeded with url: /api/auth (Caused by NewConnectionError("HTTPConnection(host='192.168.9.108', port=8080): Failed to establish a new connection: [Errno 111] Connection refused"))
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/urllib3/connection.py", line 204, in _new_conn
+    sock = connection.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    raise err
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py", line 493, in _make_request
+    conn.request(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/urllib3/connection.py", line 500, in request
+    self.endheaders()
+  File "/usr/lib/python3.12/http/client.py", line 1360, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.12/http/client.py", line 1120, in _send_output
+    self.send(msg)
+  File "/usr/lib/python3.12/http/client.py", line 1064, in send
+    self.connect()
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/urllib3/connection.py", line 331, in connect
+    self.sock = self._new_conn()
+                ^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/urllib3/connection.py", line 219, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: HTTPConnection(host='192.168.9.108', port=8080): Failed to establish a new connection: [Errno 111] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/requests/adapters.py", line 696, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/urllib3/util/retry.py", line 535, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='192.168.9.108', port=8080): Max retries exceeded with url: /api/auth (Caused by NewConnectionError("HTTPConnection(host='192.168.9.108', port=8080): Failed to establish a new connection: [Errno 111] Connection refused"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 61, in authenticate
+    pihole_response = requests.post(
+                      ^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/requests/api.py", line 134, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/requests/api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/requests/sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/requests/sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/requests/adapters.py", line 729, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='192.168.9.108', port=8080): Max retries exceeded with url: /api/auth (Caused by NewConnectionError("HTTPConnection(host='192.168.9.108', port=8080): Failed to establish a new connection: [Errno 111] Connection refused"))
+21-07-2026 19:40:00 - ERROR - pihole_service.py - get_recent_blocked_clients - block_app - Not Authenticated with Pihole
+21-07-2026 19:40:00 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+21-07-2026 21:49:53 - ERROR - database_service.py - get_pihole_address - block_app - Failed to Get Pihole Address
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such table: pihole
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 260, in get_pihole_address
+    db_pihole = db.query(db_models.Pihole).first()
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/query.py", line 2766, in first
+    return self.limit(1)._iter().first()  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/query.py", line 2864, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+                                                  ^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2351, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2249, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1419, in execute
+    return meth(
+           ^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such table: pihole
+[SQL: SELECT pihole.pihole_id AS pihole_pihole_id, pihole.pihole_address AS pihole_pihole_address 
+FROM pihole
+ LIMIT ? OFFSET ?]
+[parameters: (1, 0)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+21-07-2026 21:49:54 - ERROR - database_service.py - get_pihole_address - block_app - Failed to Get Pihole Address
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such table: pihole
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 260, in get_pihole_address
+    db_pihole = db.query(db_models.Pihole).first()
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/query.py", line 2766, in first
+    return self.limit(1)._iter().first()  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/query.py", line 2864, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+                                                  ^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2351, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2249, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1419, in execute
+    return meth(
+           ^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such table: pihole
+[SQL: SELECT pihole.pihole_id AS pihole_pihole_id, pihole.pihole_address AS pihole_pihole_address 
+FROM pihole
+ LIMIT ? OFFSET ?]
+[parameters: (1, 0)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+21-07-2026 21:49:54 - ERROR - database_service.py - get_pihole_address - block_app - Failed to Get Pihole Address
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such table: pihole
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 260, in get_pihole_address
+    db_pihole = db.query(db_models.Pihole).first()
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/query.py", line 2766, in first
+    return self.limit(1)._iter().first()  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/query.py", line 2864, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+                                                  ^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2351, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2249, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1419, in execute
+    return meth(
+           ^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such table: pihole
+[SQL: SELECT pihole.pihole_id AS pihole_pihole_id, pihole.pihole_address AS pihole_pihole_address 
+FROM pihole
+ LIMIT ? OFFSET ?]
+[parameters: (1, 0)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+21-07-2026 21:49:59 - ERROR - database_service.py - get_pihole_address - block_app - Failed to Get Pihole Address
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 264, in get_pihole_address
+    raise Exception
+Exception
+21-07-2026 21:50:00 - ERROR - database_service.py - get_pihole_address - block_app - Failed to Get Pihole Address
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 264, in get_pihole_address
+    raise Exception
+Exception
+21-07-2026 21:50:00 - ERROR - database_service.py - get_pihole_address - block_app - Failed to Get Pihole Address
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 264, in get_pihole_address
+    raise Exception
+Exception
+21-07-2026 21:55:27 - ERROR - database_service.py - get_pihole_address - block_app - Failed to Get Pihole Address
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 264, in get_pihole_address
+    raise Exception
+Exception
+21-07-2026 21:55:27 - ERROR - database_service.py - get_pihole_address - block_app - Failed to Get Pihole Address
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 264, in get_pihole_address
+    raise Exception
+Exception
+21-07-2026 21:55:27 - ERROR - database_service.py - get_pihole_address - block_app - Failed to Get Pihole Address
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 264, in get_pihole_address
+    raise Exception
+Exception
+21-07-2026 21:55:38 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+21-07-2026 21:55:49 - ERROR - database_service.py - get_pihole_address - block_app - Failed to Get Pihole Address
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 264, in get_pihole_address
+    raise Exception
+Exception
+21-07-2026 22:39:24 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+21-07-2026 22:40:06 - ERROR - database_service.py - get_pihole_address - block_app - Failed to Get Pihole Address
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 283, in get_pihole_address
+    raise Exception
+Exception
+21-07-2026 22:40:06 - ERROR - dashboard.py - dash_checks - block_app - No Pihole Address Found
+21-07-2026 22:40:06 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+21-07-2026 22:42:03 - WARNING - pihole_connection_service.py - __check_connection - block_app - Pihole Address returned code: 403
+21-07-2026 22:42:03 - ERROR - dashboard.py - dash_checks - block_app - Cant Establish Pihole Connection
+21-07-2026 22:42:03 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+21-07-2026 22:58:23 - WARNING - pihole_connection_service.py - __check_connection - block_app - Pihole Address returned code: 403
+21-07-2026 22:58:23 - ERROR - dashboard.py - dash_checks - block_app - Cant Establish Pihole Connection
+21-07-2026 22:58:23 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+21-07-2026 22:58:28 - WARNING - pihole_connection_service.py - __check_connection - block_app - Pihole Address returned code: 403
+21-07-2026 22:58:28 - ERROR - dashboard.py - dash_checks - block_app - Cant Establish Pihole Connection
+22-07-2026 19:45:00 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+22-07-2026 19:45:19 - ERROR - dashboard.py - dash_checks - block_app - Cant Establish Pihole Connection
+22-07-2026 19:45:19 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+22-07-2026 19:51:06 - ERROR - database_service.py - get_last_scan - block_app - Failed to Get Last Scan Details
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 238, in get_last_scan
+    raise Exception
+Exception
+22-07-2026 19:51:06 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - Unable to Obtain Recent Domains
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 231, in get_recent_pihole_domains
+    raise Exception
+Exception
+22-07-2026 19:51:06 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+22-07-2026 19:54:05 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+22-07-2026 19:56:08 - ERROR - database_service.py - get_last_scan - block_app - Failed to Get Last Scan Details
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 238, in get_last_scan
+    raise Exception
+Exception
+22-07-2026 19:56:08 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - Unable to Obtain Recent Domains
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 231, in get_recent_pihole_domains
+    raise Exception
+Exception
+22-07-2026 19:56:08 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+22-07-2026 20:03:03 - ERROR - database_service.py - get_last_scan - block_app - Failed to Get Last Scan Details
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 238, in get_last_scan
+    raise Exception
+Exception
+22-07-2026 20:03:03 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - Unable to Obtain Recent Domains
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 231, in get_recent_pihole_domains
+    raise Exception
+Exception
+22-07-2026 20:04:31 - ERROR - database_service.py - get_last_scan - block_app - Failed to Get Last Scan Details
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 238, in get_last_scan
+    raise Exception
+Exception
+22-07-2026 20:04:31 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - Unable to Obtain Recent Domains
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 231, in get_recent_pihole_domains
+    raise Exception
+Exception
+22-07-2026 20:07:00 - ERROR - database_service.py - get_last_scan - block_app - Failed to Get Last Scan Details
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 238, in get_last_scan
+    raise Exception
+Exception
+22-07-2026 20:07:00 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - Unable to Obtain Recent Domains
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 231, in get_recent_pihole_domains
+    raise Exception
+Exception
+22-07-2026 20:07:43 - ERROR - database_service.py - get_last_scan - block_app - Failed to Get Last Scan Details
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 238, in get_last_scan
+    raise Exception
+Exception
+22-07-2026 20:07:43 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - Unable to Obtain Recent Domains
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 231, in get_recent_pihole_domains
+    raise Exception
+Exception
+22-07-2026 20:08:13 - ERROR - database_service.py - get_last_scan - block_app - Failed to Get Last Scan Details
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 238, in get_last_scan
+    raise Exception
+Exception
+22-07-2026 20:08:13 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - Unable to Obtain Recent Domains
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 231, in get_recent_pihole_domains
+    raise Exception
+Exception
+22-07-2026 20:09:44 - ERROR - database_service.py - get_last_scan - block_app - Failed to Get Last Scan Details
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 238, in get_last_scan
+    raise Exception
+Exception
+22-07-2026 20:09:44 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - Unable to Obtain Recent Domains
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 231, in get_recent_pihole_domains
+    raise Exception
+Exception
+22-07-2026 20:10:37 - ERROR - database_service.py - get_last_scan - block_app - Failed to Get Last Scan Details
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 238, in get_last_scan
+    raise Exception
+Exception
+22-07-2026 20:10:37 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - Unable to Obtain Recent Domains
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 231, in get_recent_pihole_domains
+    raise Exception
+Exception
+22-07-2026 20:12:18 - ERROR - database_service.py - get_last_scan - block_app - Failed to Get Last Scan Details
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 238, in get_last_scan
+    raise Exception
+Exception
+22-07-2026 20:12:18 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - Unable to Obtain Recent Domains
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 231, in get_recent_pihole_domains
+    raise Exception
+Exception
+22-07-2026 20:12:55 - ERROR - database_service.py - get_last_scan - block_app - Failed to Get Last Scan Details
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 238, in get_last_scan
+    raise Exception
+Exception
+22-07-2026 20:12:55 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - Unable to Obtain Recent Domains
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 231, in get_recent_pihole_domains
+    raise Exception
+Exception
+22-07-2026 20:13:07 - ERROR - database_service.py - get_last_scan - block_app - Failed to Get Last Scan Details
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 238, in get_last_scan
+    raise Exception
+Exception
+22-07-2026 20:13:07 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - Unable to Obtain Recent Domains
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 231, in get_recent_pihole_domains
+    raise Exception
+Exception
+22-07-2026 20:13:49 - ERROR - database_service.py - get_last_scan - block_app - Failed to Get Last Scan Details
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 238, in get_last_scan
+    raise Exception
+Exception
+22-07-2026 20:13:49 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - Unable to Obtain Recent Domains
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 231, in get_recent_pihole_domains
+    raise Exception
+Exception
+22-07-2026 20:14:15 - ERROR - database_service.py - get_last_scan - block_app - Failed to Get Last Scan Details
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 238, in get_last_scan
+    raise Exception
+Exception
+22-07-2026 20:14:15 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - Unable to Obtain Recent Domains
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 231, in get_recent_pihole_domains
+    raise Exception
+Exception
+22-07-2026 20:15:43 - ERROR - database_service.py - get_last_scan - block_app - Failed to Get Last Scan Details
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 238, in get_last_scan
+    raise Exception
+Exception
+22-07-2026 20:15:43 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - Unable to Obtain Recent Domains
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 231, in get_recent_pihole_domains
+    raise Exception
+Exception
+22-07-2026 20:16:12 - ERROR - database_service.py - get_last_scan - block_app - Failed to Get Last Scan Details
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 238, in get_last_scan
+    raise Exception
+Exception
+22-07-2026 20:16:12 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - Unable to Obtain Recent Domains
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 231, in get_recent_pihole_domains
+    raise Exception
+Exception
+22-07-2026 20:16:29 - ERROR - database_service.py - get_last_scan - block_app - Failed to Get Last Scan Details
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 238, in get_last_scan
+    raise Exception
+Exception
+22-07-2026 20:16:29 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - Unable to Obtain Recent Domains
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 231, in get_recent_pihole_domains
+    raise Exception
+Exception
+22-07-2026 20:17:04 - ERROR - database_service.py - get_last_scan - block_app - Failed to Get Last Scan Details
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 238, in get_last_scan
+    raise Exception
+Exception
+22-07-2026 20:17:04 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - Unable to Obtain Recent Domains
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 231, in get_recent_pihole_domains
+    raise Exception
+Exception
+22-07-2026 20:17:20 - ERROR - database_service.py - get_last_scan - block_app - Failed to Get Last Scan Details
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 238, in get_last_scan
+    raise Exception
+Exception
+22-07-2026 20:17:20 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - Unable to Obtain Recent Domains
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 231, in get_recent_pihole_domains
+    raise Exception
+Exception
+22-07-2026 20:19:02 - ERROR - database_service.py - get_last_scan - block_app - Failed to Get Last Scan Details
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 238, in get_last_scan
+    raise Exception
+Exception
+22-07-2026 20:19:02 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - Unable to Obtain Recent Domains
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 231, in get_recent_pihole_domains
+    raise Exception
+Exception
+22-07-2026 20:19:40 - ERROR - database_service.py - get_last_scan - block_app - Failed to Get Last Scan Details
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 238, in get_last_scan
+    raise Exception
+Exception
+22-07-2026 20:19:40 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - Unable to Obtain Recent Domains
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 231, in get_recent_pihole_domains
+    raise Exception
+Exception
+22-07-2026 20:20:13 - ERROR - database_service.py - get_last_scan - block_app - Failed to Get Last Scan Details
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 238, in get_last_scan
+    raise Exception
+Exception
+22-07-2026 20:20:13 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - Unable to Obtain Recent Domains
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 231, in get_recent_pihole_domains
+    raise Exception
+Exception
+22-07-2026 20:20:34 - ERROR - database_service.py - get_last_scan - block_app - Failed to Get Last Scan Details
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 238, in get_last_scan
+    raise Exception
+Exception
+22-07-2026 20:20:34 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - Unable to Obtain Recent Domains
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 231, in get_recent_pihole_domains
+    raise Exception
+Exception
+22-07-2026 20:21:51 - ERROR - database_service.py - get_last_scan - block_app - Failed to Get Last Scan Details
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 238, in get_last_scan
+    raise Exception
+Exception
+22-07-2026 20:21:51 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - Unable to Obtain Recent Domains
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 231, in get_recent_pihole_domains
+    raise Exception
+Exception
+22-07-2026 20:26:03 - ERROR - database_service.py - get_last_scan - block_app - Failed to Get Last Scan Details
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 238, in get_last_scan
+    raise Exception
+Exception
+22-07-2026 20:26:04 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - Unable to Obtain Recent Domains
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 231, in get_recent_pihole_domains
+    raise Exception
+Exception
+22-07-2026 20:26:42 - ERROR - database_service.py - get_last_scan - block_app - Failed to Get Last Scan Details
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 238, in get_last_scan
+    raise Exception
+Exception
+22-07-2026 20:26:42 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - Unable to Obtain Recent Domains
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 231, in get_recent_pihole_domains
+    raise Exception
+Exception
+22-07-2026 20:27:11 - ERROR - database_service.py - get_last_scan - block_app - Failed to Get Last Scan Details
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 238, in get_last_scan
+    raise Exception
+Exception
+22-07-2026 20:27:11 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - Unable to Obtain Recent Domains
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 231, in get_recent_pihole_domains
+    raise Exception
+Exception
+22-07-2026 20:27:26 - ERROR - database_service.py - get_last_scan - block_app - Failed to Get Last Scan Details
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 238, in get_last_scan
+    raise Exception
+Exception
+22-07-2026 20:27:26 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - Unable to Obtain Recent Domains
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 231, in get_recent_pihole_domains
+    raise Exception
+Exception
+22-07-2026 20:27:48 - ERROR - database_service.py - get_last_scan - block_app - Failed to Get Last Scan Details
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 238, in get_last_scan
+    raise Exception
+Exception
+22-07-2026 20:27:48 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - Unable to Obtain Recent Domains
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 231, in get_recent_pihole_domains
+    raise Exception
+Exception
+22-07-2026 20:34:24 - ERROR - database_service.py - get_last_scan - block_app - Failed to Get Last Scan Details
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 238, in get_last_scan
+    raise Exception
+Exception
+22-07-2026 20:34:24 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - Unable to Obtain Recent Domains
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 231, in get_recent_pihole_domains
+    raise Exception
+Exception
+22-07-2026 20:34:34 - ERROR - database_service.py - get_last_scan - block_app - Failed to Get Last Scan Details
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 238, in get_last_scan
+    raise Exception
+Exception
+22-07-2026 20:34:34 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - Unable to Obtain Recent Domains
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 231, in get_recent_pihole_domains
+    raise Exception
+Exception
+22-07-2026 20:35:33 - ERROR - database_service.py - get_last_scan - block_app - Failed to Get Last Scan Details
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 238, in get_last_scan
+    raise Exception
+Exception
+22-07-2026 20:35:33 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - Unable to Obtain Recent Domains
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 231, in get_recent_pihole_domains
+    raise Exception
+Exception
+22-07-2026 20:35:43 - ERROR - database_service.py - get_last_scan - block_app - Failed to Get Last Scan Details
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 238, in get_last_scan
+    raise Exception
+Exception
+22-07-2026 20:35:43 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - Unable to Obtain Recent Domains
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 231, in get_recent_pihole_domains
+    raise Exception
+Exception
+22-07-2026 20:36:14 - ERROR - database_service.py - get_last_scan - block_app - Failed to Get Last Scan Details
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 238, in get_last_scan
+    raise Exception
+Exception
+22-07-2026 20:36:14 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - Unable to Obtain Recent Domains
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 231, in get_recent_pihole_domains
+    raise Exception
+Exception
+22-07-2026 20:37:02 - ERROR - database_service.py - get_last_scan - block_app - Failed to Get Last Scan Details
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 238, in get_last_scan
+    raise Exception
+Exception
+22-07-2026 20:37:02 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - Unable to Obtain Recent Domains
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 231, in get_recent_pihole_domains
+    raise Exception
+Exception
+22-07-2026 20:37:21 - ERROR - database_service.py - get_last_scan - block_app - Failed to Get Last Scan Details
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 238, in get_last_scan
+    raise Exception
+Exception
+22-07-2026 20:37:21 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - Unable to Obtain Recent Domains
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 231, in get_recent_pihole_domains
+    raise Exception
+Exception
+22-07-2026 20:37:45 - ERROR - database_service.py - get_last_scan - block_app - Failed to Get Last Scan Details
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 238, in get_last_scan
+    raise Exception
+Exception
+22-07-2026 20:37:45 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - Unable to Obtain Recent Domains
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 231, in get_recent_pihole_domains
+    raise Exception
+Exception
+22-07-2026 20:38:03 - ERROR - database_service.py - get_last_scan - block_app - Failed to Get Last Scan Details
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 238, in get_last_scan
+    raise Exception
+Exception
+22-07-2026 20:38:03 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - Unable to Obtain Recent Domains
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 231, in get_recent_pihole_domains
+    raise Exception
+Exception
+22-07-2026 20:38:22 - ERROR - database_service.py - get_last_scan - block_app - Failed to Get Last Scan Details
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 238, in get_last_scan
+    raise Exception
+Exception
+22-07-2026 20:38:22 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - Unable to Obtain Recent Domains
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 231, in get_recent_pihole_domains
+    raise Exception
+Exception
+22-07-2026 20:38:34 - ERROR - database_service.py - get_last_scan - block_app - Failed to Get Last Scan Details
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 238, in get_last_scan
+    raise Exception
+Exception
+22-07-2026 20:38:34 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - Unable to Obtain Recent Domains
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 231, in get_recent_pihole_domains
+    raise Exception
+Exception
+22-07-2026 20:38:45 - ERROR - database_service.py - get_last_scan - block_app - Failed to Get Last Scan Details
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 238, in get_last_scan
+    raise Exception
+Exception
+22-07-2026 20:38:45 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - Unable to Obtain Recent Domains
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 231, in get_recent_pihole_domains
+    raise Exception
+Exception
+22-07-2026 20:40:57 - ERROR - database_service.py - get_last_scan - block_app - Failed to Get Last Scan Details
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 238, in get_last_scan
+    raise Exception
+Exception
+22-07-2026 20:40:57 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - Unable to Obtain Recent Domains
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 231, in get_recent_pihole_domains
+    raise Exception
+Exception
+22-07-2026 20:41:07 - ERROR - database_service.py - get_last_scan - block_app - Failed to Get Last Scan Details
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 238, in get_last_scan
+    raise Exception
+Exception
+22-07-2026 20:41:07 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - Unable to Obtain Recent Domains
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 231, in get_recent_pihole_domains
+    raise Exception
+Exception
+22-07-2026 20:47:25 - ERROR - database_service.py - get_last_scan - block_app - Failed to Get Last Scan Details
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 238, in get_last_scan
+    raise Exception
+Exception
+22-07-2026 20:47:25 - ERROR - database_service.py - get_last_scan - block_app - 
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 238, in get_last_scan
+    raise Exception
+Exception
+22-07-2026 20:47:25 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - Unable to Obtain Recent Domains
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 231, in get_recent_pihole_domains
+    raise Exception
+Exception
+22-07-2026 20:47:25 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - 
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 231, in get_recent_pihole_domains
+    raise Exception
+Exception
+22-07-2026 22:09:29 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - No ML details found
+22-07-2026 22:09:29 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+22-07-2026 22:11:55 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - No ML details found
+22-07-2026 22:11:57 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - No ML details found
+22-07-2026 23:05:52 - ERROR - ml_model_service.py - __init__ - block_app - Exception Occurred while Loading Models
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/ml_model_service.py", line 18, in __init__
+    self.random_forrest = load("block_app/models/r_forrest.pkl")
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/joblib/numpy_pickle.py", line 735, in load
+    with open(filename, "rb") as f:
+         ^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'block_app/models/r_forrest.pkl'
+22-07-2026 23:05:52 - ERROR - ml_model_service.py - __init__ - block_app - Exception: [Errno 2] No such file or directory: 'block_app/models/r_forrest.pkl'
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/ml_model_service.py", line 18, in __init__
+    self.random_forrest = load("block_app/models/r_forrest.pkl")
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/joblib/numpy_pickle.py", line 735, in load
+    with open(filename, "rb") as f:
+         ^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'block_app/models/r_forrest.pkl'
+22-07-2026 23:36:14 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - No ML details found
+22-07-2026 23:46:31 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - No ML details found
+22-07-2026 23:46:32 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+22-07-2026 23:50:26 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+22-07-2026 23:50:32 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - No ML details found
+22-07-2026 23:52:10 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - No ML details found
+22-07-2026 23:53:25 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - No ML details found
+22-07-2026 23:58:25 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - No ML details found
+23-07-2026 00:00:43 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - No ML details found
+23-07-2026 00:01:17 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - No ML details found
+23-07-2026 00:03:22 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - No ML details found
+23-07-2026 00:03:37 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - No ML details found
