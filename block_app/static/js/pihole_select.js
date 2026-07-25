@@ -17,23 +17,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    const scanBtn = document.getElementById("scan_button")
-
-    scanBtn.addEventListener("click", scanNetwork)
-
-    async function scanNetwork() {
-        try{
-            const response = await fetch('/setup/scan', {
-                method: "POST",
-            })
-            if (!response.ok) {
-                throw new Error(`Response Error; Status: ${response.status}`)
-            }
-            const result = await response.json();
-        }catch (e){
-            console.error(e.message);
-        }    
-    }
-
-
 })

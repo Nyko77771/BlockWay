@@ -1,0 +1,14 @@
+{% extends "partials/head.html"%} {% block title %} 
+Not Found
+{% endblock %} {% block content %}
+{% if message %}
+<div class="message">{{ message }}</div>
+{% endif %}
+<div class="404_container">
+    <div class="not_found_box">
+        <h1>The Request has Reached Maximum Tries</h1>
+        <p>You reached the maximum number of tries for this request.</p>
+        <p>Please check the URL and Sign in again.</p>
+        <a href="{{ url_for('views.signin') }}" class="submit_btn cancel_btn return_btn">Return to Homepage</a>
+    </div>
+</div>

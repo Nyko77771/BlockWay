@@ -2754,3 +2754,80 @@ Traceback (most recent call last):
   File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 347, in get_pihole_address
     raise Exception
 Exception
+25-07-2026 20:44:34 - ERROR - database_service.py - get_pihole_address - block_app - Failed to Get Pihole Address
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 347, in get_pihole_address
+    raise Exception
+Exception
+25-07-2026 20:44:36 - ERROR - database_service.py - get_pihole_address - block_app - Failed to Get Pihole Address
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 347, in get_pihole_address
+    raise Exception
+Exception
+25-07-2026 20:44:42 - ERROR - database_service.py - get_pihole_address - block_app - Failed to Get Pihole Address
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 347, in get_pihole_address
+    raise Exception
+Exception
+25-07-2026 20:44:42 - ERROR - database_service.py - get_pihole_address - block_app - Failed to Get Pihole Address
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 347, in get_pihole_address
+    raise Exception
+Exception
+25-07-2026 20:44:42 - WARNING - run_ml_start_service.py - start_scheduler - block_app - Piohole Address not Set
+25-07-2026 20:44:42 - WARNING - run_ml_start_service.py - start_scheduler - block_app - Piohole Address not Set
+25-07-2026 21:18:10 - ERROR - database_service.py - get_pihole_address - block_app - Failed to Get Pihole Address
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 347, in get_pihole_address
+    raise Exception
+Exception
+25-07-2026 21:18:11 - ERROR - database_service.py - get_pihole_address - block_app - Failed to Get Pihole Address
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 347, in get_pihole_address
+    raise Exception
+Exception
+25-07-2026 21:18:11 - WARNING - run_ml_start_service.py - start_scheduler - block_app - Piohole Address not Set
+25-07-2026 21:24:30 - ERROR - database_service.py - get_pihole_address - block_app - Failed to Get Pihole Address
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 347, in get_pihole_address
+    raise Exception
+Exception
+25-07-2026 21:24:32 - ERROR - database_service.py - get_pihole_address - block_app - Failed to Get Pihole Address
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 347, in get_pihole_address
+    raise Exception
+Exception
+25-07-2026 21:24:32 - WARNING - run_ml_start_service.py - start_scheduler - block_app - Piohole Address not Set
+25-07-2026 21:31:48 - ERROR - database_service.py - get_pihole_address - block_app - Failed to Get Pihole Address
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 347, in get_pihole_address
+    raise Exception
+Exception
+25-07-2026 21:31:49 - ERROR - database_service.py - get_pihole_address - block_app - Failed to Get Pihole Address
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 347, in get_pihole_address
+    raise Exception
+Exception
+25-07-2026 21:31:49 - WARNING - run_ml_start_service.py - start_scheduler - block_app - Piohole Address not Set
+25-07-2026 21:32:40 - ERROR - database_service.py - get_pihole_address - block_app - Failed to Get Pihole Address
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 347, in get_pihole_address
+    raise Exception
+Exception
+25-07-2026 21:32:42 - ERROR - database_service.py - get_pihole_address - block_app - Failed to Get Pihole Address
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 347, in get_pihole_address
+    raise Exception
+Exception
+25-07-2026 21:32:42 - WARNING - run_ml_start_service.py - start_scheduler - block_app - Piohole Address not Set
+25-07-2026 21:46:57 - ERROR - database_service.py - get_pihole_address - block_app - Failed to Get Pihole Address
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 347, in get_pihole_address
+    raise Exception
+Exception
+25-07-2026 21:46:59 - ERROR - database_service.py - get_pihole_address - block_app - Failed to Get Pihole Address
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 347, in get_pihole_address
+    raise Exception
+Exception
+25-07-2026 21:46:59 - WARNING - run_ml_start_service.py - start_scheduler - block_app - Piohole Address not Set

@@ -32,15 +32,21 @@ Pihole Selection
   </form>
 
 
-  <div class="pihole_auto_selection" hidden>
-    <label for="pihole_ip">Click to scan network automatically:</label>
-    <input type="button" id="scan_button" value="Scan Network" />
-  </div>
+  <form method="POST" action="{{ url_for('setup.setup_scan') }}">
+    <div class="pihole_auto_selection" hidden>
+      <label for="pihole_ip">Click to scan network automatically:</label>
+      <input type="button" id="scan_button" class="submit_btn" />
+    </div>
+  </form>
 
+  <form method="POST" action="{{ url_for('setup.setup_pihole) }}">
   <div class="pihole_manual_select" hidden>
     <label>Enter Pihole IP below:</label>
-    <input type="text" placeholder="Add address here:" />
+    <input type="text" placeholder="Add address here:"/>
+    <input type="button" id="manual_add_button" class="submit_btn" value="pihole_address" />
   </div>
+  </form>
+
 </div>
 {% endblock %}
 {% block script2 %}

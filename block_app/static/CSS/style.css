@@ -681,6 +681,11 @@ body {
   align-items: flex-start;
 }
 
+/* Pihole Select Page */
+.pihole_selection_form {
+  margin-bottom: 10px;
+}
+
 /* /////////////////////////////////////// */
 
 /* Registered Templates */
