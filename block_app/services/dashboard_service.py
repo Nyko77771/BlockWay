@@ -31,8 +31,10 @@ class DashboardService:
 
                 if status == "block":
                     blocked += 1
-                elif status == "allowed":
+                elif status == "allow":
                     allowed += 1
+
+        logger.info(f"Blocked: {blocked}, Allowed: {allowed}")
 
         return {
             "allowed": allowed,
@@ -101,14 +103,21 @@ class DashboardService:
 
         db_queries = self.pihole.database.get_db_domains()
 
-        if db_queries is not None:
-            for query in db_queries:
-                if query['date_create'] >= from_time:
-                    ml_totals += 1
-                if query["blocked_domain"] == True:
-                    ml_blocked += 1
+        logger.info(f"DB Domains found: {db_queries}")
 
         pihole_queries = self.pihole.get_pihole_summary(from_time, until_time)
+
+        logger.info(f"Pihole Domains found: {pihole_queries}")
+
+
+        if db_queries:
+            for query in db_queries:
+                query_created = query.date_created
+                if query_created >= from_time: # type: ignore
+                    ml_totals += 1
+                    if query.blocked_domain: # type: ignore
+                        ml_blocked += 1
+
 
         if pihole_queries is not None:
             pi_totals = pihole_queries["sum_queries"]

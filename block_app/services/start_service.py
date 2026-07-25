@@ -32,10 +32,12 @@ class StartService:
         self.pihole = Pihole(address)
         # Setting Scheduler variable
         self.schedule = Scheduler()
+        # Variable for tracking self scan
+        self.scanning = False
 
     def make_scheduler(self):
         # Creating a scheduled job
-        self.schedule.hourly(datetime.time(minute=59),self.run_scan)
+        self.schedule.minutely(datetime.time(second=10),self.run_scan)
 
     # Method for Starting Scheduled Scans
     def start(self):
@@ -46,12 +48,18 @@ class StartService:
             # Executing any given jobs
             self.schedule.exec_jobs()
             # Checking the loop every 10 minutes
-            time.sleep(600)
+            # Change to 1 for Presentation Purpose
+            time.sleep(1)
 
     # Method for Performing Scan
     def run_scan(self):
 
-        logger.info('Starting scheduled ML Analyses')
+        if self.scanning:
+            logger.warning('Scan is Running')
+            return
+        self.scanning = True
+
+        logger.info('##### Starting scheduled ML Analyses ######')
 
         try:
 

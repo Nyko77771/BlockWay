@@ -106,6 +106,7 @@ def add_pihole():
             if pihole_formatter.check_address(given_address):
                 logger.info("Pihole Address Added")
                 db.add_pihole_address(given_address)
+                db.create_default_schedule()
                 return redirect("/dashboard")
             else:
                 message = 'Incorrect Address Format'

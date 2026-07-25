@@ -1279,3 +1279,1478 @@ FileNotFoundError: [Errno 2] No such file or directory: 'block_app/models/r_forr
 23-07-2026 00:01:17 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - No ML details found
 23-07-2026 00:03:22 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - No ML details found
 23-07-2026 00:03:37 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - No ML details found
+25-07-2026 14:07:10 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+25-07-2026 14:07:23 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - No ML details found
+25-07-2026 14:07:23 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+25-07-2026 14:07:47 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - No ML details found
+25-07-2026 14:09:30 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - No ML details found
+25-07-2026 15:07:24 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - No ML details found
+25-07-2026 15:07:24 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+25-07-2026 15:12:45 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - No ML details found
+25-07-2026 15:31:37 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - No ML details found
+25-07-2026 15:31:37 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - Unable to Obtain Recent Domains
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 262, in get_recent_pihole_domains
+    return self.__get_recent_domains_status(last_scan)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 158, in __get_recent_domains_status
+    unique_domains = list(dict.fromkeys(domains))
+                          ^^^^^^^^^^^^^^^^^^^^^^
+TypeError: unhashable type: 'dict'
+25-07-2026 15:31:37 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - unhashable type: 'dict'
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 262, in get_recent_pihole_domains
+    return self.__get_recent_domains_status(last_scan)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 158, in __get_recent_domains_status
+    unique_domains = list(dict.fromkeys(domains))
+                          ^^^^^^^^^^^^^^^^^^^^^^
+TypeError: unhashable type: 'dict'
+25-07-2026 15:47:06 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - No ML details found
+25-07-2026 15:47:44 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+25-07-2026 15:47:53 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - No ML details found
+25-07-2026 15:47:53 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+25-07-2026 15:51:34 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - No ML details found
+25-07-2026 15:58:38 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - No ML details found
+25-07-2026 16:00:54 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - No ML details found
+25-07-2026 16:02:36 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - No ML details found
+25-07-2026 16:07:00 - ERROR - start_service.py - run_scan - block_app - Exception Occurred While Perfoming a Scan
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/start_service.py", line 64, in run_scan
+    self.permitted_domains, self.blocked_domains = self.pihole.pihole_domain_analyses(last_scan)
+                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 199, in pihole_domain_analyses
+    logger.exception('No domains in queries')
+                                     ^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 142, in __domains_split
+    if queries is None:
+      ^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 123, in __get__recent_domains
+    difference = last_scan.timestamp()
+                 ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'timestamp'
+25-07-2026 16:07:00 - ERROR - start_service.py - run_scan - block_app - Scheduled Scan Failed
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/start_service.py", line 64, in run_scan
+    self.permitted_domains, self.blocked_domains = self.pihole.pihole_domain_analyses(last_scan)
+                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 199, in pihole_domain_analyses
+    logger.exception('No domains in queries')
+                                     ^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 142, in __domains_split
+    if queries is None:
+      ^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 123, in __get__recent_domains
+    difference = last_scan.timestamp()
+                 ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'timestamp'
+25-07-2026 16:20:28 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - No ML details found
+25-07-2026 16:26:34 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - No ML details found
+25-07-2026 16:29:31 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - No ML details found
+25-07-2026 16:29:31 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+25-07-2026 16:48:27 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - No ML details found
+25-07-2026 16:52:24 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - No ML details found
+25-07-2026 16:52:32 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - No ML details found
+25-07-2026 16:59:02 - ERROR - start_service.py - run_scan - block_app - Exception Occurred While Perfoming a Scan
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/start_service.py", line 64, in run_scan
+    self.permitted_domains, self.blocked_domains = self.pihole.pihole_domain_analyses(last_scan)
+                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 234, in pihole_domain_analyses
+    permitted_domains, blocked_domains = self.__domains_split(last_scan) # type: ignore
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 190, in __domains_split
+    status = str(domain["status"])
+                 ~~~~~~^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+25-07-2026 16:59:02 - ERROR - start_service.py - run_scan - block_app - Scheduled Scan Failed
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/start_service.py", line 64, in run_scan
+    self.permitted_domains, self.blocked_domains = self.pihole.pihole_domain_analyses(last_scan)
+                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 234, in pihole_domain_analyses
+    permitted_domains, blocked_domains = self.__domains_split(last_scan) # type: ignore
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 190, in __domains_split
+    status = str(domain["status"])
+                 ~~~~~~^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+25-07-2026 17:08:40 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - No ML details found
+25-07-2026 17:13:16 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - No ML details found
+25-07-2026 17:26:19 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - No ML details found
+25-07-2026 17:30:49 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - No ML details found
+25-07-2026 17:36:34 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - No ML details found
+25-07-2026 17:36:35 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+25-07-2026 17:41:41 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - No ML details found
+25-07-2026 17:48:03 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - No ML details found
+25-07-2026 17:50:00 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - No ML details found
+25-07-2026 17:59:01 - ERROR - start_service.py - run_scan - block_app - Exception Occurred While Perfoming a Scan
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/start_service.py", line 64, in run_scan
+    self.permitted_domains, self.blocked_domains = self.pihole.pihole_domain_analyses(last_scan)
+                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 234, in pihole_domain_analyses
+    permitted_domains, blocked_domains = self.__domains_split(last_scan) # type: ignore
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 190, in __domains_split
+    status = str(domain["status"])
+                 ~~~~~~^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+25-07-2026 17:59:01 - ERROR - start_service.py - run_scan - block_app - Scheduled Scan Failed
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/start_service.py", line 64, in run_scan
+    self.permitted_domains, self.blocked_domains = self.pihole.pihole_domain_analyses(last_scan)
+                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 234, in pihole_domain_analyses
+    permitted_domains, blocked_domains = self.__domains_split(last_scan) # type: ignore
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 190, in __domains_split
+    status = str(domain["status"])
+                 ~~~~~~^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+25-07-2026 17:59:01 - ERROR - start_service.py - run_scan - block_app - Exception Occurred While Perfoming a Scan
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/start_service.py", line 64, in run_scan
+    self.permitted_domains, self.blocked_domains = self.pihole.pihole_domain_analyses(last_scan)
+                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 234, in pihole_domain_analyses
+    permitted_domains, blocked_domains = self.__domains_split(last_scan) # type: ignore
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 190, in __domains_split
+    status = str(domain["status"])
+                 ~~~~~~^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+25-07-2026 17:59:01 - ERROR - start_service.py - run_scan - block_app - Scheduled Scan Failed
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/start_service.py", line 64, in run_scan
+    self.permitted_domains, self.blocked_domains = self.pihole.pihole_domain_analyses(last_scan)
+                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 234, in pihole_domain_analyses
+    permitted_domains, blocked_domains = self.__domains_split(last_scan) # type: ignore
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 190, in __domains_split
+    status = str(domain["status"])
+                 ~~~~~~^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+25-07-2026 18:23:50 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - No ML details found
+25-07-2026 18:25:52 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - No ML details found
+25-07-2026 18:26:11 - ERROR - start_service.py - run_scan - block_app - Exception Occurred While Perfoming a Scan
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/start_service.py", line 72, in run_scan
+    self.permitted_domains, self.blocked_domains = self.pihole.pihole_domain_analyses(last_scan)
+                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 234, in pihole_domain_analyses
+    permitted_domains, blocked_domains = self.__domains_split(last_scan) # type: ignore
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 177, in __domains_split
+    domains = self.__get_recent_domains_status(last_scan)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 151, in __get_recent_domains_status
+    difference = last_scan.timestamp()
+                 ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'timestamp'
+25-07-2026 18:26:11 - ERROR - start_service.py - run_scan - block_app - Scheduled Scan Failed
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/start_service.py", line 72, in run_scan
+    self.permitted_domains, self.blocked_domains = self.pihole.pihole_domain_analyses(last_scan)
+                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 234, in pihole_domain_analyses
+    permitted_domains, blocked_domains = self.__domains_split(last_scan) # type: ignore
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 177, in __domains_split
+    domains = self.__get_recent_domains_status(last_scan)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 151, in __get_recent_domains_status
+    difference = last_scan.timestamp()
+                 ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'timestamp'
+25-07-2026 18:27:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 18:28:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 18:28:48 - ERROR - pihole_service.py - get_recent_pihole_domains - block_app - No ML details found
+25-07-2026 18:29:11 - ERROR - ml_model_service.py - create_x_features - block_app - Domain rr2---sn-q0cedn7s.googlevideo.com is invalid
+NoneType: None
+25-07-2026 18:29:11 - ERROR - pihole_service.py - domains_scan - block_app - Exxception Occurred while Performing a Scan
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 286, in domains_scan
+    logistic_probability = self.ml_analyses.logistic_probability(domain)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/ml_model_service.py", line 82, in logistic_probability
+    probability_score = self.__probability(self.logistic_model, url, True)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/ml_model_service.py", line 72, in __probability
+    x_test = self.create_x_features(url)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/ml_model_service.py", line 41, in create_x_features
+    raise ValueError
+ValueError
+25-07-2026 18:29:11 - ERROR - ml_model_service.py - create_x_features - block_app - Domain westus-0.in.applicationinsights.azure.com is invalid
+NoneType: None
+25-07-2026 18:29:11 - ERROR - pihole_service.py - domains_scan - block_app - Exxception Occurred while Performing a Scan
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 286, in domains_scan
+    logistic_probability = self.ml_analyses.logistic_probability(domain)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/ml_model_service.py", line 82, in logistic_probability
+    probability_score = self.__probability(self.logistic_model, url, True)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/ml_model_service.py", line 72, in __probability
+    x_test = self.create_x_features(url)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/ml_model_service.py", line 41, in create_x_features
+    raise ValueError
+ValueError
+25-07-2026 18:29:11 - ERROR - database_service.py - update_last_scan - block_app - Failed to Update the Last Scan Details
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 262, in update_last_scan
+    raise Exception
+Exception
+25-07-2026 18:30:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 18:31:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 18:32:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 18:33:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 18:38:11 - ERROR - database_service.py - add_db_domain - block_app - Failed to Add Domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.IntegrityError: UNIQUE constraint failed: analysed_domains.domain_name
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 166, in add_db_domain
+    db.commit()
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2030, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 1311, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 1286, in _prepare_impl
+    self.session.flush()
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4331, in flush
+    self._flush(objects)
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4466, in _flush
+    with util.safe_reraise():
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4427, in _flush
+    flush_context.execute()
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/persistence.py", line 93, in save_obj
+    _emit_insert_statements(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/persistence.py", line 1233, in _emit_insert_statements
+    result = connection.execute(
+             ^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1419, in execute
+    return meth(
+           ^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.IntegrityError: (sqlite3.IntegrityError) UNIQUE constraint failed: analysed_domains.domain_name
+[SQL: INSERT INTO analysed_domains (domain_name, prediction_type, prediction_score, blocked_domain, added_to_pihole) VALUES (?, ?, ?, ?, ?) RETURNING domain_id, date_created, last_update]
+[parameters: ('in.grammarly.com', 'benign', 0.0, 0, 0)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+25-07-2026 18:38:13 - ERROR - database_service.py - add_db_domain - block_app - Failed to Add Domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.IntegrityError: UNIQUE constraint failed: analysed_domains.domain_name
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 166, in add_db_domain
+    db.commit()
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2030, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 1311, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 1286, in _prepare_impl
+    self.session.flush()
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4331, in flush
+    self._flush(objects)
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4466, in _flush
+    with util.safe_reraise():
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4427, in _flush
+    flush_context.execute()
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/persistence.py", line 93, in save_obj
+    _emit_insert_statements(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/persistence.py", line 1233, in _emit_insert_statements
+    result = connection.execute(
+             ^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1419, in execute
+    return meth(
+           ^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.IntegrityError: (sqlite3.IntegrityError) UNIQUE constraint failed: analysed_domains.domain_name
+[SQL: INSERT INTO analysed_domains (domain_name, prediction_type, prediction_score, blocked_domain, added_to_pihole) VALUES (?, ?, ?, ?, ?) RETURNING domain_id, date_created, last_update]
+[parameters: ('config.extension.grammarly.com', 'benign', 0.0, 0, 0)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+25-07-2026 18:38:13 - ERROR - ml_model_service.py - create_x_features - block_app - Domain github.com is invalid
+NoneType: None
+25-07-2026 18:38:13 - ERROR - pihole_service.py - domains_scan - block_app - Exxception Occurred while Performing a Scan
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 286, in domains_scan
+    logistic_probability = self.ml_analyses.logistic_probability(domain)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/ml_model_service.py", line 82, in logistic_probability
+    probability_score = self.__probability(self.logistic_model, url, True)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/ml_model_service.py", line 72, in __probability
+    x_test = self.create_x_features(url)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/ml_model_service.py", line 41, in create_x_features
+    raise ValueError
+ValueError
+25-07-2026 18:38:13 - ERROR - database_service.py - update_last_scan - block_app - Failed to Update the Last Scan Details
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 262, in update_last_scan
+    raise Exception
+Exception
+25-07-2026 18:39:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 18:40:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 18:42:13 - ERROR - database_service.py - add_db_domain - block_app - Failed to Add Domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.IntegrityError: UNIQUE constraint failed: analysed_domains.domain_name
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 166, in add_db_domain
+    db.commit()
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2030, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 1311, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 1286, in _prepare_impl
+    self.session.flush()
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4331, in flush
+    self._flush(objects)
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4466, in _flush
+    with util.safe_reraise():
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4427, in _flush
+    flush_context.execute()
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/persistence.py", line 93, in save_obj
+    _emit_insert_statements(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/persistence.py", line 1233, in _emit_insert_statements
+    result = connection.execute(
+             ^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1419, in execute
+    return meth(
+           ^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.IntegrityError: (sqlite3.IntegrityError) UNIQUE constraint failed: analysed_domains.domain_name
+[SQL: INSERT INTO analysed_domains (domain_name, prediction_type, prediction_score, blocked_domain, added_to_pihole) VALUES (?, ?, ?, ?, ?) RETURNING domain_id, date_created, last_update]
+[parameters: ('edgedl.me.gvt1.com', 'benign', 0.0, 0, 0)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+25-07-2026 18:42:14 - ERROR - ml_model_service.py - create_x_features - block_app - Domain chatgpt.com is invalid
+NoneType: None
+25-07-2026 18:42:14 - ERROR - pihole_service.py - domains_scan - block_app - Exxception Occurred while Performing a Scan
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 286, in domains_scan
+    logistic_probability = self.ml_analyses.logistic_probability(domain)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/ml_model_service.py", line 82, in logistic_probability
+    probability_score = self.__probability(self.logistic_model, url, True)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/ml_model_service.py", line 72, in __probability
+    x_test = self.create_x_features(url)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/ml_model_service.py", line 41, in create_x_features
+    raise ValueError
+ValueError
+25-07-2026 18:42:15 - ERROR - database_service.py - update_last_scan - block_app - Failed to Update the Last Scan Details
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 262, in update_last_scan
+    raise Exception
+Exception
+25-07-2026 18:42:58 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+25-07-2026 18:42:58 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+25-07-2026 18:43:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 18:45:54 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+25-07-2026 18:46:12 - ERROR - database_service.py - add_db_domain - block_app - Failed to Add Domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.IntegrityError: UNIQUE constraint failed: analysed_domains.domain_name
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 166, in add_db_domain
+    db.commit()
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2030, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 1311, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 1286, in _prepare_impl
+    self.session.flush()
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4331, in flush
+    self._flush(objects)
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4466, in _flush
+    with util.safe_reraise():
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4427, in _flush
+    flush_context.execute()
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/persistence.py", line 93, in save_obj
+    _emit_insert_statements(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/persistence.py", line 1233, in _emit_insert_statements
+    result = connection.execute(
+             ^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1419, in execute
+    return meth(
+           ^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.IntegrityError: (sqlite3.IntegrityError) UNIQUE constraint failed: analysed_domains.domain_name
+[SQL: INSERT INTO analysed_domains (domain_name, prediction_type, prediction_score, blocked_domain, added_to_pihole) VALUES (?, ?, ?, ?, ?) RETURNING domain_id, date_created, last_update]
+[parameters: ('rgl.rockstargames.com', 'benign', 0.0, 0, 0)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+25-07-2026 18:46:12 - ERROR - ml_model_service.py - create_x_features - block_app - Domain recaptcha.net is invalid
+NoneType: None
+25-07-2026 18:46:12 - ERROR - pihole_service.py - domains_scan - block_app - Exxception Occurred while Performing a Scan
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 286, in domains_scan
+    logistic_probability = self.ml_analyses.logistic_probability(domain)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/ml_model_service.py", line 82, in logistic_probability
+    probability_score = self.__probability(self.logistic_model, url, True)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/ml_model_service.py", line 72, in __probability
+    x_test = self.create_x_features(url)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/ml_model_service.py", line 41, in create_x_features
+    raise ValueError
+ValueError
+25-07-2026 18:46:12 - ERROR - database_service.py - add_db_domain - block_app - Failed to Add Domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.IntegrityError: UNIQUE constraint failed: analysed_domains.domain_name
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 166, in add_db_domain
+    db.commit()
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2030, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 1311, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 1286, in _prepare_impl
+    self.session.flush()
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4331, in flush
+    self._flush(objects)
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4466, in _flush
+    with util.safe_reraise():
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4427, in _flush
+    flush_context.execute()
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/persistence.py", line 93, in save_obj
+    _emit_insert_statements(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/persistence.py", line 1233, in _emit_insert_statements
+    result = connection.execute(
+             ^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1419, in execute
+    return meth(
+           ^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.IntegrityError: (sqlite3.IntegrityError) UNIQUE constraint failed: analysed_domains.domain_name
+[SQL: INSERT INTO analysed_domains (domain_name, prediction_type, prediction_score, blocked_domain, added_to_pihole) VALUES (?, ?, ?, ?, ?) RETURNING domain_id, date_created, last_update]
+[parameters: ('westus-0.in.applicationinsights.azure.com', 'benign', 0.0, 0, 0)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+25-07-2026 18:46:12 - ERROR - database_service.py - update_last_scan - block_app - Failed to Update the Last Scan Details
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 262, in update_last_scan
+    raise Exception
+Exception
+25-07-2026 18:46:12 - ERROR - database_service.py - add_db_domain - block_app - Failed to Add Domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.IntegrityError: UNIQUE constraint failed: analysed_domains.domain_name
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 166, in add_db_domain
+    db.commit()
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2030, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 1311, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 1286, in _prepare_impl
+    self.session.flush()
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4331, in flush
+    self._flush(objects)
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4466, in _flush
+    with util.safe_reraise():
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4427, in _flush
+    flush_context.execute()
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/persistence.py", line 93, in save_obj
+    _emit_insert_statements(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/persistence.py", line 1233, in _emit_insert_statements
+    result = connection.execute(
+             ^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1419, in execute
+    return meth(
+           ^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.IntegrityError: (sqlite3.IntegrityError) UNIQUE constraint failed: analysed_domains.domain_name
+[SQL: INSERT INTO analysed_domains (domain_name, prediction_type, prediction_score, blocked_domain, added_to_pihole) VALUES (?, ?, ?, ?, ?) RETURNING domain_id, date_created, last_update]
+[parameters: ('onedscolprdcus72.centralus.cloudapp.azure.com', 'benign', 0.0, 0, 0)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+25-07-2026 18:46:12 - ERROR - database_service.py - add_db_domain - block_app - Failed to Add Domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.IntegrityError: UNIQUE constraint failed: analysed_domains.domain_name
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 166, in add_db_domain
+    db.commit()
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2030, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 1311, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 1286, in _prepare_impl
+    self.session.flush()
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4331, in flush
+    self._flush(objects)
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4466, in _flush
+    with util.safe_reraise():
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4427, in _flush
+    flush_context.execute()
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/persistence.py", line 93, in save_obj
+    _emit_insert_statements(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/persistence.py", line 1233, in _emit_insert_statements
+    result = connection.execute(
+             ^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1419, in execute
+    return meth(
+           ^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.IntegrityError: (sqlite3.IntegrityError) UNIQUE constraint failed: analysed_domains.domain_name
+[SQL: INSERT INTO analysed_domains (domain_name, prediction_type, prediction_score, blocked_domain, added_to_pihole) VALUES (?, ?, ?, ?, ?) RETURNING domain_id, date_created, last_update]
+[parameters: ('telemetry.individual.githubcopilot.com', 'benign', 0.0, 0, 0)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+25-07-2026 18:46:12 - ERROR - database_service.py - add_db_domain - block_app - Failed to Add Domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.IntegrityError: UNIQUE constraint failed: analysed_domains.domain_name
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 166, in add_db_domain
+    db.commit()
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2030, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 1311, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 1286, in _prepare_impl
+    self.session.flush()
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4331, in flush
+    self._flush(objects)
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4466, in _flush
+    with util.safe_reraise():
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4427, in _flush
+    flush_context.execute()
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/persistence.py", line 93, in save_obj
+    _emit_insert_statements(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/persistence.py", line 1233, in _emit_insert_statements
+    result = connection.execute(
+             ^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1419, in execute
+    return meth(
+           ^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.IntegrityError: (sqlite3.IntegrityError) UNIQUE constraint failed: analysed_domains.domain_name
+[SQL: INSERT INTO analysed_domains (domain_name, prediction_type, prediction_score, blocked_domain, added_to_pihole) VALUES (?, ?, ?, ?, ?) RETURNING domain_id, date_created, last_update]
+[parameters: ('onedscolprdcus61.centralus.cloudapp.azure.com', 'benign', 0.0, 0, 0)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+25-07-2026 18:46:13 - ERROR - ml_model_service.py - create_x_features - block_app - Domain recaptcha.net is invalid
+NoneType: None
+25-07-2026 18:46:13 - ERROR - pihole_service.py - domains_scan - block_app - Exxception Occurred while Performing a Scan
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 286, in domains_scan
+    logistic_probability = self.ml_analyses.logistic_probability(domain)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/ml_model_service.py", line 82, in logistic_probability
+    probability_score = self.__probability(self.logistic_model, url, True)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/ml_model_service.py", line 72, in __probability
+    x_test = self.create_x_features(url)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/ml_model_service.py", line 41, in create_x_features
+    raise ValueError
+ValueError
+25-07-2026 18:46:13 - ERROR - database_service.py - add_db_domain - block_app - Failed to Add Domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.IntegrityError: UNIQUE constraint failed: analysed_domains.domain_name
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 166, in add_db_domain
+    db.commit()
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2030, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 1311, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 1286, in _prepare_impl
+    self.session.flush()
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4331, in flush
+    self._flush(objects)
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4466, in _flush
+    with util.safe_reraise():
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4427, in _flush
+    flush_context.execute()
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/persistence.py", line 93, in save_obj
+    _emit_insert_statements(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/orm/persistence.py", line 1233, in _emit_insert_statements
+    result = connection.execute(
+             ^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1419, in execute
+    return meth(
+           ^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.IntegrityError: (sqlite3.IntegrityError) UNIQUE constraint failed: analysed_domains.domain_name
+[SQL: INSERT INTO analysed_domains (domain_name, prediction_type, prediction_score, blocked_domain, added_to_pihole) VALUES (?, ?, ?, ?, ?) RETURNING domain_id, date_created, last_update]
+[parameters: ('westus-0.in.applicationinsights.azure.com', 'benign', 0.0, 0, 0)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+25-07-2026 18:46:13 - ERROR - database_service.py - update_last_scan - block_app - Failed to Update the Last Scan Details
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 262, in update_last_scan
+    raise Exception
+Exception
+25-07-2026 18:47:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 18:47:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 18:48:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 18:48:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 18:49:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 18:49:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 18:50:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 18:50:11 - ERROR - database_service.py - add_db_domain - block_app - Failed to Add Domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 153, in add_db_domain
+    if not_existing_domain():
+       ^^^^^^^^^^^^^^^^^^^
+NameError: name 'not_existing_domain' is not defined
+25-07-2026 18:50:11 - ERROR - database_service.py - add_db_domain - block_app - Failed to Add Domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 153, in add_db_domain
+    if not_existing_domain():
+       ^^^^^^^^^^^^^^^^^^^
+NameError: name 'not_existing_domain' is not defined
+25-07-2026 18:50:11 - ERROR - database_service.py - add_db_domain - block_app - Failed to Add Domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 153, in add_db_domain
+    if not_existing_domain():
+       ^^^^^^^^^^^^^^^^^^^
+NameError: name 'not_existing_domain' is not defined
+25-07-2026 18:50:11 - ERROR - database_service.py - add_db_domain - block_app - Failed to Add Domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 153, in add_db_domain
+    if not_existing_domain():
+       ^^^^^^^^^^^^^^^^^^^
+NameError: name 'not_existing_domain' is not defined
+25-07-2026 18:50:11 - ERROR - database_service.py - add_db_domain - block_app - Failed to Add Domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 153, in add_db_domain
+    if not_existing_domain():
+       ^^^^^^^^^^^^^^^^^^^
+NameError: name 'not_existing_domain' is not defined
+25-07-2026 18:50:11 - ERROR - database_service.py - add_db_domain - block_app - Failed to Add Domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 153, in add_db_domain
+    if not_existing_domain():
+       ^^^^^^^^^^^^^^^^^^^
+NameError: name 'not_existing_domain' is not defined
+25-07-2026 18:50:11 - ERROR - database_service.py - add_db_domain - block_app - Failed to Add Domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 153, in add_db_domain
+    if not_existing_domain():
+       ^^^^^^^^^^^^^^^^^^^
+NameError: name 'not_existing_domain' is not defined
+25-07-2026 18:50:11 - ERROR - database_service.py - add_db_domain - block_app - Failed to Add Domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 153, in add_db_domain
+    if not_existing_domain():
+       ^^^^^^^^^^^^^^^^^^^
+NameError: name 'not_existing_domain' is not defined
+25-07-2026 18:50:11 - ERROR - database_service.py - add_db_domain - block_app - Failed to Add Domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 153, in add_db_domain
+    if not_existing_domain():
+       ^^^^^^^^^^^^^^^^^^^
+NameError: name 'not_existing_domain' is not defined
+25-07-2026 18:50:11 - ERROR - database_service.py - add_db_domain - block_app - Failed to Add Domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 153, in add_db_domain
+    if not_existing_domain():
+       ^^^^^^^^^^^^^^^^^^^
+NameError: name 'not_existing_domain' is not defined
+25-07-2026 18:50:11 - ERROR - database_service.py - add_db_domain - block_app - Failed to Add Domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 153, in add_db_domain
+    if not_existing_domain():
+       ^^^^^^^^^^^^^^^^^^^
+NameError: name 'not_existing_domain' is not defined
+25-07-2026 18:50:11 - ERROR - database_service.py - add_db_domain - block_app - Failed to Add Domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 153, in add_db_domain
+    if not_existing_domain():
+       ^^^^^^^^^^^^^^^^^^^
+NameError: name 'not_existing_domain' is not defined
+25-07-2026 18:50:11 - ERROR - database_service.py - add_db_domain - block_app - Failed to Add Domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 153, in add_db_domain
+    if not_existing_domain():
+       ^^^^^^^^^^^^^^^^^^^
+NameError: name 'not_existing_domain' is not defined
+25-07-2026 18:50:11 - ERROR - database_service.py - add_db_domain - block_app - Failed to Add Domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 153, in add_db_domain
+    if not_existing_domain():
+       ^^^^^^^^^^^^^^^^^^^
+NameError: name 'not_existing_domain' is not defined
+25-07-2026 18:50:11 - ERROR - database_service.py - add_db_domain - block_app - Failed to Add Domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 153, in add_db_domain
+    if not_existing_domain():
+       ^^^^^^^^^^^^^^^^^^^
+NameError: name 'not_existing_domain' is not defined
+25-07-2026 18:50:11 - ERROR - database_service.py - add_db_domain - block_app - Failed to Add Domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 153, in add_db_domain
+    if not_existing_domain():
+       ^^^^^^^^^^^^^^^^^^^
+NameError: name 'not_existing_domain' is not defined
+25-07-2026 18:50:11 - ERROR - ml_model_service.py - create_x_features - block_app - Domain chatgpt.com is invalid
+NoneType: None
+25-07-2026 18:50:11 - ERROR - pihole_service.py - domains_scan - block_app - Exxception Occurred while Performing a Scan
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 286, in domains_scan
+    logistic_probability = self.ml_analyses.logistic_probability(domain)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/ml_model_service.py", line 82, in logistic_probability
+    probability_score = self.__probability(self.logistic_model, url, True)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/ml_model_service.py", line 72, in __probability
+    x_test = self.create_x_features(url)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/ml_model_service.py", line 41, in create_x_features
+    raise ValueError
+ValueError
+25-07-2026 18:50:11 - ERROR - database_service.py - update_last_scan - block_app - Failed to Update the Last Scan Details
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 263, in update_last_scan
+    raise Exception
+Exception
+25-07-2026 18:51:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 18:51:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 18:52:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 18:52:11 - ERROR - database_service.py - add_db_domain - block_app - Failed to Add Domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 153, in add_db_domain
+    if not_existing_domain():
+       ^^^^^^^^^^^^^^^^^^^
+NameError: name 'not_existing_domain' is not defined
+25-07-2026 18:52:11 - ERROR - database_service.py - add_db_domain - block_app - Failed to Add Domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 153, in add_db_domain
+    if not_existing_domain():
+       ^^^^^^^^^^^^^^^^^^^
+NameError: name 'not_existing_domain' is not defined
+25-07-2026 18:52:11 - ERROR - database_service.py - add_db_domain - block_app - Failed to Add Domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 153, in add_db_domain
+    if not_existing_domain():
+       ^^^^^^^^^^^^^^^^^^^
+NameError: name 'not_existing_domain' is not defined
+25-07-2026 18:52:11 - ERROR - database_service.py - add_db_domain - block_app - Failed to Add Domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 153, in add_db_domain
+    if not_existing_domain():
+       ^^^^^^^^^^^^^^^^^^^
+NameError: name 'not_existing_domain' is not defined
+25-07-2026 18:52:11 - ERROR - database_service.py - add_db_domain - block_app - Failed to Add Domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 153, in add_db_domain
+    if not_existing_domain():
+       ^^^^^^^^^^^^^^^^^^^
+NameError: name 'not_existing_domain' is not defined
+25-07-2026 18:52:11 - ERROR - database_service.py - add_db_domain - block_app - Failed to Add Domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 153, in add_db_domain
+    if not_existing_domain():
+       ^^^^^^^^^^^^^^^^^^^
+NameError: name 'not_existing_domain' is not defined
+25-07-2026 18:52:11 - ERROR - database_service.py - add_db_domain - block_app - Failed to Add Domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 153, in add_db_domain
+    if not_existing_domain():
+       ^^^^^^^^^^^^^^^^^^^
+NameError: name 'not_existing_domain' is not defined
+25-07-2026 18:52:11 - ERROR - database_service.py - add_db_domain - block_app - Failed to Add Domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 153, in add_db_domain
+    if not_existing_domain():
+       ^^^^^^^^^^^^^^^^^^^
+NameError: name 'not_existing_domain' is not defined
+25-07-2026 18:52:11 - ERROR - ml_model_service.py - create_x_features - block_app - Domain chatgpt.com is invalid
+NoneType: None
+25-07-2026 18:52:11 - ERROR - pihole_service.py - domains_scan - block_app - Exxception Occurred while Performing a Scan
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 286, in domains_scan
+    logistic_probability = self.ml_analyses.logistic_probability(domain)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/ml_model_service.py", line 82, in logistic_probability
+    probability_score = self.__probability(self.logistic_model, url, True)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/ml_model_service.py", line 72, in __probability
+    x_test = self.create_x_features(url)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/ml_model_service.py", line 41, in create_x_features
+    raise ValueError
+ValueError
+25-07-2026 18:52:11 - ERROR - database_service.py - update_last_scan - block_app - Failed to Update the Last Scan Details
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 261, in update_last_scan
+    raise Exception
+Exception
+25-07-2026 18:53:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 18:54:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 18:55:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 18:56:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 18:57:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 18:58:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 18:59:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:00:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:01:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:02:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:02:11 - ERROR - database_service.py - __not_existing_domain - block_app - Failed adding domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 228, in __not_existing_domain
+    existing_domain = db.query(db_models.AnalysedDomains).filter(db_models.AnalysedDomains.domain_name == domain.domain_name).first()
+                                                                                                          ^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'domain_name'
+25-07-2026 19:02:11 - ERROR - ml_model_service.py - create_x_features - block_app - Domain chatgpt.com is invalid
+NoneType: None
+25-07-2026 19:02:11 - ERROR - pihole_service.py - domains_scan - block_app - Exxception Occurred while Performing a Scan
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 286, in domains_scan
+    logistic_probability = self.ml_analyses.logistic_probability(domain)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/ml_model_service.py", line 82, in logistic_probability
+    probability_score = self.__probability(self.logistic_model, url, True)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/ml_model_service.py", line 72, in __probability
+    x_test = self.create_x_features(url)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/ml_model_service.py", line 41, in create_x_features
+    raise ValueError
+ValueError
+25-07-2026 19:02:11 - ERROR - database_service.py - update_last_scan - block_app - Failed to Update the Last Scan Details
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 277, in update_last_scan
+    raise Exception
+Exception
+25-07-2026 19:03:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:03:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:04:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:04:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:05:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:05:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:06:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:06:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:07:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:07:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:08:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:08:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:09:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:09:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:10:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:10:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:11:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:11:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:12:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:12:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:13:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:13:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:14:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:14:11 - ERROR - database_service.py - __not_existing_domain - block_app - Failed adding domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 243, in __not_existing_domain
+    existing_domain = db.query(db_models.AnalysedDomains).filter(db_models.AnalysedDomains.domain_name == domain.domain_name).first()
+                                                                                                          ^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'domain_name'
+25-07-2026 19:14:11 - ERROR - database_service.py - __not_existing_domain - block_app - Failed adding domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 243, in __not_existing_domain
+    existing_domain = db.query(db_models.AnalysedDomains).filter(db_models.AnalysedDomains.domain_name == domain.domain_name).first()
+                                                                                                          ^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'domain_name'
+25-07-2026 19:14:11 - ERROR - database_service.py - __not_existing_domain - block_app - Failed adding domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 243, in __not_existing_domain
+    existing_domain = db.query(db_models.AnalysedDomains).filter(db_models.AnalysedDomains.domain_name == domain.domain_name).first()
+                                                                                                          ^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'domain_name'
+25-07-2026 19:14:11 - ERROR - database_service.py - __not_existing_domain - block_app - Failed adding domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 243, in __not_existing_domain
+    existing_domain = db.query(db_models.AnalysedDomains).filter(db_models.AnalysedDomains.domain_name == domain.domain_name).first()
+                                                                                                          ^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'domain_name'
+25-07-2026 19:14:11 - ERROR - database_service.py - __not_existing_domain - block_app - Failed adding domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 243, in __not_existing_domain
+    existing_domain = db.query(db_models.AnalysedDomains).filter(db_models.AnalysedDomains.domain_name == domain.domain_name).first()
+                                                                                                          ^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'domain_name'
+25-07-2026 19:14:11 - ERROR - database_service.py - __not_existing_domain - block_app - Failed adding domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 243, in __not_existing_domain
+    existing_domain = db.query(db_models.AnalysedDomains).filter(db_models.AnalysedDomains.domain_name == domain.domain_name).first()
+                                                                                                          ^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'domain_name'
+25-07-2026 19:14:11 - ERROR - database_service.py - __not_existing_domain - block_app - Failed adding domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 243, in __not_existing_domain
+    existing_domain = db.query(db_models.AnalysedDomains).filter(db_models.AnalysedDomains.domain_name == domain.domain_name).first()
+                                                                                                          ^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'domain_name'
+25-07-2026 19:14:11 - ERROR - database_service.py - __not_existing_domain - block_app - Failed adding domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 243, in __not_existing_domain
+    existing_domain = db.query(db_models.AnalysedDomains).filter(db_models.AnalysedDomains.domain_name == domain.domain_name).first()
+                                                                                                          ^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'domain_name'
+25-07-2026 19:14:11 - ERROR - database_service.py - __not_existing_domain - block_app - Failed adding domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 243, in __not_existing_domain
+    existing_domain = db.query(db_models.AnalysedDomains).filter(db_models.AnalysedDomains.domain_name == domain.domain_name).first()
+                                                                                                          ^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'domain_name'
+25-07-2026 19:14:11 - ERROR - database_service.py - __not_existing_domain - block_app - Failed adding domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 243, in __not_existing_domain
+    existing_domain = db.query(db_models.AnalysedDomains).filter(db_models.AnalysedDomains.domain_name == domain.domain_name).first()
+                                                                                                          ^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'domain_name'
+25-07-2026 19:14:11 - ERROR - database_service.py - __not_existing_domain - block_app - Failed adding domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 243, in __not_existing_domain
+    existing_domain = db.query(db_models.AnalysedDomains).filter(db_models.AnalysedDomains.domain_name == domain.domain_name).first()
+                                                                                                          ^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'domain_name'
+25-07-2026 19:14:11 - ERROR - database_service.py - __not_existing_domain - block_app - Failed adding domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 243, in __not_existing_domain
+    existing_domain = db.query(db_models.AnalysedDomains).filter(db_models.AnalysedDomains.domain_name == domain.domain_name).first()
+                                                                                                          ^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'domain_name'
+25-07-2026 19:14:11 - ERROR - database_service.py - __not_existing_domain - block_app - Failed adding domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 243, in __not_existing_domain
+    existing_domain = db.query(db_models.AnalysedDomains).filter(db_models.AnalysedDomains.domain_name == domain.domain_name).first()
+                                                                                                          ^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'domain_name'
+25-07-2026 19:14:11 - ERROR - database_service.py - __not_existing_domain - block_app - Failed adding domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 243, in __not_existing_domain
+    existing_domain = db.query(db_models.AnalysedDomains).filter(db_models.AnalysedDomains.domain_name == domain.domain_name).first()
+                                                                                                          ^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'domain_name'
+25-07-2026 19:14:11 - ERROR - database_service.py - __not_existing_domain - block_app - Failed adding domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 243, in __not_existing_domain
+    existing_domain = db.query(db_models.AnalysedDomains).filter(db_models.AnalysedDomains.domain_name == domain.domain_name).first()
+                                                                                                          ^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'domain_name'
+25-07-2026 19:14:11 - ERROR - database_service.py - __not_existing_domain - block_app - Failed adding domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 243, in __not_existing_domain
+    existing_domain = db.query(db_models.AnalysedDomains).filter(db_models.AnalysedDomains.domain_name == domain.domain_name).first()
+                                                                                                          ^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'domain_name'
+25-07-2026 19:14:11 - ERROR - database_service.py - __not_existing_domain - block_app - Failed adding domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 243, in __not_existing_domain
+    existing_domain = db.query(db_models.AnalysedDomains).filter(db_models.AnalysedDomains.domain_name == domain.domain_name).first()
+                                                                                                          ^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'domain_name'
+25-07-2026 19:14:11 - ERROR - database_service.py - __not_existing_domain - block_app - Failed adding domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 243, in __not_existing_domain
+    existing_domain = db.query(db_models.AnalysedDomains).filter(db_models.AnalysedDomains.domain_name == domain.domain_name).first()
+                                                                                                          ^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'domain_name'
+25-07-2026 19:14:11 - ERROR - database_service.py - __not_existing_domain - block_app - Failed adding domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 243, in __not_existing_domain
+    existing_domain = db.query(db_models.AnalysedDomains).filter(db_models.AnalysedDomains.domain_name == domain.domain_name).first()
+                                                                                                          ^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'domain_name'
+25-07-2026 19:14:11 - ERROR - database_service.py - __not_existing_domain - block_app - Failed adding domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 243, in __not_existing_domain
+    existing_domain = db.query(db_models.AnalysedDomains).filter(db_models.AnalysedDomains.domain_name == domain.domain_name).first()
+                                                                                                          ^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'domain_name'
+25-07-2026 19:14:11 - ERROR - database_service.py - update_last_scan - block_app - Failed to Update the Last Scan Details
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 292, in update_last_scan
+    raise Exception
+Exception
+25-07-2026 19:14:18 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+25-07-2026 19:15:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:15:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:16:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:16:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:17:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:17:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:18:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:18:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:19:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:19:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:20:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:20:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:21:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:21:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:22:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:22:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:23:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:23:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:24:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:24:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:25:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:25:12 - ERROR - ml_model_service.py - create_x_features - block_app - Domain chatgpt.com is invalid
+NoneType: None
+25-07-2026 19:25:12 - ERROR - pihole_service.py - domains_scan - block_app - Exxception Occurred while Performing a Scan
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 286, in domains_scan
+    logistic_probability = self.ml_analyses.logistic_probability(domain)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/ml_model_service.py", line 82, in logistic_probability
+    probability_score = self.__probability(self.logistic_model, url, True)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/ml_model_service.py", line 72, in __probability
+    x_test = self.create_x_features(url)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/ml_model_service.py", line 41, in create_x_features
+    raise ValueError
+ValueError
+25-07-2026 19:25:12 - ERROR - database_service.py - update_last_scan - block_app - Failed to Update the Last Scan Details
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 292, in update_last_scan
+    raise Exception
+Exception
+25-07-2026 19:26:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:26:12 - ERROR - database_service.py - __not_existing_domain - block_app - Failed adding domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 243, in __not_existing_domain
+    existing_domain = db.query(db_models.AnalysedDomains).filter(db_models.AnalysedDomains.domain_name == domain.domain_name).first()
+                                                                                                          ^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'domain_name'
+25-07-2026 19:26:12 - ERROR - database_service.py - __not_existing_domain - block_app - Failed adding domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 243, in __not_existing_domain
+    existing_domain = db.query(db_models.AnalysedDomains).filter(db_models.AnalysedDomains.domain_name == domain.domain_name).first()
+                                                                                                          ^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'domain_name'
+25-07-2026 19:26:12 - ERROR - database_service.py - __not_existing_domain - block_app - Failed adding domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 243, in __not_existing_domain
+    existing_domain = db.query(db_models.AnalysedDomains).filter(db_models.AnalysedDomains.domain_name == domain.domain_name).first()
+                                                                                                          ^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'domain_name'
+25-07-2026 19:26:12 - ERROR - database_service.py - __not_existing_domain - block_app - Failed adding domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 243, in __not_existing_domain
+    existing_domain = db.query(db_models.AnalysedDomains).filter(db_models.AnalysedDomains.domain_name == domain.domain_name).first()
+                                                                                                          ^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'domain_name'
+25-07-2026 19:26:13 - ERROR - database_service.py - __not_existing_domain - block_app - Failed adding domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 243, in __not_existing_domain
+    existing_domain = db.query(db_models.AnalysedDomains).filter(db_models.AnalysedDomains.domain_name == domain.domain_name).first()
+                                                                                                          ^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'domain_name'
+25-07-2026 19:26:13 - ERROR - database_service.py - __not_existing_domain - block_app - Failed adding domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 243, in __not_existing_domain
+    existing_domain = db.query(db_models.AnalysedDomains).filter(db_models.AnalysedDomains.domain_name == domain.domain_name).first()
+                                                                                                          ^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'domain_name'
+25-07-2026 19:26:13 - ERROR - database_service.py - __not_existing_domain - block_app - Failed adding domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 243, in __not_existing_domain
+    existing_domain = db.query(db_models.AnalysedDomains).filter(db_models.AnalysedDomains.domain_name == domain.domain_name).first()
+                                                                                                          ^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'domain_name'
+25-07-2026 19:26:13 - ERROR - database_service.py - __not_existing_domain - block_app - Failed adding domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 243, in __not_existing_domain
+    existing_domain = db.query(db_models.AnalysedDomains).filter(db_models.AnalysedDomains.domain_name == domain.domain_name).first()
+                                                                                                          ^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'domain_name'
+25-07-2026 19:26:13 - ERROR - database_service.py - __not_existing_domain - block_app - Failed adding domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 243, in __not_existing_domain
+    existing_domain = db.query(db_models.AnalysedDomains).filter(db_models.AnalysedDomains.domain_name == domain.domain_name).first()
+                                                                                                          ^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'domain_name'
+25-07-2026 19:26:13 - ERROR - database_service.py - __not_existing_domain - block_app - Failed adding domain
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 243, in __not_existing_domain
+    existing_domain = db.query(db_models.AnalysedDomains).filter(db_models.AnalysedDomains.domain_name == domain.domain_name).first()
+                                                                                                          ^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'domain_name'
+25-07-2026 19:26:13 - ERROR - ml_model_service.py - create_x_features - block_app - Domain api.steampowered.com.lan is invalid
+NoneType: None
+25-07-2026 19:26:13 - ERROR - pihole_service.py - domains_scan - block_app - Exxception Occurred while Performing a Scan
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/pihole_service.py", line 286, in domains_scan
+    logistic_probability = self.ml_analyses.logistic_probability(domain)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/ml_model_service.py", line 82, in logistic_probability
+    probability_score = self.__probability(self.logistic_model, url, True)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/ml_model_service.py", line 72, in __probability
+    x_test = self.create_x_features(url)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/ml_model_service.py", line 41, in create_x_features
+    raise ValueError
+ValueError
+25-07-2026 19:26:13 - ERROR - database_service.py - update_last_scan - block_app - Failed to Update the Last Scan Details
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 292, in update_last_scan
+    raise Exception
+Exception
+25-07-2026 19:27:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:27:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:28:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:28:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:29:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:29:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:30:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:30:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:31:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:31:10 - WARNING - start_service.py - run_scan - block_app - Scan is Running
+25-07-2026 19:38:58 - ERROR - database_service.py - get_pihole_address - block_app - Failed to Get Pihole Address
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 347, in get_pihole_address
+    raise Exception
+Exception
+25-07-2026 19:38:59 - ERROR - database_service.py - get_pihole_address - block_app - Failed to Get Pihole Address
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 347, in get_pihole_address
+    raise Exception
+Exception
+25-07-2026 19:39:00 - ERROR - database_service.py - get_pihole_address - block_app - Failed to Get Pihole Address
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 347, in get_pihole_address
+    raise Exception
+Exception
+25-07-2026 19:39:00 - WARNING - run_ml_start_service.py - start_scheduler - block_app - Piohole Address not Set
+25-07-2026 19:39:01 - ERROR - database_service.py - get_pihole_address - block_app - Failed to Get Pihole Address
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 347, in get_pihole_address
+    raise Exception
+Exception
+25-07-2026 19:39:01 - WARNING - run_ml_start_service.py - start_scheduler - block_app - Piohole Address not Set
+25-07-2026 19:39:33 - ERROR - __init__.py - page_not_found - block_app - Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+25-07-2026 19:39:44 - ERROR - database_service.py - get_pihole_address - block_app - Failed to Get Pihole Address
+Traceback (most recent call last):
+  File "/mnt/5fd63f71-1b3f-4bc2-a22a-9f306602cd52/Documents/NCI/Final Year Project/BlockWay/block_app/services/database_service.py", line 347, in get_pihole_address
+    raise Exception
+Exception

@@ -120,7 +120,12 @@ class Pihole:
                 raise RuntimeError
 
             logger.info("Getting Recent Queries")
-            difference = last_scan.timestamp()
+
+            if last_scan is None:
+                logger.info("No previous scan found. Getting all recent domains.")
+                difference = 86300
+            else:
+                difference = last_scan.timestamp()
 
             # Using set method to create object with no duplicates
             domains = set()
@@ -134,12 +139,46 @@ class Pihole:
             logger.exception('No queries obtained found')
             return None
 
+    def __get_recent_domains_status(self, last_scan):
+                
+                try:
+                    queries = self.__get_queries()
+
+                    if queries is None:
+                        raise RuntimeError
+
+                    logger.info("Getting Recent Queries")
+                    if last_scan is None:
+                        logger.info("No previous scan found. Getting all recent domains.")
+                        difference = 86300
+                    else:
+                        difference = last_scan.timestamp()
+
+                    # Using set method to create object with no duplicates
+                    domains = []
+
+                    for query in queries:
+                        if query["time"] >= difference:
+                            domains.append(
+                                {
+                                    "domain": query["domain"],
+                                    "status": query["status"]
+                                }
+                            )
+
+
+                    return domains
+                except RuntimeError:
+                    logger.exception('No queries obtained found')
+                    return None
+
+
 
     # Method for Making Blocked and Non=Blocked List
     def __domains_split(self, last_scan):
         try:
 
-            domains = self.__get__recent_domains(last_scan)
+            domains = self.__get_recent_domains_status(last_scan)
 
             if domains is None:
                 raise RuntimeError
@@ -229,8 +268,8 @@ class Pihole:
             last_scan = self.database.get_last_scan()
             if last_scan is None:
                 logger.error('No ML details found')
-                return []
-            return self.__get__recent_domains(last_scan)
+                last_scan = datetime.now(timezone.utc) - timedelta(hours=24)
+            return self.__get_recent_domains_status(last_scan)
         except Exception as e:
             logger.exception('Unable to Obtain Recent Domains')
             logger.exception(f'{e}')
@@ -239,6 +278,7 @@ class Pihole:
     # Method for Performing Scan
     def domains_scan(self, domains):
         try:
+            logger.info(f"ML SCAN STARTED - Domains received: {domains}")
             logger.info(f"Starting domain scan for {domains} ; size: {len(domains)}")
             for domain in domains:
                 logger.info(f"Scanning {domain}")
@@ -338,7 +378,7 @@ class Pihole:
 
                 status = self.__classify_status(query["status"])
 
-                if status is not "block":
+                if status != "block":
                     continue
 
 
@@ -351,7 +391,7 @@ class Pihole:
                 )
 
         # Getting Domains from Database
-        from_time = (datetime.now(timezone.utc) - timedelta(hours=1)).timestamp()
+        from_time = (datetime.now(timezone.utc) - timedelta(hours=24)).timestamp()
         until_time = datetime.now(timezone.utc).timestamp()
         recent_db_domains = self.database.get_db_recent_domains(from_time, until_time)
 
@@ -383,6 +423,10 @@ class Pihole:
             reverse = True,
             key = lambda event : event["time"]
         )
+
+        logger.info(f"Pi-hole events: {pihole_events}")
+        logger.info(f"ML events: {ml_events}")
+        logger.info(f"Combined events: {events[:5]}")
 
         return events[:5]
 

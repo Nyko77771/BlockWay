@@ -41,20 +41,20 @@ class DomainAnalyses:
             raise ValueError
 
         features = pd.DataFrame([{
-            "domain_length": self._make_length(url),
-            "domain_has_ip": self._make_has_ip(url),
-            "domain_digit_count": self._make_digit_count(url),
-            "domain_dot_count":  self.__make_dot_count(url),
-            "domain_has_subdomain": self.__make_has_subdomain(url),
-            "domain_subdomain_count": self.__make_subdomain_count(url),
-            "domain_hyphen_count": self.__make_hyphen_count(url),
-            "domain_special_count": self.__make_special_count(url),
-            "domain_host_in_subdomain": self.__make_host_in_subdomain(url),
-            "domain_host_in_domain": self.__make_host_in_domain(url),
-            "domain_similarity": self.__make_similarity(url),
-            "domain_has_com": self.__make_has_com(url),
-            "domain_has_org": self.__make_has_org(url),
-            "domain_has_countrry_code": self.__make_has_country_code(url),
+            "Length": self._make_length(url),
+            "Has_IP": self._make_has_ip(url),
+            "Digit_Count": self._make_digit_count(url),
+            "Dot_Count":  self.__make_dot_count(url),
+            "Has_Subdomain": self.__make_has_subdomain(url),
+            "Subdomain_Count": self.__make_subdomain_count(url),
+            "Hyphen_Count": self.__make_hyphen_count(url),
+            "Special_Count": self.__make_special_count(url),
+            "Host_in_Subdomain": self.__make_host_in_subdomain(url),
+            "Host_in_Domain": self.__make_host_in_domain(url),
+            "Similarity": self.__make_similarity(url),
+            "Has_com": self.__make_has_com(url),
+            "Has_org": self.__make_has_org(url),
+            "Has_Country_Code": self.__make_has_country_code(url),
             }])
         return features
 
@@ -65,7 +65,7 @@ class DomainAnalyses:
             x_scaled = self.scaler.transform(x_test)
             prediction = model.predict(x_scaled)
         else:
-            probability = model.predict(x_test)
+            prediction = model.predict(x_test)
         return prediction[0]
 
     def __probability(self, model, url, logistic=False):
@@ -76,7 +76,7 @@ class DomainAnalyses:
             probability = model.predict_proba(x_scaled)
         else:
             probability = model.predict_proba(x_test)
-        return probability[0]
+        return probability[0][1]
 
     def logistic_probability(self, url):
         probability_score = self.__probability(self.logistic_model, url, True)
@@ -105,20 +105,25 @@ class DomainAnalyses:
 
     # Method For Checking if Domain was given
     def _check_domain(self, url):
-        sections = tld.extract(url)
-        domain = sections.domain
-        subdomain = sections.subdomain
-        suffix = sections.suffix
+        try:
+            sections = tld.extract(url)
+            sections = tld.extract(url) 
+            domain = sections.domain
+            subdomain = sections.subdomain 
+            suffix = sections.suffix
 
-        regex = r"^(?:[a-zA-Z0-9]+\.)+[a-zA-Z]{2,}$"
-        domain_pattern = re.compile(regex)
-        if (
-            domain is not None
-            and subdomain is not None
-            and suffix is not None
-            and domain_pattern.fullmatch(url)
-        ):
-            return True
+            if (
+                domain
+                and subdomain and suffix
+            ):
+                regex = r"^(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$"
+
+                return bool(
+                    re.fullmatch(regex, url)
+                )
+
+        except Exception:
+            logger.exception(f"Domain validation failed {url}")
         return False
 
     def _make_length(self, url):

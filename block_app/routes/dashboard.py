@@ -1,6 +1,3 @@
-# Importing threading module
-import threading
-
 # Importing Flask Services
 from flask import Blueprint, render_template, session, abort, jsonify
 from flask_login import login_required, current_user
@@ -10,8 +7,6 @@ from block_app.services.pihole_service import Pihole
 from block_app.services.database_service import DomainDatabase
 from block_app.services.dashboard_service import DashboardService
 from block_app.services.log_service import logger
-# Importing ML Generating Method
-from block_app.services.run_ml_start_service import start_scheduler
 
 import traceback
 
@@ -72,13 +67,6 @@ def home():
                 "admin_templates/dashboard_templates/admin_system_details.html",
                 current_user=user,
             )
-
-        # Performing ML Analyses
-        # Using Threadding to run ML scan concurrently
-        thread = threading.Thread(target=start_scheduler, daemon=True)
-        thread.start()
-        logger.info("Starting ML Thread")
-        logger.info(f'Active Threads: {threading.active_count()}')
 
         # Initialising Dashboard Services
         dash_service = DashboardService()

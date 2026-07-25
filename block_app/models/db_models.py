@@ -10,9 +10,8 @@ from sqlalchemy import (
     Boolean,
     Float,
 )
-from sqlalchemy.orm import relationship, Mapped, mapped_column
-from sqlalchemy.ext.declarative import declarative_base
-from datetime import datetime
+from sqlalchemy.orm import relationship, Mapped, mapped_column, declarative_base
+from datetime import datetime, timezone
 import enum
 from flask_login import UserMixin
 
@@ -51,6 +50,7 @@ class PiholeAdded(enum.Enum):
 class ScanStatus(enum.Enum):
     SUCCESS = "success"
     FAILURE = "failure"
+    NOT_STARTED = 'not_started'
     NONE = "none"
 
 
@@ -136,9 +136,9 @@ class AnalysedDomains(Base):
     prediction_type = Column(String, nullable=False)
     prediction_score = Column(Float, nullable=True)
     blocked_domain = Column(Boolean, default=False, nullable=False)
-    date_created = Column(DateTime(timezone=True), server_default=func.now())
+    date_created = Column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc), nullable=False)
     last_update = Column(
-        DateTime(timezone=True), server_default=func.now(), onupdate=func.now()
+        DateTime(timezone=True), default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc), nullable=False
     )
     added_to_pihole = Column(Boolean, default=False, nullable=False)
     __table_args__ = (CheckConstraint("prediction_type IN ('benign', 'malicious')"),)
@@ -154,7 +154,7 @@ class ScheduleConfiguration(Base):
         String, default="success", nullable=False
     )
     __table_args__ = (
-        CheckConstraint("last_scan_status IN ('success', 'failure', 'none')"),
+        CheckConstraint("last_scan_status IN ('success', 'failure', 'not_started', 'none')"),
     )
 
 

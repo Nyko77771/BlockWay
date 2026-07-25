@@ -150,23 +150,22 @@ class DomainDatabase:
         try:
             logger.info("Adding Domains")
 
-            new_domain = db_models.AnalysedDomains(
-                domain_name=domain,
-                prediction_type=(
-                    db_models.DomainPredictionType.MALICIOUS.value
-                    if prediction_type == "malicious"
-                    else db_models.DomainPredictionType.BENIGN.value
-                ),
-                prediction_score=score,
-                blocked_domain=prediction_type == "malicious",
-                added_to_pihole=added_to_pihole,
-            )
+            if self.__not_existing_domain(domain):
+                new_domain = db_models.AnalysedDomains(
+                    domain_name=domain,
+                    prediction_type=(
+                        db_models.DomainPredictionType.MALICIOUS.value
+                        if prediction_type == "malicious"
+                        else db_models.DomainPredictionType.BENIGN.value
+                    ),
+                    prediction_score=score,
+                    blocked_domain=prediction_type == "malicious",
+                    added_to_pihole=added_to_pihole,
+                )
 
-            db.add(new_domain)
-            db.commit()
-            db.refresh(new_domain)
-
-            return new_domain
+                db.add(new_domain)
+                db.commit()
+                db.refresh(new_domain)
 
         except Exception:
             logger.exception("Failed to Add Domain")
@@ -176,8 +175,23 @@ class DomainDatabase:
             logger.info("Closing Database")
             db.close()
 
-    def update_db_domain(self):
-        pass
+    def update_db_domain(self, domain):
+        db = SessionLocal()
+        try:
+            existing_domain = db.query(db_models.AnalysedDomains).filter(db_models.AnalysedDomains.domain_name == domain.domain_name).first()
+            if existing_domain is not None:
+                existing_domain.prediction_type = domain.prediction_type
+                existing_domain.prediction_score = domain.prediction_score
+                existing_domain.blocked_domain = domain.blocked_domain
+                existing_domain.added_to_pihole = domain.added_to_pihole
+                db.commit()
+                logger.info('Domain Information Updated')
+            logger.info('Domain Does not Exist')
+        except Exception:
+            db.rollback()
+            logger.exception("Failed Updating Domain")
+        finally:
+            db.close()      
 
     def get_db_recent_domains(self, from_time, until_time):
         db = SessionLocal()
@@ -223,8 +237,24 @@ class DomainDatabase:
             db.close()
 
 
-    def get_unblocked_domains(self):
-        pass
+    def __not_existing_domain(self, domain):
+        db = SessionLocal()
+        try:
+            existing_domain = db.query(db_models.AnalysedDomains).filter(db_models.AnalysedDomains.domain_name == domain.domain_name).first()
+
+            if existing_domain:
+                logger.info("Domain Exists. Updating DB")
+                self.update_db_domain(domain)
+                return False
+            else:
+                return True
+        except Exception:
+            db.rollback()
+            logger.exception("Failed adding domain")
+        finally:
+            db.close()
+
+
 
     ######################################
     # Scheduler Methods
@@ -270,6 +300,38 @@ class DomainDatabase:
         finally:
             logger.info("Closing Database")
             db.close()
+
+    def create_default_schedule(self):
+        db = SessionLocal()
+        try:
+            logger.info('Checking ML Schedule')
+
+            existing_schedule = (
+                db.query(db_models.ScheduleConfiguration).first()
+            )
+
+            if existing_schedule:
+                logger.info('ML Schedule Already Created')
+                return existing_schedule
+
+            logger.info('Creating default ML Schedule')
+            schedule = db_models.ScheduleConfiguration(
+                last_scan = None,
+                next_scan = datetime.now(timezone.utc),
+                last_scan_status = db_models.ScanStatus.NOT_STARTED
+            )
+
+            db.add(schedule)
+            db.commit()
+
+            return schedule
+        except Exception:
+            db.rollback()
+            logger.exception('Failed creating ML Schedule')
+        finally:
+            logger.info("Closing Database")
+            db.close()
+            
 
     ######################################
     # Pihole Methods

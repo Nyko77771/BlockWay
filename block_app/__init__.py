@@ -22,6 +22,9 @@ from block_app.cli.administrator import admin_reset
 from block_app.services.database_service import DomainDatabase
 from block_app.services.log_service import logger
 
+# Import MLThreadManager
+from block_app.services.thread_service import MLThreadManager
+
 # Loading the enviromental variables
 dotenv.load_dotenv()
 
@@ -65,7 +68,6 @@ def make_blockway():
         db = DomainDatabase()
         return db.get_db_user_by_id(user_id)
 
-
     # Defining the routes functions inside the app via flask blueprint
     block_app.register_blueprint(views)
     block_app.register_blueprint(setup)
@@ -82,4 +84,8 @@ def make_blockway():
 
     # Starting Database
     check_start_db()
+
+    # Starting The ML Scanning Thread using class method
+    MLThreadManager.start()
+
     return block_app
