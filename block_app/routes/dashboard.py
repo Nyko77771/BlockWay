@@ -112,8 +112,12 @@ def home():
 
 @dashboard.route("/threats", methods=["GET"])
 def threats():
+
+    dash_service = DashboardService()
+    basic_stats = dash_service.get_threat_stats()
+
     return render_template(
-        "normal_templates/dashboard_templates/threats.html", current_user=user
+        "normal_templates/dashboard_templates/threats.html", current_user=user, basic_stats=basic_stats
     )
 
 

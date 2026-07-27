@@ -38,7 +38,7 @@ class DomainAnalyses:
         # First checking if domain is in correct format
         if not self._check_domain(url):
             logger.exception(f'Domain {url} is invalid')
-            raise ValueError
+            return None
 
         features = pd.DataFrame([{
             "Length": self._make_length(url),
@@ -58,8 +58,12 @@ class DomainAnalyses:
             }])
         return features
 
+
+
     def __prediction(self, model, url, logistic=False):
         x_test = self.create_x_features(url)
+        if x_test is None:
+            return 0
         prediction = []
         if logistic:
             x_scaled = self.scaler.transform(x_test)
@@ -70,6 +74,8 @@ class DomainAnalyses:
 
     def __probability(self, model, url, logistic=False):
         x_test = self.create_x_features(url)
+        if x_test is None:
+            return None
         probability = []
         if logistic:
             x_scaled = self.scaler.transform(x_test)
@@ -80,6 +86,11 @@ class DomainAnalyses:
 
     def logistic_probability(self, url):
         probability_score = self.__probability(self.logistic_model, url, True)
+        return probability_score
+
+    def random_forrest_probability(self, url):
+        logger.info("Performing Random Forrest Probability")
+        probability_score = self.__probability(self.random_forrest, url)
         return probability_score
 
     def logistic_prediction(self, url):
@@ -107,9 +118,9 @@ class DomainAnalyses:
     def _check_domain(self, url):
         try:
             sections = tld.extract(url)
-            sections = tld.extract(url) 
+            sections = tld.extract(url)
             domain = sections.domain
-            subdomain = sections.subdomain 
+            subdomain = sections.subdomain
             suffix = sections.suffix
 
             if (

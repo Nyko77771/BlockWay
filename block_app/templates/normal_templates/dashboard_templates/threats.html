@@ -1,29 +1,174 @@
-{% extends "partials/head.html"%} {% block scripts %} {% if current_user.user_id
-%}
-<script
-  src="{{ url_for('static', filename='js/chart.umd.min.js') }}"
-  defer
-></script>
-{% endif %} {% endblock %} {% block navbar %} {% include
-"partials/navs/nav_logo.html" %} {% include
-"partials/navs/navbar_registered.html" %} {% endblock %} {% block title %}
-Dashboard {% endblock %} {% block content %}
-<div class="dash_container">
-  <div class="dash_nav">{% include "partials/navs/side_nav.html" %}</div>
-  <div class="dash_main">
-    <div class="dash_title">
-      <h1>Threats</h1>
-      <p>
-        Here you can view the threats detected by the system. You can analyze
-        threat details, take necessary actions, and monitor the status of each
-        threat.
-      </p>
-    </div>
-    <div class="dash_content"></div>
+{% extends "partials/head.html" %}
 
-    <!-- Add more dashboard content here -->
-  </div>
+{% block scripts %}
+{% if current_user.user_id %}
+<script src="{{ url_for('static', filename='js/chart.umd.min.js') }}" defer></script>
+{% endif %}
+{% endblock %}
+
+{% block navbar %}
+{% include "partials/navs/nav_logo.html" %}
+{% include "partials/navs/navbar_registered.html" %}
+{% endblock %}
+
+{% block title %}
+Threats
+{% endblock %}
+
+{% block content %}
+
+<div class="dash_container">
+    <div class="dash_nav">
+        {% include "partials/navs/side_nav.html" %}
+    </div>
+    <div class="dash_main">
+        <div class="dash_title">
+            <h1>Threats</h1>
+            <p>
+                View malicious domains identified by BlockWay's machine learning
+                engine and monitor recent threat activity.
+            </p>
+        </div>
+
+        <div class="dash_content">
+            <div class="dash_statistics">
+
+                <div class="dash_box">
+                    <h5>Total Threats</h5>
+                    <h2>{{ basic_stats.total_threats or 0 }}</h2>
+                    <p class="small_dash_text">
+                        Last 24 Hours
+                    </p>
+                </div>
+
+                <div class="dash_box">
+                    <h5>Blocked</h5>
+                    <h2>{{ basic_stats.ml_blocks or 0 }}</h2>
+                    <p class="small_dash_text">
+                        ML Decisions
+                    </p>
+                </div>
+
+                <div class="dash_box">
+                    <h5>Allowed</h5>
+                    <h2>{{ basic_stats.allowed or 0 }}</h2>
+                    <p class="small_dash_text">
+                        User / System Allowed
+                    </p>
+                </div>
+
+                <div class="dash_box">
+                    <h5>Average Confidence</h5>
+                    <h2>{{ basic_stats.average_confidence_score or 0 }}%</h2>
+                    <p class="small_dash_text">
+                        Detection Confidence
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- Threat Activity -->
+
+            <div class="dash_box">
+
+                <div class="dash_box_header">
+                    <h4>Threat Activity</h4>
+                    <p class="small_dash_text">
+                        Threat detections over the last 24 hours.
+                    </p>
+                </div>
+
+                <canvas id="threatChart"></canvas>
+
+            </div>
+
+            <!-- Recent Threats -->
+
+            <div class="dash_box">
+
+                <div class="dash_box_header">
+                    <h4>Recent Threats</h4>
+                    <p class="small_dash_text">
+                        Latest machine learning threat detections.
+                    </p>
+                </div>
+
+                <table class="threats_table">
+
+                    <thead>
+
+                        <tr>
+                            <th>Domain</th>
+                            <th>Confidence</th>
+                            <th>Status</th>
+                            <th>Source</th>
+                            <th>Date</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for threat in threats %}
+
+                        <tr>
+
+                            <td>{{ threat.domain_name }}</td>
+
+                            <td>{{ threat.prediction_score }}%</td>
+
+                            <td>
+
+                                {% if threat.blocked_domain %}
+
+                                <span class="status_blocked">
+                                    Blocked
+                                </span>
+
+                                {% else %}
+
+                                <span class="status_allowed">
+                                    Allowed
+                                </span>
+
+                                {% endif %}
+
+                            </td>
+
+                            <td>ML</td>
+
+                            <td>
+                                {{ threat.date_created.strftime("%d %b %Y") }}
+                            </td>
+
+                        </tr>
+
+                        {% else %}
+
+                        <tr>
+
+                            <td colspan="5">
+                                No threats detected.
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
+
 {% block script2 %}
-<script src="{{ url_for('static', filename='js/overview.js') }}" defer></script>
-{% endblock %} {% endblock %}
+<script src="{{ url_for('static', filename='js/threats.js') }}" defer></script>
+{% endblock %}
+
+{% endblock %}

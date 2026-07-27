@@ -11,6 +11,7 @@ class DashboardService:
     def __init__(self, address=None):
         self.pihole = Pihole(address)
 
+    ### --- NORMAL OVERVIEW FUNCTIONS --- ###
     def get_table_data(self, time_conversion=False):
         if self.pihole.contains_address():
             recent_blocked_clients = self.pihole.get_recent_blocked_clients()
@@ -171,3 +172,26 @@ class DashboardService:
             )
 
             return appended_queries
+
+    ### --- THREAT FUNCTIONS --- ###
+    def get_threat_stats(self):#
+
+        db_stats = self.pihole.database.get_threat_stats()
+
+        total_threats = 0
+        ml_blocks = 0
+        allowed = 0
+        average_confidence_score = 0
+
+        if db_stats:
+            total_threats = db_stats["total_threats"]
+            ml_blocks = db_stats["ml_blocks"]
+            allowed = db_stats["allowed"]
+            average_confidence_score = db_stats["average_confidence_score"]
+
+        return {
+            "total_threats": total_threats,
+            "ml_blocks": ml_blocks,
+            "allowed": allowed,
+            "average_confidence_score": average_confidence_score
+        }

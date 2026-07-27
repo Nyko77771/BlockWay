@@ -47,7 +47,7 @@ class Pihole:
         if self.pihole_address is None:
             return False
         return True
-    
+
     def get_address(self):
         return self.database.get_pihole_address()
 
@@ -140,7 +140,7 @@ class Pihole:
             return None
 
     def __get_recent_domains_status(self, last_scan):
-                
+
                 try:
                     queries = self.__get_queries()
 
@@ -285,30 +285,33 @@ class Pihole:
 
                 logistic_probability = self.ml_analyses.logistic_probability(domain)
 
-                if logistic_probability < 60:
+                if logistic_probability is None:
+                    continue
+
+                if logistic_probability < .60:
                     logger.info("Logiistic Model Determined Domain to be Benign")
                     logistic_prediction = self.ml_analyses.logistic_prediction(domain)
-                    self.database.add_db_domain(domain, "benign", logistic_prediction)
+                    self.database.add_db_domain(domain, "benign", logistic_prediction, is_string=True)
                 else:
                     # Analysing with better model
                     logger.info("Random Forrest Scan is Required")
-                    random_forrest_prediction = (
-                        self.ml_analyses.random_forrest_prediction(domain)
+                    random_forrest_probability = (
+                        self.ml_analyses.random_forrest_probability(domain)
                     )
 
+                    if random_forrest_probability is None:
+                        continue
+
                     # If score is high than likely Malicious
-                    if random_forrest_prediction >= 80:
+                    if random_forrest_probability >= .80:
 
                         self.add_to_pihole_blocklist(domain)
                         self.database.add_db_domain(
-                            domain, "malicious", random_forrest_prediction, True
+                            domain, "malicious", random_forrest_probability, True
                         )
                     else:
-                        logistic_prediction = self.ml_analyses.logistic_prediction(
-                            domain
-                        )
                         self.database.add_db_domain(
-                            domain, "benign", logistic_prediction
+                            domain, "benign", random_forrest_probability, is_string=True
                         )
 
                 logger.info("Scan Completed")

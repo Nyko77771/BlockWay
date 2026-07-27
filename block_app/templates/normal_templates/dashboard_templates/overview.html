@@ -21,38 +21,33 @@ Dashboard {% endblock %} {% block content %}
       <div class="dash_box">
         <!-- Add your dashboard content here -->
         <!-- Displaying some general information -->
-        <div class="dash_general_info">          
+        <div class="dash_general_info">
           <div class="dash_general_queries">
             <h4>Queries</h4>
             <div class="dash_general_queries_2"></div>
               <p class="small_dash_text">
-                Blocked Queries (24 hours): {% if basic_stats.blocked_query %} {{
-                basic_stats.blocked_query }} {% else %} 0 {% endif %}
+                Blocked Queries (24 hours): {{  basic_stats.blocked_query or 0 }}
               </p>
               <p class="small_dash_text">
-                Pihole Queries (24 hours): {% if basic_stats.pi_query %} {{
-                basic_stats.pi_query }} {% else %} 0 {% endif %}
+                Pihole Queries (24 hours): {{ basic_stats.pi_query or 0 }}
               </p>
               <p class="small_dash_text">
-                BlockWay ML Queries (24 hours): {% if basic_stats.ml_query %} {{
-                basic_stats.ml_query }} {% else %} 0 {% endif %}
+                BlockWay ML Queries (24 hours): {{ basic_stats.ml_query or 0 }}
               </p>
-            </div>            
+            </div>
           </div>
 
           <div class="dash_general_threats">
             <h4>Threats Found:</h4>
             <p class="small_dash_text">
-              Total: {% if basic_stats.total_threats %} {{
-              basic_stats.total_threats }} {% else %} 0 {% endif %}
+              Total: {{ basic_stats.total_threats or 0 }}
             </p>
           </div>
 
           <div class="dash_general_ml_blocks">
             <h4>ML Blocks:</h4>
             <p>
-              {% if basic_stats.ml_blocks %} {{ basic_stats.ml_blocks }} {% else
-              %} 0 {% endif %}
+              {{ basic_stats.ml_blocks or 0 }}
             </p>
             <p class="small_dash_text"></p>
           </div>
@@ -60,8 +55,7 @@ Dashboard {% endblock %} {% block content %}
           <div class="dash_general_status">
             <h4>Status:</h4>
             <p class="small_dash_text">
-              {% if basic_stats.activity %} {{ basic_stats.activity }} {% else
-              %} Not Detected {% endif %}
+              {{ basic_stats.activity or 0 }}
             </p>
           </div>
         </div>
@@ -79,7 +73,7 @@ Dashboard {% endblock %} {% block content %}
             ></div>
           </div>
 
-          <div class="graph">
+          <div class="graph chart">
             <canvas id="generalBlockedAllowedChart"></canvas>
             <div
               id="blocked_allowed_graph"

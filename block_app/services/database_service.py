@@ -4,7 +4,7 @@ from block_app.database.database import SessionLocal
 import block_app.models.db_models as db_models
 
 # Importing External Libraries
-from datetime import datetime
+from datetime import datetime, timedelta
 from datetime import timezone
 
 
@@ -145,12 +145,12 @@ class DomainDatabase:
             logger.info("Closing Database")
             db.close()
 
-    def add_db_domain(self, domain, prediction_type, score, added_to_pihole=False):
+    def add_db_domain(self, domain, prediction_type, score, is_string: bool,  added_to_pihole=False):
         db = SessionLocal()
         try:
             logger.info("Adding Domains")
 
-            if self.__not_existing_domain(domain):
+            if self.__not_existing_domain(domain, is_string):
                 new_domain = db_models.AnalysedDomains(
                     domain_name=domain,
                     prediction_type=(
@@ -175,10 +175,13 @@ class DomainDatabase:
             logger.info("Closing Database")
             db.close()
 
-    def update_db_domain(self, domain):
+    def update_db_domain(self, domain, string=False):
         db = SessionLocal()
         try:
-            existing_domain = db.query(db_models.AnalysedDomains).filter(db_models.AnalysedDomains.domain_name == domain.domain_name).first()
+            if string:
+                existing_domain = db.query(db_models.AnalysedDomains).filter(db_models.AnalysedDomains.domain_name == str(domain)).first()
+            else:
+                existing_domain = db.query(db_models.AnalysedDomains).filter(db_models.AnalysedDomains.domain_name == domain.domain_name).first()
             if existing_domain is not None:
                 existing_domain.prediction_type = domain.prediction_type
                 existing_domain.prediction_score = domain.prediction_score
@@ -191,7 +194,7 @@ class DomainDatabase:
             db.rollback()
             logger.exception("Failed Updating Domain")
         finally:
-            db.close()      
+            db.close()
 
     def get_db_recent_domains(self, from_time, until_time):
         db = SessionLocal()
@@ -228,7 +231,7 @@ class DomainDatabase:
                     if domain.blocked_domain == True:
                         malicious_list.append(domain)
                 return malicious_list
-            return None            
+            return None
         except Exception:
             logger.exception("Failed to Get Malicious Domains")
             return None
@@ -236,15 +239,14 @@ class DomainDatabase:
             logger.info("Closing Database")
             db.close()
 
-
-    def __not_existing_domain(self, domain):
+    def __not_existing_domain(self, domain, string=False):
         db = SessionLocal()
         try:
-            existing_domain = db.query(db_models.AnalysedDomains).filter(db_models.AnalysedDomains.domain_name == domain.domain_name).first()
+            existing_domain = db.query(db_models.AnalysedDomains).filter(db_models.AnalysedDomains.domain_name == str(domain)).first()
 
             if existing_domain:
                 logger.info("Domain Exists. Updating DB")
-                self.update_db_domain(domain)
+                self.update_db_domain(domain, string)
                 return False
             else:
                 return True
@@ -254,7 +256,32 @@ class DomainDatabase:
         finally:
             db.close()
 
+    def get_threat_stats(self):
+        db = SessionLocal()
+        try:
+            last_24_hours = datetime.now(timezone.utc) - timedelta(hours=24)
+            domains_in_24 = db.query(db_models.AnalysedDomains).filter(db_models.AnalysedDomains.date_created >= last_24_hours)
+            total_threats = domains_in_24.count()
+            ml_blocks = domains_in_24.filter(db_models.AnalysedDomains.blocked_domain.is_(True)).count()
+            allowed_scans = domains_in_24.filter(db_models.AnalysedDomains.blocked_domain.is_(False)).count()
+            average_confidence_score = 0
+            domain_scores = []
+            for domain in domains_in_24:
+                domain_scores.append(domain.prediction_score)
+            if domain_scores:
+                average_confidence_score = sum(domain_scores) / len(domain_scores)
+            return {
+                "total_threats": total_threats,
+                "ml_blocks": ml_blocks,
+                "allowed": allowed_scans,
+                "average_confidence_score": average_confidence_score
+            }
 
+        except Exception:
+            db.rollback()
+            logger.exception("Failed Getting Domain Stats")
+        finally:
+            db.close()
 
     ######################################
     # Scheduler Methods
@@ -282,18 +309,21 @@ class DomainDatabase:
             logger.info("Closing Database")
             db.close()
 
-    def update_last_scan(self, type):
+    def update_last_scan(self, status):
         db = SessionLocal()
         try:
             schedule = db.query(db_models.ScheduleConfiguration).first()
 
+            logger.info("Schedule object: %s", schedule)
             if schedule is None:
-                logger.info("Scheduler  not Set")
+                logger.warning("Scheduler Configuration not Set")
                 raise Exception
 
             schedule.last_scan = datetime.now(timezone.utc)
             schedule.next_scan = datetime.now(timezone.utc)
-            schedule.last_scan_status = type
+            schedule.last_scan_status = status
+
+            db.commit()
 
         except Exception:
             logger.exception("Failed to Update the Last Scan Details")
@@ -331,7 +361,7 @@ class DomainDatabase:
         finally:
             logger.info("Closing Database")
             db.close()
-            
+
 
     ######################################
     # Pihole Methods
