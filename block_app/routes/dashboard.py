@@ -123,7 +123,9 @@ def threats():
 
 @dashboard.route("/system", methods=["GET"])
 def system():
-    return render_template("normal_templates/dashboard_templates/system.html", current_user=user)
+    dash_service = DashboardService()
+    system = dash_service.get_system_information()
+    return render_template("normal_templates/dashboard_templates/system.html", current_user=user, system=system)
 
 
 @dashboard.route("/settings", methods=["GET"])

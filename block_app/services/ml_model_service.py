@@ -123,9 +123,15 @@ class DomainAnalyses:
             subdomain = sections.subdomain
             suffix = sections.suffix
 
+            if str(url).startswith("_"):
+                return False
+
+            if "._" in url:
+                return False
+
             if (
                 domain
-                and subdomain and suffix
+                and suffix
             ):
                 regex = r"^(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$"
 

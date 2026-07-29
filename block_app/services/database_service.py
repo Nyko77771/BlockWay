@@ -145,12 +145,15 @@ class DomainDatabase:
             logger.info("Closing Database")
             db.close()
 
+    # Method for Adding Domains
     def add_db_domain(self, domain, prediction_type, score, is_string: bool,  added_to_pihole=False):
         db = SessionLocal()
         try:
             logger.info("Adding Domains")
 
-            if self.__not_existing_domain(domain, is_string):
+            # Checks to see if the domain already exists
+            if not self.__not_existing_domain(domain, is_string):#
+                # Not - then is added
                 new_domain = db_models.AnalysedDomains(
                     domain_name=domain,
                     prediction_type=(
@@ -166,7 +169,11 @@ class DomainDatabase:
                 db.add(new_domain)
                 db.commit()
                 db.refresh(new_domain)
-
+            # If Yes (its in database) - Then Update
+            else:
+                if is_string:
+                    self.update_db_domain_string(domain, prediction_type, score, added_to_pihole)
+                self.update_db_domain(domain)
         except Exception:
             logger.exception("Failed to Add Domain")
             logger.info("Rolling Back Domain Addition")
@@ -175,13 +182,34 @@ class DomainDatabase:
             logger.info("Closing Database")
             db.close()
 
-    def update_db_domain(self, domain, string=False):
+    # Method for Updating Domain if a String is Given
+    def update_db_domain_string(self, domain, prediction_type, score, added_to_pihole):
         db = SessionLocal()
         try:
-            if string:
-                existing_domain = db.query(db_models.AnalysedDomains).filter(db_models.AnalysedDomains.domain_name == str(domain)).first()
-            else:
-                existing_domain = db.query(db_models.AnalysedDomains).filter(db_models.AnalysedDomains.domain_name == domain.domain_name).first()
+
+            existing_domain = db.query(db_models.AnalysedDomains).filter(db_models.AnalysedDomains.domain_name == str(domain)).first()
+
+            if existing_domain is not None:
+                existing_domain.prediction_type = prediction_type
+                existing_domain.prediction_score = score
+                existing_domain.blocked_domain = prediction_type == 'malicious'
+                existing_domain.added_to_pihole = added_to_pihole
+                db.commit()
+                logger.info('Domain Information Updated')
+            logger.info('Domain Does not Exist')
+        except Exception:
+            db.rollback()
+            logger.exception("Failed Updating Domain")
+        finally:
+            db.close()
+
+    # Method for Updating Domain if Domain Object is Given
+    def update_db_domain(self, domain):
+        db = SessionLocal()
+        try:
+
+            existing_domain = db.query(db_models.AnalysedDomains).filter(db_models.AnalysedDomains.domain_name == domain.domain_name).first()
+
             if existing_domain is not None:
                 existing_domain.prediction_type = domain.prediction_type
                 existing_domain.prediction_score = domain.prediction_score
@@ -196,6 +224,7 @@ class DomainDatabase:
         finally:
             db.close()
 
+    # Method for Getting Recent Domains
     def get_db_recent_domains(self, from_time, until_time):
         db = SessionLocal()
         try:
@@ -239,17 +268,18 @@ class DomainDatabase:
             logger.info("Closing Database")
             db.close()
 
-    def __not_existing_domain(self, domain, string=False):
+    def __not_existing_domain(self, domain, is_str):
         db = SessionLocal()
         try:
-            existing_domain = db.query(db_models.AnalysedDomains).filter(db_models.AnalysedDomains.domain_name == str(domain)).first()
+            if is_str:
+                existing_domain = db.query(db_models.AnalysedDomains).filter(db_models.AnalysedDomains.domain_name == str(domain)).first()
+            else:
+                existing_domain = db.query(db_models.AnalysedDomains).filter(db_models.AnalysedDomains.domain_name == domain.domain_name).first()
 
             if existing_domain:
-                logger.info("Domain Exists. Updating DB")
-                self.update_db_domain(domain, string)
-                return False
-            else:
                 return True
+            else:
+                return False
         except Exception:
             db.rollback()
             logger.exception("Failed adding domain")

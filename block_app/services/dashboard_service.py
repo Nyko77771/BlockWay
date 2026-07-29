@@ -1,5 +1,5 @@
 #  Importing datetime
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timezone, timedelta, tzinfo
 # Importing Custom Services
 from block_app.services.log_service import logger
 from block_app.services.pihole_service import Pihole
@@ -114,7 +114,12 @@ class DashboardService:
         if db_queries:
             for query in db_queries:
                 query_created = query.date_created
-                if query_created >= from_time: # type: ignore
+                query_with_utc = self.__get_timezone(query_created) # type: ignore
+
+                print(query_created, query_created.tzinfo)
+                print(from_time, from_time.tzinfo)
+
+                if query_with_utc >= from_time: # type: ignore
                     ml_totals += 1
                     if query.blocked_domain: # type: ignore
                         ml_blocked += 1
@@ -136,6 +141,15 @@ class DashboardService:
         }
 
         return stats
+
+    # Method for Adding Timezone to DB Resuls:
+    def __get_timezone(self, passed_datetime: datetime | None) -> datetime | None:
+        if passed_datetime is None:
+            return None
+        if passed_datetime.tzinfo is None:
+            return passed_datetime.replace(tzinfo=timezone.utc)
+        return passed_datetime
+
 
     # Method for Getting Recently Blocked Domains
     def __get_blocked_allowed(self):
@@ -195,3 +209,7 @@ class DashboardService:
             "allowed": allowed,
             "average_confidence_score": average_confidence_score
         }
+
+    ### --- SYSTEM INFO FUNCTIONS --- ###
+    def get_system_information(self):
+        return None

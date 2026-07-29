@@ -1,18 +1,68 @@
 {% extends "partials/head.html"%} {% block navbar %} {% include
 "partials/navs/navbar_registered.html" %} {% endblock %} {% block title %}
 Dashboard {% endblock %} {% block content %}
-<div class="container">
+
+<div class="dash_container">
   <div class="dash_nav">{% include "partials/navs/side_nav.html" %}</div>
+
   <div class="dash_main">
     <div class="dash_title">
       <h1>System</h1>
       <p>Manage your system settings here.</p>
     </div>
-    <div class="dash_content">
-      <div class="dash_box"></div>
-    </div>
 
-    <!-- Add more dashboard content here -->
+    <div class="dash_content">
+      <div class="dash_box">
+        <div class="system_title">
+          <h2>System Status</h2>
+        </div>
+        <div class="system_grid">
+          <div class="system_card">
+            <h3>Application</h3>
+            <span class="system online">Running</span>
+          </div>
+          <div class="system_card">
+            <h3>Pi-hole</h3>
+            <span class="system online">
+              {% if system.pihole %} Connected {% else %} Offline {% endif %}
+            </span>
+          </div>
+          <div class="system_card">
+            <h3>ML Scanner</h3>
+            <span class="system online">
+              {% if system.ml %} Active {% else %} Stopped {% endif %}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="dash_box">
+        <div class="system_title">
+          <h2>Version Information</h2>
+        </div>
+
+        <table class="system_table">
+          <tr>
+            <td>Application Version:</td>
+            <td>{{ system.version }}</td>
+          </tr>
+          <tr>
+            <td>Python Version:</td>
+            <td>{{ system.python }}</td>
+          </tr>
+          <tr>
+            <td>Operating System:</td>
+            <td>{{ system.os }}</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="dash_box">
+        <div class="system_title">
+          <h2>Runtime</h2>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 {% endblock %}
