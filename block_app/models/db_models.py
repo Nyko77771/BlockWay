@@ -9,6 +9,7 @@ from sqlalchemy import (
     CheckConstraint,
     Boolean,
     Float,
+    Enum,
 )
 from sqlalchemy.orm import relationship, Mapped, mapped_column, declarative_base
 from datetime import datetime, timezone
@@ -62,87 +63,163 @@ issue_events = Table(
     Column("event_id", Integer, ForeignKey("events.event_id"), primary_key=True),
 )
 
-
 # User Table
 class User(Base, UserMixin):
     __tablename__ = "users"
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    username = Column(String, unique=True)
-    password = Column(String, nullable=False)
-    salt = Column(String, nullable=False)
-    role_type = Column(String)
-    date_created = Column(DateTime(timezone=True), server_default=func.now())
-    sessions = relationship("UserSession", back_populates="user")
-    events = relationship("Event", back_populates="user")
-
-    __table_args__ = (CheckConstraint("role_type IN ('admin', 'normal')"),)
-
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    username: Mapped[str] = mapped_column(String, unique=True)
+    password: Mapped[str] = mapped_column(String, nullable=False)
+    salt: Mapped[str] = mapped_column(String, nullable=False)
+    role_type: Mapped[UserRoleEnum] = mapped_column(
+        Enum(
+            UserRoleEnum,
+            values_callable=lambda enum: [ str(item.value) for item in enum ]
+        )
+        )
+    date_created: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True),
+        server_default=func.now(),
+    )
+    sessions: Mapped[list["UserSession"]] = relationship(
+        "UserSession", 
+        back_populates="user"
+    )
+    events: Mapped[list["Event"]] = relationship(
+        "Event",
+        back_populates="user"
+    )
 
 # Event Table
 class Event(Base):
     __tablename__ = "events"
-    event_id = Column(Integer, primary_key=True, autoincrement=True)
-    user_id = Column(Integer, ForeignKey("users.id"))
-    event_type = Column(String, nullable=False)
-    description = Column(String, nullable=False)
-    severity = Column(String, nullable=False, default="info")
-
-    date_created = Column(DateTime(timezone=True), server_default=func.now())
-    issues = relationship("Issue", secondary=issue_events, back_populates="events")
-    user = relationship("User", back_populates="events")
-
-    __table_args__ = (
-        CheckConstraint(
-            "severity IN ('critical', 'high', 'low', 'info')",
-        ),
+    event_id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    user_id: Mapped[int] = mapped_column(Integer, ForeignKey("users.id"))
+    event_type: Mapped[str] = mapped_column(String, nullable=False)
+    description: Mapped[str] = mapped_column(String, nullable=False)
+    severity: Mapped[ScoreEnum] = mapped_column(
+        Enum(
+            ScoreEnum,
+            values_callable=lambda enum: [ str(item.value) for item in enum ]
+            ),
+        nullable=False,
+        default="info"
+        )
+    date_created: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now()
     )
-
+    issues: Mapped[list["Issue"]] = relationship(
+        "Issue",
+        secondary=issue_events,
+        back_populates="events"
+    )
+    user: Mapped[list["User"]] = relationship(
+        "User", 
+        back_populates="events"
+    )
 
 # Table for encountered issues
 class Issue(Base):
     __tablename__ = "issues"
-    issue_id = Column(Integer, primary_key=True, autoincrement=True)
-    type = Column(String, nullable=False)
-    description = Column(String, nullable=False)
-    severity = Column(String, nullable=False)
-    status = Column(String, nullable=False)
-
-    date_created = Column(DateTime(timezone=True), server_default=func.now())
-    date_closed = Column(DateTime(timezone=True), nullable=True)
-
-    events = relationship("Event", secondary=issue_events, back_populates="issues")
-
-    __table_args__ = (
-        CheckConstraint("severity IN ('critical', 'high', 'low', 'info')"),
-        CheckConstraint("status IN ('open', 'closed')"),
+    issue_id: Mapped[int] = mapped_column(
+        Integer,
+        primary_key=True,
+        autoincrement=True
     )
-
+    type: Mapped[str] = mapped_column(
+        String,
+        nullable=False
+    )
+    description: Mapped[str] = mapped_column(
+        String,
+        nullable=False
+    )
+    severity: Mapped[ScoreEnum] = mapped_column(
+        Enum(
+            ScoreEnum,
+            values_callable=lambda enum: [ str(item.value) for item in enum ]
+            ),
+        nullable=False
+    )
+    status: Mapped[StatusEnum] = mapped_column(
+        Enum(
+            StatusEnum,
+            values_callable=lambda enum: [ str(item.value) for item in enum ]
+            ),
+        nullable=False
+    )
+    date_created: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True),
+        server_default=func.now()
+    )
+    date_closed: Mapped[datetime | None] = mapped_column(
+        DateTime(timezone=True),
+        nullable=True
+    )
+    events: Mapped[list["Event"]] = relationship(
+        "Event",
+        secondary=issue_events,
+        back_populates="issues"
+    )
 
 # Session Table
 class UserSession(Base):
     __tablename__ = "user_sessions"
-    session_id = Column(Integer, primary_key=True, autoincrement=True)
-    user_id = Column(Integer, ForeignKey("users.id"))
-    token = Column(String)
-    date_created = Column(DateTime(timezone=True))
-    user = relationship("User", back_populates="sessions")
-
+    session_id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    user_id: Mapped[int] = mapped_column(Integer, ForeignKey("users.id"))
+    token: Mapped[str] = mapped_column(String)
+    date_created: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True)
+    )
+    user: Mapped[list["User"]] = relationship(
+        "User",
+        back_populates="sessions"
+    )
 
 # Analysed Domains Table
 class AnalysedDomains(Base):
     __tablename__ = "analysed_domains"
-    domain_id = Column(Integer, primary_key=True, autoincrement=True)
-    domain_name = Column(String, unique=True, nullable=False)
-    prediction_type = Column(String, nullable=False)
-    prediction_score = Column(Float, nullable=True)
-    blocked_domain = Column(Boolean, default=False, nullable=False)
-    date_created = Column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc), nullable=False)
-    last_update = Column(
-        DateTime(timezone=True), default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc), nullable=False
+    domain_id: Mapped[int] = mapped_column(
+        Integer,
+        primary_key=True,
+        autoincrement=True
     )
-    added_to_pihole = Column(Boolean, default=False, nullable=False)
-    __table_args__ = (CheckConstraint("prediction_type IN ('benign', 'malicious')"),)
-
+    domain_name: Mapped[str] = mapped_column(
+        String,
+        unique=True,
+        nullable=False
+    )
+    prediction_type: Mapped[DomainPredictionType] = mapped_column(
+        Enum(
+            DomainPredictionType,
+            values_callable=lambda enum: [ str(item.value) for item in enum ]
+            ), 
+        nullable=False
+    )
+    prediction_score: Mapped[float | None] = mapped_column(
+        Float,
+        nullable=True
+    )
+    blocked_domain: Mapped[bool] = mapped_column(
+        Boolean,
+        default=False,
+        nullable=False
+    )
+    date_created: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True),
+        default=lambda: datetime.now(timezone.utc),
+        nullable=False
+    )
+    last_update: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True),
+        default=lambda: datetime.now(timezone.utc),
+        onupdate=lambda: datetime.now(timezone.utc),
+        nullable=False
+    )
+    added_to_pihole: Mapped[bool] = mapped_column(
+        Boolean,
+        default=False,
+        nullable=False
+    )
 
 class ScheduleConfiguration(Base):
     __tablename__ = "configuration"
@@ -150,15 +227,14 @@ class ScheduleConfiguration(Base):
     schedule_id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     last_scan: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     next_scan: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
-    last_scan_status: Mapped[str] = mapped_column(
-        String, default="success", nullable=False
+    last_scan_status: Mapped[ScanStatus] = mapped_column(
+        Enum(
+            ScanStatus,
+            values_callable=lambda enum: [ str(item.value) for item in enum ]
+            ), default="success", nullable=False
     )
-    __table_args__ = (
-        CheckConstraint("last_scan_status IN ('success', 'failure', 'not_started', 'none')"),
-    )
-
 
 class Pihole(Base):
     __tablename__ = "pihole"
-    pihole_id = Column(Integer, primary_key=True, autoincrement=True)
-    pihole_address = Column(String, nullable=True)
+    pihole_id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    pihole_address: Mapped[str] = mapped_column(String, nullable=True)

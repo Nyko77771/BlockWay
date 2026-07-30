@@ -33,6 +33,8 @@ class DomainDatabase:
             logger.info("Closing Database")
             db.close()
 
+
+
     # Method for Getting User by ID
     def get_db_user_by_id(self, user_id):
         db = SessionLocal()
@@ -119,14 +121,54 @@ class DomainDatabase:
     def update_db_user_password(self, user, password):
         pass
 
-    def check_db_admin(self):
-        pass
+    def check_db_admin(self, username):
+        db = SessionLocal()
+        try:
+            logger.info("Getting User Database Details")
+            db_user = (
+                db.query(db_models.User)
+                .filter(db_models.User.username == username)
+                .first()
+            )
+        
+            if db_user:
+                if str(db_user.role_type) == db_models.UserRoleEnum.ADMIN.__str__:
+                    return True
+
+            return False
+
+        except Exception:
+            logger.exception("Failed to Get Admin")
+        finally:
+            logger.info("Closing Database")
+            db.close()
 
     def update_db_user(self):
         pass
 
-    def make_db_admin(self):
-        pass
+    def make_db_admin(self, username):
+        db = SessionLocal()
+        try:
+            logger.info("Getting User Database Details")
+            db_user = (
+                db.query(db_models.User)
+                .filter(db_models.User.username == username)
+                .first()
+            )
+        
+            if db_user:
+                if str(db_user.role_type) == db_models.UserRoleEnum.ADMIN:
+                    logger.info("No update neccessary")
+
+                db_user.role_type = db_models.UserRoleEnum.ADMIN
+            return False
+
+        except Exception:
+            logger.exception("Failed to Get Admin")
+        finally:
+            logger.info("Closing Database")
+            db.close()
+        
 
     ##############################
     # Domain Methods
@@ -142,7 +184,6 @@ class DomainDatabase:
         except Exception:
             logger.exception("Failed to get Domains")
         finally:
-            logger.info("Closing Database")
             db.close()
 
     # Method for Adding Domains
@@ -179,7 +220,6 @@ class DomainDatabase:
             logger.info("Rolling Back Domain Addition")
             db.rollback()
         finally:
-            logger.info("Closing Database")
             db.close()
 
     # Method for Updating Domain if a String is Given
@@ -245,7 +285,6 @@ class DomainDatabase:
         except Exception:
             logger.exception('An Exception Occurred')
         finally:
-            logger.info("Closing Database")
             db.close()
 
     def get_malicious_domains(self):
@@ -265,7 +304,6 @@ class DomainDatabase:
             logger.exception("Failed to Get Malicious Domains")
             return None
         finally:
-            logger.info("Closing Database")
             db.close()
 
     def __not_existing_domain(self, domain, is_str):
@@ -313,6 +351,15 @@ class DomainDatabase:
         finally:
             db.close()
 
+    def get_domains_count(self):
+        domains = self.get_db_domains()
+        logger.info("Getting Domains Count")
+        count = 0
+        if domains:
+            for domain in domains:
+                count += 1
+        return count      
+
     ######################################
     # Scheduler Methods
     def get_last_scan(self):
@@ -336,7 +383,6 @@ class DomainDatabase:
             logger.exception("Failed to Get Last Scan Details")
             logger.exception(f"{e}")
         finally:
-            logger.info("Closing Database")
             db.close()
 
     def update_last_scan(self, status):
@@ -358,7 +404,6 @@ class DomainDatabase:
         except Exception:
             logger.exception("Failed to Update the Last Scan Details")
         finally:
-            logger.info("Closing Database")
             db.close()
 
     def create_default_schedule(self):
@@ -389,7 +434,6 @@ class DomainDatabase:
             db.rollback()
             logger.exception('Failed creating ML Schedule')
         finally:
-            logger.info("Closing Database")
             db.close()
 
 
@@ -413,7 +457,6 @@ class DomainDatabase:
         except Exception:
             logger.exception("Failed to Get Pihole Address")
         finally:
-            logger.info("Closing Database")
             db.close()
 
     def add_pihole_address(self, address):
@@ -432,5 +475,22 @@ class DomainDatabase:
             logger.info("Rolling Back Address Addition")
             db.rollback()
         finally:
-            logger.info("Closing Database")
+            db.close()
+
+    def update_pihole_address(self, address):
+        db = SessionLocal()
+        try:
+
+            pihole_address = db.query(db_models.Pihole).filter(db_models.Pihole.pihole_address == address).first()
+
+            if pihole_address:
+                pihole_address.pihole_address = address
+            
+            db.commit()
+
+        except Exception:
+            logger.exception("Failed to Update Pihole Address")
+            logger.info("Rolling Back Address Update")
+            db.rollback()
+        finally:
             db.close()

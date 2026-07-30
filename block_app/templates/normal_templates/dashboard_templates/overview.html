@@ -1,10 +1,14 @@
-{% extends "partials/head.html"%} {% block scripts %} {% if current_user.user_id
+{% extends "partials/head.html"%} 
+{% block scripts %} {% if current_user.user_id
 %}
 <script
   src="{{ url_for('static', filename='js/chart.umd.min.js') }}"
   defer
 ></script>
-{% endif %} {% endblock %} {% block navbar %} {% include
+{% endif %} {% endblock %} 
+
+
+{% block navbar %} {% include
 "partials/navs/nav_logo.html" %} {% include
 "partials/navs/navbar_registered.html" %} {% endblock %} {% block title %}
 Dashboard {% endblock %} {% block content %}

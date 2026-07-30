@@ -43,6 +43,17 @@ def dash_checks():
         message = 'Pihole address could not be reached'
         return render_template('/normal_templates/pihole_add.html', message=message)
 
+    # Checking Authentication
+    try:
+        pihole.authenticate()
+
+        if pihole.sid is None or pihole.csrf is None:
+            raise RuntimeError('Pihole authentication failed')
+    except Exception:
+        logger.exception("Pihole authentication failure")
+        message = "The Authentication Failed. Please enter new address"
+        return render_template('/normal_templates/pihole_add.html', message=message)
+
 @dashboard.route("/dashboard", methods=["GET"])
 def home():
 
@@ -106,9 +117,6 @@ def home():
 
 ##################################################################
 # TO DO:
-
-# Normal Users
-
 
 @dashboard.route("/threats", methods=["GET"])
 def threats():

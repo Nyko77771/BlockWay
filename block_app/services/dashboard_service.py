@@ -1,9 +1,17 @@
+# Importin os library to traverse file locations
+import os
+# Importing platform library to get information about platform
+import platform
+# Importing time module
+import time
+# Importing psutil utility
+import psutil
 #  Importing datetime
 from datetime import datetime, timezone, timedelta, tzinfo
 # Importing Custom Services
 from block_app.services.log_service import logger
 from block_app.services.pihole_service import Pihole
-
+from block_app.services.run_ml_start_service import is_running
 
 
 class DashboardService:
@@ -212,4 +220,97 @@ class DashboardService:
 
     ### --- SYSTEM INFO FUNCTIONS --- ###
     def get_system_information(self):
-        return None
+
+        logger.info("Getting System Information")
+
+        db_size = ""
+
+        # Getting Pihole Status
+        pihole = self.pihole.connectionn_checker.is_connected()
+
+        # Getting ML Information
+        ml = self.__check_ml_status()
+
+        # Getting Version
+        version =self.__get_current_system_version()
+
+        # Getting System's Python Version
+        python = platform.python_version()
+
+        # Getting os Version
+        os = platform.system()
+
+        # Getting Uptime Information
+        uptime = self.__get_uptime()
+
+        # Getting CPU Information
+        cpu = psutil.cpu_percent()
+
+        # Getting Memory Informatio
+        used_memory = psutil.virtual_memory().percent
+        available_memory = 100 - used_memory
+        round_available_memory = round(available_memory, 1)
+
+        # Getting Total Domains
+        total_domains = self.__get_domain_totals()
+
+        # Getting db size
+        db_size = self.__get_db_size()
+
+
+        system_information = {
+            "pihole": pihole,
+            "ml": ml,
+            "version": version,
+            "python": python,
+            "os": os,
+            "uptime": uptime,
+            "cpu": cpu,
+            "used_memory": used_memory,
+            "available_memory": round_available_memory,
+            "total_domains": total_domains,
+            "db_size": db_size 
+        }
+
+        return system_information
+
+    # Method for Getting DB file size
+    def __get_db_size(self):
+        path = "block_app/database/block_way.db"
+        if os.path.exists(path):
+            db_size = os.path.getsize(path)
+            size_in_mb = db_size / (1024 * 1024)
+            rounded_size = round(size_in_mb, 2)
+            return f"{rounded_size}mb"
+        return 'Unknown'
+
+    # Method for Countig total of Processed Domains
+    def __get_domain_totals(self):
+        try:
+            logger.info("Counting Total of Domains on Database")
+            count = self.pihole.database.get_domains_count()
+            return count
+        except Exception:
+            return 0
+
+    # Methodfor Getting Uptime of System
+    def __get_uptime(self):
+        logger.info("Getting Uptime Details")
+        seconds = int(time.time() - psutil.boot_time())
+
+        days, days_remainder = divmod(seconds, 86400) # minutes * hour * day = 86400
+        hours, hours_remainder = divmod(days_remainder, 3600) # minutes * hour = 3600
+        minutes, minutes_remainder = divmod(hours_remainder, 60) # hour (60)
+        return f"{days}Day {hours}Hours {minutes}Minutes"
+
+
+    # Method for checking ML Service Status
+    def __check_ml_status(self):
+        if is_running:
+            return 'Active'
+        else:
+            return "Offline"
+
+    # Method for Getting the Version of the BlockWay
+    def __get_current_system_version(self):
+        return "BlockWay v1"

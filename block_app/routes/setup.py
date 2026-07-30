@@ -102,6 +102,13 @@ def add_pihole():
             pihole_formatter = PiholeFormatter()
 
             if pihole_formatter.check_address(given_address):
+                db_pi_address = db.get_pihole_address().__str__
+                if db_pi_address:
+                    if db_pi_address == given_address:
+                        logger.info("Updating Pihole Address")
+                        db.update_pihole_address(given_address)
+
+
                 logger.info("Pihole Address Added")
                 db.add_pihole_address(given_address)
                 db.create_default_schedule()

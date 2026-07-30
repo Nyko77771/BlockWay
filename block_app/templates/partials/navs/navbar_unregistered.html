@@ -5,16 +5,6 @@
     alt="BlockWay Logo"
     src="{{url_for('static', filename='images/Logo/Logo2_Small.png')}}"
   />
-  {% if request.endpoint != 'views.home' %}
-  <div class="back_button nav_start">
-    <a href="{{ url_for('views.home') }}">
-      <img
-        alt="Back Icon"
-        src="{{url_for('static', filename='images/back_icon.png')}}"
-      />
-    </a>
-  </div>
-  {% endif %}
 
   <div class="nav_end">
     <a href="{{ url_for('views.home') }}">Home</a>

@@ -1,4 +1,5 @@
 {% extends "partials/head.html"%} {% block navbar %} {% include
+"partials/navs/nav_logo.html" %} {% include
 "partials/navs/navbar_registered.html" %} {% endblock %} {% block title %}
 Dashboard {% endblock %} {% block content %}
 
@@ -61,7 +62,51 @@ Dashboard {% endblock %} {% block content %}
         <div class="system_title">
           <h2>Runtime</h2>
         </div>
+        <div class="system_table">
+          <table class="system_table">
+            <tr>
+              <td>Uptime:</td>
+              <td>{{ system.uptime }}</td>
+            </tr>
+            <tr>
+              <td>CPU Usage:</td>
+              <td>{{ system.cpu }}%</td>
+            </tr>
+            <tr>
+              <td>Memory Usage:</td>
+              <td>{{ system.used_memory }}%</td>
+            </tr>
+            <tr>
+              <td>Memory Available:</td>
+              <td>{{ system.available_memory }}%</td>
+            </tr>
+          </table>
+        </div>
+
       </div>
+
+      <div class="dash_box">
+        <div class="system_title">
+          <h2>Database</h2>
+        </div>
+        <div class="system_table">
+          <table class="system_table">
+            <tr>
+              <td>Database Type:</td>
+              <td>SQLite</td>
+            </tr>
+            <tr>
+              <td>Total Stored Domains:</td>
+              <td>{{ system.total_domains }}</td>
+            </tr>
+            <tr>
+              <td>Size:</td>
+              <td>{{ system.db_size }}</td>
+            </tr>
+          </table>
+
+      </div>
+
     </div>
   </div>
 </div>

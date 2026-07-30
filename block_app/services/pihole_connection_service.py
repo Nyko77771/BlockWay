@@ -20,8 +20,8 @@ class PiholeConnectionChecker:
             result = self.__check_connection()
             self.previous_result = result
             self.previous_check = current_time
-            return self.previous_check
-
+           
+        return self.previous_result
 
     def __check_connection(self):
         try:
