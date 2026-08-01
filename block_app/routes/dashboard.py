@@ -153,7 +153,15 @@ def configurations():
 
 @dashboard.route("/logs", methods=["GET"])
 def logs():
-    return render_template("normal_templates/dashboard_templates/admin_logs.html")
+    dash_service = DashboardService()
+    logs = dash_service.get_logs()
+    stats = dash_service.get_log_stats()
+    return render_template(
+        "normal_templates/dashboard_templates/admin_logs.html",
+        current_user=user,
+        logs=logs,
+        stats=stats
+        )
 
 
 @dashboard.route("/users", methods=["GET"])

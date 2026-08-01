@@ -2,5 +2,5 @@
 minversion = "9.0"
 addopts = ["-v", "-ra", "-s"]
 testpaths = ["tests"]
-python_files = ["system_information_test.py"]
+python_files = ["log_file_split_test.py"]
 pythonpath = ["src"]

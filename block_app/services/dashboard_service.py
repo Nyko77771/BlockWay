@@ -12,12 +12,13 @@ from datetime import datetime, timezone, timedelta, tzinfo
 from block_app.services.log_service import logger
 from block_app.services.pihole_service import Pihole
 from block_app.services.run_ml_start_service import is_running
-
+from block_app.services.admin_services import AdminServices
 
 class DashboardService:
 
     def __init__(self, address=None):
         self.pihole = Pihole(address)
+        self.admin = AdminServices()
 
     ### --- NORMAL OVERVIEW FUNCTIONS --- ###
     def get_table_data(self, time_conversion=False):
@@ -314,3 +315,45 @@ class DashboardService:
     # Method for Getting the Version of the BlockWay
     def __get_current_system_version(self):
         return "BlockWay v1"
+
+
+    #################################################
+    # ADMIN Aligned Functions
+
+    # Function for Getting Logs
+    def get_logs(self):
+        return self.admin.generate_log_data()
+
+    # Function for Getting Log Stats
+    def get_log_stats(self):
+
+        logs = self.admin.generate_log_data()
+
+        # Getting Size
+        total_logs = len(logs)
+
+        # Getting Totals
+        total_errors = 0
+        total_warnings = 0
+        total_info = 0
+
+        for log in logs:
+            if log["level"] == "ERROR":
+                total_errors  += 1
+            if log["level"] == "WARNING":
+                total_warnings  += 1
+            if log["level"] == "INFO":
+                total_info  += 1
+
+        # Getting Information About Last Update:
+        last_update = "Unknown"
+        if logs[0]["timestamp"]:
+            last_update = str(logs[0]["timestamp"])
+
+        return {
+            "total_logs": len(logs),
+            "errors": total_errors,
+            "warnings": total_warnings,
+            "info": total_info,
+            "last_update": last_update
+        }

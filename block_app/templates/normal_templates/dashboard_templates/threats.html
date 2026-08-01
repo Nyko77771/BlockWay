@@ -33,7 +33,7 @@ Threats
         <div class="dash_content">
             <div class="dash_statistics">
 
-                <div class="dash_box">
+                <div class="dash_box dash_general">
                     <h5>Total Threats</h5>
                     <h2>{{ basic_stats.total_threats or 0 }}</h2>
                     <p class="small_dash_text">
@@ -41,7 +41,7 @@ Threats
                     </p>
                 </div>
 
-                <div class="dash_box">
+                <div class="dash_box dash_general">
                     <h5>Blocked</h5>
                     <h2>{{ basic_stats.ml_blocks or 0 }}</h2>
                     <p class="small_dash_text">
@@ -49,7 +49,7 @@ Threats
                     </p>
                 </div>
 
-                <div class="dash_box">
+                <div class="dash_box dash_general">
                     <h5>Allowed</h5>
                     <h2>{{ basic_stats.allowed or 0 }}</h2>
                     <p class="small_dash_text">
@@ -57,7 +57,7 @@ Threats
                     </p>
                 </div>
 
-                <div class="dash_box">
+                <div class="dash_box dash_general">
                     <h5>Average Confidence</h5>
                     <h2>{{ basic_stats.average_confidence_score or 0 }}%</h2>
                     <p class="small_dash_text">
@@ -69,7 +69,7 @@ Threats
 
             <!-- Threat Activity -->
 
-            <div class="dash_box">
+            <div class="dash_box dash_general">
 
                 <div class="dash_box_header">
                     <h4>Threat Activity</h4>
@@ -84,7 +84,7 @@ Threats
 
             <!-- Recent Threats -->
 
-            <div class="dash_box">
+            <div class="dash_box dash_general">
 
                 <div class="dash_box_header">
                     <h4>Recent Threats</h4>
