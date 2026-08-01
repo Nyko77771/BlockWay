@@ -8,3 +8,4 @@ block_way.db
 .pytest_cache
 block_app/models/r_forrest.pkl
 block_app/logs/block_app.log
+block_app/database/block_way.db
