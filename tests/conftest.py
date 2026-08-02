@@ -16,9 +16,9 @@ def db_session():
     SessionMemory = sessionmaker(autoflush=False, bind=engine)
 
     db = SessionMemory()
-    try:
-        yield db
-    except Exception as e:
-        print(f"Exception in temporal db session. Exception: {e}")
-    finally:
-        db.close()
+    yield db
+    db.close()
+
+@pytest.fixture
+def pihole_url():
+    return "http://192.168.9.109:8080"

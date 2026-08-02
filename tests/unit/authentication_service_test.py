@@ -1,4 +1,4 @@
-from conftest import db_session
+from tests.conftest import db_session
 import block_app.models.db_models as db_models
 
 
