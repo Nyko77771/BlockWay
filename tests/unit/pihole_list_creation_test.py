@@ -39,7 +39,7 @@ def get_auth():
     print(f"CSRF obtained: {csrf}")
 
     return sid, csrf
-"""
+
 def test_add_to_pihole():
 
     sid, csrf = get_auth()
@@ -57,7 +57,7 @@ def test_add_to_pihole():
     )
 
     assert pihole_response.status_code == 201
-"""
+
 """
 def test_update_pihole_domain():
 
@@ -66,7 +66,7 @@ def test_update_pihole_domain():
     pihole_response = requests.put(
             f"{pihole_url}/api/domains/allow/exact/{DOMAIN_TO_ADD}",
             headers={
-               "X-FTL-SID": sid, "X-FTL-CSRF": csrf 
+               "X-FTL-SID": sid, "X-FTL-CSRF": csrf
             },
             json={
                 "type": "deny",
@@ -84,7 +84,7 @@ def test_update_pihole_domain():
 def test_delete_pihole_domain():
 
     sid, csrf = get_auth()
-    
+
     pihole_response = requests.delete(
         f"{pihole_url}/api/domains/allow/exact/{DOMAIN_TO_ADD}",
         headers={

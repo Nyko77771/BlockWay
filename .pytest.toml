@@ -1,6 +1,9 @@
 [pytest]
 minversion = "9.0"
 addopts = ["-v", "-ra", "-s"]
-testpaths = ["tests"]
-python_files = ["log_file_split_test.py"]
+testpaths = [
+    "tests/integration",
+    "tests/unit"
+    ]
+python_files = ["*_test.py"]
 pythonpath = ["src"]
