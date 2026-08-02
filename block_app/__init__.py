@@ -21,6 +21,7 @@ from block_app.cli.administrator import admin_reset
 # Importing Custom Services
 from block_app.services.database_service import DomainDatabase
 from block_app.services.log_service import logger
+from block_app.services.pihole_service import Pihole
 
 # Import MLThreadManager
 from block_app.services.thread_service import MLThreadManager
@@ -84,6 +85,13 @@ def make_blockway():
 
     # Starting Database
     check_start_db()
+
+    # Initialisn Pihole and adding to pihole_service
+    block_app.extensions['pihole_service'] = Pihole()
+
+    from block_app.services.dashboard_service import DashboardService
+
+    block_app.extensions['dashboard_service'] = DashboardService(block_app.extensions['pihole_service'])
 
     # Starting The ML Scanning Thread using class method
     MLThreadManager.start()

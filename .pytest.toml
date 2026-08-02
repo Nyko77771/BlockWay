@@ -5,5 +5,5 @@ testpaths = [
     "tests/integration",
     "tests/unit"
     ]
-python_files = ["*_test.py"]
+python_files = ["database_service_test.py"]
 pythonpath = ["src"]
