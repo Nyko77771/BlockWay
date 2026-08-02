@@ -22,6 +22,12 @@
         action="{{ url_for('setup.admin_setup') }}"
         class="default_admin_form"
       >
+        <div class="signin_input_group">
+          <input class="toggle_checkbox" type="checkbox" id="toggle" />
+          <label class="toggle_label" for="toggle" class="toggle_label">
+            <i>Reveal Password</i>
+          </label>
+        </div>
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required />
         <label for="password"
@@ -34,7 +40,13 @@
             </span>
           </span>
         </label>
-        <input type="password" id="password" name="password" required />
+        <input
+          class="password"
+          type="password"
+          id="password"
+          name="password"
+          required
+        />
         <button type="submit" id="btn_default_register">Register</button>
         <a
           href="{{ url_for('dashboard.home') }}"
@@ -46,4 +58,8 @@
     </div>
   </div>
 </div>
+{% endblock %}
+
+{% block script2 %}
+<script src="{{ url_for('static', filename='js/revealer.js') }}"></script>
 {% endblock %}
