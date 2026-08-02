@@ -5,7 +5,7 @@ from flask_login import login_user, logout_user, current_user
 from block_app.services.database_service import DomainDatabase
 from block_app.services.pihole_formatter_service import PiholeFormatter
 from block_app.database.database import check_admin
-
+from block_app.services.log_service import logger
 
 from block_app.services.password_service import password_hashing, password_strength
 
@@ -117,6 +117,15 @@ def signup():
             if check_admin():
                 return redirect("/setup/admin-setup")
 
+            role = new_db_user.role_type
+
+            if str(role).strip().lower() == "admin":
+                logger.info("Admin User Signing")
+                return render_template(
+                "admin_templates/dasboard_templates/admin_configurations.html",
+                current_user=backend_current_user,
+            )
+
             print("Redirecting to dashboard")
             return redirect("/dashboard")
 
@@ -169,13 +178,22 @@ def signin():
 
             # If Passwords don't match ask user to sign-in again
             if db_password != given_hashed_password:
-                render_template(
+                return render_template(
                     "unregistered_templates/signin.html",
                     message="Passwords do not match",
                     current_user=backend_current_user,
                 )
 
             login_user(db_username)
+
+            role = db_username.role_type
+
+            if str(role).strip().lower() == "admin":
+                logger.info("Admin User Signing")
+                return render_template(
+                "admin_templates/dasboard_templates/admin_configurations.html",
+                current_user=backend_current_user,
+            )
 
             return redirect("/dashboard")
         except Exception as e:

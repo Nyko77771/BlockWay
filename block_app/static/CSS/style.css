@@ -497,7 +497,7 @@ body {
   margin: 0;
   display: flex;
   align-items: center;
-  font-size: .6rem;
+  font-size: 0.6rem;
   cursor: pointer;
 }
 
@@ -670,6 +670,8 @@ body {
   max-width: 50%;
 }
 
+/* ADITIONAL PAGES */
+
 /* Pihole Add Page */
 .pihole_add_container {
   padding: 50px;
@@ -686,6 +688,114 @@ body {
   justify-content: center;
 }
 
+/* About Page */
+
+.about_background {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-height: 60px;
+  margin-top: 50px;
+  padding: 20px;
+  overflow: hidden;
+  min-height: 80vh;
+  max-width: 1100px;
+  border-radius: 20px;
+  background-image: var(--background);
+}
+
+.about_box {
+  display: flex;
+  flex-direction: row;
+  max-width: 900px;
+  width: 90vw;
+  min-height: 80vh;
+}
+
+/* Left */
+.about_image {
+  align-items: center;
+  width: 400px;
+  max-height: 600px;
+  overflow: hidden;
+  border-radius: 20px;
+  box-shadow:
+    rgba(0, 0, 0, 0.16) 0px 3px 6px,
+    rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+.about_image_box {
+  display: flex;
+  align-items: center;
+}
+
+.about_image img {
+  width: 100%;
+  height: 100%;
+}
+
+/* Right */
+
+.about_content_decorator {
+  position: relative;
+  max-width: 550px;
+  min-width: 400px;
+}
+
+.about_layer {
+  position: absolute;
+  border-radius: 25px;
+  max-width: 500px;
+  max-height: 520px;
+  min-width: 350px;
+  min-height: 560px;
+  width: 88%;
+  height: 77%;
+}
+
+/* Back Zone */
+.layer_one {
+  background: #c7d8ff;
+  top: 5px;
+  left: 68px;
+  z-index: 1;
+}
+
+/* Middle Zone */
+.layer_two {
+  background: #89aefc;
+  left: 65px;
+  z-index: 2;
+}
+
+.about_content {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  background: var(--box);
+  padding: 50px;
+  border-radius: 25px;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.12);
+  z-index: 3;
+}
+
+.about_title h2 {
+  margin: 0;
+  font-size: 42px;
+  color: var(--text);
+}
+
+.about_text {
+  margin-top: 35px;
+  color: var(--text);
+  font-size: 20px;
+}
+
+.about_text p {
+  margin-bottom: 20px;
+}
+
+/* ######################## */
 /* Pihole Select Page */
 .pihole_setup {
   display: flex;

@@ -337,7 +337,7 @@ class DomainDatabase:
             for domain in domains_in_24:
                 domain_scores.append(domain.prediction_score)
             if domain_scores:
-                average_confidence_score = sum(domain_scores) / len(domain_scores)
+                average_confidence_score = (sum(domain_scores) / len(domain_scores)) * 100
             return {
                 "total_threats": total_threats,
                 "ml_blocks": ml_blocks,

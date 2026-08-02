@@ -18,7 +18,7 @@ import datetime
 class StartService:
 
     # Initialing Method for Class
-    def __init__(self):
+    def __init__(self, pihole_service):
 
         # Loading environmental variables
         load_dotenv()
@@ -29,7 +29,7 @@ class StartService:
         # Obtaining Password from .env
         self.password = os.getenv('PASSWORD')
         # Initialising Pihole class
-        self.pihole = Pihole(address)
+        self.pihole = pihole_service
         # Setting Scheduler variable
         self.schedule = Scheduler()
         # Variable for tracking self scan

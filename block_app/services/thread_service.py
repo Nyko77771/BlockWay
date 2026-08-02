@@ -12,7 +12,7 @@ class MLThreadManager:
     has_started = False
 
     @classmethod
-    def start(cls):
+    def start(cls, service):
         logger.info("MLThreadManager.start begun")
 
         logger.info("State os ML Thread Manager: %s", cls.has_started)
@@ -22,14 +22,14 @@ class MLThreadManager:
 
         # Performing ML Analyses
         # Using Threadding to run ML scan concurrently
-        thread = threading.Thread(target=run, daemon=True)
+        thread = threading.Thread(target=run, args=(service,), daemon=True)
 
         thread.start()
         cls.has_started = True
         logger.info("Starting ML Thread")
 
-def run():
+def run(service):
     try:
-        start_scheduler()
+        start_scheduler(service)
     except Exception:
         logger.exception("ML Scheduler not working")

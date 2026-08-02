@@ -26,6 +26,12 @@ from block_app.services.pihole_service import Pihole
 # Import MLThreadManager
 from block_app.services.thread_service import MLThreadManager
 
+# Importing Dashboard Services
+from block_app.services.dashboard_service import DashboardService
+
+# Importing Start Service
+from block_app.services.start_service import StartService
+
 # Loading the enviromental variables
 dotenv.load_dotenv()
 
@@ -69,6 +75,20 @@ def make_blockway():
         db = DomainDatabase()
         return db.get_db_user_by_id(user_id)
 
+    # Starting Database
+    check_start_db()
+
+    # Initialisn Pihole and adding to pihole_service
+    pihole_service = Pihole()
+
+    start_service = StartService(pihole_service)
+
+    block_app.extensions['pihole_service'] = pihole_service
+
+    block_app.extensions['dashboard_service'] = DashboardService(block_app.extensions['pihole_service'])
+
+    block_app.extensions['start_service'] = start_service
+
     # Defining the routes functions inside the app via flask blueprint
     block_app.register_blueprint(views)
     block_app.register_blueprint(setup)
@@ -83,17 +103,7 @@ def make_blockway():
         logger.error('Error: %s', error)
         return render_template("404.html"), 404
 
-    # Starting Database
-    check_start_db()
-
-    # Initialisn Pihole and adding to pihole_service
-    block_app.extensions['pihole_service'] = Pihole()
-
-    from block_app.services.dashboard_service import DashboardService
-
-    block_app.extensions['dashboard_service'] = DashboardService(block_app.extensions['pihole_service'])
-
     # Starting The ML Scanning Thread using class method
-    MLThreadManager.start()
+    MLThreadManager.start(start_service)
 
     return block_app

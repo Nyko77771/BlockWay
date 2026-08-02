@@ -5,7 +5,7 @@ from block_app.services.log_service import logger
 lock = Lock()
 is_running = False
 
-def start_scheduler():
+def start_scheduler(start_service):
 
     global is_running
 
@@ -17,7 +17,7 @@ def start_scheduler():
             logger.info('Scheduler already running')
             return
 
-        scheduler = StartService()
+        scheduler = start_service.start()
 
         if scheduler.pihole.pihole_address is None:
             logger.warning('Piohole Address not Set')
