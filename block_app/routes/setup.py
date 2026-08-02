@@ -139,7 +139,7 @@ def setup_pihole():
 
                 response = request.form
 
-                given_address = response.get('pihole_address')
+                given_address = response.get('manual_add_password')
 
                 if given_address is None:
                     request_count += 1
@@ -179,7 +179,7 @@ def setup_scan():
     try:
         if request.method == "POST":
             net_scan = NetworkScan()
-            
+
     except Exception:
         logger.exception("An Exception was Raised")
         message = 'Try Adding Pihole Address Again'

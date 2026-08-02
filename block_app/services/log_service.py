@@ -1,4 +1,9 @@
 import logging
+import os
+
+# Creating a Logging Directory
+log_path = "./block_app/logs"
+os.makedirs(log_path, exist_ok=True)
 
 # Creating a Logger Variable
 logger = logging.getLogger("block_app")
@@ -9,7 +14,11 @@ if not logger.handlers:
     console_handler = logging.StreamHandler()
     console_handler.setLevel(logging.INFO)
 
-    file_handler = logging.FileHandler("block_app/logs/block_app.log", mode="a", encoding="utf-8")
+    file_handler = logging.FileHandler(
+        "block_app/logs/block_app.log",
+        mode="a",
+        encoding="utf-8"
+        )
     file_handler.setLevel(logging.WARNING)
 
     # Adding Formatter to Handlers

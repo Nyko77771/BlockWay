@@ -44,6 +44,9 @@ class StartService:
 
         logger.info('Starting Scheduler')
 
+        # Running Initial Scan
+        self.run_scan()
+
         while True:
             # Executing any given jobs
             self.schedule.exec_jobs()

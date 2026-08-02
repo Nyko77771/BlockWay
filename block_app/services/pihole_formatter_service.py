@@ -10,6 +10,11 @@ class PiholeFormatter:
     def check_address(self, address: str):
         try:
             logger.info('Checking Pihole Address')
+            address = str(address).strip()
+            for c in address:
+                if c.isspace():
+                    logger.warning("Pihole Address Provided Contains Whitespace")
+                    return False
             sections = urlsplit(address)
 
             scheme = sections.scheme
@@ -22,7 +27,7 @@ class PiholeFormatter:
             logger.info('URL Provided:')
             logger.info(f'Scheme: {scheme}')
             logger.info(f'UNetloc: {netloc}')
-            logger.info(f'UNetloc: {port}')
+            logger.info(f'Port: {port}')
 
             if scheme not in ('http', 'https'):
                 return False
@@ -30,7 +35,7 @@ class PiholeFormatter:
                 return False
             if not port:
                 return False
-            if path:
+            if path not in ("", "/"):
                 return False
             if query:
                 return False

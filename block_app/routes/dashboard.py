@@ -1,5 +1,5 @@
 # Importing Flask Services
-from flask import Blueprint, render_template, session, abort, jsonify
+from flask import Blueprint,render_template, session, abort, current_app
 from flask_login import login_required, current_user
 
 # Importing Custom Services
@@ -80,7 +80,7 @@ def home():
             )
 
         # Initialising Dashboard Services
-        dash_service = DashboardService()
+        dash_service = current_app.extensions['dashboard_service']
 
         # Getting general Statistical Information
         basic_stats = dash_service.get_stats()
@@ -121,7 +121,7 @@ def home():
 @dashboard.route("/threats", methods=["GET"])
 def threats():
 
-    dash_service = DashboardService()
+    dash_service = current_app.extensions['dashboard_service']
     basic_stats = dash_service.get_threat_stats()
 
     return render_template(
@@ -131,7 +131,7 @@ def threats():
 
 @dashboard.route("/system", methods=["GET"])
 def system():
-    dash_service = DashboardService()
+    dash_service = current_app.extensions['dashboard_service']
     system = dash_service.get_system_information()
     return render_template("normal_templates/dashboard_templates/system.html", current_user=user, system=system)
 
@@ -153,7 +153,7 @@ def configurations():
 
 @dashboard.route("/logs", methods=["GET"])
 def logs():
-    dash_service = DashboardService()
+    dash_service = current_app.extensions['dashboard_service']
     logs = dash_service.get_logs()
     stats = dash_service.get_log_stats()
     return render_template(

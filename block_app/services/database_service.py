@@ -130,7 +130,7 @@ class DomainDatabase:
                 .filter(db_models.User.username == username)
                 .first()
             )
-        
+
             if db_user:
                 if str(db_user.role_type) == db_models.UserRoleEnum.ADMIN.__str__:
                     return True
@@ -155,7 +155,7 @@ class DomainDatabase:
                 .filter(db_models.User.username == username)
                 .first()
             )
-        
+
             if db_user:
                 if str(db_user.role_type) == db_models.UserRoleEnum.ADMIN:
                     logger.info("No update neccessary")
@@ -168,7 +168,7 @@ class DomainDatabase:
         finally:
             logger.info("Closing Database")
             db.close()
-        
+
 
     ##############################
     # Domain Methods
@@ -358,7 +358,7 @@ class DomainDatabase:
         if domains:
             for domain in domains:
                 count += 1
-        return count      
+        return count
 
     ######################################
     # Scheduler Methods
@@ -463,8 +463,10 @@ class DomainDatabase:
         db = SessionLocal()
         try:
 
+            given_address = str(address).strip()
+
             new_pi_address = db_models.Pihole(
-                pihole_address=address,
+                pihole_address=given_address,
             )
 
             db.add(new_pi_address)
@@ -485,7 +487,7 @@ class DomainDatabase:
 
             if pihole_address:
                 pihole_address.pihole_address = address
-            
+
             db.commit()
 
         except Exception:

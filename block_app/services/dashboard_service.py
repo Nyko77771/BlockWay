@@ -16,8 +16,8 @@ from block_app.services.admin_services import AdminServices
 
 class DashboardService:
 
-    def __init__(self, address=None):
-        self.pihole = Pihole(address)
+    def __init__(self, pihole):
+        self.pihole = pihole
         self.admin = AdminServices()
 
     ### --- NORMAL OVERVIEW FUNCTIONS --- ###
@@ -51,6 +51,7 @@ class DashboardService:
             "blocked": blocked
         }
 
+    # Getrting for last 24 hour scan from pihole / database
     def get_last_24_hours(self):
 
         recent_blocked_queries = self.get_table_data()
@@ -100,6 +101,7 @@ class DashboardService:
 
         return queries
 
+    # Getting statistics for displaying
     def get_stats(self):
 
         until_time = datetime.now(timezone.utc)
@@ -205,18 +207,20 @@ class DashboardService:
         ml_blocks = 0
         allowed = 0
         average_confidence_score = 0
+        rounded_confidence_score = 0
 
         if db_stats:
             total_threats = db_stats["total_threats"]
             ml_blocks = db_stats["ml_blocks"]
             allowed = db_stats["allowed"]
             average_confidence_score = db_stats["average_confidence_score"]
+            rounded_confidence_score = round(average_confidence_score, 2)
 
         return {
             "total_threats": total_threats,
             "ml_blocks": ml_blocks,
             "allowed": allowed,
-            "average_confidence_score": average_confidence_score
+            "average_confidence_score": rounded_confidence_score
         }
 
     ### --- SYSTEM INFO FUNCTIONS --- ###
@@ -270,7 +274,7 @@ class DashboardService:
             "used_memory": used_memory,
             "available_memory": round_available_memory,
             "total_domains": total_domains,
-            "db_size": db_size 
+            "db_size": db_size
         }
 
         return system_information

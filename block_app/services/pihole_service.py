@@ -45,6 +45,7 @@ class Pihole:
             self.pihole_address = db_pihole_address
         else:
             self.pihole_address = str(address).rstrip('/')
+        logger.info(f"PIHOLE ADDRESS ADDED: {self.pihole_address}")
 
         self.pihole_password = os.getenv("PASSWORD")
         self.connectionn_checker = PiholeConnectionChecker(self)
@@ -152,7 +153,7 @@ class Pihole:
 
         logger.info("Data Obtained")
         return response.json()
-    
+
     # Method for Authenticating with Pihole Connections
     # Used to get SID and
     def authenticate(self):
@@ -163,44 +164,49 @@ class Pihole:
                 difference = current_time - self.authentication_period
 
                 if (self.sid
-                    and self.csrf 
+                    and self.csrf
                     and difference < self.authentication_cache_period):
                     logger.info("Using Existing Pihole Details")
                     return
 
             formatter = PiholeFormatter()
 
-            if self.contains_address():
+            if not self.contains_address():
+                raise RuntimeError("Pihole address is missing and not configured")
 
-                if formatter.check_address(self.pihole_address): # type: ignore
+            if formatter.check_address(self.pihole_address): # type: ignore
 
-                    logger.info("Authenticating with Pihole")
-                    logger.info(f"On address: {self.pihole_address}")
-                    
-                    pihole_response = self.session.post(
-                        f"{str(self.pihole_address).rstrip('/')}/api/auth",
-                        json={"password": self.pihole_password},
-                        timeout=5,
+                logger.info("Authenticating with Pihole")
+                logger.info(f"On address: {self.pihole_address}")
+
+                pihole_response = self.session.post(
+                    f"{str(self.pihole_address).rstrip('/')}/api/auth",
+                    json={"password": self.pihole_password},
+                    timeout=5,
+                )
+
+                data_json = pihole_response.json()
+
+                logger.info(
+                    f"Pi-hole Auth Status: {pihole_response.status_code}"
                     )
 
-                    data_json = pihole_response.json()
-                    
-                    if "session" not in data_json:
-                        logger.error(f"Pihole authentication failed")
-                        raise RuntimeError("Pihole authentication failed")
+                if "session" not in data_json:
+                    logger.error(f"Pihole authentication failed")
+                    raise RuntimeError("Pihole authentication failed")
 
-                    self.sid = data_json["session"]["sid"]
+                self.sid = data_json["session"]["sid"]
 
-                    self.csrf = data_json["session"]["csrf"]
+                self.csrf = data_json["session"]["csrf"]
 
-                    self.authentication_period = current_time
+                self.authentication_period = current_time
 
         except Exception as e:
             logger.exception(f"Authentication failure: {e}")
             self.sid = None
             self.csrf = None
             self.authentication_period = None
-            raise    
+            raise
 
     # Method for obtaining the Queries from Pihole
     def __get_queries(self):
@@ -213,7 +219,7 @@ class Pihole:
                 raise RuntimeError('Pihole Authentication is Not Established')
 
             logger.info("Getting Pihole Queries")
-            logger.info(f"On address: {self.pihole_address}")         
+            logger.info(f"On address: {self.pihole_address}")
 
             data_json = self.__make_request(method="GET",
                                             api_destination="api/queries"
@@ -221,7 +227,7 @@ class Pihole:
 
             queries = data_json["queries"]
             return queries
-        
+
         except RuntimeError:
             logger.exception('No SID or CSRF tokens found')
             raise
@@ -451,7 +457,7 @@ class Pihole:
     # Method for Adding to Pihole
     # Adds as a Domain to be Blocked
     def add_to_block_pihole_blocklist(self, domain):
-        
+
         if self.sid is None or self.csrf is None:
             self.authenticate()
 
@@ -477,7 +483,7 @@ class Pihole:
             if pihole_response.status_code in (200, 201):
                 logger.info(f"Added {domain} to Pihole")
                 return True
-            
+
             logger.error("Unable to Add Domain to Pihole: "
                             f"{pihole_response.text}")
             return False
@@ -490,7 +496,7 @@ class Pihole:
 
         if self.sid is None or self.csrf is None:
                     self.authenticate()
-        
+
         if self.sid is None or self.csrf is None:
             logger.error('Not Authenticated with Pihole')
             logger.info(f'Pihole address is: {self.pihole_address}')
@@ -513,7 +519,7 @@ class Pihole:
             if pihole_response.status_code in (200, 201):
                 logger.info(f"Added {domain} to Pihole")
                 return True
-            
+
             logger.error("Unable to Add Domain to Pihole: "
                             f"{pihole_response.text}")
             return False

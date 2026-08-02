@@ -20,7 +20,7 @@ class PiholeConnectionChecker:
             result = self.__check_connection()
             self.previous_result = result
             self.previous_check = current_time
-           
+
         return self.previous_result
 
     def __check_connection(self):
@@ -28,7 +28,7 @@ class PiholeConnectionChecker:
             logger.info('Checking Connection to Pihole')
             pihole_address = self.pihole.get_address()
             logger.info(f"Checking Pihole URL: {pihole_address}")
-            response = requests.get(str(pihole_address)+"/admin/", timeout=5)
+            response = requests.get(str(pihole_address).rstrip('/')+"/admin/", timeout=5)
             logger.info(response.status_code)
             logger.info(response.headers)
             if response.ok:
