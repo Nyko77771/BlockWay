@@ -101,8 +101,7 @@ class Pihole:
     def __make_request(self, method, api_destination, params=None, json=None):
 
         # Establishing Authentication
-        if self.sid is None or self.csrf is None:
-            self.authenticate()
+        self.authenticate()
 
         if self.sid is None or self.csrf is None:
             logger.error("Not Authenticated with Pihole")
