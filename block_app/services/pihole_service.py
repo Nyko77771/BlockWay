@@ -59,9 +59,14 @@ class Pihole:
         self.authentication_cache_period = 300
 
     def contains_address(self):
-        if self.pihole_address is None:
-            return False
-        return True
+
+        logger.info("Checking if Address is Found ")
+        address = self.database.get_pihole_address()
+
+        if address:
+            self.pihole_address = address
+            return True
+        return False
 
     def get_address(self):
         return self.database.get_pihole_address()
