@@ -1,0 +1,57 @@
+{% extends "partials/head.html"%} {% block title %} Signin {% endblock %} {%
+block content %}
+<div class="main_signin">
+  <!---->
+  <div class="signin_form_box">
+    <div class="logo_img">
+      <img
+        src="{{ url_for('static', filename='images/Logo/Logo3_Small.png') }}"
+        alt="signin logo"
+        class="signin_image"
+      />
+    </div>
+
+    {% if message %}
+    <div class="message">{{ message }}</div>
+    {% endif %}
+
+    <div class="choice_title">
+      <h1>Welcome Back!</h1>
+      <h2>Login</h2>
+    </div>
+
+    <form method="POST" action="{{ url_for('views.signin') }}">
+      <div class="signin_inputs">
+        <div class="signin_input_group">
+          <input class="toggle_checkbox" type="checkbox" id="toggle" />
+          <label class="toggle_label" for="toggle" class="toggle_label">
+            <i>Reveal Password</i>
+          </label>
+        </div>
+
+        <div>
+          <h3>Username</h3>
+          <input class="username" type="text" name="username" required />
+          <h3>Password</h3>
+          <input class="password" type="password" name="password" required />
+        </div>
+      </div>
+
+      <div class="signin_link">
+        <a href="{{ url_for('views.signup') }}" class="signup_link"
+          >Don't have an account? Sign up here.</a
+        >
+      </div>
+
+      <div class="signin_btn_group">
+        <input type="submit" value="Login" class="submit_btn" />
+        <a href="{{ url_for('views.home') }}" class="submit_btn cancel_btn"
+          >Cancel</a
+        >
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %} {% block script2 %}
+<script src="{{ url_for('static', filename='js/revealer.js') }}"></script>
+{% endblock %}

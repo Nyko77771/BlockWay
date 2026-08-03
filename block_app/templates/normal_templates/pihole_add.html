@@ -1,0 +1,32 @@
+{% extends "partials/head.html"%} {% block title %} Pihole Address Configuration
+{% endblock %} {% block content %}
+
+<div class="pihole_add_container">
+  <div class="pihole_add_box">
+    <h1>Pihole Address Addition</h1>
+    {% if message %}
+    <div class="message">{{ message }}</div>
+    {% endif %}
+    <p>We have detected that no Pihole is configured.</p>
+    <p><b>Please Add Pihole URL Address Below:</b></p>
+    <form method="POST" action="{{ url_for('setup.add_pihole') }}">
+      <label for="pihole_address">Pihole Address:</label>
+      <input
+        type="text"
+        id="pihole_address"
+        name="pihole_address"
+        placeholder="Enter Pihole URL"
+        required
+      />
+      <input type="submit" value="Add Pihole" class="submit_btn" />
+    </form>
+  </div>
+  <div class="return_box">
+    <a
+      href="{{ url_for('views.signin') }}"
+      class="submit_btn cancel_btn return_btn"
+      >Return</a
+    >
+  </div>
+</div>
+{% endblock %}

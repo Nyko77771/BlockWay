@@ -1,0 +1,124 @@
+{% extends "partials/head.html"%} 
+{% block scripts %} {% if current_user.user_id
+%}
+<script
+  src="{{ url_for('static', filename='js/chart.umd.min.js') }}"
+  defer
+></script>
+{% endif %} {% endblock %} 
+
+
+{% block navbar %} {% include
+"partials/navs/nav_logo.html" %} {% include
+"partials/navs/navbar_registered.html" %} {% endblock %} {% block title %}
+Dashboard {% endblock %} {% block content %}
+<div class="dash_container">
+  <div class="dash_nav">{% include "partials/navs/side_nav.html" %}</div>
+  <div class="dash_main">
+    <div class="dash_title">
+      <h1>Overview</h1>
+      <p>Welcome to Dashboard overview!</p>
+    </div>
+
+    <div class="dash_content">
+
+      <div class="dash_box">
+
+        <div class="dash_general_info">
+          <div class="dash_general_queries">
+            <h4>Queries</h4>
+            <div class="dash_general_queries_2"></div>
+              <p class="small_dash_text">
+                Blocked Queries (24 hours): {{  basic_stats.blocked_query or 0 }}
+              </p>
+              <p class="small_dash_text">
+                Pihole Queries (24 hours): {{ basic_stats.pi_query or 0 }}
+              </p>
+              <p class="small_dash_text">
+                BlockWay ML Queries (24 hours): {{ basic_stats.ml_query or 0 }}
+              </p>
+            </div>
+          </div>
+
+          <div class="dash_general_threats">
+            <h4>Threats Found:</h4>
+            <p class="small_dash_text">
+              Total: {{ basic_stats.total_threats or 0 }}
+            </p>
+          </div>
+
+          <div class="dash_general_ml_blocks">
+            <h4>ML Blocks:</h4>
+            <p>
+              {{ basic_stats.ml_blocks or 0 }}
+            </p>
+            <p class="small_dash_text"></p>
+          </div>
+
+          <div class="dash_general_status">
+            <h4>Status:</h4>
+            <p class="small_dash_text">
+              {{ basic_stats.activity or 0 }}
+            </p>
+          </div>
+        </div>
+
+        <div class="dash_general_graph_activity">
+          <div class="dash_general_graph_title">
+            <h3>Activity Graph (24 hours)</h3>
+          </div>
+
+          <div class="graph">
+            <canvas id="generalActivityChart"></canvas>
+            <div
+              id="activity_graph"
+              data-chart="{{ activity_graph | tojson | forceescape }}"
+            ></div>
+          </div>
+
+          <div class="graph chart">
+            <canvas id="generalBlockedAllowedChart"></canvas>
+            <div
+              id="blocked_allowed_graph"
+              data-chart="{{ chart_graph | tojson | forceescape }}"
+            ></div>
+          </div>
+
+          <div class="graph"></div>
+        </div>
+<div class="dash_general_blocked_domains">
+        <table class="dash_general_blocked_domains_table">
+          <thead>
+            <tr>
+              <th colspan="4">Blocked Domains</th>
+            </tr>
+            <tr>
+              <th>Name</th>
+              <th>Time</th>
+              <th>Source</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% if table_data %} {% for event in table_data %}
+            <tr>
+              <td>{{ event.domain }}</td>
+              <td>{{ event.time }}</td>
+              <td>{{ event.source }}</td>
+            </tr>
+            {% endfor %} {% else %}
+            <tr>
+              <td colspan="4">No blocked domains found.</td>
+            </tr>
+            {% endif %}
+          </tbody>
+        </table>
+      </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+ {% endblock %}
+ {% block script2 %}
+<script src="{{ url_for('static', filename='js/overview.js') }}" defer></script>
+{% endblock %}

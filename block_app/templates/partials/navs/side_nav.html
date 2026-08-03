@@ -1,0 +1,49 @@
+<div class="side_navbar">
+  {% if current_user.user_id and current_user.is_admin %}
+  <a
+    href="{{ url_for('dashboard.configurations') }}"
+    class="side_nav_btns {% if request.endpoint == 'dashboard.configurations' %} active_side_link {% endif %}"
+    >Configurations</a
+  >
+  <a
+    href="{{ url_for('dashboard.logs') }}"
+    class="side_nav_btns {% if request.endpoint == 'dashboard.logs' %} active_side_link {% endif %}"
+    >Logs</a
+  >
+  <a
+    href="{{ url_for('dashboard.users') }}"
+    class="side_nav_btns {% if request.endpoint == 'dashboard.users' %} active_side_link {% endif %}"
+    >Users</a
+  >
+  <a
+    href="{{ url_for('dashboard.ml') }}"
+    class="side_nav_btns {% if request.endpoint == 'dashboard.ml' %} active_side_link {% endif %}"
+    >ML Management</a
+  >
+
+
+  {% elif current_user.user_id %}
+  <a
+    href="{{ url_for('dashboard.home') }}"
+    class="side_nav_btns {% if request.endpoint == 'dashboard.home' %} active_side_link {% endif %}"
+    >Overview</a
+  >
+
+  <a
+    href="{{ url_for('dashboard.threats') }}"
+    class="side_nav_btns {% if request.endpoint == 'dashboard.threats' %} active_side_link {% endif %}"
+    >Threats</a
+  >
+  <a
+    href="{{ url_for('dashboard.system') }}"
+    class="side_nav_btns {% if request.endpoint == 'dashboard.system' %} active_side_link {% endif %}"
+    >System</a
+  >
+  <a
+    href="{{ url_for('dashboard.settings') }}"
+    class="side_nav_btns {% if request.endpoint == 'dashboard.settings' %} active_side_link {% endif %}"
+    >Settings</a
+  >
+
+  {% endif %}
+</div>

@@ -1,0 +1,99 @@
+{% extends "partials/head.html"%} 
+
+{% block navbar %} 
+{% include
+"partials/navs/nav_logo.html" %} {% include
+"partials/navs/navbar_registered.html" %} {% endblock %}
+
+{% block title %}
+Dashboard {% endblock %} 
+
+{% block content %}
+<div class="dash_container">
+
+  <div class="dash_nav">
+    {% include "partials/navs/side_nav.html" %}
+    </div>
+  
+  <div class="dash_main">
+    <div class="dash_title">
+      <h1>Logs</h1>
+      <p>Monitor applications activity and system events.</p>
+    </div>
+
+
+    <div class="dash_content">
+
+        <div class="logs_box">
+            <div class="dash_box">
+                <h3>Total Logs</h3>
+                <h4>{{ stats.total_logs }}</h4>
+            </div>
+
+            <div class="dash_box">
+                <h3>Errors</h3>
+                <h4>{{ stats.errors }}</h4>
+            </div>
+
+            <div class="dash_box">
+                <h3>Warnings</h3>
+                <h4>{{ stats.warnings }}</h4>
+            </div>
+
+        </div>
+
+        <div class="dash_box">
+            <div class="logs_filter">
+                <input type="text" id="logSearchInput" placeholder="Search ...">
+                <select id="logFilter">
+                    <option value="all">All</option>
+                    <option value="info">Info</option>
+                    <option value="warning">Warning</option>
+                    <option value="error">Error</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="dash_box">
+            <table class="log_table">
+                <thead>
+                    <tr>
+                        <th>Timestamp</th>
+                        <th>Level</th>
+                        <th>Component</th>
+                        <th>Function</th>
+                        <th>Message</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for log in logs %}
+                    <tr>
+                        <td>{{ log.timestamp }}</td>
+                        <td>
+                            {% if log.level == "INFO" %}
+                                <span class="log_level info">Info</span>
+                            {% elif log.level == "WARNING" %}
+                                <span class="log_level warning">Warning</span>
+                            {% elif log.level == "ERROR" %}
+                                <span class="log_level error">Error</span>
+                            {% else %}
+                                <span class="log_level">{{ log.level }}</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ log.component }}</td>
+                        <td>{{ log.function }}</td>
+                        <td>{{ log.message }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+  </div>
+</div>
+ {% endblock %}
+ {% block script2 %}
+<script src="{{ url_for('static', filename='js/logs.js') }}" defer></script>
+{% endblock %}

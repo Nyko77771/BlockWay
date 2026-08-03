@@ -1,0 +1,113 @@
+{% extends "partials/head.html"%} {% block navbar %} {% include
+"partials/navs/nav_logo.html" %} {% include
+"partials/navs/navbar_registered.html" %} {% endblock %} {% block title %}
+Dashboard {% endblock %} {% block content %}
+
+<div class="dash_container">
+  <div class="dash_nav">{% include "partials/navs/side_nav.html" %}</div>
+
+  <div class="dash_main">
+    <div class="dash_title">
+      <h1>System</h1>
+      <p>Manage your system settings here.</p>
+    </div>
+
+    <div class="dash_content">
+      <div class="dash_box dash_general">
+        <div class="system_title">
+          <h2>System Status</h2>
+        </div>
+        <div class="system_grid">
+          <div class="system_card">
+            <h3>Application</h3>
+            <span class="system online">Running</span>
+          </div>
+          <div class="system_card">
+            <h3>Pi-hole</h3>
+            <span class="system online">
+              {% if system.pihole %} Connected {% else %} Offline {% endif %}
+            </span>
+          </div>
+          <div class="system_card">
+            <h3>ML Scanner</h3>
+            <span class="system online">
+              {% if system.ml %} Active {% else %} Stopped {% endif %}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="dash_box dash_general">
+        <div class="system_title">
+          <h2>Version Information</h2>
+        </div>
+
+        <table class="system_table">
+          <tr>
+            <td>Application Version:</td>
+            <td>{{ system.version }}</td>
+          </tr>
+          <tr>
+            <td>Python Version:</td>
+            <td>{{ system.python }}</td>
+          </tr>
+          <tr>
+            <td>Operating System:</td>
+            <td>{{ system.os }}</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="dash_box dash_general">
+        <div class="system_title">
+          <h2>Runtime</h2>
+        </div>
+        <div class="system_table">
+          <table class="system_table">
+            <tr>
+              <td>Uptime:</td>
+              <td>{{ system.uptime }}</td>
+            </tr>
+            <tr>
+              <td>CPU Usage:</td>
+              <td>{{ system.cpu }}%</td>
+            </tr>
+            <tr>
+              <td>Memory Usage:</td>
+              <td>{{ system.used_memory }}%</td>
+            </tr>
+            <tr>
+              <td>Memory Available:</td>
+              <td>{{ system.available_memory }}%</td>
+            </tr>
+          </table>
+        </div>
+
+      </div>
+
+      <div class="dash_box dash_general">
+        <div class="system_title">
+          <h2>Database</h2>
+        </div>
+        <div class="system_table">
+          <table class="system_table">
+            <tr>
+              <td>Database Type:</td>
+              <td>SQLite</td>
+            </tr>
+            <tr>
+              <td>Total Stored Domains:</td>
+              <td>{{ system.total_domains }}</td>
+            </tr>
+            <tr>
+              <td>Size:</td>
+              <td>{{ system.db_size }}</td>
+            </tr>
+          </table>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endblock %}

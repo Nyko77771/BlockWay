@@ -1,0 +1,65 @@
+{% extends "partials/head.html"%} {% block title %} Admin Registration
+{%endblock %} {% block content %} {% if message %}
+<div class="message">{{ message }}</div>
+{% endif %}
+<div class="signup_box admin_setup_container">
+  <div class="default_admin_heading">
+    <h1>Admin Registration</h1>
+    <p>Please change your default admin details below.</p>
+  </div>
+  <div class="default_admin_details">
+    <h3>Default Admin Details</h3>
+    <p>Username: {{ user.username }}</p>
+    <p>Password: {{ user.password }}</p>
+  </div>
+  <div class="default_admin_box">
+    <div class="signup_inputs">
+      <h3 id="default_admin_form_text">
+        Please Change Your Default Admin Details
+      </h3>
+      <form
+        method="POST"
+        action="{{ url_for('setup.admin_setup') }}"
+        class="default_admin_form"
+      >
+        <div class="signin_input_group">
+          <input class="toggle_checkbox" type="checkbox" id="toggle" />
+          <label class="toggle_label" for="toggle" class="toggle_label">
+            <i>Reveal Password</i>
+          </label>
+        </div>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required />
+        <label for="password"
+          >Password:
+          <span class="tooltip">
+            &#9432;
+            <span class="tooltip_text">
+              Your password should be at least 10 characters long and contain a
+              mix of uppercase letters, lowercase letters, and numbers.
+            </span>
+          </span>
+        </label>
+        <input
+          class="password"
+          type="password"
+          id="password"
+          name="password"
+          required
+        />
+        <button type="submit" id="btn_default_register">Register</button>
+        <a
+          href="{{ url_for('dashboard.home') }}"
+          class="submit_btn cancel_btn default_admin_cancel_btn"
+        >
+          Cancel
+        </a>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block script2 %}
+<script src="{{ url_for('static', filename='js/revealer.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "partials/head.html"%} {% block navbar %} {% include
+"partials/navs/navbar_unregistered.html" %} {% endblock %} {% block title %}
+Welcome {% endblock %} {% block content %}
+
+<div class="about_background">
+  <div class="about_box">
+    <div class="about_image_box">
+      <div class="about_image">
+        <img
+          src="{{ url_for('static', filename='images/about_image.jpg') }}"
+          alt="About BlockWay"
+        />
+      </div>
+    </div>
+
+    <div class="about_content_decorator">
+      <div class="about_layer layer_one"></div>
+      <div class="about_layer layer_two"></div>
+
+      <div class="about_content">
+        <div class="about_title">
+          <h2>About BlockWay</h2>
+        </div>
+
+        <div class="about_text">
+          <p>
+            BlockWay is a smart DNS security application designed to help users
+            manage unwanted websites and improve online protection.
+          </p>
+
+          <p>
+            By combining Pi-hole DNS filtering with machine learning, BlockWay
+            analyses unknown domains and identifies potential threats before
+            they reach your network.
+          </p>
+
+          <p>
+            The application provides users with an easy-to-use dashboard where
+            they can monitor blocked domains, review threats, and manage their
+            network security.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

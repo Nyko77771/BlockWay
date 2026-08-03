@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="{{ 'dark-mode' if session.get('theme') == 'dark' }}">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,13 +8,17 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='CSS/style.css')}}"
     />
+    {% block scripts %}
+    {% endblock %}
     <title>{% block title %}BlockWay{% endblock%}</title>
     {% endblock %}
   </head>
   <body>
-    <div class="content">{% block content %}{% endblock %}</div>
-    <div class="footer">
-      {% block footer %}&copy; Copyright 2026 by Nykyta McDonald{% endblock %}
+    <div class="wrapper">
+      {% block navbar %}{% endblock %}
+      <div class="content">{% block content %}{% endblock %}</div>
     </div>
+    {% block script2 %} 
+    {% endblock %}
   </body>
 </html>

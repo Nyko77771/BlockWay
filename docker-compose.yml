@@ -5,12 +5,11 @@ services:
     image: pihole/pihole:latest
     environment:
       TZ: "Europe/Dublin"
-      FTLCONF_webserver_api_password: "@connection5"
+      FTLCONF_webserver_api_password: ${PASSWORD}
       FTLCONF_dns_listeningMode: "all"
-    ports:
-      - "8080:80"
-      - "53:53/udp"
-      - "53:53/tcp"
+    expose:
+      - "80"
+      - "53"
     volumes:
       - "/home/nykyta/pihole/etc-pihole:/etc/pihole"
     cap_add:
@@ -21,12 +20,33 @@ services:
   web:
     container_name: web
     build: .
-    ports:
-      - "8000:8000"
+    expose:
+      - "8000"
     restart: unless-stopped
     networks:
+      - my_network
+
+  caddy:
+    container_name: caddy
+    image: caddy:alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - proxy_network
       - my_network
 
 networks:
   my_network:
     driver: bridge
+  proxy_network:
+    driver: bridge
+
+volumes:
+  caddy_data:
+  caddy_config:

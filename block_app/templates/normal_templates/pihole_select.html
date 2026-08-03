@@ -1,0 +1,53 @@
+{% extends "partials/head.html"%} {% block title %} Pihole Selection {% endblock
+%} {% block content %}
+
+<div class="signup_box pihole_setup">
+  {% if message %}
+  <div class="message">{{ message }}</div>
+  {% endif %}
+
+  <h1>Pihole Selection</h1>
+  <p>We have detected that no Pihole is configured.</p>
+  <p>Please Add Pihole</p>
+  <h2>Choose Option:</h2>
+
+  <form>
+    <div class="pihole_selection_form">
+      <div class="pihole_selection_option_1">
+        <input type="radio" id="option1" name="option" value="option1" />
+        <label for="option1">Option 1: Add Pihole Manually</label><br />
+      </div>
+      <div class="pihole_selection_option_2">
+        <input type="radio" id="option2" name="option" value="option2" />
+        <label for="option2">Option 2: Auto-Detect Pihole</label><br />
+      </div>
+    </div>
+  </form>
+
+  <form method="POST" action="{{ url_for('setup.setup_scan') }}">
+    <div class="pihole_auto_selection" hidden>
+      <label for="pihole_ip">Click to scan network automatically:</label>
+      <input type="submit" id="scan_button" class="submit_btn" value="Scan" />
+    </div>
+  </form>
+
+  <form method="POST" action="{{ url_for('setup.setup_pihole') }}">
+    <div class="pihole_manual_select" hidden>
+      <label>Enter Pihole IP below:</label>
+      <input
+        type="text"
+        placeholder="Add address here:"
+        name="manual_add_password"
+      />
+      <input
+        type="submit"
+        id="manual_add_button"
+        class="submit_btn"
+        value="Enter"
+      />
+    </div>
+  </form>
+</div>
+{% endblock %} {% block script2 %}
+<script src="{{ url_for('static', filename='js/pihole_select.js') }}"></script>
+{% endblock %}

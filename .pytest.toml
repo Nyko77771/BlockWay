@@ -1,0 +1,9 @@
+[pytest]
+minversion = "9.0"
+addopts = ["-v", "-ra", "-s"]
+testpaths = [
+    "tests/integration",
+    "tests/unit"
+    ]
+python_files = ["database_service_test.py"]
+pythonpath = ["src"]

@@ -1,0 +1,18 @@
+[flake8]
+extend-ignore = E302, W503, W293, W292
+max-line-length = 105
+exclude =
+    .git,
+    .env,
+    block_app/__init__.py,
+    tests,
+    app.py,
+    .github,
+    .dockerignore,
+    Dockerfile,
+    docker-compose.yml,
+    installation.sh,
+    README.md,
+    .virt,
+    Caddyfile,
+    requirements.txt,
