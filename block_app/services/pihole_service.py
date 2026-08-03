@@ -46,6 +46,7 @@ class Pihole:
 
             self.pihole_address = db_pihole_address
         else:
+            self.database.add_pihole_address(address=address)
             self.pihole_address = str(address).rstrip("/")
         logger.info(f"PIHOLE ADDRESS ADDED: {self.pihole_address}")
 
