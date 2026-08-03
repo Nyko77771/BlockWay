@@ -31,7 +31,7 @@ if [ -e .env ]; then
 else
     echo 'Making .env'
 
-    cat << EOF >> .env
+    cat << EOF > .env
 PASSWORD=$(openssl rand -base64 12)
 SECRET=$(openssl rand -base64 32)
 EOF
