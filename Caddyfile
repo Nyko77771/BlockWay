@@ -1,7 +1,7 @@
-block-way.localhost {
+block-way.local {
     reverse_proxy web:8000
 }
 
-pihole.localhost {
+pihole.local {
     reverse_proxy pihole:80
 }
