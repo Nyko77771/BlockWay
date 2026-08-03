@@ -32,13 +32,12 @@ else
     echo 'Making .env'
 
     cat << EOF >> .env
-
 PASSWORD=$(openssl rand -base64 12)
 SECRET=$(openssl rand -base64 32)
-
-EOF
-
     echo 'Created .env file'
+EOF
+fi
+
 
 docker compose build --no-cache
 
