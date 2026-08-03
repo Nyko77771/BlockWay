@@ -71,7 +71,12 @@ def test_update_domain(db_session):
 
 
 def test_delete_domain(db_session):
-    domain = db_models.AnalysedDomains(domain_name="remove-me.com")
+    domain = db_models.AnalysedDomains(
+        domain_name="remove-me.com",
+        prediction_type="benign",
+        prediction_score=0.25,
+        blocked_domain=False,
+                                       )
 
     # Adding Domain to Database
     db_session.add(domain)
