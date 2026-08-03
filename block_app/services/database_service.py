@@ -539,7 +539,7 @@ class DomainDatabase:
                     db.commit()
                     logger.info("Deleted Last Address")
             else:
-                db_pihole_addresses = db.query(db_models.Pihole).delete()
+                db.query(db_models.Pihole).delete()
                 db.commit()
                 logger.info("Deleted Addresses")
 
