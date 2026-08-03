@@ -165,9 +165,6 @@ class Pihole:
 
             formatter = PiholeFormatter()
 
-            if not self.contains_address():
-                raise RuntimeError("Pihole address is missing and not configured")
-
             if formatter.check_address(self.pihole_address):  # type: ignore
 
                 logger.info("Authenticating with Pihole")
