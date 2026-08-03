@@ -32,8 +32,6 @@ class PiholeFormatter:
                 return False
             if not netloc:
                 return False
-            if not port:
-                return False
             if path not in ("", "/"):
                 return False
             if query:
