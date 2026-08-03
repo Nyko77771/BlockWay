@@ -28,15 +28,17 @@ echo 'Creating .env file'
 
 if [ -e .env ]; then
     echo 'File Found'
+    echo 'File to be Overwritten'
 else
     echo 'Making .env'
+fi
 
     cat << EOF > .env
 PASSWORD=$(openssl rand -base64 12)
 SECRET=$(openssl rand -base64 32)
 EOF
     echo 'Created .env file'
-fi
+
 
 
 
