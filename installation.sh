@@ -12,7 +12,7 @@ else
     echo 'Docker Found'
     echo 'Version:'
     docker --version
-fi
+
 
 
 if ! docker compose version >/dev/null 2>&1; then
@@ -23,7 +23,7 @@ else
     echo 'Docker Compose Found'
     echo 'Version:'
     docker compose version
-fi
+
 
 
 echo 'Creating .env file'
@@ -46,7 +46,11 @@ EOF
 
     docker compose up
 
+    echo 'Access your Pihole on https://pihole.localhost'
+
     echo ' Access your dashboard on https://block_way.localhost'
+
+    echo 'NOTE: Make Sure to Add pihole.localhost and block-way.localhost to hosts under this machines IP'
 
 fi
 
