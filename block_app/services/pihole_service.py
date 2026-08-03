@@ -397,7 +397,7 @@ class Pihole:
                 if logistic_probability is None:
                     continue
 
-                if logistic_probability < 0.60:
+                if logistic_probability < 0.70:
                     logger.info("Logiistic Model Determined Domain to be Benign")
                     logistic_prediction = self.ml_analyses.logistic_prediction(domain)
                     self.database.add_db_domain(
