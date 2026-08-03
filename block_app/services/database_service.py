@@ -487,6 +487,8 @@ class DomainDatabase:
 
             given_address = str(address).strip()
 
+            logger.info(f"Saving Pihole address: {address}")
+
             new_pi_address = db_models.Pihole(
                 pihole_address=given_address,
             )
@@ -498,6 +500,7 @@ class DomainDatabase:
             logger.exception("Failed to Add Pihole Address")
             logger.info("Rolling Back Address Addition")
             db.rollback()
+            raise
         finally:
             db.close()
 
