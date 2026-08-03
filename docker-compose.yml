@@ -9,7 +9,8 @@ services:
       FTLCONF_dns_listeningMode: "all"
     expose:
       - "80"
-      - "53"
+      - "53:53/udp"
+      - "53:53/tcp"
     volumes:
       - "/home/nykyta/pihole/etc-pihole:/etc/pihole"
     cap_add:
