@@ -40,15 +40,15 @@ EOF
 
     echo 'Created .env file'
 
-    docker compose build --no-cache
+docker compose build --no-cache
 
-    docker compose up -d
+docker compose up -d
 
-    echo 'Access your Pihole on https://pihole.localhost'
+echo 'Access your Pihole on https://pihole.localhost'
 
-    echo ' Access your dashboard on https://block-way.localhost'
+echo ' Access your dashboard on https://block-way.localhost'
 
-    echo 'NOTE: Make Sure to Add pihole.localhost and block-way.localhost to hosts under this machines IP'
+echo 'NOTE: Make Sure to Add pihole.localhost and block-way.localhost to hosts under this machines IP'
 
 fi
 
