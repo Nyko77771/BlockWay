@@ -25,7 +25,7 @@ def dash_checks():
 
     # Checking if Pihole Address is Present
     logger.info("Checking Pihole Address")
-    pihole = Pihole()
+    pihole = current_app.extensions['pihole_service']
     if not pihole.contains_address():
         logger.error("No Pihole Address Found")  #
         message = "Address Could not be reached. Try Again"
