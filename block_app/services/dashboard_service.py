@@ -67,7 +67,7 @@ class DashboardService:
 
         for query in recent_blocked_queries:
 
-            logger.info(f"Time {query["time"]} ; Type : {type(query["time"])}")
+            logger.info(f"Time: {query['time']} ; Type: {type(query['time'])}")
 
             if isinstance(query["time"], float) or isinstance(query["time"], int):
                 time_format = datetime.fromtimestamp(query["time"])
