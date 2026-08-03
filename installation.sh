@@ -50,7 +50,5 @@ echo ' Access your dashboard on https://block-way.localhost'
 
 echo 'NOTE: Make Sure to Add pihole.localhost and block-way.localhost to hosts under this machines IP'
 
-fi
-
 
 
