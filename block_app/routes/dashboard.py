@@ -3,7 +3,6 @@ from flask import Blueprint, render_template, session, abort, current_app
 from flask_login import login_required, current_user
 
 # Importing Custom Services
-from block_app.services.pihole_service import Pihole
 from block_app.services.database_service import DomainDatabase
 from block_app.services.log_service import logger
 
