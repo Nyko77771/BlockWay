@@ -24,7 +24,7 @@ def get_id():
     if current_user.is_authenticated:
         backend_current_user["user_id"] = current_user.id
     else:
-        redirect('/signin')
+        redirect("/signin")
 
 
 # Home Route - Initial Page
@@ -108,8 +108,10 @@ def signup():
                 db.create_default_schedule()
             else:
                 render_template(
-        "unregistered_templates/signup.html",current_user=backend_current_user, message="Please Enter URL address with a port number"
-    )
+                    "unregistered_templates/signup.html",
+                    current_user=backend_current_user,
+                    message="Please Enter URL address with a port number",
+                )
 
             # Establishing a session
             login_user(new_db_user)
@@ -122,9 +124,9 @@ def signup():
             if str(role).strip().lower() == "admin":
                 logger.info("Admin User Signing")
                 return render_template(
-                "admin_templates/dasboard_templates/admin_configurations.html",
-                current_user=backend_current_user,
-            )
+                    "admin_templates/dasboard_templates/admin_configurations.html",
+                    current_user=backend_current_user,
+                )
 
             print("Redirecting to dashboard")
             return redirect("/dashboard")
@@ -191,9 +193,9 @@ def signin():
             if str(role).strip().lower() == "admin":
                 logger.info("Admin User Signing")
                 return render_template(
-                "admin_templates/dasboard_templates/admin_configurations.html",
-                current_user=backend_current_user,
-            )
+                    "admin_templates/dasboard_templates/admin_configurations.html",
+                    current_user=backend_current_user,
+                )
 
             return redirect("/dashboard")
         except Exception as e:

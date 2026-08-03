@@ -1,5 +1,6 @@
 # Importing os module
 import os
+
 # Importing time module
 import time
 
@@ -18,6 +19,7 @@ from datetime import datetime, timedelta, timezone
 
 # Importing dotenv library for obtaining values from.env
 from dotenv import load_dotenv
+
 
 # Establishing an overall class for Pihole connections
 class Pihole:
@@ -44,7 +46,7 @@ class Pihole:
 
             self.pihole_address = db_pihole_address
         else:
-            self.pihole_address = str(address).rstrip('/')
+            self.pihole_address = str(address).rstrip("/")
         logger.info(f"PIHOLE ADDRESS ADDED: {self.pihole_address}")
 
         self.pihole_password = os.getenv("PASSWORD")
@@ -88,15 +90,11 @@ class Pihole:
         data = method(*args, **kwargs)
 
         # Add new cached item to cache list
-        self.cache[name] = {
-            "data": data,
-            "time": current_time
-        }
+        self.cache[name] = {"data": data, "time": current_time}
 
         # Returning the function if the cached program is ont found
         # Or the time expired
         return data
-
 
     # Creating Custom Method for Generating Requests
     def __make_request(self, method, api_destination, params=None, json=None):
@@ -106,13 +104,10 @@ class Pihole:
             self.authenticate()
 
         if self.sid is None or self.csrf is None:
-                        logger.error('Not Authenticated with Pihole')
-                        raise RuntimeError('Pihole Authentication is Not Established')
+            logger.error("Not Authenticated with Pihole")
+            raise RuntimeError("Pihole Authentication is Not Established")
 
-        headers = {
-            "X-FTL-SID": self.sid,
-            "X-FTL-CSRF": self.csrf
-        }
+        headers = {"X-FTL-SID": self.sid, "X-FTL-CSRF": self.csrf}
 
         response = self.session.request(
             method=method,
@@ -120,7 +115,7 @@ class Pihole:
             headers=headers,
             params=params,
             json=json,
-            timeout=5
+            timeout=5,
         )
 
         status_code = response.status_code
@@ -133,13 +128,10 @@ class Pihole:
             self.authenticate()
 
             if self.sid is None or self.csrf is None:
-                logger.error('Not Authenticated with Pihole')
-                raise RuntimeError('Pihole Authentication is Not Established')
+                logger.error("Not Authenticated with Pihole")
+                raise RuntimeError("Pihole Authentication is Not Established")
 
-            headers = {
-                    "X-FTL-SID": self.sid,
-                    "X-FTL-CSRF": self.csrf
-                }
+            headers = {"X-FTL-SID": self.sid, "X-FTL-CSRF": self.csrf}
 
             response = self.session.request(
                 method=method,
@@ -147,9 +139,8 @@ class Pihole:
                 headers=headers,
                 params=params,
                 json=json,
-                timeout=5
+                timeout=5,
             )
-
 
         logger.info("Data Obtained")
         return response.json()
@@ -163,9 +154,11 @@ class Pihole:
             if self.authentication_period:
                 difference = current_time - self.authentication_period
 
-                if (self.sid
+                if (
+                    self.sid
                     and self.csrf
-                    and difference < self.authentication_cache_period):
+                    and difference < self.authentication_cache_period
+                ):
                     logger.info("Using Existing Pihole Details")
                     return
 
@@ -174,7 +167,7 @@ class Pihole:
             if not self.contains_address():
                 raise RuntimeError("Pihole address is missing and not configured")
 
-            if formatter.check_address(self.pihole_address): # type: ignore
+            if formatter.check_address(self.pihole_address):  # type: ignore
 
                 logger.info("Authenticating with Pihole")
                 logger.info(f"On address: {self.pihole_address}")
@@ -187,12 +180,10 @@ class Pihole:
 
                 data_json = pihole_response.json()
 
-                logger.info(
-                    f"Pi-hole Auth Status: {pihole_response.status_code}"
-                    )
+                logger.info(f"Pi-hole Auth Status: {pihole_response.status_code}")
 
                 if "session" not in data_json:
-                    logger.error(f"Pihole authentication failed")
+                    logger.error("Pihole authentication failed")
                     raise RuntimeError("Pihole authentication failed")
 
                 self.sid = data_json["session"]["sid"]
@@ -215,33 +206,28 @@ class Pihole:
                 self.authenticate()
 
             if self.sid is None or self.csrf is None:
-                logger.error('Not Authenticated with Pihole')
-                raise RuntimeError('Pihole Authentication is Not Established')
+                logger.error("Not Authenticated with Pihole")
+                raise RuntimeError("Pihole Authentication is Not Established")
 
             logger.info("Getting Pihole Queries")
             logger.info(f"On address: {self.pihole_address}")
 
-            data_json = self.__make_request(method="GET",
-                                            api_destination="api/queries"
-                                            )
+            data_json = self.__make_request(method="GET", api_destination="api/queries")
 
             queries = data_json["queries"]
             return queries
 
         except RuntimeError:
-            logger.exception('No SID or CSRF tokens found')
+            logger.exception("No SID or CSRF tokens found")
             raise
-
 
     # Obtaining Recent Domains Names
     def __get__recent_domains(self, last_scan):
         try:
 
             queries = self.get_cache_data(
-                name="recent_domains",
-                method=self.__get_queries,
-                duration_time=60
-                )
+                name="recent_domains", method=self.__get_queries, duration_time=60
+            )
 
             if not queries:
                 raise RuntimeError
@@ -263,44 +249,39 @@ class Pihole:
 
             return domains
         except RuntimeError:
-            logger.exception('No queries obtained found')
+            logger.exception("No queries obtained found")
             return set()
 
     # Method for Obtaining the Domains with Status
     def __get_recent_domains_status(self, last_scan):
 
-                try:
-                    queries = self.get_cache_data(
-                        name="recent_domains",
-                        method=self.__get_queries,
-                        duration_time=40
+        try:
+            queries = self.get_cache_data(
+                name="recent_domains", method=self.__get_queries, duration_time=40
+            )
+
+            if not queries:
+                logger.warning("Nothing in queries")
+
+            logger.info("Getting Recent Queries")
+            if last_scan is None:
+                logger.info("No previous scan found. Getting all recent domains.")
+                difference = 86300
+            else:
+                difference = last_scan.timestamp()
+
+            # Using set method to create object with no duplicates
+            domains = []
+
+            for query in queries:
+                if query["time"] >= difference:
+                    domains.append(
+                        {"domain": query["domain"], "status": query["status"]}
                     )
-
-                    if not queries:
-                        logger.warning("Nothing in queries")
-
-                    logger.info("Getting Recent Queries")
-                    if last_scan is None:
-                        logger.info("No previous scan found. Getting all recent domains.")
-                        difference = 86300
-                    else:
-                        difference = last_scan.timestamp()
-
-                    # Using set method to create object with no duplicates
-                    domains = []
-
-                    for query in queries:
-                        if query["time"] >= difference:
-                            domains.append(
-                                {
-                                    "domain": query["domain"],
-                                    "status": query["status"]
-                                }
-                            )
-                    return domains
-                except RuntimeError:
-                    logger.exception('No queries obtained found')
-                    return []
+            return domains
+        except RuntimeError:
+            logger.exception("No queries obtained found")
+            return []
 
     # Method for Making Blocked and Non=Blocked List
     def __domains_split(self, last_scan):
@@ -330,7 +311,7 @@ class Pihole:
 
             return permited_domains, blocked_domains
         except RuntimeError:
-            logger.exception('No domains in queries')
+            logger.exception("No domains in queries")
             return set(), set()
 
     # Determine Status Type of Query
@@ -359,9 +340,7 @@ class Pihole:
 
         db_domains = self.database.get_db_domains()
 
-
-        permitted_domains, blocked_domains = self.__domains_split(last_scan) # type: ignore
-
+        permitted_domains, blocked_domains = self.__domains_split(last_scan)  # type: ignore
 
         unfamiliar_permitted_domains = self.__get_new_domains(
             permitted_domains, db_domains
@@ -390,21 +369,18 @@ class Pihole:
 
             last_scan = self.database.get_last_scan()
             if last_scan is None:
-                logger.error('No ML details found')
+                logger.error("No ML details found")
                 last_scan = datetime.now(timezone.utc) - timedelta(hours=24)
             return self.__get_recent_domains_status(last_scan)
         except Exception as e:
-            logger.exception('Unable to Obtain Recent Domains')
-            logger.exception(f'{e}')
+            logger.exception("Unable to Obtain Recent Domains")
+            logger.exception(f"{e}")
             return None
 
     # Method for Obtaining all of the Domains
     def __get_all_domains(self):
 
-        data_json = self.__make_request(
-            method="GET",
-            api_destination="api/domains"
-        )
+        data_json = self.__make_request(method="GET", api_destination="api/domains")
 
         return data_json["domains"]
 
@@ -421,10 +397,12 @@ class Pihole:
                 if logistic_probability is None:
                     continue
 
-                if logistic_probability < .60:
+                if logistic_probability < 0.60:
                     logger.info("Logiistic Model Determined Domain to be Benign")
                     logistic_prediction = self.ml_analyses.logistic_prediction(domain)
-                    self.database.add_db_domain(domain, "benign", logistic_prediction, is_string=True)
+                    self.database.add_db_domain(
+                        domain, "benign", logistic_prediction, is_string=True
+                    )
                 else:
                     # Analysing with better model
                     logger.info("Random Forrest Scan is Required")
@@ -436,7 +414,7 @@ class Pihole:
                         continue
 
                     # If score is high than likely Malicious
-                    if random_forrest_probability >= .80:
+                    if random_forrest_probability >= 0.80:
 
                         self.add_to_block_pihole_blocklist(domain)
                         self.database.add_db_domain(
@@ -453,7 +431,6 @@ class Pihole:
         except Exception:
             logger.exception("Exxception Occurred while Performing a Scan")
 
-
     # Method for Adding to Pihole
     # Adds as a Domain to be Blocked
     def add_to_block_pihole_blocklist(self, domain):
@@ -462,9 +439,9 @@ class Pihole:
             self.authenticate()
 
         if self.sid is None or self.csrf is None:
-            logger.error('Not Authenticated with Pihole')
-            logger.info(f'Pihole address is: {self.pihole_address}')
-            raise RuntimeError('Pihole Authentication is Not Established')
+            logger.error("Not Authenticated with Pihole")
+            logger.info(f"Pihole address is: {self.pihole_address}")
+            raise RuntimeError("Pihole Authentication is Not Established")
 
         if not self.check_pihole_domain(domain):
             logger.info("Adding Blocked Domain to Pihole")
@@ -484,10 +461,9 @@ class Pihole:
                 logger.info(f"Added {domain} to Pihole")
                 return True
 
-            logger.error("Unable to Add Domain to Pihole: "
-                            f"{pihole_response.text}")
+            logger.error("Unable to Add Domain to Pihole: " f"{pihole_response.text}")
             return False
-        logger.info(f'Domain Already Exists')
+        logger.info("Domain Already Exists")
         return False
 
     # Method for Adding to Pihole
@@ -495,12 +471,12 @@ class Pihole:
     def add_to_allow_pihole_blocklist(self, domain):
 
         if self.sid is None or self.csrf is None:
-                    self.authenticate()
+            self.authenticate()
 
         if self.sid is None or self.csrf is None:
-            logger.error('Not Authenticated with Pihole')
-            logger.info(f'Pihole address is: {self.pihole_address}')
-            raise RuntimeError('Pihole Authentication is Not Established')
+            logger.error("Not Authenticated with Pihole")
+            logger.info(f"Pihole address is: {self.pihole_address}")
+            raise RuntimeError("Pihole Authentication is Not Established")
 
         if not self.check_pihole_domain(domain):
             logger.info("Adding Allow Domain to Pihole")
@@ -520,10 +496,9 @@ class Pihole:
                 logger.info(f"Added {domain} to Pihole")
                 return True
 
-            logger.error("Unable to Add Domain to Pihole: "
-                            f"{pihole_response.text}")
+            logger.error("Unable to Add Domain to Pihole: " f"{pihole_response.text}")
             return False
-        logger.info(f'Domain Already Exists')
+        logger.info("Domain Already Exists")
         return False
 
     # Method for Deleting a Domain
@@ -533,9 +508,9 @@ class Pihole:
             self.authenticate()
 
         if self.sid is None or self.csrf is None:
-            logger.error('Not Authenticated with Pihole')
-            logger.info(f'Pihole address is: {self.pihole_address}')
-            raise RuntimeError('Pihole Authentication is Not Established')
+            logger.error("Not Authenticated with Pihole")
+            logger.info(f"Pihole address is: {self.pihole_address}")
+            raise RuntimeError("Pihole Authentication is Not Established")
 
         logger.info("Updating Pihole Domain")
 
@@ -575,13 +550,11 @@ class Pihole:
         logger.info("Checking Domain on Pihole")
 
         pihole_domains = self.get_cache_data(
-            name="pihole_domains",
-            method=self.__get_all_domains,
-            duration_time=400
-            )
+            name="pihole_domains", method=self.__get_all_domains, duration_time=400
+        )
 
         for domain in pihole_domains:
-            if domain['domain'] == given_domain:
+            if domain["domain"] == given_domain:
                 return True
         return False
 
@@ -590,14 +563,12 @@ class Pihole:
 
         logger.info("Getting Domain Type")
         pihole_domains = self.get_cache_data(
-            name="pihole_domains",
-            method=self.__get_all_domains,
-            duration_time=400
-            )
+            name="pihole_domains", method=self.__get_all_domains, duration_time=400
+        )
 
         if pihole_domains:
             for domain in pihole_domains:
-                if domain['domain'] == given_domain:
+                if domain["domain"] == given_domain:
                     if domain["type"]:
                         return domain["type"]
                     return None
@@ -612,10 +583,7 @@ class Pihole:
         data_json = self.__make_request(
             method="GET",
             api_destination="api/stats/database/summary",
-            params= {
-                "from": str(hour_ago),
-                "until": str(current_time)
-                }
+            params={"from": str(hour_ago), "until": str(current_time)},
         )
 
         return data_json
@@ -631,11 +599,7 @@ class Pihole:
         hour_ago = until_time.timestamp()
 
         summary = self.get_cache_data(
-            "database_summary",
-            self.__get_database_summary,
-            300,
-            current_time,
-            hour_ago
+            "database_summary", self.__get_database_summary, 300, current_time, hour_ago
         )
 
         return summary
@@ -645,10 +609,8 @@ class Pihole:
 
         # Getting Pihole Queries
         queries = self.get_cache_data(
-                        name="recent_domains",
-                        method=self.__get_queries,
-                        duration_time=40
-                    )
+            name="recent_domains", method=self.__get_queries, duration_time=40
+        )
 
         pihole_events = []
 
@@ -661,12 +623,11 @@ class Pihole:
                 if status != "block":
                     continue
 
-
                 pihole_events.append(
                     {
                         "time": query["time"],
-                        "domain": query['domain'],
-                        "source": 'Pihole'
+                        "domain": query["domain"],
+                        "source": "Pihole",
                     }
                 )
 
@@ -676,14 +637,11 @@ class Pihole:
         recent_db_domains = self.database.get_db_recent_domains(from_time, until_time)
 
         if recent_db_domains is None and queries is not None:
-            pihole_events.sort(
-                reverse = True,
-                key = lambda event : event["time"]
-            )
+            pihole_events.sort(reverse=True, key=lambda event: event["time"])
             return pihole_events[:5]
 
         if recent_db_domains is None and queries is None:
-            logger.warning('No domains obtained from Pihole and database.')
+            logger.warning("No domains obtained from Pihole and database.")
             return None
 
         ml_events = []
@@ -694,19 +652,15 @@ class Pihole:
                     {
                         "time": domain.date_created.timestamp(),
                         "domain": domain.domain_name,
-                        "source": 'BlockWay ML'
+                        "source": "BlockWay ML",
                     }
                 )
 
         events = pihole_events + ml_events
-        events.sort(
-            reverse = True,
-            key = lambda event : event["time"]
-        )
+        events.sort(reverse=True, key=lambda event: event["time"])
 
         logger.info(f"Pi-hole events: {pihole_events}")
         logger.info(f"ML events: {ml_events}")
         logger.info(f"Combined events: {events[:5]}")
 
         return events[:5]
-

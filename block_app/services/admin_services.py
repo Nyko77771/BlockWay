@@ -1,6 +1,7 @@
 # Importing os module
 import os
 
+
 class AdminServices:
 
     def generate_log_data(self):
@@ -24,7 +25,7 @@ class AdminServices:
                                 "component": sections[2],
                                 "function": sections[3],
                                 "application": sections[4],
-                                "message": sections[5]        
+                                "message": sections[5],
                             }
                         )
                     except Exception as e:

@@ -16,13 +16,11 @@ setup = Blueprint(
 # For Pihole Address Redirection
 request_count = 0
 
+
 @setup.route("/admin-setup", methods=["GET", "POST"])
 def admin_setup():
 
-    generic_user = {
-        "username": "Not Found",
-        "password": "Not Given"
-    }
+    generic_user = {"username": "Not Found", "password": "Not Given"}
 
     try:
 
@@ -31,7 +29,7 @@ def admin_setup():
         db_admin = db.get_default_admin()
 
         if db_admin is None:
-            message = 'Please Create an Admin Account'
+            message = "Please Create an Admin Account"
             return render_template("/setup/new-admin-setup", message=message)
 
         user = {"username": db_admin.username, "password": db_admin.password}
@@ -68,7 +66,7 @@ def admin_setup():
             if db_pihole_address is None:
                 return redirect("/setup/pihole")
 
-            return redirect('/dashboard')
+            return redirect("/dashboard")
 
     except Exception:
         logger.exception("Exception occurred")
@@ -86,6 +84,7 @@ def new_admin_setup():
 
     return render_template("normal_templates/default-admin-set.html")
 
+
 @setup.route("/add-pihole", methods=["GET", "POST"])
 def add_pihole():
     try:
@@ -93,7 +92,7 @@ def add_pihole():
 
             response = request.form
 
-            given_address = response.get('pihole_address')
+            given_address = response.get("pihole_address")
 
             if given_address is None:
                 raise Exception
@@ -108,82 +107,75 @@ def add_pihole():
                         logger.info("Updating Pihole Address")
                         db.update_pihole_address(given_address)
 
-
                 logger.info("Pihole Address Added")
                 db.add_pihole_address(given_address)
                 db.create_default_schedule()
                 return redirect("/dashboard")
             else:
-                message = 'Incorrect Address Format'
+                message = "Incorrect Address Format"
                 return render_template(
-            "normal_templates/pihole_add.html", message=message
-        )
+                    "normal_templates/pihole_add.html", message=message
+                )
 
     except Exception:
         logger.exception("Exception occurred")
         message = "Please try adding address again"
-        return render_template(
-            "normal_templates/pihole_add.html", message=message
-        )
+        return render_template("normal_templates/pihole_add.html", message=message)
     return render_template("normal_templates/pihole_add.html")
+
 
 @setup.route("/pihole", methods=["GET", "POST"])
 def setup_pihole():
-        try:
-            global request_count
+    try:
+        global request_count
 
-            if request.method == "POST":
+        if request.method == "POST":
 
-                if request_count > 3:
-                    return render_template("normal_templates/not_found.html")
+            if request_count > 3:
+                return render_template("normal_templates/not_found.html")
 
-                response = request.form
+            response = request.form
 
-                given_address = response.get('manual_add_password')
+            given_address = response.get("manual_add_password")
 
-                if given_address is None:
-                    request_count += 1
-                    raise NameError
+            if given_address is None:
+                request_count += 1
+                raise NameError
 
-                db = DomainDatabase()
-                pihole_formatter = PiholeFormatter()
+            db = DomainDatabase()
+            pihole_formatter = PiholeFormatter()
 
-                if pihole_formatter.check_address(given_address):
-                    logger.info("Pihole Address Added")
-                    db.add_pihole_address(given_address)
-                    db.create_default_schedule()
-                    return redirect("/dashboard")
-                else:
-                    logger.info("Pihole Address is Incorrect")
-                    message = 'Incorrect Address Format'
-                    return render_template(
-                "normal_templates/pihole_add.html", message=message
-            )
+            if pihole_formatter.check_address(given_address):
+                logger.info("Pihole Address Added")
+                db.add_pihole_address(given_address)
+                db.create_default_schedule()
+                return redirect("/dashboard")
+            else:
+                logger.info("Pihole Address is Incorrect")
+                message = "Incorrect Address Format"
+                return render_template(
+                    "normal_templates/pihole_add.html", message=message
+                )
 
-        except NameError:
-            logger.exception("Pihole Address not Found")
-            message = 'No Address Provided'
-            return render_template(
-                            "normal_templates/pihole_add.html", message=message
-                        )
-        except Exception:
-            logger.exception("An Exception was Raised")
-            message = 'Something Went Wrong'
-            return render_template(
-                "normal_templates/pihole_add.html", message=message
-            )
-        return render_template("normal_templates/pihole_select.html")
+    except NameError:
+        logger.exception("Pihole Address not Found")
+        message = "No Address Provided"
+        return render_template("normal_templates/pihole_add.html", message=message)
+    except Exception:
+        logger.exception("An Exception was Raised")
+        message = "Something Went Wrong"
+        return render_template("normal_templates/pihole_add.html", message=message)
+    return render_template("normal_templates/pihole_select.html")
+
 
 @setup.route("/pihole/scan", methods=["GET", "POST"])
 def setup_scan():
     try:
         if request.method == "POST":
-            net_scan = NetworkScan()
+            NetworkScan()
 
     except Exception:
         logger.exception("An Exception was Raised")
-        message = 'Try Adding Pihole Address Again'
-        return render_template(
-            "normal_templates/pihole_add.html", message=message
-        )
+        message = "Try Adding Pihole Address Again"
+        return render_template("normal_templates/pihole_add.html", message=message)
     return render_template("normal_templates/pihole_select.html")

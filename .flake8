@@ -13,6 +13,6 @@ exclude =
     docker-compose.yml,
     installation.sh,
     README.md,
-    virt,
+    .virt,
     Caddyfile,
     requirements.txt,

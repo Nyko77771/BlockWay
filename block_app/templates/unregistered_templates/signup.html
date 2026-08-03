@@ -13,57 +13,62 @@ block content %}
       action="{{ url_for('views.signup') }}"
       class="signup_form"
     >
-      <div class="signin_input_group signup_input_group">
-        <input class="toggle_checkbox" type="checkbox" id="toggle" />
-        <label class="toggle_label" for="toggle" class="toggle_label">
-        <i>Reveal Password</i>
-        </label>
-      </div>
+      <div class="signup_input_groups">
+        <div class="signin_input_group">
+          <input class="toggle_checkbox" type="checkbox" id="toggle" />
+          <label class="toggle_label" for="toggle" class="toggle_label">
+            <i>Reveal Password</i>
+          </label>
+        </div>
 
-      <div>
-      <h3>Username</h3>
-      <input type="text" name="username" required />
+        <h3>Username</h3>
+        <input type="text" name="username" required />
 
-      <h3>
-        Password
-        <span class="tooltip">
-          &#9432;
-          <span class="tooltip_text">
-            Your password should be at least 10 characters long and contain a
-            mix of uppercase letters, lowercase letters, and numbers.
+        <h3>
+          Password
+          <span class="tooltip">
+            &#9432;
+            <span class="tooltip_text">
+              Your password should be at least 10 characters long and contain a
+              mix of uppercase letters, lowercase letters, and numbers.
+            </span>
           </span>
-        </span>
-      </h3>
-      <input class="password" type="password" name="password" required />
+        </h3>
+        <input class="password" type="password" name="password" required />
 
-      <h3>
-        Confirm Password
-        <span class="tooltip">
-          &#9432;
-          <span class="tooltip_text tooltip_text_bottom">
-            Please make sure to enter the same password as above for
-            verification.
+        <h3>
+          Confirm Password
+          <span class="tooltip">
+            &#9432;
+            <span class="tooltip_text tooltip_text_bottom">
+              Please make sure to enter the same password as above for
+              verification.
+            </span>
           </span>
-        </span>
-      </h3>
-      <input class="password" type="password" name="confirm_password" required />
+        </h3>
+        <input
+          class="password"
+          type="password"
+          name="confirm_password"
+          required
+        />
 
-      <h3>
-        Pihole Address
-        <span class="tooltip">
-          &#9432;
-          <span class="tooltip_text">
-            Please enter the URL address of your Pihole Service.
+        <h3>
+          Pihole Address
+          <span class="tooltip">
+            &#9432;
+            <span class="tooltip_text">
+              Please enter the URL address of your Pihole Service.
+            </span>
           </span>
-        </span>
-      </h3>
-      <input
-        type="text"
-        name="address"
-        placeholder="E.q. https://192.168.9.10:80"
-        class="address_input"
-        required
-      />
+        </h3>
+        <input
+          type="text"
+          name="address"
+          placeholder="E.q. https://192.168.9.10:80"
+          class="address_input"
+          required
+        />
       </div>
 
       <div class="signup_btns">
@@ -83,7 +88,6 @@ block content %}
     <h1>Welcome!</h1>
   </div>
 </div>
-{% endblock %}
-{% block script2 %}
+{% endblock %} {% block script2 %}
 <script src="{{ url_for('static', filename='js/revealer.js') }}"></script>
 {% endblock %}

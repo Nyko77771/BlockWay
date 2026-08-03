@@ -15,16 +15,15 @@ if not logger.handlers:
     console_handler.setLevel(logging.INFO)
 
     file_handler = logging.FileHandler(
-        "block_app/logs/block_app.log",
-        mode="a",
-        encoding="utf-8"
-        )
+        "block_app/logs/block_app.log", mode="a", encoding="utf-8"
+    )
     file_handler.setLevel(logging.WARNING)
 
     # Adding Formatter to Handlers
     # Create Custom Logging Form
     formatter = logging.Formatter(
-        "%(asctime)s - %(levelname)s - %(filename)s - %(funcName)s - %(name)s - %(message)s", datefmt="%d-%m-%Y %H:%M:%S"
+        "%(asctime)s - %(levelname)s - %(filename)s - %(funcName)s - %(name)s - %(message)s",
+        datefmt="%d-%m-%Y %H:%M:%S",
     )
     console_handler.setFormatter(formatter)
     file_handler.setFormatter(formatter)

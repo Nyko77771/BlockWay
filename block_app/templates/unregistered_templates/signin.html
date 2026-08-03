@@ -21,23 +21,20 @@ block content %}
     </div>
 
     <form method="POST" action="{{ url_for('views.signin') }}">
-
       <div class="signin_inputs">
-
         <div class="signin_input_group">
           <input class="toggle_checkbox" type="checkbox" id="toggle" />
           <label class="toggle_label" for="toggle" class="toggle_label">
             <i>Reveal Password</i>
           </label>
         </div>
-        
+
         <div>
           <h3>Username</h3>
-          <input type="text" name="username" required />
+          <input class="username" type="text" name="username" required />
           <h3>Password</h3>
           <input class="password" type="password" name="password" required />
         </div>
-      
       </div>
 
       <div class="signin_link">
@@ -53,10 +50,8 @@ block content %}
         >
       </div>
     </form>
-
   </div>
 </div>
-{% endblock %}
-{% block script2 %}
+{% endblock %} {% block script2 %}
 <script src="{{ url_for('static', filename='js/revealer.js') }}"></script>
 {% endblock %}

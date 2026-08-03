@@ -1,4 +1,3 @@
-
 # Importing App Creating Method
 from block_app import make_blockway
 

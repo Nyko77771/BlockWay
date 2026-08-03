@@ -1,6 +1,7 @@
 import psutil
 import socket
 
+
 class NetworkScan:
     def scan_network(self):
         addresses = psutil.net_if_addrs()
@@ -12,7 +13,7 @@ class NetworkScan:
             if interface not in stats or not stats[interface].isup:
                 continue
             for addr in addresses_list:
-                if addr.family != socket.AF_INET :
+                if addr.family != socket.AF_INET:
                     continue
                 if addr.address.startswith("169.254"):
                     continue

@@ -1,15 +1,14 @@
 # Importing urlib library for url analysis
 from urllib.parse import urlsplit
-# Importing request to establish API connection
-import requests
 
 # Importing Custom Logger:
 from block_app.services.log_service import logger
 
+
 class PiholeFormatter:
     def check_address(self, address: str):
         try:
-            logger.info('Checking Pihole Address')
+            logger.info("Checking Pihole Address")
             address = str(address).strip()
             for c in address:
                 if c.isspace():
@@ -24,12 +23,12 @@ class PiholeFormatter:
             query = sections.query
             fragment = sections.fragment
 
-            logger.info('URL Provided:')
-            logger.info(f'Scheme: {scheme}')
-            logger.info(f'UNetloc: {netloc}')
-            logger.info(f'Port: {port}')
+            logger.info("URL Provided:")
+            logger.info(f"Scheme: {scheme}")
+            logger.info(f"UNetloc: {netloc}")
+            logger.info(f"Port: {port}")
 
-            if scheme not in ('http', 'https'):
+            if scheme not in ("http", "https"):
                 return False
             if not netloc:
                 return False
@@ -46,6 +45,3 @@ class PiholeFormatter:
 
         except Exception:
             return False
-
-
-

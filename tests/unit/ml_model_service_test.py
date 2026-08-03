@@ -39,37 +39,35 @@ class FakeModelAnalysis:
 
 # Unit Testing:
 
+
 def test_feature_creation():
     fake_analysis = FakeModelAnalysis()
 
     result = fake_analysis.create_features(5)
-    assert result == [
-        5, 5, 5
-    ]
+    assert result == [5, 5, 5]
+
 
 def test_feature_default():
     fake_analysis = FakeModelAnalysis()
 
     result = fake_analysis.create_features()
-    assert result == [
-        1, 1, 1
-    ]
+    assert result == [1, 1, 1]
+
 
 def test_malicious_prediction():
     fake_analysis = FakeModelAnalysis()
 
-    result = fake_analysis.logistic_model.predict('malicious')
+    result = fake_analysis.logistic_model.predict("malicious")
 
     assert result == 1
+
 
 def test_benign_prediction():
     fake_analysis = FakeModelAnalysis()
 
-    result = fake_analysis.logistic_model.predict('benign')
+    result = fake_analysis.logistic_model.predict("benign")
 
     assert result == 0
-
-
 
 
 def test_zip_opening():

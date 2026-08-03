@@ -1,4 +1,5 @@
 """This module creates the block_way app"""
+
 import os
 import dotenv
 
@@ -35,11 +36,11 @@ from block_app.services.start_service import StartService
 # Loading the enviromental variables
 dotenv.load_dotenv()
 
+
 # Making a function for block app creation
 def make_blockway():
-
     """Defines Flask App"""
-    logger.info('Creating Block_App')
+    logger.info("Creating Block_App")
 
     # Creating Flask Instance
     block_app = Flask(__name__)
@@ -55,19 +56,18 @@ def make_blockway():
 
     Talisman(
         block_app,
-        content_security_policy = csp,
-        strict_transport_security = True,
-        strict_transport_security_max_age = 31536000,
-        strict_transport_security_include_subdomains = True,
+        content_security_policy=csp,
+        strict_transport_security=True,
+        strict_transport_security_max_age=31536000,
+        strict_transport_security_include_subdomains=True,
     )
-
 
     # !!! TO ADD ENCRYPTION HERE!!!
     block_app.secret_key = os.getenv("SECRET")
 
     login_manager = LoginManager()
     login_manager.init_app(block_app)
-    login_manager.login_view = 'views.signin' # type: ignore
+    login_manager.login_view = "views.signin"  # type: ignore
     login_manager.login_message = "Login to access page."
 
     @login_manager.user_loader
@@ -83,11 +83,13 @@ def make_blockway():
 
     start_service = StartService(pihole_service)
 
-    block_app.extensions['pihole_service'] = pihole_service
+    block_app.extensions["pihole_service"] = pihole_service
 
-    block_app.extensions['dashboard_service'] = DashboardService(block_app.extensions['pihole_service'])
+    block_app.extensions["dashboard_service"] = DashboardService(
+        block_app.extensions["pihole_service"]
+    )
 
-    block_app.extensions['start_service'] = start_service
+    block_app.extensions["start_service"] = start_service
 
     # Defining the routes functions inside the app via flask blueprint
     block_app.register_blueprint(views)
@@ -100,7 +102,7 @@ def make_blockway():
     # Handling Not Found Errors Globally
     @block_app.errorhandler(404)
     def page_not_found(error):
-        logger.error('Error: %s', error)
+        logger.error("Error: %s", error)
         return render_template("404.html"), 404
 
     # Starting The ML Scanning Thread using class method

@@ -33,19 +33,15 @@ class DomainDatabase:
             logger.info("Closing Database")
             db.close()
 
-
-
     # Method for Getting User by ID
     def get_db_user_by_id(self, user_id):
         db = SessionLocal()
         try:
             logger.info("Checking User by ID")
-            logger.info(f'User ID: {user_id}')
+            logger.info(f"User ID: {user_id}")
 
             db_user = (
-                db.query(db_models.User)
-                .filter(db_models.User.id == user_id)
-                .first()
+                db.query(db_models.User).filter(db_models.User.id == user_id).first()
             )
 
             return db_user
@@ -169,7 +165,6 @@ class DomainDatabase:
             logger.info("Closing Database")
             db.close()
 
-
     ##############################
     # Domain Methods
     def get_db_domains(self):
@@ -187,13 +182,15 @@ class DomainDatabase:
             db.close()
 
     # Method for Adding Domains
-    def add_db_domain(self, domain, prediction_type, score, is_string: bool,  added_to_pihole=False):
+    def add_db_domain(
+        self, domain, prediction_type, score, is_string: bool, added_to_pihole=False
+    ):
         db = SessionLocal()
         try:
             logger.info("Adding Domains")
 
             # Checks to see if the domain already exists
-            if not self.__not_existing_domain(domain, is_string):#
+            if not self.__not_existing_domain(domain, is_string):  #
                 # Not - then is added
                 new_domain = db_models.AnalysedDomains(
                     domain_name=domain,
@@ -213,7 +210,9 @@ class DomainDatabase:
             # If Yes (its in database) - Then Update
             else:
                 if is_string:
-                    self.update_db_domain_string(domain, prediction_type, score, added_to_pihole)
+                    self.update_db_domain_string(
+                        domain, prediction_type, score, added_to_pihole
+                    )
                 self.update_db_domain(domain)
         except Exception:
             logger.exception("Failed to Add Domain")
@@ -227,16 +226,20 @@ class DomainDatabase:
         db = SessionLocal()
         try:
 
-            existing_domain = db.query(db_models.AnalysedDomains).filter(db_models.AnalysedDomains.domain_name == str(domain)).first()
+            existing_domain = (
+                db.query(db_models.AnalysedDomains)
+                .filter(db_models.AnalysedDomains.domain_name == str(domain))
+                .first()
+            )
 
             if existing_domain is not None:
                 existing_domain.prediction_type = prediction_type
                 existing_domain.prediction_score = score
-                existing_domain.blocked_domain = prediction_type == 'malicious'
+                existing_domain.blocked_domain = prediction_type == "malicious"
                 existing_domain.added_to_pihole = added_to_pihole
                 db.commit()
-                logger.info('Domain Information Updated')
-            logger.info('Domain Does not Exist')
+                logger.info("Domain Information Updated")
+            logger.info("Domain Does not Exist")
         except Exception:
             db.rollback()
             logger.exception("Failed Updating Domain")
@@ -248,7 +251,11 @@ class DomainDatabase:
         db = SessionLocal()
         try:
 
-            existing_domain = db.query(db_models.AnalysedDomains).filter(db_models.AnalysedDomains.domain_name == domain.domain_name).first()
+            existing_domain = (
+                db.query(db_models.AnalysedDomains)
+                .filter(db_models.AnalysedDomains.domain_name == domain.domain_name)
+                .first()
+            )
 
             if existing_domain is not None:
                 existing_domain.prediction_type = domain.prediction_type
@@ -256,8 +263,8 @@ class DomainDatabase:
                 existing_domain.blocked_domain = domain.blocked_domain
                 existing_domain.added_to_pihole = domain.added_to_pihole
                 db.commit()
-                logger.info('Domain Information Updated')
-            logger.info('Domain Does not Exist')
+                logger.info("Domain Information Updated")
+            logger.info("Domain Does not Exist")
         except Exception:
             db.rollback()
             logger.exception("Failed Updating Domain")
@@ -272,7 +279,7 @@ class DomainDatabase:
 
             db_domains = db.query(db_models.AnalysedDomains).all()
 
-            difference = (from_time - until_time)
+            difference = from_time - until_time
 
             recent_domains = []
 
@@ -283,7 +290,7 @@ class DomainDatabase:
 
             return recent_domains
         except Exception:
-            logger.exception('An Exception Occurred')
+            logger.exception("An Exception Occurred")
         finally:
             db.close()
 
@@ -296,7 +303,7 @@ class DomainDatabase:
             malicious_list = []
             if db_malicious is not None:
                 for domain in db_malicious:
-                    if domain.blocked_domain == True:
+                    if domain.blocked_domain is True:
                         malicious_list.append(domain)
                 return malicious_list
             return None
@@ -310,9 +317,17 @@ class DomainDatabase:
         db = SessionLocal()
         try:
             if is_str:
-                existing_domain = db.query(db_models.AnalysedDomains).filter(db_models.AnalysedDomains.domain_name == str(domain)).first()
+                existing_domain = (
+                    db.query(db_models.AnalysedDomains)
+                    .filter(db_models.AnalysedDomains.domain_name == str(domain))
+                    .first()
+                )
             else:
-                existing_domain = db.query(db_models.AnalysedDomains).filter(db_models.AnalysedDomains.domain_name == domain.domain_name).first()
+                existing_domain = (
+                    db.query(db_models.AnalysedDomains)
+                    .filter(db_models.AnalysedDomains.domain_name == domain.domain_name)
+                    .first()
+                )
 
             if existing_domain:
                 return True
@@ -328,21 +343,29 @@ class DomainDatabase:
         db = SessionLocal()
         try:
             last_24_hours = datetime.now(timezone.utc) - timedelta(hours=24)
-            domains_in_24 = db.query(db_models.AnalysedDomains).filter(db_models.AnalysedDomains.date_created >= last_24_hours)
+            domains_in_24 = db.query(db_models.AnalysedDomains).filter(
+                db_models.AnalysedDomains.date_created >= last_24_hours
+            )
             total_threats = domains_in_24.count()
-            ml_blocks = domains_in_24.filter(db_models.AnalysedDomains.blocked_domain.is_(True)).count()
-            allowed_scans = domains_in_24.filter(db_models.AnalysedDomains.blocked_domain.is_(False)).count()
+            ml_blocks = domains_in_24.filter(
+                db_models.AnalysedDomains.blocked_domain.is_(True)
+            ).count()
+            allowed_scans = domains_in_24.filter(
+                db_models.AnalysedDomains.blocked_domain.is_(False)
+            ).count()
             average_confidence_score = 0
             domain_scores = []
             for domain in domains_in_24:
                 domain_scores.append(domain.prediction_score)
             if domain_scores:
-                average_confidence_score = (sum(domain_scores) / len(domain_scores)) * 100
+                average_confidence_score = (
+                    sum(domain_scores) / len(domain_scores)
+                ) * 100
             return {
                 "total_threats": total_threats,
                 "ml_blocks": ml_blocks,
                 "allowed": allowed_scans,
-                "average_confidence_score": average_confidence_score
+                "average_confidence_score": average_confidence_score,
             }
 
         except Exception:
@@ -409,21 +432,19 @@ class DomainDatabase:
     def create_default_schedule(self):
         db = SessionLocal()
         try:
-            logger.info('Checking ML Schedule')
+            logger.info("Checking ML Schedule")
 
-            existing_schedule = (
-                db.query(db_models.ScheduleConfiguration).first()
-            )
+            existing_schedule = db.query(db_models.ScheduleConfiguration).first()
 
             if existing_schedule:
-                logger.info('ML Schedule Already Created')
+                logger.info("ML Schedule Already Created")
                 return existing_schedule
 
-            logger.info('Creating default ML Schedule')
+            logger.info("Creating default ML Schedule")
             schedule = db_models.ScheduleConfiguration(
-                last_scan = None,
-                next_scan = datetime.now(timezone.utc),
-                last_scan_status = db_models.ScanStatus.NOT_STARTED
+                last_scan=None,
+                next_scan=datetime.now(timezone.utc),
+                last_scan_status=db_models.ScanStatus.NOT_STARTED,
             )
 
             db.add(schedule)
@@ -432,10 +453,9 @@ class DomainDatabase:
             return schedule
         except Exception:
             db.rollback()
-            logger.exception('Failed creating ML Schedule')
+            logger.exception("Failed creating ML Schedule")
         finally:
             db.close()
-
 
     ######################################
     # Pihole Methods
@@ -483,7 +503,11 @@ class DomainDatabase:
         db = SessionLocal()
         try:
 
-            pihole_address = db.query(db_models.Pihole).filter(db_models.Pihole.pihole_address == address).first()
+            pihole_address = (
+                db.query(db_models.Pihole)
+                .filter(db_models.Pihole.pihole_address == address)
+                .first()
+            )
 
             if pihole_address:
                 pihole_address.pihole_address = address

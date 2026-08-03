@@ -37,28 +37,30 @@ class DomainAnalyses:
 
         # First checking if domain is in correct format
         if not self._check_domain(url):
-            logger.exception(f'Domain {url} is invalid')
+            logger.exception(f"Domain {url} is invalid")
             return None
 
-        features = pd.DataFrame([{
-            "Length": self._make_length(url),
-            "Has_IP": self._make_has_ip(url),
-            "Digit_Count": self._make_digit_count(url),
-            "Dot_Count":  self.__make_dot_count(url),
-            "Has_Subdomain": self.__make_has_subdomain(url),
-            "Subdomain_Count": self.__make_subdomain_count(url),
-            "Hyphen_Count": self.__make_hyphen_count(url),
-            "Special_Count": self.__make_special_count(url),
-            "Host_in_Subdomain": self.__make_host_in_subdomain(url),
-            "Host_in_Domain": self.__make_host_in_domain(url),
-            "Similarity": self.__make_similarity(url),
-            "Has_com": self.__make_has_com(url),
-            "Has_org": self.__make_has_org(url),
-            "Has_Country_Code": self.__make_has_country_code(url),
-            }])
+        features = pd.DataFrame(
+            [
+                {
+                    "Length": self._make_length(url),
+                    "Has_IP": self._make_has_ip(url),
+                    "Digit_Count": self._make_digit_count(url),
+                    "Dot_Count": self.__make_dot_count(url),
+                    "Has_Subdomain": self.__make_has_subdomain(url),
+                    "Subdomain_Count": self.__make_subdomain_count(url),
+                    "Hyphen_Count": self.__make_hyphen_count(url),
+                    "Special_Count": self.__make_special_count(url),
+                    "Host_in_Subdomain": self.__make_host_in_subdomain(url),
+                    "Host_in_Domain": self.__make_host_in_domain(url),
+                    "Similarity": self.__make_similarity(url),
+                    "Has_com": self.__make_has_com(url),
+                    "Has_org": self.__make_has_org(url),
+                    "Has_Country_Code": self.__make_has_country_code(url),
+                }
+            ]
+        )
         return features
-
-
 
     def __prediction(self, model, url, logistic=False):
         x_test = self.create_x_features(url)
@@ -111,7 +113,9 @@ class DomainAnalyses:
 
     # Method for uploading popular domains csv
     def __get_popular_domains(self):
-        self.popular_domain_data_frame = pd.read_csv("block_app/models/popular_domains.csv")
+        self.popular_domain_data_frame = pd.read_csv(
+            "block_app/models/popular_domains.csv"
+        )
         return
 
     # Method For Checking if Domain was given
@@ -120,7 +124,6 @@ class DomainAnalyses:
             sections = tld.extract(url)
             sections = tld.extract(url)
             domain = sections.domain
-            subdomain = sections.subdomain
             suffix = sections.suffix
 
             if str(url).startswith("_"):
@@ -129,15 +132,10 @@ class DomainAnalyses:
             if "._" in url:
                 return False
 
-            if (
-                domain
-                and suffix
-            ):
+            if domain and suffix:
                 regex = r"^(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$"
 
-                return bool(
-                    re.fullmatch(regex, url)
-                )
+                return bool(re.fullmatch(regex, url))
 
         except Exception:
             logger.exception(f"Domain validation failed {url}")
@@ -222,7 +220,7 @@ class DomainAnalyses:
         sections = tld.extract(url)
         hostname = sections.domain.lower()
         best_score = 0
-        for domain in self.popular_domain_data_frame["Domain"]: # type: ignore
+        for domain in self.popular_domain_data_frame["Domain"]:  # type: ignore
             similiraty_score = Levenshtein.ratio(domain, hostname)
             if similiraty_score > best_score:
                 return similiraty_score

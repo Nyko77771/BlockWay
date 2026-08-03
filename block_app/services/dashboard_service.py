@@ -1,18 +1,23 @@
 # Importin os library to traverse file locations
 import os
+
 # Importing platform library to get information about platform
 import platform
+
 # Importing time module
 import time
+
 # Importing psutil utility
 import psutil
+
 #  Importing datetime
-from datetime import datetime, timezone, timedelta, tzinfo
+from datetime import datetime, timezone, timedelta
+
 # Importing Custom Services
 from block_app.services.log_service import logger
-from block_app.services.pihole_service import Pihole
 from block_app.services.run_ml_start_service import is_running
 from block_app.services.admin_services import AdminServices
+
 
 class DashboardService:
 
@@ -20,7 +25,8 @@ class DashboardService:
         self.pihole = pihole
         self.admin = AdminServices()
 
-    ### --- NORMAL OVERVIEW FUNCTIONS --- ###
+    # --- NORMAL OVERVIEW FUNCTIONS ---
+
     def get_table_data(self, time_conversion=False):
         if self.pihole.contains_address():
             recent_blocked_clients = self.pihole.get_recent_blocked_clients()
@@ -46,10 +52,7 @@ class DashboardService:
 
         logger.info(f"Blocked: {blocked}, Allowed: {allowed}")
 
-        return {
-            "allowed": allowed,
-            "blocked": blocked
-        }
+        return {"allowed": allowed, "blocked": blocked}
 
     # Getrting for last 24 hour scan from pihole / database
     def get_last_24_hours(self):
@@ -57,10 +60,7 @@ class DashboardService:
         recent_blocked_queries = self.get_table_data()
 
         if recent_blocked_queries is None:
-            return {
-                "labels": [],
-                "values": []
-            }
+            return {"labels": [], "values": []}
 
         hourly_queries = [0] * 24
         queries = {}
@@ -83,20 +83,13 @@ class DashboardService:
 
             hourly_queries[hour] += 1
 
-        labels = [
-            f"{hour:02d}:00"
-            for hour in range(24)
-        ]
+        labels = [f"{hour:02d}:00" for hour in range(24)]
 
-        queries = {
-                "labels": labels,
-                "values": hourly_queries
+        queries = {"labels": labels, "values": hourly_queries}
 
-            }
-
-        i=1
+        i = 1
         for query in queries:
-            logger.info(f'Query {i}: {query}')
+            logger.info(f"Query {i}: {query}")
             i += 1
 
         return queries
@@ -121,20 +114,18 @@ class DashboardService:
 
         logger.info(f"Pihole Domains found: {pihole_queries}")
 
-
         if db_queries:
             for query in db_queries:
                 query_created = query.date_created
-                query_with_utc = self.__get_timezone(query_created) # type: ignore
+                query_with_utc = self.__get_timezone(query_created)  # type: ignore
 
                 print(query_created, query_created.tzinfo)
                 print(from_time, from_time.tzinfo)
 
-                if query_with_utc >= from_time: # type: ignore
+                if query_with_utc >= from_time:  # type: ignore
                     ml_totals += 1
-                    if query.blocked_domain: # type: ignore
+                    if query.blocked_domain:  # type: ignore
                         ml_blocked += 1
-
 
         if pihole_queries is not None:
             pi_totals = pihole_queries["sum_queries"]
@@ -161,12 +152,11 @@ class DashboardService:
             return passed_datetime.replace(tzinfo=timezone.utc)
         return passed_datetime
 
-
     # Method for Getting Recently Blocked Domains
     def __get_blocked_allowed(self):
-         if self.pihole.contains_address():
-             return self.pihole.get_recent_pihole_domains()
-         return None
+        if self.pihole.contains_address():
+            return self.pihole.get_recent_pihole_domains()
+        return None
 
     # Method for Converting UNIX Timestamp to Datetime (H:M:S)
     def __convert_time(self, queries_list):
@@ -176,12 +166,16 @@ class DashboardService:
         for query in queries_list:
 
             try:
-                query_time =  query['time']
+                query_time = query["time"]
 
                 if isinstance(query_time, float) or isinstance(query["time"], int):
-                    format_time = datetime.fromtimestamp(query["time"]).strftime("%H:%M:%S")
+                    format_time = datetime.fromtimestamp(query["time"]).strftime(
+                        "%H:%M:%S"
+                    )
                 elif isinstance(query_time, str):
-                    format_time = datetime.fromisoformat(query["time"]).strftime("%H:%M:%S")
+                    format_time = datetime.fromisoformat(query["time"]).strftime(
+                        "%H:%M:%S"
+                    )
                 else:
                     format_time = "Unknown"
 
@@ -192,14 +186,14 @@ class DashboardService:
                 {
                     "time": format_time,
                     "domain": query["domain"],
-                    "source": query["source"]
+                    "source": query["source"],
                 }
             )
 
             return appended_queries
 
-    ### --- THREAT FUNCTIONS --- ###
-    def get_threat_stats(self):#
+    # --- THREAT FUNCTIONS ---
+    def get_threat_stats(self):  #
 
         db_stats = self.pihole.database.get_threat_stats()
 
@@ -220,10 +214,10 @@ class DashboardService:
             "total_threats": total_threats,
             "ml_blocks": ml_blocks,
             "allowed": allowed,
-            "average_confidence_score": rounded_confidence_score
+            "average_confidence_score": rounded_confidence_score,
         }
 
-    ### --- SYSTEM INFO FUNCTIONS --- ###
+    # --- SYSTEM INFO FUNCTIONS ---
     def get_system_information(self):
 
         logger.info("Getting System Information")
@@ -237,7 +231,7 @@ class DashboardService:
         ml = self.__check_ml_status()
 
         # Getting Version
-        version =self.__get_current_system_version()
+        version = self.__get_current_system_version()
 
         # Getting System's Python Version
         python = platform.python_version()
@@ -262,7 +256,6 @@ class DashboardService:
         # Getting db size
         db_size = self.__get_db_size()
 
-
         system_information = {
             "pihole": pihole,
             "ml": ml,
@@ -274,7 +267,7 @@ class DashboardService:
             "used_memory": used_memory,
             "available_memory": round_available_memory,
             "total_domains": total_domains,
-            "db_size": db_size
+            "db_size": db_size,
         }
 
         return system_information
@@ -287,7 +280,7 @@ class DashboardService:
             size_in_mb = db_size / (1024 * 1024)
             rounded_size = round(size_in_mb, 2)
             return f"{rounded_size}mb"
-        return 'Unknown'
+        return "Unknown"
 
     # Method for Countig total of Processed Domains
     def __get_domain_totals(self):
@@ -303,16 +296,15 @@ class DashboardService:
         logger.info("Getting Uptime Details")
         seconds = int(time.time() - psutil.boot_time())
 
-        days, days_remainder = divmod(seconds, 86400) # minutes * hour * day = 86400
-        hours, hours_remainder = divmod(days_remainder, 3600) # minutes * hour = 3600
-        minutes, minutes_remainder = divmod(hours_remainder, 60) # hour (60)
+        days, days_remainder = divmod(seconds, 86400)  # minutes * hour * day = 86400
+        hours, hours_remainder = divmod(days_remainder, 3600)  # minutes * hour = 3600
+        minutes, minutes_remainder = divmod(hours_remainder, 60)  # hour (60)
         return f"{days}Day {hours}Hours {minutes}Minutes"
-
 
     # Method for checking ML Service Status
     def __check_ml_status(self):
         if is_running:
-            return 'Active'
+            return "Active"
         else:
             return "Offline"
 
@@ -320,8 +312,6 @@ class DashboardService:
     def __get_current_system_version(self):
         return "BlockWay v1"
 
-
-    #################################################
     # ADMIN Aligned Functions
 
     # Function for Getting Logs
@@ -334,7 +324,7 @@ class DashboardService:
         logs = self.admin.generate_log_data()
 
         # Getting Size
-        total_logs = len(logs)
+        len(logs)
 
         # Getting Totals
         total_errors = 0
@@ -343,11 +333,11 @@ class DashboardService:
 
         for log in logs:
             if log["level"] == "ERROR":
-                total_errors  += 1
+                total_errors += 1
             if log["level"] == "WARNING":
-                total_warnings  += 1
+                total_warnings += 1
             if log["level"] == "INFO":
-                total_info  += 1
+                total_info += 1
 
         # Getting Information About Last Update:
         last_update = "Unknown"
@@ -359,5 +349,5 @@ class DashboardService:
             "errors": total_errors,
             "warnings": total_warnings,
             "info": total_info,
-            "last_update": last_update
+            "last_update": last_update,
         }

@@ -1,5 +1,4 @@
 # Importing Local Services
-from block_app.services.pihole_service import Pihole
 from block_app.services.database_service import DomainDatabase
 
 from block_app.services.log_service import logger
@@ -15,6 +14,7 @@ from scheduler import Scheduler
 # Importing datetime
 import datetime
 
+
 class StartService:
 
     # Initialing Method for Class
@@ -25,9 +25,8 @@ class StartService:
 
         # Initialing the Database
         self.database = DomainDatabase()
-        address = self.database.get_pihole_address()
         # Obtaining Password from .env
-        self.password = os.getenv('PASSWORD')
+        self.password = os.getenv("PASSWORD")
         # Initialising Pihole class
         self.pihole = pihole_service
         # Setting Scheduler variable
@@ -37,12 +36,12 @@ class StartService:
 
     def make_scheduler(self):
         # Creating a scheduled job
-        self.schedule.minutely(datetime.time(second=10),self.run_scan)
+        self.schedule.minutely(datetime.time(second=10), self.run_scan)
 
     # Method for Starting Scheduled Scans
     def start(self):
 
-        logger.info('Starting Scheduler')
+        logger.info("Starting Scheduler")
 
         # Running Initial Scan
         self.run_scan()
@@ -58,21 +57,23 @@ class StartService:
     def run_scan(self):
 
         if self.scanning:
-            logger.warning('Scan is Running')
+            logger.warning("Scan is Running")
             return
         self.scanning = True
 
-        logger.info('##### Starting scheduled ML Analyses ######')
+        logger.info("##### Starting scheduled ML Analyses ######")
 
         try:
 
-            logger.info('Establishing Pihole Connection')
+            logger.info("Establishing Pihole Connection")
             # Getting SID and CSRF
             self.pihole.authenticate()
 
             last_scan = self.database.get_last_scan()
 
-            self.permitted_domains, self.blocked_domains = self.pihole.pihole_domain_analyses(last_scan)
+            self.permitted_domains, self.blocked_domains = (
+                self.pihole.pihole_domain_analyses(last_scan)
+            )
 
             outcome_permmitted = self.pihole.domains_scan(self.permitted_domains)
 
@@ -87,5 +88,5 @@ class StartService:
 
             self.database.update_last_scan(message)
         except Exception:
-            logger.exception('Exception Occurred While Perfoming a Scan')
-            logger.exception('Scheduled Scan Failed')
+            logger.exception("Exception Occurred While Perfoming a Scan")
+            logger.exception("Scheduled Scan Failed")

@@ -1,6 +1,7 @@
 """
 Adding to Pihole Tests
 """
+
 import requests
 import pytest
 
@@ -11,6 +12,7 @@ csrf = None
 
 # Domainn to Add
 DOMAIN_TO_ADD = "Some_Domain_I_Made_Up.com"
+
 
 def get_auth():
     pihole_response = requests.post(
@@ -40,6 +42,7 @@ def get_auth():
 
     return sid, csrf
 
+
 def test_add_to_pihole():
 
     sid, csrf = get_auth()
@@ -49,7 +52,7 @@ def test_add_to_pihole():
         headers={
             "X-FTL-SID": sid,
             "X-FTL-CSRF": csrf,
-        }, # type: ignore
+        },  # type: ignore
         json={
             "domain": DOMAIN_TO_ADD,
         },
@@ -57,6 +60,7 @@ def test_add_to_pihole():
     )
 
     assert pihole_response.status_code == 201
+
 
 """
 def test_update_pihole_domain():
@@ -81,6 +85,7 @@ def test_update_pihole_domain():
     assert str(pihole_domains["type"]) == "allow"
 """
 
+
 def test_delete_pihole_domain():
 
     sid, csrf = get_auth()
@@ -90,7 +95,7 @@ def test_delete_pihole_domain():
         headers={
             "X-FTL-SID": sid,
             "X-FTL-CSRF": csrf,
-        }, # type: ignore
+        },  # type: ignore
         timeout=5,
     )
 

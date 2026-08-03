@@ -1,11 +1,10 @@
 # Importing Flask Services
-from flask import Blueprint,render_template, session, abort, current_app
+from flask import Blueprint, render_template, session, abort, current_app
 from flask_login import login_required, current_user
 
 # Importing Custom Services
 from block_app.services.pihole_service import Pihole
 from block_app.services.database_service import DomainDatabase
-from block_app.services.dashboard_service import DashboardService
 from block_app.services.log_service import logger
 
 import traceback
@@ -28,9 +27,9 @@ def dash_checks():
     logger.info("Checking Pihole Address")
     pihole = Pihole()
     if not pihole.contains_address():
-        logger.error('No Pihole Address Found')#
-        message = 'Address Could not be reached. Try Again'
-        return render_template('/normal_templates/pihole_add.html', message=message)
+        logger.error("No Pihole Address Found")  #
+        message = "Address Could not be reached. Try Again"
+        return render_template("/normal_templates/pihole_add.html", message=message)
 
     # Getting id from session
     if current_user.is_authenticated:
@@ -39,20 +38,21 @@ def dash_checks():
 
     # Checking Pihole Connection
     if not pihole.connectionn_checker.is_connected():
-        logger.error('Cant Establish Pihole Connection')
-        message = 'Pihole address could not be reached'
-        return render_template('/normal_templates/pihole_add.html', message=message)
+        logger.error("Cant Establish Pihole Connection")
+        message = "Pihole address could not be reached"
+        return render_template("/normal_templates/pihole_add.html", message=message)
 
     # Checking Authentication
     try:
         pihole.authenticate()
 
         if pihole.sid is None or pihole.csrf is None:
-            raise RuntimeError('Pihole authentication failed')
+            raise RuntimeError("Pihole authentication failed")
     except Exception:
         logger.exception("Pihole authentication failure")
         message = "The Authentication Failed. Please enter new address"
-        return render_template('/normal_templates/pihole_add.html', message=message)
+        return render_template("/normal_templates/pihole_add.html", message=message)
+
 
 @dashboard.route("/dashboard", methods=["GET"])
 def home():
@@ -80,7 +80,7 @@ def home():
             )
 
         # Initialising Dashboard Services
-        dash_service = current_app.extensions['dashboard_service']
+        dash_service = current_app.extensions["dashboard_service"]
 
         # Getting general Statistical Information
         basic_stats = dash_service.get_stats()
@@ -97,14 +97,15 @@ def home():
         chart_graph = dash_service.get_blocked_allowed_totals()
 
         return render_template(
-            "normal_templates/dashboard_templates/overview.html", current_user=user,
+            "normal_templates/dashboard_templates/overview.html",
+            current_user=user,
             basic_stats=basic_stats,
             activity_graph=activity_graph,
             chart_graph=chart_graph,
-            table_data=table_data
+            table_data=table_data,
         )
 
-    except Exception as e:
+    except Exception:
         print("EXCEPTION in DASH")
         traceback.print_exc()
         message = "Something Went Wrong. Please Log In Again"
@@ -118,27 +119,36 @@ def home():
 ##################################################################
 # TO DO:
 
+
 @dashboard.route("/threats", methods=["GET"])
 def threats():
 
-    dash_service = current_app.extensions['dashboard_service']
+    dash_service = current_app.extensions["dashboard_service"]
     basic_stats = dash_service.get_threat_stats()
 
     return render_template(
-        "normal_templates/dashboard_templates/threats.html", current_user=user, basic_stats=basic_stats
+        "normal_templates/dashboard_templates/threats.html",
+        current_user=user,
+        basic_stats=basic_stats,
     )
 
 
 @dashboard.route("/system", methods=["GET"])
 def system():
-    dash_service = current_app.extensions['dashboard_service']
+    dash_service = current_app.extensions["dashboard_service"]
     system = dash_service.get_system_information()
-    return render_template("normal_templates/dashboard_templates/system.html", current_user=user, system=system)
+    return render_template(
+        "normal_templates/dashboard_templates/system.html",
+        current_user=user,
+        system=system,
+    )
 
 
 @dashboard.route("/settings", methods=["GET"])
 def settings():
-    return render_template("normal_templates/dashboard_templates/settings.html", current_user=user)
+    return render_template(
+        "normal_templates/dashboard_templates/settings.html", current_user=user
+    )
 
 
 # Advanced Users
@@ -153,15 +163,15 @@ def configurations():
 
 @dashboard.route("/logs", methods=["GET"])
 def logs():
-    dash_service = current_app.extensions['dashboard_service']
+    dash_service = current_app.extensions["dashboard_service"]
     logs = dash_service.get_logs()
     stats = dash_service.get_log_stats()
     return render_template(
         "normal_templates/dashboard_templates/admin_logs.html",
         current_user=user,
         logs=logs,
-        stats=stats
-        )
+        stats=stats,
+    )
 
 
 @dashboard.route("/users", methods=["GET"])

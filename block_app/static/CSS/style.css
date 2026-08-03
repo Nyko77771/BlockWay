@@ -416,6 +416,12 @@ body {
   font-size: 0.6rem;
 }
 
+@media (min-width: 1250px) {
+  .signin_input_group {
+    margin-left: 70px;
+  }
+}
+
 @media (max-width: 1490px) {
   .signup_message h1 {
     font-size: 0.7rem;
@@ -474,7 +480,29 @@ body {
   margin-top: 10px;
 }
 
-@media screen and (max-width: 240pxs) {
+@media (min-width: 1250px) {
+  .signin_inputs {
+    align-items: start;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .signin_inputs .signin_input_group {
+    justify-self: baseline;
+    width: 100%;
+    align-self: start;
+    margin-left: 0;
+  }
+
+  .signin_inputs .username,
+  .signin_inputs .password {
+    min-width: 250px;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 240px) {
   .signin_link {
     font-size: smaller;
   }

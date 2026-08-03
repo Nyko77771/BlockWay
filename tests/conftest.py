@@ -19,6 +19,7 @@ def db_session():
     yield db
     db.close()
 
+
 @pytest.fixture
 def pihole_url():
     return "http://192.168.9.109:8080"

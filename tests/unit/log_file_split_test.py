@@ -25,13 +25,14 @@ def generate_log_data():
                             "component": sections[2],
                             "function": sections[3],
                             "application": sections[4],
-                            "message": sections[5]        
+                            "message": sections[5],
                         }
                     )
                 except Exception as e:
                     print(f"Exception occured: {e}")
 
     return logs
+
 
 results = generate_log_data()
 print("Total logs:", len(results))
