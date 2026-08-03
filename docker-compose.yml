@@ -7,10 +7,12 @@ services:
       TZ: "Europe/Dublin"
       FTLCONF_webserver_api_password: ${PASSWORD}
       FTLCONF_dns_listeningMode: "all"
-    expose:
-      - "80"
+    ports:
       - "53:53/udp"
       - "53:53/tcp"
+    expose:
+      - "80"
+      - "53"
     volumes:
       - "/home/nykyta/pihole/etc-pihole:/etc/pihole"
     cap_add:
