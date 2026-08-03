@@ -483,6 +483,8 @@ class DomainDatabase:
         db = SessionLocal()
         try:
 
+            self.delete_pihole_address()
+
             given_address = str(address).strip()
 
             new_pi_address = db_models.Pihole(
@@ -513,6 +515,30 @@ class DomainDatabase:
                 pihole_address.pihole_address = address
 
             db.commit()
+
+        except Exception:
+            logger.exception("Failed to Update Pihole Address")
+            logger.info("Rolling Back Address Update")
+            db.rollback()
+        finally:
+            db.close()
+
+    def delete_pihole_address(self, given_address=None):
+        db = SessionLocal()
+        try:
+            if given_address:
+                db_pihole_address = db.query(db_models.Pihole).filter(
+                    db_models.Pihole.pihole_address == given_address
+                ).first()
+
+                if db_pihole_address:
+                    db.delete(db_pihole_address)
+                    db.commit()
+                    logger.info("Deleted Last Address")
+            else:
+                db_pihole_addresses = db.query(db_models.Pihole).delete()
+                db.commit()
+                logger.info("Deleted Addresses")
 
         except Exception:
             logger.exception("Failed to Update Pihole Address")
