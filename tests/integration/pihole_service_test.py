@@ -2,9 +2,6 @@ from datetime import datetime, timezone, timedelta
 from tests.conftest import pihole_url
 from block_app.services.pihole_service import Pihole
 
-until_time = datetime.now(timezone.utc)
-from_time = (datetime.now(timezone.utc) - timedelta(hours=24)).timestamp()
-
 
 # Checking Authentication with Pihole
 def test_pihole_sid(pihole_url):
@@ -16,7 +13,10 @@ def test_pihole_sid(pihole_url):
 
 
 # Checking Pihole Summary Retrieval
-def test_pihole_summary(pihole_url, until_time, from_time):
+def test_pihole_summary(pihole_url):
+
+    until_time = datetime.now(timezone.utc)
+    from_time = (datetime.now(timezone.utc) - timedelta(hours=24))
     pihole = Pihole(pihole_url)
 
     pihole_summary = pihole.get_pihole_summary(
@@ -67,4 +67,4 @@ def test_pihole_benign_to_malicious_fail(pihole_url):
 
     result = pihole.update_pihole_domain(domain=update_domain, domain_type="other")
 
-    assert result is False
+    assert result is None

@@ -22,4 +22,4 @@ def db_session():
 
 @pytest.fixture
 def pihole_url():
-    return "http://192.168.9.109:8080"
+    return "http://192.168.9.108:8080"

@@ -5,5 +5,5 @@ testpaths = [
     "tests/integration",
     "tests/unit"
     ]
-python_files = ["database_service_test.py"]
+python_files = ["integration/pihole_service_test.py"]
 pythonpath = ["src"]
