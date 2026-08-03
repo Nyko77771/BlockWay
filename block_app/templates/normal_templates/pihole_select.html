@@ -12,6 +12,7 @@
   <h2>Choose Option:</h2>
 
   <form>
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
     <div class="pihole_selection_form">
       <div class="pihole_selection_option_1">
         <input type="radio" id="option1" name="option" value="option1" />

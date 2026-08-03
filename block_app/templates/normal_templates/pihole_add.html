@@ -10,6 +10,7 @@
     <p>We have detected that no Pihole is configured.</p>
     <p><b>Please Add Pihole URL Address Below:</b></p>
     <form method="POST" action="{{ url_for('setup.add_pihole') }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
       <label for="pihole_address">Pihole Address:</label>
       <input
         type="text"

@@ -7,6 +7,7 @@ import dotenv
 from flask_login import LoginManager
 from flask import Flask, render_template
 from flask_talisman import Talisman
+from flask_wtf import CSRFProtect
 
 # Importing Blueprints
 from block_app.routes.views import views
@@ -64,6 +65,11 @@ def make_blockway():
 
     # !!! TO ADD ENCRYPTION HERE!!!
     block_app.secret_key = os.getenv("SECRET")
+
+    # CSRF
+    # Adding Anti-CSRF header
+    csrf = CSRFProtect()
+    csrf.init_app(block_app)
 
     login_manager = LoginManager()
     login_manager.init_app(block_app)
