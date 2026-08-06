@@ -28,7 +28,7 @@ Works within Ubuntu based Raspberry Pi 5 environment.
 ### Step 1 - Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/BlockWay.git
+git clone https://github.com/Nyko77771/BlockWay.git
 ```
 
 ### Step 2 - Change into BlockWay directory
