@@ -1,4 +1,4 @@
-![Extension Logo Screenshot](block_app/static/images/Logo/Logo1_Smaller.png)
+![Extension Logo Screenshot](block_app/static/images/Logo/Logo1_Small.png)
 
 ## By Nyk077771
 
